@@ -589,7 +589,7 @@ class _ApplyCellForSetColumnRow implements _Apply {
           ..setRow(row);
       }
     } catch (e) {
-      throw 'An error occurred: ${e.toString()}';
+      rethrow;
     }
   }
 }
