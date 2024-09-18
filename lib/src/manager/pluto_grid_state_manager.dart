@@ -588,8 +588,6 @@ class _ApplyCellForSetColumnRow implements _Apply {
           ..setColumn(element)
           ..setRow(row);
       }
-    } on NullThrownError catch (e) {
-      throw 'NullThrownError occurred: ${e.toString()}';
     } catch (e) {
       throw 'An error occurred: ${e.toString()}';
     }
