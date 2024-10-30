@@ -36,6 +36,10 @@ class PlutoColumn {
 
   bool readOnly;
 
+  PlutoOnChangedEventCallback? onChanged;
+
+  bool canBeHidden;
+
   double width;
 
   double minWidth;
@@ -223,6 +227,7 @@ class PlutoColumn {
     required this.type,
     this.readOnly = false,
     PlutoColumnCheckReadOnly? checkReadOnly,
+    this.onChanged,
     this.width = PlutoGridSettings.columnWidth,
     this.minWidth = PlutoGridSettings.minColumnWidth,
     this.titlePadding,
@@ -258,6 +263,7 @@ class PlutoColumn {
     this.enableAutoEditing = false,
     this.enableEditingMode = true,
     this.hide = false,
+    this.canBeHidden = true,
     this.backgroundGradient,
     this.filterWidgetBuilder,
   })  : _key = UniqueKey(),

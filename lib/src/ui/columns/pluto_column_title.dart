@@ -141,15 +141,17 @@ class PlutoColumnTitleState extends PlutoStateWithChange<PlutoColumnTitle> {
       child: Align(
         alignment: Alignment.center,
         child: IconButton(
-          icon: PlutoGridColumnIcon(
-            sort: _sort,
-            color: style.iconColor,
-            icon: widget.column.enableContextMenu
-                ? style.columnContextIcon
-                : style.columnResizeIcon,
-            ascendingIcon: style.columnAscendingIcon,
-            descendingIcon: style.columnDescendingIcon,
-          ),
+          icon: widget.column.enableContextMenu
+              ? PlutoGridColumnIcon(
+                  sort: _sort,
+                  color: style.iconColor,
+                  icon: widget.column.enableContextMenu
+                      ? style.columnContextIcon
+                      : style.columnResizeIcon,
+                  ascendingIcon: style.columnAscendingIcon,
+                  descendingIcon: style.columnDescendingIcon,
+                )
+              : const SizedBox.shrink(),
           iconSize: style.iconSize,
           mouseCursor: contextMenuCursor,
           onPressed: null,
