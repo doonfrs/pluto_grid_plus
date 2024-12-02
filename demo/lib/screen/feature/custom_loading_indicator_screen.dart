@@ -4,7 +4,7 @@ import 'package:pluto_grid_plus/pluto_grid_plus.dart';
 import '../../dummy_data/development.dart';
 
 class CustomLoadingIndicatorScreen extends StatefulWidget {
-  static const routeName = 'empty';
+  static const routeName = 'feature/custom-loading-indicator';
 
   const CustomLoadingIndicatorScreen({super.key});
 
