@@ -110,6 +110,7 @@ class MyApp extends StatelessWidget {
             const TimeTypeColumnScreen(),
         ValueFormatterScreen.routeName: (context) =>
             const ValueFormatterScreen(),
+        CustomLoadingIndicator.routeName: (context) => const CustomLoadingIndicatorScreen(),
         // only development
         EmptyScreen.routeName: (context) => const EmptyScreen(),
         DevelopmentScreen.routeName: (context) => const DevelopmentScreen(),
