@@ -147,8 +147,12 @@ class PlutoColumn {
 
   /// A checkbox appears in the cell of the column.
   bool enableRowChecked;
-  int rowCheckBoxGroupDepth; //
+
+  int rowCheckBoxGroupDepth;
+
   bool enableTitleChecked;
+
+  bool Function(PlutoRow row)? disableRowCheckWhen;
 
   /// Sort rows by tapping on the column heading.
   bool enableSorting;
@@ -258,8 +262,7 @@ class PlutoColumn {
     this.enableAutoEditing = false,
     this.enableEditingMode = true,
     this.hide = false,
-    this.backgroundGradient,
-    this.filterWidgetBuilder,
+    this.disableRowCheckWhen,
   })  : _key = UniqueKey(),
         _checkReadOnly = checkReadOnly;
 

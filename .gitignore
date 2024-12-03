@@ -76,8 +76,15 @@ coverage/
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 
-# FVM Support - https://fvm.app/
-.fvm/flutter_sdk
 example/windows/flutter/generated_plugin_registrant.cc
 example/windows/flutter/generated_plugin_registrant.h
 example/windows/flutter/generated_plugins.cmake
+
+example/windows/flutter/generated_plugin_registrant.cc
+example/windows/flutter/generated_plugin_registrant.h
+example/windows/flutter/generated_plugins.cmake
+
+# FVM Support - https://fvm.app/
+.fvm/flutter_sdk
+# FVM Version Cache
+.fvm/

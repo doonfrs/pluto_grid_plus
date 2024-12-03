@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class PlutoScaledCheckbox extends StatelessWidget {
   final bool? value;
 
-  final Function(bool? changed) handleOnChanged;
+  final Function(bool? changed)? handleOnChanged;
 
   final bool tristate;
 
