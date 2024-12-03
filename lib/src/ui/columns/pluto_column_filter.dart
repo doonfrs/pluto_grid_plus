@@ -35,46 +35,31 @@ class PlutoColumnFilterState extends PlutoStateWithChange<PlutoColumnFilter> {
   late final TextEditingController _controller;
 
   String get _filterValue {
-    return _filterRows.isEmpty
-        ? ''
-        : _filterRows.first.cells[FilterHelper.filterFieldValue]!.value
-            .toString();
+    return _filterRows.isEmpty ? '' : _filterRows.first.cells[FilterHelper.filterFieldValue]!.value.toString();
   }
 
   bool get _hasCompositeFilter {
-    return _filterRows.length > 1 ||
-        stateManager
-            .filterRowsByField(FilterHelper.filterFieldAllColumns)
-            .isNotEmpty;
+    return _filterRows.length > 1 || stateManager.filterRowsByField(FilterHelper.filterFieldAllColumns).isNotEmpty;
   }
 
   InputBorder get _border => OutlineInputBorder(
-        borderSide: BorderSide(
-            color: stateManager.configuration.style.borderColor, width: 0.0),
+        borderSide: BorderSide(color: stateManager.configuration.style.borderColor, width: 0.0),
         borderRadius: BorderRadius.zero,
       );
 
   InputBorder get _enabledBorder => OutlineInputBorder(
-        borderSide: BorderSide(
-            color: stateManager.configuration.style.activatedBorderColor,
-            width: 0.0),
+        borderSide: BorderSide(color: stateManager.configuration.style.activatedBorderColor, width: 0.0),
         borderRadius: BorderRadius.zero,
       );
 
   InputBorder get _disabledBorder => OutlineInputBorder(
-        borderSide: BorderSide(
-            color: stateManager.configuration.style.inactivatedBorderColor,
-            width: 0.0),
+        borderSide: BorderSide(color: stateManager.configuration.style.inactivatedBorderColor, width: 0.0),
         borderRadius: BorderRadius.zero,
       );
 
-  Color get _textFieldColor => _enabled
-      ? stateManager.configuration.style.cellColorInEditState
-      : stateManager.configuration.style.cellColorInReadOnlyState;
+  Color get _textFieldColor => _enabled ? stateManager.configuration.style.cellColorInEditState : stateManager.configuration.style.cellColorInReadOnlyState;
 
-  EdgeInsets get _padding =>
-      widget.column.filterPadding ??
-      stateManager.configuration.style.defaultColumnFilterPadding;
+  EdgeInsets get _padding => widget.column.filterPadding ?? stateManager.configuration.style.defaultColumnFilterPadding;
 
   @override
   PlutoGridStateManager get stateManager => widget.stateManager;
@@ -155,12 +140,9 @@ class PlutoColumnFilterState extends PlutoStateWithChange<PlutoColumnFilter> {
       return KeyEventResult.handled;
     }
 
-    final handleMoveDown =
-        (keyManager.isDown || keyManager.isEnter || keyManager.isEsc) &&
-            stateManager.refRows.isNotEmpty;
+    final handleMoveDown = (keyManager.isDown || keyManager.isEnter || keyManager.isEsc) && stateManager.refRows.isNotEmpty;
 
-    final handleMoveHorizontal = keyManager.isTab ||
-        (_controller.text.isEmpty && keyManager.isHorizontal);
+    final handleMoveHorizontal = keyManager.isTab || (_controller.text.isEmpty && keyManager.isHorizontal);
 
     final skip = !(handleMoveDown || handleMoveHorizontal || keyManager.isF3);
 
@@ -200,14 +182,8 @@ class PlutoColumnFilterState extends PlutoStateWithChange<PlutoColumnFilter> {
       return;
     }
 
-    if (plutoEvent is PlutoGridCannotMoveCurrentCellEvent &&
-        plutoEvent.direction.isUp) {
-      var isCurrentColumn = widget
-              .stateManager
-              .refColumns[stateManager.columnIndexesByShowFrozen[
-                  plutoEvent.cellPosition.columnIdx!]]
-              .key ==
-          widget.column.key;
+    if (plutoEvent is PlutoGridCannotMoveCurrentCellEvent && plutoEvent.direction.isUp) {
+      var isCurrentColumn = widget.stateManager.refColumns[stateManager.columnIndexesByShowFrozen[plutoEvent.cellPosition.columnIdx!]].key == widget.column.key;
 
       if (isCurrentColumn) {
         stateManager.clearCurrentCell(notify: false);
@@ -227,8 +203,7 @@ class PlutoColumnFilterState extends PlutoStateWithChange<PlutoColumnFilter> {
         column: widget.column,
         filterType: widget.column.defaultFilter,
         filterValue: changed,
-        debounceMilliseconds:
-            stateManager.configuration.columnFilter.debounceMilliseconds,
+        debounceMilliseconds: stateManager.configuration.columnFilter.debounceMilliseconds,
       ),
     );
   }
@@ -247,16 +222,14 @@ class PlutoColumnFilterState extends PlutoStateWithChange<PlutoColumnFilter> {
         decoration: BoxDecoration(
           border: BorderDirectional(
             top: BorderSide(color: style.borderColor),
-            end: style.enableColumnBorderVertical
-                ? BorderSide(color: style.borderColor)
-                : BorderSide.none,
+            end: style.enableColumnBorderVertical ? BorderSide(color: style.borderColor) : BorderSide.none,
           ),
         ),
         child: Padding(
           padding: _padding,
+          // ignore: deprecated_member_use_from_same_package
           child: widget.column.filterWidget ??
-              widget.column.filterWidgetBuilder?.call(_focusNode, _controller,
-                  _enabled, _handleOnChanged, stateManager) ??
+              widget.column.filterWidgetBuilder?.call(_focusNode, _controller, _enabled, _handleOnChanged, stateManager) ??
               TextField(
                 focusNode: _focusNode,
                 controller: _controller,
@@ -267,11 +240,9 @@ class PlutoColumnFilterState extends PlutoStateWithChange<PlutoColumnFilter> {
                 onEditingComplete: _handleOnEditingComplete,
                 decoration: InputDecoration(
                   suffixIcon: widget.column.filterSuffixIcon,
-                  hintText: widget.column.filterHintText ??
-                      (_enabled ? widget.column.defaultFilter.title : ''),
+                  hintText: widget.column.filterHintText ?? (_enabled ? widget.column.defaultFilter.title : ''),
                   filled: true,
-                  hintStyle:
-                      TextStyle(color: widget.column.filterHintTextColor),
+                  hintStyle: TextStyle(color: widget.column.filterHintTextColor),
                   fillColor: _textFieldColor,
                   border: _border,
                   enabledBorder: _border,

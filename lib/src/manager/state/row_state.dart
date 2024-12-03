@@ -224,11 +224,11 @@ mixin RowState implements IPlutoGridState {
 
   @override
   void setRowChecked(
-      PlutoRow row,
-      bool flag, {
-        bool notify = true,
-        bool checkedViaSelect = false,
-      }) {
+    PlutoRow row,
+    bool flag, {
+    bool notify = true,
+    bool checkedViaSelect = false,
+  }) {
     final findRow = refRows.firstWhereOrNull(
       (element) => element.key == row.key,
     );

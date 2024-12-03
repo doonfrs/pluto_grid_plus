@@ -114,6 +114,16 @@ abstract class ILayoutState {
     bool notify = true,
   });
 
+  void setLoadingLevel(
+    PlutoGridLoadingLevel level, {
+    bool notify = true,
+  });
+
+  void setCustomLoadingIndicator(
+    WidgetBuilder builder, {
+    bool notify = true,
+  });
+
   void resetShowFrozenColumn();
 
   bool shouldShowFrozenColumns(double width);
@@ -154,6 +164,8 @@ class _State {
   bool? _showLoading;
 
   PlutoGridLoadingLevel _loadingLevel = PlutoGridLoadingLevel.grid;
+
+  WidgetBuilder? _customLoadingIndicator;
 
   TextDirection _textDirection = TextDirection.ltr;
 }
@@ -261,6 +273,9 @@ mixin LayoutState implements IPlutoGridState {
 
   @override
   PlutoGridLoadingLevel get loadingLevel => _state._loadingLevel;
+
+  @override
+  WidgetBuilder? get customLoadingIndicator => _state._customLoadingIndicator;
 
   @override
   bool get hasLeftFrozenColumns =>
@@ -386,10 +401,8 @@ mixin LayoutState implements IPlutoGridState {
     double offset = 0;
 
     if (showFrozenColumn) {
-      offset +=
-          leftFrozenColumnsWidth > 0 ? gridBorderWidth: 0;
-      offset +=
-          rightFrozenColumnsWidth > 0 ? gridBorderWidth : 0;
+      offset += leftFrozenColumnsWidth > 0 ? gridBorderWidth : 0;
+      offset += rightFrozenColumnsWidth > 0 ? gridBorderWidth : 0;
     }
 
     return offset;
@@ -473,9 +486,37 @@ mixin LayoutState implements IPlutoGridState {
 
     _state._showLoading = flag;
 
-    _state._loadingLevel = level;
+    setLoadingLevel(level, notify: false);
 
     notifyListeners(notify, setShowLoading.hashCode);
+  }
+
+  @override
+  void setLoadingLevel(
+    PlutoGridLoadingLevel level, {
+    bool notify = true,
+  }) {
+    if (loadingLevel == level) {
+      return;
+    }
+
+    _state._loadingLevel = level;
+
+    notifyListeners(notify, setLoadingLevel.hashCode);
+  }
+
+  @override
+  void setCustomLoadingIndicator(
+    WidgetBuilder builder, {
+    bool notify = true,
+  }) {
+    if (customLoadingIndicator == builder) {
+      return;
+    }
+
+    _state._customLoadingIndicator = builder;
+
+    notifyListeners(notify, setCustomLoadingIndicator.hashCode);
   }
 
   @override

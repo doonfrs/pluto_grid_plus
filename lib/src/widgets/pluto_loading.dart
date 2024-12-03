@@ -4,14 +4,14 @@ import 'package:pluto_grid_plus/pluto_grid_plus.dart';
 /// Widget that is displayed when loading is enabled
 /// with the [PlutoGridStateManager.setShowLoading] method.
 class PlutoLoading extends StatelessWidget {
-  final PlutoGridLoadingLevel level;
+  final PlutoGridStateManager stateManager;
   final Color? backgroundColor;
   final Color? indicatorColor;
   final String? text;
   final TextStyle? textStyle;
 
   const PlutoLoading({
-    this.level = PlutoGridLoadingLevel.grid,
+    required this.stateManager,
     this.backgroundColor,
     this.indicatorColor,
     this.text,
@@ -21,7 +21,7 @@ class PlutoLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    switch (level) {
+    switch (stateManager.loadingLevel) {
       case PlutoGridLoadingLevel.grid:
         return _GridLoading(
           backgroundColor: backgroundColor,
@@ -39,6 +39,8 @@ class PlutoLoading extends StatelessWidget {
           backgroundColor: Colors.transparent,
           color: indicatorColor,
         );
+      case PlutoGridLoadingLevel.custom:
+        return _CustomLoading(stateManager: stateManager);
     }
   }
 }
@@ -90,6 +92,41 @@ class _GridLoading extends StatelessWidget {
             ],
           ),
         ),
+      ],
+    );
+  }
+}
+
+class _CustomLoading extends StatelessWidget {
+  const _CustomLoading({required this.stateManager});
+
+  final PlutoGridStateManager stateManager;
+
+  @override
+  Widget build(BuildContext context) {
+    return stateManager.customLoadingIndicator?.call(context) ??
+        CustomLoadingIndicator();
+  }
+}
+
+class CustomLoadingIndicator extends StatefulWidget {
+  const CustomLoadingIndicator({super.key});
+
+  @override
+  State<CustomLoadingIndicator> createState() => _CustomLoadingIndicatorState();
+}
+
+class _CustomLoadingIndicatorState extends State<CustomLoadingIndicator> {
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Positioned.fill(
+          child: ColoredBox(
+            color: Theme.of(context).colorScheme.onPrimary.withOpacity(.6),
+          ),
+        ),
+        Center(child: CircularProgressIndicator.adaptive()),
       ],
     );
   }
