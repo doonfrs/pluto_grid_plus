@@ -168,6 +168,8 @@ class PlutoAggregateColumnFooter extends PlutoStatefulWidget {
 
   final bool formatAsCurrency;
 
+  final Color? color;
+
   const PlutoAggregateColumnFooter({
     required this.rendererContext,
     required this.type,
@@ -181,6 +183,7 @@ class PlutoAggregateColumnFooter extends PlutoStatefulWidget {
     this.alignment,
     this.padding,
     this.formatAsCurrency = false,
+    this.color,
     super.key,
   });
 

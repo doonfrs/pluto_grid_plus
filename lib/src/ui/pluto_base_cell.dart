@@ -3,6 +3,7 @@ import 'package:pluto_grid_plus/pluto_grid_plus.dart';
 import 'package:pluto_grid_plus/src/helper/platform_helper.dart';
 import 'package:pluto_grid_plus/src/helper/pluto_double_tap_detector.dart';
 
+import 'cells/pluto_widget_cell.dart';
 import 'ui.dart';
 
 class PlutoBaseCell extends StatelessWidget
@@ -116,33 +117,41 @@ class PlutoBaseCell extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      behavior: HitTestBehavior.translucent,
-      // Essential gestures.
-      onTapUp: _handleOnTapUp,
-      onLongPressStart: _handleOnLongPressStart,
-      onLongPressMoveUpdate: _handleOnLongPressMoveUpdate,
-      onLongPressEnd: _handleOnLongPressEnd,
-      // Optional gestures.
-      onDoubleTap: _onDoubleTapOrNull(),
-      onSecondaryTapDown: _onSecondaryTapOrNull(),
-      child: _CellContainer(
-        cell: cell,
-        rowIdx: rowIdx,
-        row: row,
-        column: column,
-        cellPadding: column.cellPadding ??
-            stateManager.configuration.style.defaultCellPadding,
-        stateManager: stateManager,
-        child: _Cell(
-          stateManager: stateManager,
-          rowIdx: rowIdx,
-          column: column,
-          row: row,
-          cell: cell,
-        ),
-      ),
-    );
+    return column.type.isWidget
+        ? _Cell(
+            stateManager: stateManager,
+            rowIdx: rowIdx,
+            column: column,
+            row: row,
+            cell: cell,
+          )
+        : GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            // Essential gestures.
+            onTapUp: _handleOnTapUp,
+            onLongPressStart: _handleOnLongPressStart,
+            onLongPressMoveUpdate: _handleOnLongPressMoveUpdate,
+            onLongPressEnd: _handleOnLongPressEnd,
+            // Optional gestures.
+            onDoubleTap: _onDoubleTapOrNull(),
+            onSecondaryTapDown: _onSecondaryTapOrNull(),
+            child: _CellContainer(
+              cell: cell,
+              rowIdx: rowIdx,
+              row: row,
+              column: column,
+              cellPadding: column.cellPadding ??
+                  stateManager.configuration.style.defaultCellPadding,
+              stateManager: stateManager,
+              child: _Cell(
+                stateManager: stateManager,
+                rowIdx: rowIdx,
+                column: column,
+                row: row,
+                cell: cell,
+              ),
+            ),
+          );
   }
 }
 
@@ -359,6 +368,14 @@ class _CellState extends PlutoStateWithChange<_Cell> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.column.type.isWidget) {
+      return PlutoWidgetCell(
+        stateManager: stateManager,
+        cell: widget.cell,
+        column: widget.column,
+        row: widget.row,
+      );
+    }
     if (_showTypedCell && widget.column.enableEditingMode == true) {
       if (widget.column.type.isSelect) {
         return PlutoSelectCell(

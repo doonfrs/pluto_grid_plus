@@ -54,6 +54,8 @@ mixin TextCellState<T extends TextCell> on State<T> implements TextFieldProps {
 
     cellFocus = FocusNode(onKeyEvent: _handleOnKey);
 
+    cellFocus.addListener(_onFocusChanged);
+
     widget.stateManager.setTextEditingController(_textController);
 
     _textController.text = formattedValue;
@@ -65,6 +67,14 @@ mixin TextCellState<T extends TextCell> on State<T> implements TextFieldProps {
     _textController.addListener(() {
       _handleOnChanged(_textController.text.toString());
     });
+  }
+
+  void _onFocusChanged() {
+    if (cellFocus.hasFocus) {
+      _textController.selectAllText();
+    } else {
+      _handleOnComplete();
+    }
   }
 
   @override
@@ -87,6 +97,8 @@ mixin TextCellState<T extends TextCell> on State<T> implements TextFieldProps {
     _textController.dispose();
 
     cellFocus.dispose();
+
+    cellFocus.removeListener(_onFocusChanged);
 
     super.dispose();
   }
@@ -276,5 +288,12 @@ enum _CellEditingStatus {
 
   bool get isUpdated {
     return _CellEditingStatus.updated == this;
+  }
+}
+
+extension TextEditingControllerExt on TextEditingController {
+  void selectAllText() {
+    if (text.isEmpty) return;
+    selection = TextSelection(baseOffset: 0, extentOffset: text.length);
   }
 }

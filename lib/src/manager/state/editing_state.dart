@@ -243,15 +243,19 @@ mixin EditingState implements IPlutoGridState {
 
     cell.value = value;
 
+    final changedEvent = PlutoGridOnChangedEvent(
+      columnIdx: columnIndex(currentColumn)!,
+      column: currentColumn,
+      rowIdx: refRows.indexOf(currentRow),
+      row: currentRow,
+      value: value,
+      oldValue: oldValue,
+    );
+    if (currentColumn.onChanged != null) {
+      currentColumn.onChanged!(changedEvent);
+    }
     if (callOnChangedEvent == true && onChanged != null) {
-      onChanged!(PlutoGridOnChangedEvent(
-        columnIdx: columnIndex(currentColumn)!,
-        column: currentColumn,
-        rowIdx: refRows.indexOf(currentRow),
-        row: currentRow,
-        value: value,
-        oldValue: oldValue,
-      ));
+      onChanged!(changedEvent);
     }
 
     notifyListeners(notify, changeCellValue.hashCode);

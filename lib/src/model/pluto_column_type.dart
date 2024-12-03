@@ -158,6 +158,14 @@ abstract class PlutoColumnType {
     );
   }
 
+  factory PlutoColumnType.widget({
+    dynamic defaultValue = '',
+  }) {
+    return PlutoColumnTypeWidget(
+      defaultValue: defaultValue,
+    );
+  }
+
   bool isValid(dynamic value);
 
   int compare(dynamic a, dynamic b);
@@ -177,6 +185,8 @@ extension PlutoColumnTypeExtension on PlutoColumnType {
   bool get isDate => this is PlutoColumnTypeDate;
 
   bool get isTime => this is PlutoColumnTypeTime;
+
+  bool get isWidget => this is PlutoColumnTypeWidget;
 
   PlutoColumnTypeText get text {
     if (this is! PlutoColumnTypeText) {
@@ -224,6 +234,14 @@ extension PlutoColumnTypeExtension on PlutoColumnType {
     }
 
     return this as PlutoColumnTypeTime;
+  }
+
+  PlutoColumnTypeWidget get widget {
+    if (this is! PlutoColumnTypeText) {
+      throw TypeError();
+    }
+
+    return this as PlutoColumnTypeWidget;
   }
 
   bool get hasFormat => this is PlutoColumnTypeHasFormat;
@@ -503,6 +521,30 @@ class PlutoColumnTypeTime
   @override
   bool isValid(dynamic value) {
     return _timeFormat.hasMatch(value.toString());
+  }
+
+  @override
+  int compare(dynamic a, dynamic b) {
+    return _compareWithNull(a, b, () => a.toString().compareTo(b.toString()));
+  }
+
+  @override
+  dynamic makeCompareValue(dynamic v) {
+    return v;
+  }
+}
+
+class PlutoColumnTypeWidget implements PlutoColumnType {
+  @override
+  final dynamic defaultValue;
+
+  const PlutoColumnTypeWidget({
+    this.defaultValue,
+  });
+
+  @override
+  bool isValid(dynamic value) {
+    return true;
   }
 
   @override
