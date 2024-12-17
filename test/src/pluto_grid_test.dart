@@ -314,7 +314,6 @@ void main() {
     // 수정 상태 확인
     expect(stateManager!.isEditing, true);
 
-    // TODO : 셀 값 변경 (1) 안되서 (2) 강제로
     // (1)
     // await tester.pump(Duration(milliseconds:800));
     //

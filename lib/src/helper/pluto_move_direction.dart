@@ -32,8 +32,6 @@ enum PlutoMoveDirection {
       case PlutoMoveDirection.right:
       case PlutoMoveDirection.down:
         return 1;
-      default:
-        return 0;
     }
   }
 

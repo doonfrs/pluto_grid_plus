@@ -38,7 +38,6 @@ class PlutoGridCellGestureEvent extends PlutoGridEvent {
       case PlutoGridGestureType.onSecondaryTap:
         _onSecondaryTap(stateManager);
         break;
-      default:
     }
   }
 

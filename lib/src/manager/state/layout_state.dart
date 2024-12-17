@@ -43,6 +43,8 @@ abstract class ILayoutState {
 
   PlutoGridLoadingLevel get loadingLevel;
 
+  WidgetBuilder? get customLoadingIndicator;
+
   bool get hasLeftFrozenColumns;
 
   bool get hasRightFrozenColumns;

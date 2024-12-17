@@ -128,7 +128,8 @@ class _CustomLoadingIndicatorState extends State<CustomLoadingIndicator> {
       children: [
         Positioned.fill(
           child: ColoredBox(
-            color: Theme.of(context).colorScheme.onPrimary.withOpacity(.6),
+            color:
+                Theme.of(context).colorScheme.onPrimary.withValues(alpha: .6),
           ),
         ),
         Center(child: CircularProgressIndicator.adaptive()),

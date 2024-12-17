@@ -94,3 +94,39 @@ class _GridLoading extends StatelessWidget {
     );
   }
 }
+
+class _CustomLoading extends StatelessWidget {
+  const _CustomLoading({required this.stateManager});
+
+  final PlutoGridStateManager stateManager;
+
+  @override
+  Widget build(BuildContext context) {
+    return stateManager.customLoadingIndicator?.call(context) ??
+        CustomLoadingIndicator();
+  }
+}
+
+class CustomLoadingIndicator extends StatefulWidget {
+  const CustomLoadingIndicator({super.key});
+
+  @override
+  State<CustomLoadingIndicator> createState() => _CustomLoadingIndicatorState();
+}
+
+class _CustomLoadingIndicatorState extends State<CustomLoadingIndicator> {
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Positioned.fill(
+          child: ColoredBox(
+            color:
+                Theme.of(context).colorScheme.onPrimary.withValues(alpha: .6),
+          ),
+        ),
+        Center(child: CircularProgressIndicator.adaptive()),
+      ],
+    );
+  }
+}
