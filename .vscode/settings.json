@@ -1,3 +1,4 @@
 {
-    "dart.lineLength": 80,
+    "dart.lineLength": 80, // most used
+    "files.eol": "\r\n" // This makes sure, that the EOL (End of Line seperator) is always \r\n (CRLF) and not \n (LF) to avoid git difs errors
 }
