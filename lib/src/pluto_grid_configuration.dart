@@ -642,7 +642,8 @@ class PlutoGridStyleConfig {
             defaultColumnFilterPadding ?? this.defaultColumnFilterPadding,
         defaultCellPadding: defaultCellPadding ?? this.defaultCellPadding,
         columnTextStyle: columnTextStyle ?? this.columnTextStyle,
-        columnUnselectedColor: columnUnselectedColor ?? this.columnUnselectedColor,
+        columnUnselectedColor:
+            columnUnselectedColor ?? this.columnUnselectedColor,
         columnActiveColor: columnActiveColor ?? this.columnActiveColor,
         cellUnselectedColor: cellUnselectedColor ?? this.cellUnselectedColor,
         cellActiveColor: cellActiveColor ?? this.cellActiveColor,
@@ -1784,12 +1785,16 @@ class PlutoGridLocaleText {
 enum PlutoGridRowSelectionCheckBoxBehavior {
   /// Selecting a row does nothing to its checkbox
   none,
+
   /// Automatically enables the checkbox of the selected rows
   checkRow,
+
   /// Automatically toggles the checkbox of the selected rows
   toggleCheckRow,
+
   /// Automatically enabels the checkbox of a selected row (if another row is checked via select, the previous one is unchecked)
   singleRowCheck,
+
   /// Automatically toggles the checkbox of a selected row (if another row is checked via select, the previous one is unchecked)
   toggleSingleRowCheck,
 }
