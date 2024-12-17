@@ -112,11 +112,15 @@ enum PlutoGridLoadingLevel {
   rows,
 
   /// {@macro pluto_grid_loading_level_rowsBottomCircular}
-  rowsBottomCircular;
+  rowsBottomCircular,
+
+  custom;
 
   bool get isGrid => this == PlutoGridLoadingLevel.grid;
 
   bool get isRows => this == PlutoGridLoadingLevel.rows;
+
+  bool get isCustom => this == PlutoGridLoadingLevel.custom;
 
   bool get isRowsBottomCircular =>
       this == PlutoGridLoadingLevel.rowsBottomCircular;

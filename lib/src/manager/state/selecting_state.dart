@@ -235,7 +235,6 @@ mixin SelectingState implements IPlutoGridState {
         setCurrentSelectingRowsByRange(0, refRows.length - 1);
         break;
       case PlutoGridSelectingMode.none:
-      default:
         break;
     }
   }
