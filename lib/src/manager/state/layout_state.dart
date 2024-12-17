@@ -386,10 +386,8 @@ mixin LayoutState implements IPlutoGridState {
     double offset = 0;
 
     if (showFrozenColumn) {
-      offset +=
-          leftFrozenColumnsWidth > 0 ? gridBorderWidth: 0;
-      offset +=
-          rightFrozenColumnsWidth > 0 ? gridBorderWidth : 0;
+      offset += leftFrozenColumnsWidth > 0 ? gridBorderWidth : 0;
+      offset += rightFrozenColumnsWidth > 0 ? gridBorderWidth : 0;
     }
 
     return offset;

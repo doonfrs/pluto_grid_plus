@@ -52,7 +52,8 @@ class PlutoDateCellState extends State<PlutoDateCell>
       final date = await sm.selectDateCallback!(widget.cell, widget.column);
       isOpenedPopup = false;
       if (date != null) {
-        handleSelected(widget.column.type.date.dateFormat.format(date)); // Consider call onSelected
+        handleSelected(widget.column.type.date.dateFormat
+            .format(date)); // Consider call onSelected
       }
     } else {
       PlutoGridDatePicker(

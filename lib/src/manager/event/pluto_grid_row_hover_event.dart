@@ -12,7 +12,8 @@ class PlutoGridRowHoverEvent extends PlutoGridEvent {
 
   @override
   void handler(PlutoGridStateManager stateManager) {
-    bool enableRowHoverColor = stateManager.configuration.style.enableRowHoverColor;
+    bool enableRowHoverColor =
+        stateManager.configuration.style.enableRowHoverColor;
 
     // only change current hovered row index
     // if row hover color effect is enabled
