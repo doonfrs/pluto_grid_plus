@@ -191,6 +191,15 @@ class PlutoColumn {
   ///Set suffix icon for filter field
   Icon? filterSuffixIcon;
 
+  /// Set a custom on tap event for the filter suffix icon
+  Function(
+    FocusNode focusNode,
+    TextEditingController controller,
+    bool enabled,
+    void Function(String changed) handleOnChanged,
+    PlutoGridStateManager stateManager,
+  )? onFilterSuffixTap;
+
   ///Set custom widget
   @Deprecated("Use new filterWidgetBuilder to provide some parameters")
   Widget? filterWidget;
@@ -257,6 +266,8 @@ class PlutoColumn {
     this.filterSuffixIcon,
     @Deprecated("Use new filterWidgetBuilder to provide some parameters")
     this.filterWidget,
+    this.filterWidgetBuilder,
+    this.onFilterSuffixTap,
     this.enableHideColumnMenuItem = true,
     this.enableSetColumnsMenuItem = true,
     this.enableAutoEditing = false,

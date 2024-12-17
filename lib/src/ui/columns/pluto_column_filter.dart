@@ -267,7 +267,20 @@ class PlutoColumnFilterState extends PlutoStateWithChange<PlutoColumnFilter> {
                 onChanged: _handleOnChanged,
                 onEditingComplete: _handleOnEditingComplete,
                 decoration: InputDecoration(
-                  suffixIcon: widget.column.filterSuffixIcon,
+                  suffixIcon: widget.column.filterSuffixIcon != null
+                      ? GestureDetector(
+                          onTap: () {
+                            widget.column.onFilterSuffixTap?.call(
+                              _focusNode,
+                              _controller,
+                              _enabled,
+                              _handleOnChanged,
+                              stateManager,
+                            );
+                          },
+                          child: widget.column.filterSuffixIcon,
+                        )
+                      : null,
                   hintText: widget.column.filterHintText ??
                       (_enabled ? widget.column.defaultFilter.title : ''),
                   filled: true,
