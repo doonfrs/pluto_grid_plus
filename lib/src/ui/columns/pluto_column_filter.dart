@@ -217,6 +217,50 @@ class PlutoColumnFilterState extends PlutoStateWithChange<PlutoColumnFilter> {
   @override
   Widget build(BuildContext context) {
     final style = stateManager.style;
+    final filterDelegate = widget.column.filterWidgetDelegate;
+
+    Widget? suffixIcon;
+
+    if (filterDelegate?.filterSuffixIcon != null) {
+      suffixIcon = InkWell(
+        onTap: () {
+          filterDelegate?.onFilterSuffixTap?.call(
+            _focusNode,
+            _controller,
+            _enabled,
+            _handleOnChanged,
+            stateManager,
+          );
+        },
+        child: filterDelegate?.filterSuffixIcon,
+      );
+    }
+
+    final clearIcon = InkWell(
+      onTap: () {
+        _controller.clear();
+        _handleOnChanged(_controller.text);
+        filterDelegate?.onClear?.call();
+      },
+      child: filterDelegate?.clearIcon,
+    );
+
+    if (filterDelegate?.onClear != null) {
+      if (suffixIcon == null) {
+        suffixIcon = clearIcon;
+      } else {
+        suffixIcon = Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisSize: MainAxisSize.min,
+          spacing: 8,
+          children: [
+            suffixIcon,
+            clearIcon,
+            SizedBox(width: 4),
+          ],
+        );
+      }
+    }
 
     return SizedBox(
       height: stateManager.columnFilterHeight,

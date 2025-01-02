@@ -629,7 +629,7 @@ class PlutoGridActionPasteValues extends PlutoGridShortcutAction {
     if (stateManager.isEditing == true) {
       return;
     }
-
+    
     Clipboard.getData('text/plain').then((ClipboardData? data) {
       final text = data?.text;
 
