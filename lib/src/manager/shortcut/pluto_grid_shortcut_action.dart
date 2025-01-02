@@ -662,7 +662,7 @@ class PlutoGridActionPasteValues extends PlutoGridShortcutAction {
         return;
       }
       List<List<String>> textList =
-          PlutoClipboardTransformation.stringToList(value!.text!);
+          PlutoClipboardTransformation.stringToList(value.text!);
 
       stateManager.pasteCellValue(textList);
     });

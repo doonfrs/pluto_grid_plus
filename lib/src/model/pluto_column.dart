@@ -182,27 +182,6 @@ class PlutoColumn {
   /// Valid only when [enableContextMenu] is activated.
   bool enableFilterMenuItem;
 
-  ///Set hint text for filter field
-  String? filterHintText;
-
-  ///Set hint text color for filter field
-  Color? filterHintTextColor;
-
-  ///Set suffix icon for filter field
-  Icon? filterSuffixIcon;
-
-  ///Set custom widget
-  @Deprecated("Use new filterWidgetBuilder to provide some parameters")
-  Widget? filterWidget;
-
-  Widget Function(
-    FocusNode focusNode,
-    TextEditingController controller,
-    bool enabled,
-    void Function(String changed) handleOnChanged,
-    PlutoGridStateManager stateManager,
-  )? filterWidgetBuilder;
-
   /// Displays Hide column menu in the column context menu.
   /// Valid only when [enableContextMenu] is activated.
   bool enableHideColumnMenuItem;
@@ -220,6 +199,9 @@ class PlutoColumn {
   bool hide;
 
   LinearGradient? backgroundGradient;
+
+  /// The widget of the filter column, this can be customized with the multiple constructors, defaults to a [PlutoFilterColumnWidgetDelegate.initial()]
+  PlutoFilterColumnWidgetDelegate? filterWidgetDelegate;
 
   PlutoColumn({
     required this.title,
@@ -252,16 +234,13 @@ class PlutoColumn {
     this.enableContextMenu = true,
     this.enableDropToResize = true,
     this.enableFilterMenuItem = true,
-    this.filterHintText,
-    this.filterHintTextColor,
-    this.filterSuffixIcon,
-    @Deprecated("Use new filterWidgetBuilder to provide some parameters")
-    this.filterWidget,
     this.enableHideColumnMenuItem = true,
     this.enableSetColumnsMenuItem = true,
     this.enableAutoEditing = false,
     this.enableEditingMode = true,
     this.hide = false,
+    this.filterWidgetDelegate =
+        const PlutoFilterColumnWidgetDelegate.textField(),
     this.disableRowCheckboxWhen,
   })  : _key = UniqueKey(),
         _checkReadOnly = checkReadOnly;
@@ -370,6 +349,60 @@ class PlutoColumn {
 
     return value.toString();
   }
+}
+
+class PlutoFilterColumnWidgetDelegate {
+  /// This is the default filter widget delegate
+  const PlutoFilterColumnWidgetDelegate.textField({
+    this.filterHintText,
+    this.filterHintTextColor,
+    this.filterSuffixIcon,
+    this.onFilterSuffixTap,
+    this.clearIcon = const Icon(Icons.clear),
+    this.onClear,
+  }) : filterWidgetBuilder = null;
+
+  /// If you don't want a custom widget
+  const PlutoFilterColumnWidgetDelegate.builder({
+    this.filterWidgetBuilder,
+  })  : filterSuffixIcon = null,
+        onFilterSuffixTap = null,
+        filterHintText = null,
+        filterHintTextColor = null,
+        clearIcon = const Icon(Icons.clear),
+        onClear = null;
+
+  ///Set hint text for filter field
+  final String? filterHintText;
+
+  ///Set hint text color for filter field
+  final Color? filterHintTextColor;
+
+  ///Set suffix icon for filter field
+  final Widget? filterSuffixIcon;
+
+  /// Clear icon in the text field, if onClear is null, this will not appear
+  final Widget clearIcon;
+
+  /// If this is set, it will be called when the clear button is tapped, if this is null there won't be a clear icon
+  final Function? onClear;
+
+  /// Set a custom on tap event for the filter suffix icon
+  final Function(
+    FocusNode focusNode,
+    TextEditingController controller,
+    bool enabled,
+    void Function(String changed) handleOnChanged,
+    PlutoGridStateManager stateManager,
+  )? onFilterSuffixTap;
+
+  final Widget Function(
+    FocusNode focusNode,
+    TextEditingController controller,
+    bool enabled,
+    void Function(String changed) handleOnChanged,
+    PlutoGridStateManager stateManager,
+  )? filterWidgetBuilder;
 }
 
 class PlutoColumnRendererContext {
