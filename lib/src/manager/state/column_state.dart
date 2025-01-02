@@ -109,7 +109,18 @@ abstract class IColumnState {
   /// it is not changed if the width constraint of the frozen column is narrow.
   void resizeColumn(PlutoColumn column, double offset);
 
+  /// {@template autoFitColumn}
+  /// Auto fit a specific column.
+  /// {@endtemplate}
   void autoFitColumn(BuildContext context, PlutoColumn column);
+
+  /// {@template autoFitAllColumns}
+  /// Auto fit all columns.
+  ///
+  /// If no columns are specified, use the column from the state.
+  /// {@endtemplate}
+  void autoFitAllColumns(BuildContext context,
+      [Iterable<PlutoColumn>? columns]);
 
   /// Hide or show the [column] with [hide] value.
   ///
@@ -547,7 +558,7 @@ mixin ColumnState implements IPlutoGridState {
     if (columnsResizeMode.isNormal) {
       final setWidth = column.width + offset;
 
-      column.width = setWidth > column.minWidth ? setWidth : column.minWidth;
+      column.width = math.max(setWidth, column.minWidth);
 
       updated = setWidth == column.width;
     } else {
@@ -628,6 +639,19 @@ mixin ColumnState implements IPlutoGridState {
         ].reduce((acc, a) => acc + a);
 
     resizeColumn(column, math.max(calculatedTileWidth, calculatedCellWidth));
+
+    notifyResizingListeners();
+  }
+
+  @override
+  void autoFitAllColumns(BuildContext context,
+      [Iterable<PlutoColumn>? columns]) {
+    // If no columns are specified, use the column from the state.
+    columns ??= this.columns;
+
+    for (final column in columns) {
+      autoFitColumn(context, column);
+    }
   }
 
   double _visualTextWidth(String text, TextStyle style) {
