@@ -812,7 +812,7 @@ class PlutoGridState extends PlutoStateWithChange<PlutoGrid> {
                   LayoutId(
                     id: _StackName.loading,
                     child: PlutoLoading(
-                      level: _stateManager.loadingLevel,
+                      stateManager: _stateManager,
                       backgroundColor: style.gridBackgroundColor,
                       indicatorColor: style.activatedBorderColor,
                       text: _stateManager.localeText.loadingText,
@@ -1209,6 +1209,8 @@ class PlutoGridLayoutDelegate extends MultiChildLayoutDelegate {
               size.height - bodyRowsBottomOffset - 45,
             ),
           );
+        case PlutoGridLoadingLevel.custom:
+          loadingSize = size;
           break;
       }
 
