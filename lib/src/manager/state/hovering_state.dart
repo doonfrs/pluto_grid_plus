@@ -1,13 +1,9 @@
 import 'package:pluto_grid_plus/pluto_grid_plus.dart';
 
 abstract class IHoveringState {
-
   int? get hoveredRowIdx;
 
-  void setHoveredRowIdx(
-    int? rowIdx,
-    {bool notify = true}
-  );
+  void setHoveredRowIdx(int? rowIdx, {bool notify = true});
 
   bool isRowIdxHovered(int rowIdx);
 }
@@ -24,9 +20,9 @@ mixin HoveringState implements IPlutoGridState {
 
   @override
   void setHoveredRowIdx(
-    int? rowIdx,
-    {bool notify = true,}
-  ) {
+    int? rowIdx, {
+    bool notify = true,
+  }) {
     if (hoveredRowIdx == rowIdx) {
       return;
     }

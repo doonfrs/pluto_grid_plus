@@ -1,4 +1,4 @@
 {
     "dart.lineLength": 80,
-    "files.eol": "\n",
+    "files.eol": "auto",
 }

@@ -203,7 +203,8 @@ class _PlutoInfinityScrollRowsState extends State<PlutoInfinityScrollRows> {
       if (!_isLast) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (scroll.hasClients && scroll.position.maxScrollExtent == 0) {
-	    var lastRow = stateManager.rows.isNotEmpty ? stateManager.rows.last : null;
+            var lastRow =
+                stateManager.rows.isNotEmpty ? stateManager.rows.last : null;
             _update(lastRow);
           }
         });
