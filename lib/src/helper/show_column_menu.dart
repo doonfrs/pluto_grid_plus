@@ -104,7 +104,7 @@ List<PopupMenuEntry<PlutoGridColumnMenuItem>> _getDefaultColumnMenuItems({
 }) {
   final Color textColor = stateManager.style.cellTextStyle.color!;
 
-  final Color disableTextColor = textColor.withOpacity(0.5);
+  final Color disableTextColor = textColor.withAlpha((0.5 * 255).toInt());
 
   final bool enoughFrozenColumnsWidth = stateManager.enoughFrozenColumnsWidth(
     stateManager.maxWidth! - column.width,
@@ -182,7 +182,7 @@ PopupMenuItem<PlutoGridColumnMenuItem> _buildMenuItem<PlutoGridColumnMenuItem>({
     child: Text(
       text,
       style: TextStyle(
-        color: enabled ? textColor : textColor!.withOpacity(0.5),
+        color: enabled ? textColor : textColor!.withAlpha((0.5 * 255).toInt()),
         fontSize: 13,
       ),
     ),
