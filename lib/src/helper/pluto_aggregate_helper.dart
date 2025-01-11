@@ -1,5 +1,5 @@
 import 'package:collection/collection.dart'
-    show IterableExtension, IterableNullableExtension, IterableNumberExtension;
+    show IterableExtension, IterableNumberExtension;
 import 'package:pluto_grid_plus/pluto_grid_plus.dart';
 
 class PlutoAggregateHelper {
@@ -23,7 +23,7 @@ class PlutoAggregateHelper {
         .map(
           (e) => e.cells[column.field]?.value as num?,
         )
-        .whereNotNull();
+        .nonNulls;
 
     return numbers.isNotEmpty
         ? numberColumn.toNumber(numberColumn.applyFormat(numbers.sum))
@@ -50,7 +50,7 @@ class PlutoAggregateHelper {
         .map(
           (e) => e.cells[column.field]?.value as num?,
         )
-        .whereNotNull();
+        .nonNulls;
 
     return numbers.isNotEmpty
         ? numberColumn.toNumber(numberColumn.applyFormat(numbers.average))

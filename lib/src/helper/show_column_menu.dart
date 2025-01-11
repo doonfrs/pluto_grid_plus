@@ -106,6 +106,7 @@ List<PopupMenuEntry<PlutoGridColumnMenuItem>> _getDefaultColumnMenuItems({
 
   final Color disableTextColor = textColor.withValues(alpha: 0.5);
 
+
   final bool enoughFrozenColumnsWidth = stateManager.enoughFrozenColumnsWidth(
     stateManager.maxWidth! - column.width,
   );
