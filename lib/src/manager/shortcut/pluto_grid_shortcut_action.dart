@@ -80,7 +80,8 @@ class PlutoGridActionMoveCellFocus extends PlutoGridShortcutAction {
     required PlutoKeyManagerEvent keyEvent,
     required PlutoGridStateManager stateManager,
   }) {
-    bool force = keyEvent.isHorizontal && stateManager.configuration.enableMoveHorizontalInEditing == true;
+    bool force = keyEvent.isHorizontal &&
+        stateManager.configuration.enableMoveHorizontalInEditing == true;
 
     if (stateManager.currentCell == null) {
       stateManager.setCurrentCell(stateManager.firstCell, 0);
@@ -137,7 +138,8 @@ class PlutoGridActionMoveCellFocusByPage extends PlutoGridShortcutAction {
 
         final previousPosition = stateManager.currentCellPosition;
 
-        int toPage = direction.isLeft ? stateManager.page - 1 : stateManager.page + 1;
+        int toPage =
+            direction.isLeft ? stateManager.page - 1 : stateManager.page + 1;
 
         if (toPage < 1) {
           toPage = 1;
@@ -156,7 +158,9 @@ class PlutoGridActionMoveCellFocusByPage extends PlutoGridShortcutAction {
         break;
       case PlutoMoveDirection.up:
       case PlutoMoveDirection.down:
-        final int moveCount = (stateManager.rowContainerHeight / stateManager.rowTotalHeight).floor();
+        final int moveCount =
+            (stateManager.rowContainerHeight / stateManager.rowTotalHeight)
+                .floor();
 
         int rowIdx = stateManager.currentRowIdx!;
 
@@ -195,7 +199,8 @@ class PlutoGridActionMoveCellFocusByPage extends PlutoGridShortcutAction {
 ///
 /// When [direction] is left or right, no action is taken.
 /// {@endtemplate}
-class PlutoGridActionMoveSelectedCellFocusByPage extends PlutoGridShortcutAction {
+class PlutoGridActionMoveSelectedCellFocusByPage
+    extends PlutoGridShortcutAction {
   const PlutoGridActionMoveSelectedCellFocusByPage(this.direction);
 
   final PlutoMoveDirection direction;
@@ -207,9 +212,12 @@ class PlutoGridActionMoveSelectedCellFocusByPage extends PlutoGridShortcutAction
   }) {
     if (direction.horizontal) return;
 
-    final int moveCount = (stateManager.rowContainerHeight / stateManager.rowTotalHeight).floor();
+    final int moveCount =
+        (stateManager.rowContainerHeight / stateManager.rowTotalHeight).floor();
 
-    int rowIdx = stateManager.currentSelectingPosition?.rowIdx ?? stateManager.currentCellPosition?.rowIdx ?? 0;
+    int rowIdx = stateManager.currentSelectingPosition?.rowIdx ??
+        stateManager.currentCellPosition?.rowIdx ??
+        0;
 
     rowIdx += direction.isUp ? -moveCount : moveCount;
 
@@ -242,13 +250,16 @@ class PlutoGridActionDefaultTab extends PlutoGridShortcutAction {
 
     final saveIsEditing = stateManager.isEditing;
 
-    keyEvent.isShiftPressed ? _moveCellPrevious(stateManager) : _moveCellNext(stateManager);
+    keyEvent.isShiftPressed
+        ? _moveCellPrevious(stateManager)
+        : _moveCellNext(stateManager);
 
     stateManager.setEditing(stateManager.autoEditing || saveIsEditing);
   }
 
   void _moveCellPrevious(PlutoGridStateManager stateManager) {
-    if (_willMoveToPreviousRow(stateManager.currentCellPosition, stateManager)) {
+    if (_willMoveToPreviousRow(
+        stateManager.currentCellPosition, stateManager)) {
       _moveCellToPreviousRow(stateManager);
     } else {
       stateManager.moveCurrentCell(PlutoMoveDirection.left, force: true);
@@ -267,7 +278,9 @@ class PlutoGridActionDefaultTab extends PlutoGridShortcutAction {
     PlutoGridCellPosition? position,
     PlutoGridStateManager stateManager,
   ) {
-    if (!stateManager.configuration.tabKeyAction.isMoveToNextOnEdge || position == null || !position.hasPosition) {
+    if (!stateManager.configuration.tabKeyAction.isMoveToNextOnEdge ||
+        position == null ||
+        !position.hasPosition) {
       return false;
     }
 
@@ -278,11 +291,14 @@ class PlutoGridActionDefaultTab extends PlutoGridShortcutAction {
     PlutoGridCellPosition? position,
     PlutoGridStateManager stateManager,
   ) {
-    if (!stateManager.configuration.tabKeyAction.isMoveToNextOnEdge || position == null || !position.hasPosition) {
+    if (!stateManager.configuration.tabKeyAction.isMoveToNextOnEdge ||
+        position == null ||
+        !position.hasPosition) {
       return false;
     }
 
-    return position.rowIdx! < stateManager.refRows.length - 1 && position.columnIdx == stateManager.refColumns.length - 1;
+    return position.rowIdx! < stateManager.refRows.length - 1 &&
+        position.columnIdx == stateManager.refColumns.length - 1;
   }
 
   void _moveCellToPreviousRow(PlutoGridStateManager stateManager) {
@@ -335,7 +351,9 @@ class PlutoGridActionDefaultEnterKey extends PlutoGridShortcutAction {
         row: stateManager.currentRow,
         rowIdx: stateManager.currentRowIdx,
         cell: stateManager.currentCell,
-        selectedRows: stateManager.mode.isMultiSelectMode ? stateManager.currentSelectingRows : null,
+        selectedRows: stateManager.mode.isMultiSelectMode
+            ? stateManager.currentSelectingRows
+            : null,
       ));
       return;
     }
@@ -352,7 +370,8 @@ class PlutoGridActionDefaultEnterKey extends PlutoGridShortcutAction {
     if (stateManager.configuration.enterKeyAction.isToggleEditing) {
       stateManager.toggleEditing(notify: false);
     } else {
-      if (stateManager.isEditing == true || stateManager.currentColumn?.enableEditingMode == false) {
+      if (stateManager.isEditing == true ||
+          stateManager.currentColumn?.enableEditingMode == false) {
         final saveIsEditing = stateManager.isEditing;
 
         _moveCell(keyEvent, stateManager);
@@ -371,7 +390,11 @@ class PlutoGridActionDefaultEnterKey extends PlutoGridShortcutAction {
   }
 
   bool _isExpandableCell(PlutoGridStateManager stateManager) {
-    return stateManager.currentCell != null && stateManager.enabledRowGroups && stateManager.rowGroupDelegate?.isExpandableCell(stateManager.currentCell!) == true;
+    return stateManager.currentCell != null &&
+        stateManager.enabledRowGroups &&
+        stateManager.rowGroupDelegate
+                ?.isExpandableCell(stateManager.currentCell!) ==
+            true;
   }
 
   void _moveCell(
@@ -431,7 +454,8 @@ class PlutoGridActionDefaultEscapeKey extends PlutoGridShortcutAction {
     required PlutoKeyManagerEvent keyEvent,
     required PlutoGridStateManager stateManager,
   }) {
-    if (stateManager.mode.isSelectMode || (stateManager.mode.isPopup && !stateManager.isEditing)) {
+    if (stateManager.mode.isSelectMode ||
+        (stateManager.mode.isPopup && !stateManager.isEditing)) {
       if (stateManager.onSelected != null) {
         stateManager.clearCurrentSelecting();
         stateManager.onSelected!(const PlutoGridOnSelectedEvent());
@@ -475,7 +499,8 @@ class PlutoGridActionMoveCellFocusToEdge extends PlutoGridShortcutAction {
 /// Moves the selected focus to the end of the [direction] direction
 /// in the cell or row selection state.
 /// {@endtemplate}
-class PlutoGridActionMoveSelectedCellFocusToEdge extends PlutoGridShortcutAction {
+class PlutoGridActionMoveSelectedCellFocusToEdge
+    extends PlutoGridShortcutAction {
   const PlutoGridActionMoveSelectedCellFocusToEdge(this.direction);
 
   final PlutoMoveDirection direction;
@@ -574,7 +599,9 @@ class PlutoGridActionToggleColumnSort extends PlutoGridShortcutAction {
     PlutoGridCellPosition? previousPosition,
     bool ignore = false,
   }) {
-    if (ignore || currentColumn == null || previousPosition?.hasPosition != true) {
+    if (ignore ||
+        currentColumn == null ||
+        previousPosition?.hasPosition != true) {
       return;
     }
 
@@ -635,7 +662,8 @@ class PlutoGridActionPasteValues extends PlutoGridShortcutAction {
 
       if (text == null) return;
 
-      List<List<String>> textList = PlutoClipboardTransformation.stringToList(text);
+      List<List<String>> textList =
+          PlutoClipboardTransformation.stringToList(text);
 
       stateManager.pasteCellValue(textList);
     });

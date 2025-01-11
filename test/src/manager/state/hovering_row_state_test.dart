@@ -38,7 +38,7 @@ void main() {
   group('setHoveredRowIdx', () {
     test(
       'If the rowIdx passed as an argument is the same as'
-          'hoveredRowIdx, then notifyListeners should not be called.',
+      'hoveredRowIdx, then notifyListeners should not be called.',
       () {
         // given
         stateManager.setHoveredRowIdx(1);
@@ -55,7 +55,7 @@ void main() {
 
     test(
       'If the rowIdx passed as an argument is different from '
-          'hoveredRowIdx, notifyListeners should be called.',
+      'hoveredRowIdx, notifyListeners should be called.',
       () {
         // given
         stateManager.setHoveredRowIdx(1);
@@ -73,8 +73,8 @@ void main() {
 
     test(
       'If the rowIdx passed as an argument is different from '
-          'hoveredRowIdx, but notify is false,'
-          'notifyListeners should not be called.',
+      'hoveredRowIdx, but notify is false,'
+      'notifyListeners should not be called.',
       () {
         // given
         stateManager.setHoveredRowIdx(1);
