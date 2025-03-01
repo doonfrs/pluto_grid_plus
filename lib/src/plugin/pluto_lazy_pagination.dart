@@ -10,6 +10,9 @@ abstract class PlutoLazyPaginationStrategy {
     BuildContext context,
     PlutoLazyPaginationState state,
   );
+
+  /// Optional method to provide a default page size
+  int? getInitialPageSize() => null;
 }
 
 /// Default strategy (original implementation)
@@ -39,25 +42,33 @@ class DefaultPlutoLazyPaginationStrategy
       setPage: state.setPage,
     );
   }
+
+  @override
+  int? getInitialPageSize() => null;
 }
 
 /// Strategy with page size dropdown
 class PageSizeDropdownPlutoLazyPaginationStrategy
     implements PlutoLazyPaginationStrategy {
-  const PageSizeDropdownPlutoLazyPaginationStrategy({
+  PageSizeDropdownPlutoLazyPaginationStrategy({
     this.pageSizeToMove,
     this.pageSizes = const [10, 20, 30, 50, 100],
+    this.initialPageSize,
     this.onPageSizeChanged,
     this.dropdownDecoration,
     this.dropdownItemDecoration,
     this.pageSizeDropdownIcon,
-  });
+  }) : assert(initialPageSize == null || pageSizes.contains(initialPageSize),
+            'initialPageSize must be included in pageSizes list');
 
   /// Set the number of moves to the previous or next page button.
   final int? pageSizeToMove;
 
   /// Available page sizes in dropdown
   final List<int> pageSizes;
+
+  /// Default page size to use if initialPageSize is not set in PlutoLazyPagination
+  final int? initialPageSize;
 
   /// Callback when page size changes
   final void Function(int pageSize)? onPageSizeChanged;
@@ -99,6 +110,9 @@ class PageSizeDropdownPlutoLazyPaginationStrategy
       pageSizeDropdownIcon: pageSizeDropdownIcon,
     );
   }
+
+  @override
+  int? getInitialPageSize() => initialPageSize;
 }
 
 /// Callback function to implement to add lazy pagination data.
@@ -174,7 +188,7 @@ class PlutoLazyPaginationResponse {
 class PlutoLazyPagination extends StatefulWidget {
   const PlutoLazyPagination({
     this.initialPage = 1,
-    this.initialPageSize = 10,
+    this.initialPageSize,
     this.initialFetch = true,
     this.fetchWithSorting = true,
     this.fetchWithFiltering = true,
@@ -188,8 +202,8 @@ class PlutoLazyPagination extends StatefulWidget {
   /// Set the first page.
   final int initialPage;
 
-  /// Set the initial page size
-  final int initialPageSize;
+  /// Set the initial page size (optional, will use strategy's default if not provided)
+  final int? initialPageSize;
 
   /// Decide whether to call the fetch function first.
   final bool initialFetch;
@@ -229,7 +243,7 @@ class PlutoLazyPaginationState extends State<PlutoLazyPagination> {
   late final StreamSubscription<PlutoGridEvent> _events;
 
   int _page = 1;
-  int _pageSize = 10;
+  late int _pageSize;
   int _totalPage = 0;
   bool _isFetching = false;
 
@@ -245,7 +259,9 @@ class PlutoLazyPaginationState extends State<PlutoLazyPagination> {
     super.initState();
 
     _page = widget.initialPage;
-    _pageSize = widget.initialPageSize;
+
+    // Determine page size from initialPageSize or strategy
+    _initializePageSize();
 
     if (widget.fetchWithSorting) {
       stateManager.setSortOnlyEvent(true);
@@ -262,6 +278,28 @@ class PlutoLazyPaginationState extends State<PlutoLazyPagination> {
         setPage(widget.initialPage);
       });
     }
+  }
+
+  void _initializePageSize() {
+    int? widgetInitialPageSize = widget.initialPageSize;
+    int? strategyInitialPageSize = widget.strategy?.getInitialPageSize();
+
+    int? pageSize = strategyInitialPageSize ?? widgetInitialPageSize;
+
+    if (pageSize != null) {
+      if (widget.strategy is PageSizeDropdownPlutoLazyPaginationStrategy) {
+        final dropdownStrategy =
+            widget.strategy as PageSizeDropdownPlutoLazyPaginationStrategy;
+
+        if (!dropdownStrategy.pageSizes.contains(pageSize)) {
+          throw AssertionError(
+            'initialPageSize (${widget.initialPageSize}) must be included in the pageSizes list of PageSizeDropdownPlutoLazyPaginationStrategy (${dropdownStrategy.pageSizes})',
+          );
+        }
+      }
+    }
+
+    _pageSize = pageSize ?? 10;
   }
 
   @override
@@ -634,10 +672,7 @@ class _PageSizeDropdownPaginationWidgetState
   }
 
   int get _pageSizeToMove {
-    if (widget.pageSizeToMove == null) {
-      return 1 + (_itemSize * 2);
-    }
-    return widget.pageSizeToMove!;
+    return widget.pageSizeToMove ?? 1;
   }
 
   void _firstPage() {
