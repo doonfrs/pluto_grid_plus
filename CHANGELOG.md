@@ -1,5 +1,11 @@
 # Changelog
 
+## [8.4.5] - 2025. 03. 01
+
+* add initialPageSize to PageSizeDropdownPlutoLazyPaginationStrategy and default pageSizeToMove to 1
+* Fix pagination bug
+
+
 ## [8.4.4] - 2025. 03. 01
 
 * Added pagesize dropdown using strategy pattern
