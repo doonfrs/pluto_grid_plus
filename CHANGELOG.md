@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file.
 
+## [8.4.4] - 2025. 03. 01
+
+* Added pagesize dropdown using strategy pattern
+* Upgraded to latest Flutter version
+* Used intl any version for compatibility
+* Added onClear and clearIcon parameters to filter widgets
+* Added filterWidgetDelegate to PlutoColumn
+* Added missing filterWidgetBuilder and onFilterSuffixTap parameters
+* Updated GitHub Actions tests
+* Added optional width parameter to column in PlutoColumnType.select
+* Added ability to disable row checkbox under specific conditions
+* Fixed issue #105
+* Added clear columns filter event
+* Added empty screen to homepage
+* Added VS Code formatting restrictions
+* Fixed unit tests
+* Added guard against missing scroll client (when disposed)
+* Improved row wrapper implementation
+* Changed WidgetBuilder to Widget Function(BuildContext, Widget)
+* Enhanced infinity scroll to continue updating if screen not filled
+* Fixed homescreen pointing to old package
+* Implemented ability to disable row checkbox under conditions
+* Added handling for pure checkbox values when disabled
+* Added null check to prevent 'Null check operator used on a null value' exception
+* Updated intl library to ^0.20.0
+* Added onActiveCellChanged event
+
+
 ## [8.4.3] - 2024. 10. 23
 
 * Added rowWrapper & editCellWrapper for the state manager
