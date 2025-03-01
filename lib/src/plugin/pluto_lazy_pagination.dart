@@ -4,6 +4,103 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:pluto_grid_plus/pluto_grid_plus.dart';
 
+/// Strategy interface for pagination implementations
+abstract class PlutoLazyPaginationStrategy {
+  Widget build(
+    BuildContext context,
+    PlutoLazyPaginationState state,
+  );
+}
+
+/// Default strategy (original implementation)
+class DefaultPlutoLazyPaginationStrategy
+    implements PlutoLazyPaginationStrategy {
+  const DefaultPlutoLazyPaginationStrategy({
+    this.pageSizeToMove,
+  });
+
+  /// Set the number of moves to the previous or next page button.
+  final int? pageSizeToMove;
+
+  @override
+  Widget build(
+    BuildContext context,
+    PlutoLazyPaginationState state,
+  ) {
+    return _PaginationWidget(
+      iconColor: state.stateManager.style.iconColor,
+      disabledIconColor: state.stateManager.style.disabledIconColor,
+      activatedColor: state.stateManager.style.activatedBorderColor,
+      iconSize: state.stateManager.style.iconSize,
+      height: state.stateManager.footerHeight,
+      page: state.page,
+      totalPage: state.totalPage,
+      pageSizeToMove: pageSizeToMove,
+      setPage: state.setPage,
+    );
+  }
+}
+
+/// Strategy with page size dropdown
+class PageSizeDropdownPlutoLazyPaginationStrategy
+    implements PlutoLazyPaginationStrategy {
+  const PageSizeDropdownPlutoLazyPaginationStrategy({
+    this.pageSizeToMove,
+    this.pageSizes = const [10, 20, 30, 50, 100],
+    this.onPageSizeChanged,
+    this.dropdownDecoration,
+    this.dropdownItemDecoration,
+    this.pageSizeDropdownIcon,
+  });
+
+  /// Set the number of moves to the previous or next page button.
+  final int? pageSizeToMove;
+
+  /// Available page sizes in dropdown
+  final List<int> pageSizes;
+
+  /// Callback when page size changes
+  final void Function(int pageSize)? onPageSizeChanged;
+
+  /// Decoration for the dropdown button
+  final BoxDecoration? dropdownDecoration;
+
+  /// Decoration for dropdown items
+  final BoxDecoration? dropdownItemDecoration;
+
+  /// Icon for the dropdown
+  final Icon? pageSizeDropdownIcon;
+
+  @override
+  Widget build(
+    BuildContext context,
+    PlutoLazyPaginationState state,
+  ) {
+    return _PageSizeDropdownPaginationWidget(
+      iconColor: state.stateManager.style.iconColor,
+      disabledIconColor: state.stateManager.style.disabledIconColor,
+      activatedColor: state.stateManager.style.activatedBorderColor,
+      iconSize: state.stateManager.style.iconSize,
+      height: state.stateManager.footerHeight,
+      page: state.page,
+      totalPage: state.totalPage,
+      pageSizeToMove: pageSizeToMove,
+      setPage: state.setPage,
+      pageSizes: pageSizes,
+      currentPageSize: state.pageSize,
+      onPageSizeChanged: (size) {
+        state.setPageSize(size);
+        if (onPageSizeChanged != null) {
+          onPageSizeChanged!(size);
+        }
+      },
+      dropdownDecoration: dropdownDecoration,
+      dropdownItemDecoration: dropdownItemDecoration,
+      pageSizeDropdownIcon: pageSizeDropdownIcon,
+    );
+  }
+}
+
 /// Callback function to implement to add lazy pagination data.
 typedef PlutoLazyPaginationFetch = Future<PlutoLazyPaginationResponse> Function(
     PlutoLazyPaginationRequest);
@@ -12,12 +109,16 @@ typedef PlutoLazyPaginationFetch = Future<PlutoLazyPaginationResponse> Function(
 class PlutoLazyPaginationRequest {
   PlutoLazyPaginationRequest({
     required this.page,
+    this.pageSize = 10,
     this.sortColumn,
     this.filterRows = const <PlutoRow>[],
   });
 
   /// Request page.
   final int page;
+
+  /// Page size (items per page)
+  final int pageSize;
 
   /// If the sort condition is set, the column for which the sort is set.
   /// The value of [PlutoColumn.sort] is the sort status of the column.
@@ -73,10 +174,12 @@ class PlutoLazyPaginationResponse {
 class PlutoLazyPagination extends StatefulWidget {
   const PlutoLazyPagination({
     this.initialPage = 1,
+    this.initialPageSize = 10,
     this.initialFetch = true,
     this.fetchWithSorting = true,
     this.fetchWithFiltering = true,
     this.pageSizeToMove,
+    this.strategy,
     required this.fetch,
     required this.stateManager,
     super.key,
@@ -84,6 +187,9 @@ class PlutoLazyPagination extends StatefulWidget {
 
   /// Set the first page.
   final int initialPage;
+
+  /// Set the initial page size
+  final int initialPageSize;
 
   /// Decide whether to call the fetch function first.
   final bool initialFetch;
@@ -107,31 +213,39 @@ class PlutoLazyPagination extends StatefulWidget {
   /// If this value is set to 1, the next previous page is moved by one page.
   final int? pageSizeToMove;
 
+  /// Strategy to use for pagination widget UI
+  final PlutoLazyPaginationStrategy? strategy;
+
   /// A callback function that returns the data to be added.
   final PlutoLazyPaginationFetch fetch;
 
   final PlutoGridStateManager stateManager;
 
   @override
-  State<PlutoLazyPagination> createState() => _PlutoLazyPaginationState();
+  State<PlutoLazyPagination> createState() => PlutoLazyPaginationState();
 }
 
-class _PlutoLazyPaginationState extends State<PlutoLazyPagination> {
+class PlutoLazyPaginationState extends State<PlutoLazyPagination> {
   late final StreamSubscription<PlutoGridEvent> _events;
 
   int _page = 1;
-
+  int _pageSize = 10;
   int _totalPage = 0;
-
   bool _isFetching = false;
 
   PlutoGridStateManager get stateManager => widget.stateManager;
+
+  // Expose state for strategy pattern
+  int get page => _page;
+  int get pageSize => _pageSize;
+  int get totalPage => _totalPage;
 
   @override
   void initState() {
     super.initState();
 
     _page = widget.initialPage;
+    _pageSize = widget.initialPageSize;
 
     if (widget.fetchWithSorting) {
       stateManager.setSortOnlyEvent(true);
@@ -175,12 +289,13 @@ class _PlutoLazyPaginationState extends State<PlutoLazyPagination> {
         .fetch(
       PlutoLazyPaginationRequest(
         page: page,
+        pageSize: _pageSize,
         sortColumn: stateManager.getSortedColumn,
         filterRows: stateManager.filterRows,
       ),
     )
         .then((data) {
-      if(!mounted)return;
+      if (!mounted) return;
       stateManager.scroll.bodyRowsVertical!.jumpTo(0);
 
       stateManager.refRows.clearFromOriginal();
@@ -188,9 +303,7 @@ class _PlutoLazyPaginationState extends State<PlutoLazyPagination> {
 
       setState(() {
         _page = page;
-
         _totalPage = data.totalPage;
-
         _isFetching = false;
       });
 
@@ -198,19 +311,26 @@ class _PlutoLazyPaginationState extends State<PlutoLazyPagination> {
     });
   }
 
+  void setPageSize(int size) {
+    if (_pageSize == size) return;
+
+    setState(() {
+      _pageSize = size;
+    });
+
+    // Reset to first page with new page size
+    setPage(1);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return _PaginationWidget(
-      iconColor: stateManager.style.iconColor,
-      disabledIconColor: stateManager.style.disabledIconColor,
-      activatedColor: stateManager.style.activatedBorderColor,
-      iconSize: stateManager.style.iconSize,
-      height: stateManager.footerHeight,
-      page: _page,
-      totalPage: _totalPage,
-      pageSizeToMove: widget.pageSizeToMove,
-      setPage: setPage,
-    );
+    // Use provided strategy or default to original implementation
+    final strategy = widget.strategy ??
+        DefaultPlutoLazyPaginationStrategy(
+          pageSizeToMove: widget.pageSizeToMove,
+        );
+
+    return strategy.build(context, this);
   }
 }
 
@@ -228,27 +348,13 @@ class _PaginationWidget extends StatefulWidget {
   });
 
   final Color iconColor;
-
   final Color disabledIconColor;
-
   final Color activatedColor;
-
   final double iconSize;
-
   final double height;
-
   final int page;
-
   final int totalPage;
-
-  /// Set the number of moves to the previous or next page button.
-  ///
-  /// Default is null.
-  /// Moves the page as many as the number of page buttons currently displayed.
-  ///
-  /// If this value is set to 1, the next previous page is moved by one page.
   final int? pageSizeToMove;
-
   final void Function(int page) setPage;
 
   @override
@@ -441,6 +547,278 @@ class _PaginationWidgetState extends State<_PaginationWidget> {
           ),
         );
       },
+    );
+  }
+}
+
+/// Widget with page size dropdown
+class _PageSizeDropdownPaginationWidget extends StatefulWidget {
+  const _PageSizeDropdownPaginationWidget({
+    required this.iconColor,
+    required this.disabledIconColor,
+    required this.activatedColor,
+    required this.iconSize,
+    required this.height,
+    required this.page,
+    required this.totalPage,
+    this.pageSizeToMove,
+    required this.setPage,
+    required this.pageSizes,
+    required this.currentPageSize,
+    required this.onPageSizeChanged,
+    this.dropdownDecoration,
+    this.dropdownItemDecoration,
+    this.pageSizeDropdownIcon,
+  });
+
+  final Color iconColor;
+  final Color disabledIconColor;
+  final Color activatedColor;
+  final double iconSize;
+  final double height;
+  final int page;
+  final int totalPage;
+  final int? pageSizeToMove;
+  final void Function(int page) setPage;
+  final List<int> pageSizes;
+  final int currentPageSize;
+  final void Function(int) onPageSizeChanged;
+  final BoxDecoration? dropdownDecoration;
+  final BoxDecoration? dropdownItemDecoration;
+  final Icon? pageSizeDropdownIcon;
+
+  @override
+  State<_PageSizeDropdownPaginationWidget> createState() =>
+      _PageSizeDropdownPaginationWidgetState();
+}
+
+class _PageSizeDropdownPaginationWidgetState
+    extends State<_PageSizeDropdownPaginationWidget> {
+  double _maxWidth = 0;
+
+  final _iconSplashRadius = PlutoGridSettings.rowHeight / 2;
+
+  bool get _isFirstPage => widget.page < 2;
+
+  bool get _isLastPage => widget.page > widget.totalPage - 1;
+
+  int get _itemSize {
+    final countItemSize = ((_maxWidth - 350) / 100).floor();
+    return countItemSize < 0 ? 0 : min(countItemSize, 3);
+  }
+
+  int get _startPage {
+    final itemSizeGap = _itemSize + 1;
+    var start = widget.page - itemSizeGap;
+    if (widget.page + _itemSize > widget.totalPage) {
+      start -= _itemSize + widget.page - widget.totalPage;
+    }
+    return start < 0 ? 0 : start;
+  }
+
+  int get _endPage {
+    final itemSizeGap = _itemSize + 1;
+    var end = widget.page + _itemSize;
+    if (widget.page - itemSizeGap < 0) {
+      end += itemSizeGap - widget.page;
+    }
+    return end > widget.totalPage ? widget.totalPage : end;
+  }
+
+  List<int> get _pageNumbers {
+    return List.generate(
+      _endPage - _startPage,
+      (index) => _startPage + index,
+      growable: false,
+    );
+  }
+
+  int get _pageSizeToMove {
+    if (widget.pageSizeToMove == null) {
+      return 1 + (_itemSize * 2);
+    }
+    return widget.pageSizeToMove!;
+  }
+
+  void _firstPage() {
+    _movePage(1);
+  }
+
+  void _beforePage() {
+    int beforePage = widget.page - _pageSizeToMove;
+    if (beforePage < 1) {
+      beforePage = 1;
+    }
+    _movePage(beforePage);
+  }
+
+  void _nextPage() {
+    int nextPage = widget.page + _pageSizeToMove;
+    if (nextPage > widget.totalPage) {
+      nextPage = widget.totalPage;
+    }
+    _movePage(nextPage);
+  }
+
+  void _lastPage() {
+    _movePage(widget.totalPage);
+  }
+
+  void _movePage(int page) {
+    widget.setPage(page);
+  }
+
+  ButtonStyle _getNumberButtonStyle(bool isCurrentIndex) {
+    return TextButton.styleFrom(
+      disabledForegroundColor: Colors.transparent,
+      shadowColor: Colors.transparent,
+      padding: const EdgeInsets.fromLTRB(5, 0, 0, 10),
+      backgroundColor: Colors.transparent,
+    );
+  }
+
+  TextStyle _getNumberTextStyle(bool isCurrentIndex) {
+    return TextStyle(
+      fontSize: isCurrentIndex ? widget.iconSize : null,
+      color: isCurrentIndex ? widget.activatedColor : widget.iconColor,
+    );
+  }
+
+  Widget _makeNumberButton(int index) {
+    var pageFromIndex = index + 1;
+    var isCurrentIndex = widget.page == pageFromIndex;
+    return TextButton(
+      onPressed: () {
+        _movePage(pageFromIndex);
+      },
+      style: _getNumberButtonStyle(isCurrentIndex),
+      child: Text(
+        pageFromIndex.toString(),
+        style: _getNumberTextStyle(isCurrentIndex),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (_, size) {
+        _maxWidth = size.maxWidth;
+
+        return SizedBox(
+          width: size.maxWidth,
+          height: widget.height,
+          child: Align(
+            alignment: Alignment.center,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(children: [
+                    _firstPageIconButton(),
+                    _beforePageIconButton(),
+                    ..._pageNumbers.map(_makeNumberButton),
+                    _nextPageIconButton(),
+                    _lastPageIconButton(),
+                  ]),
+                  Align(
+                      alignment: Alignment.centerRight,
+                      child: Row(
+                        children: [
+                          const SizedBox(width: 16),
+                          _pagesDropdownButton(),
+                        ],
+                      )),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  IconButton _lastPageIconButton() {
+    return IconButton(
+      onPressed: _isLastPage ? null : _lastPage,
+      icon: const Icon(Icons.last_page),
+      color: widget.iconColor,
+      disabledColor: widget.disabledIconColor,
+      splashRadius: _iconSplashRadius,
+      mouseCursor:
+          _isLastPage ? SystemMouseCursors.basic : SystemMouseCursors.click,
+    );
+  }
+
+  IconButton _nextPageIconButton() {
+    return IconButton(
+      onPressed: _isLastPage ? null : _nextPage,
+      icon: const Icon(Icons.navigate_next),
+      color: widget.iconColor,
+      disabledColor: widget.disabledIconColor,
+      splashRadius: _iconSplashRadius,
+      mouseCursor:
+          _isLastPage ? SystemMouseCursors.basic : SystemMouseCursors.click,
+    );
+  }
+
+  IconButton _beforePageIconButton() {
+    return IconButton(
+      onPressed: _isFirstPage ? null : _beforePage,
+      icon: const Icon(Icons.navigate_before),
+      color: widget.iconColor,
+      disabledColor: widget.disabledIconColor,
+      splashRadius: _iconSplashRadius,
+      mouseCursor:
+          _isFirstPage ? SystemMouseCursors.basic : SystemMouseCursors.click,
+    );
+  }
+
+  IconButton _firstPageIconButton() {
+    return IconButton(
+      onPressed: _isFirstPage ? null : _firstPage,
+      icon: const Icon(Icons.first_page),
+      color: widget.iconColor,
+      disabledColor: widget.disabledIconColor,
+      splashRadius: _iconSplashRadius,
+      mouseCursor:
+          _isFirstPage ? SystemMouseCursors.basic : SystemMouseCursors.click,
+    );
+  }
+
+  Container _pagesDropdownButton() {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 8),
+      decoration: widget.dropdownDecoration ??
+          BoxDecoration(
+            border: Border.all(color: Colors.grey.shade300),
+            borderRadius: BorderRadius.circular(4),
+          ),
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      child: DropdownButton<int>(
+        value: widget.currentPageSize,
+        icon: widget.pageSizeDropdownIcon ?? const Icon(Icons.arrow_drop_down),
+        iconSize: widget.iconSize,
+        elevation: 16,
+        style: TextStyle(color: widget.iconColor),
+        underline: Container(height: 0),
+        onChanged: (int? newValue) {
+          if (newValue != null) {
+            widget.onPageSizeChanged(newValue);
+          }
+        },
+        items: widget.pageSizes.map<DropdownMenuItem<int>>((int value) {
+          return DropdownMenuItem<int>(
+            value: value,
+            child: Container(
+              decoration: widget.dropdownItemDecoration,
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Text("$value / page"),
+            ),
+          );
+        }).toList(),
+      ),
     );
   }
 }
