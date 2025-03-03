@@ -745,28 +745,23 @@ class _PageSizeDropdownPaginationWidgetState
           height: widget.height,
           child: Align(
             alignment: Alignment.center,
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(children: [
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Spacer(),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(children: [
                     _firstPageIconButton(),
                     _beforePageIconButton(),
                     ..._pageNumbers.map(_makeNumberButton),
                     _nextPageIconButton(),
                     _lastPageIconButton(),
                   ]),
-                  Align(
-                      alignment: Alignment.centerRight,
-                      child: Row(
-                        children: [
-                          const SizedBox(width: 16),
-                          _pagesDropdownButton(),
-                        ],
-                      )),
-                ],
-              ),
+                ),
+                const Spacer(),
+                _pagesDropdownButton(),
+              ],
             ),
           ),
         );
@@ -824,10 +819,9 @@ class _PageSizeDropdownPaginationWidgetState
 
   Container _pagesDropdownButton() {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 8),
+      margin: const EdgeInsets.symmetric(horizontal: 5),
       decoration: widget.dropdownDecoration ??
           BoxDecoration(
-            border: Border.all(color: Colors.grey.shade300),
             borderRadius: BorderRadius.circular(4),
           ),
       padding: const EdgeInsets.symmetric(horizontal: 8),

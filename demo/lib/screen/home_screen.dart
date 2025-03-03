@@ -48,6 +48,7 @@ import 'feature/selection_type_column_screen.dart';
 import 'feature/text_type_column_screen.dart';
 import 'feature/time_type_column_screen.dart';
 import 'feature/value_formatter_screen.dart';
+import 'feature/pages_list_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   static const routeName = '/';
@@ -483,6 +484,13 @@ class PlutoFeatures extends StatelessWidget {
             description: 'Exporting grid data as CSV.',
             onTapLiveDemo: () {
               Navigator.pushNamed(context, ExportScreen.routeName);
+            },
+          ),
+          PlutoListTile(
+            title: 'Pages list',
+            description: 'A list of pages to test various functions.',
+            onTapLiveDemo: () {
+              Navigator.pushNamed(context, PagesListScreen.routeName);
             },
           ),
           PlutoListTile.dark(
