@@ -1,5 +1,9 @@
 # Changelog
 
+## [8.4.7] - 2025. 03. 04
+
+* Fix pagination bug
+
 ## [8.4.6] - 2025. 03. 04
 
 * Remove Stratagy pattern from the pagination widget and simplify the code
