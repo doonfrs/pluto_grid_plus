@@ -119,6 +119,7 @@ class _PagesListScreenState extends State<PagesListScreen> {
     return Future.value(PlutoLazyPaginationResponse(
       totalPage: totalPage,
       rows: fetchedRows.toList(),
+      totalRecords: tempList.length,
     ));
   }
 
@@ -150,10 +151,9 @@ class _PagesListScreenState extends State<PagesListScreen> {
         configuration: const PlutoGridConfiguration(),
         createFooter: (stateManager) {
           return PlutoLazyPagination(
-            strategy: PageSizeDropdownPlutoLazyPaginationStrategy(
-              pageSizes: [10, 20, 30, 40, 50],
-              
-            ),
+            pageSizes: [10, 20, 30, 40, 50],
+
+            showPageSizeSelector: true,
 
             // Determine the first page.
             // Default is 1.

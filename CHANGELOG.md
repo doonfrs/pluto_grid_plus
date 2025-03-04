@@ -1,10 +1,15 @@
 # Changelog
 
+## [8.4.6] - 2025. 03. 04
+
+* Remove Stratagy pattern from the pagination widget and simplify the code
+* Add total records
+* Enhance the ui of the pagination widget
+
 ## [8.4.5] - 2025. 03. 01
 
 * add initialPageSize to PageSizeDropdownPlutoLazyPaginationStrategy and default pageSizeToMove to 1
 * Fix pagination bug
-
 
 ## [8.4.4] - 2025. 03. 01
 
@@ -33,7 +38,6 @@
 * Updated intl library to ^0.20.0
 * Added onActiveCellChanged event
 
-
 ## [8.4.3] - 2024. 10. 23
 
 * Added rowWrapper & editCellWrapper for the state manager
@@ -42,8 +46,6 @@
 * Add PlutoGridRowSelectionCheckBehavior which enables automatically setting the CheckBox values of selected rows
 * Add PlutoGridRowSelectionCheckBehavior
 * Upgrade packages
-
-
 
 ## [8.4.2] - 2024. 07. 15
 
