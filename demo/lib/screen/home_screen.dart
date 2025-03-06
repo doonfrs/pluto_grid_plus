@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:demo/screen/empty_screen.dart';
+import 'package:demo/screen/feature/check_visible_columns_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -491,6 +492,16 @@ class PlutoFeatures extends StatelessWidget {
             description: 'A list of pages to test various functions.',
             onTapLiveDemo: () {
               Navigator.pushNamed(context, PagesListScreen.routeName);
+            },
+          ),
+          PlutoListTile(
+            title: 'Check visible columns',
+            description: 'Check visible columns.',
+            onTapLiveDemo: () {
+              Navigator.pushNamed(
+                context,
+                CheckVisibleColumnsScreen.routeName,
+              );
             },
           ),
           PlutoListTile.dark(

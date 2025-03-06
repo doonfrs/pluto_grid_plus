@@ -1,3 +1,4 @@
+import 'package:demo/screen/feature/check_visible_columns_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -65,6 +66,8 @@ class MyApp extends StatelessWidget {
             const AddRowsAsynchronouslyScreen(),
         CellRendererScreen.routeName: (context) => const CellRendererScreen(),
         CellSelectionScreen.routeName: (context) => const CellSelectionScreen(),
+        CheckVisibleColumnsScreen.routeName: (context) =>
+            const CheckVisibleColumnsScreen(),
         RTLScreen.routeName: (context) => const RTLScreen(),
         ColumnFilteringScreen.routeName: (context) =>
             const ColumnFilteringScreen(),

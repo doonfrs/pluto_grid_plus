@@ -275,6 +275,35 @@ class PlutoGridStateManager extends PlutoGridStateChangeNotifier {
     );
   }
 
+  /// Returns a list of columns that are currently visible in the viewport
+  List<PlutoColumn> getVisibleColumns() {
+    if (refColumns.isEmpty) return [];
+
+    return refColumns.where((column) => isColumnVisible(column)).toList();
+  }
+
+  /// Checks if a specific column is currently visible in the viewport
+  bool isColumnVisible(PlutoColumn column) {
+    if (column.hide) return false;
+
+    final RenderBox? gridRenderBox =
+        gridKey.currentContext?.findRenderObject() as RenderBox?;
+
+    if (gridRenderBox == null) {
+      return false;
+    }
+
+    final scrollPosition = scroll.horizontal?.offset ?? 0;
+    final viewportWidth = gridRenderBox.size.width;
+    final viewportEnd = scrollPosition + viewportWidth;
+
+    final columnStart = column.startPosition;
+    final columnEnd = columnStart + column.width;
+
+    // Column is visible if any part of it is in the viewport
+    return (columnStart <= viewportEnd && columnEnd > scrollPosition);
+  }
+
   /// It handles the necessary settings when [rows] are first set or added to the [PlutoGrid].
   ///
   /// {@template initialize_rows_params}

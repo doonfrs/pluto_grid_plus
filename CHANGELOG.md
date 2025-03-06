@@ -1,5 +1,9 @@
 # Changelog
 
+## [8.4.8] - 2025. 03. 06
+
+* Added getVisibleColumns method & isColumnVisible
+
 ## [8.4.7] - 2025. 03. 04
 
 * Fix pagination bug
