@@ -1,5 +1,9 @@
 # Changelog
 
+## [8.4.9] - 2025. 03. 06
+
+* Added scrollToColumn method
+
 ## [8.4.8] - 2025. 03. 06
 
 * Added getVisibleColumns method & isColumnVisible

@@ -275,6 +275,19 @@ class PlutoGridStateManager extends PlutoGridStateChangeNotifier {
     );
   }
 
+  void scrollToColumn(PlutoColumn column) {
+    final index = refColumns.indexOf(column);
+
+    if (index == -1) return;
+
+    double jumpTo = column.startPosition;
+    if (jumpTo > scroll.maxScrollHorizontal) {
+      jumpTo = scroll.maxScrollHorizontal;
+    }
+
+    scroll.horizontal?.jumpTo(jumpTo);
+  }
+
   /// Returns a list of columns that are currently visible in the viewport
   List<PlutoColumn> getVisibleColumns() {
     if (refColumns.isEmpty) return [];
