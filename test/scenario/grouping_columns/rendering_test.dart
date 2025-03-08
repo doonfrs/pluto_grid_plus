@@ -35,7 +35,7 @@ void main() {
     await tester.pumpAndSettle();
   }
 
-  testWidgets('1뎁스로 그룹핑 한 컬럼 그룹들이 렌더링 되어야 한다.', (tester) async {
+  testWidgets('Column groups grouped by 1 level should be rendered', (tester) async {
     final columns = ColumnHelper.textColumn('column', count: 5, start: 1);
 
     final rows = RowHelper.count(10, columns);
@@ -58,7 +58,7 @@ void main() {
     expect(find.text('groupC'), findsOneWidget);
   });
 
-  testWidgets('expanded 그룹 컬럼은 렌더링 되지 않아야 한다.', (tester) async {
+  testWidgets('Expanded group columns should not be rendered', (tester) async {
     final columns = ColumnHelper.textColumn('column', count: 5, start: 1);
 
     final rows = RowHelper.count(10, columns);
@@ -85,7 +85,7 @@ void main() {
     expect(find.text('groupC'), findsNothing);
   });
 
-  testWidgets('column3 을 hide 하면 groupB 는 hide 되지 않아야 한다.', (tester) async {
+  testWidgets('If column3 is hidden, groupB should not be hidden', (tester) async {
     final columns = ColumnHelper.textColumn('column', count: 5, start: 1);
 
     final rows = RowHelper.count(10, columns);
@@ -114,7 +114,7 @@ void main() {
     expect(find.text('column4'), findsOneWidget);
   });
 
-  testWidgets('column5 를 hide 하면 groupC 도 hide 되어야 한다.', (tester) async {
+  testWidgets('If column5 is hidden, groupC should also be hidden', (tester) async {
     final columns = ColumnHelper.textColumn('column', count: 5, start: 1);
 
     final rows = RowHelper.count(10, columns);

@@ -28,8 +28,8 @@ void main() {
     );
   }
 
-  group('마침표를 Decimal separator 로 사용하는 기본 locale.', () {
-    testWidgets('소수점 2자리 숫자가 마침표로 구분되어야 한다.', (tester) async {
+  group('Number Cell Editing Test', () {
+    testWidgets('Decimal points should be used as the decimal separator in the default locale.', (tester) async {
       final columns = [
         PlutoColumn(
           title: 'column',
@@ -51,7 +51,7 @@ void main() {
       expect(find.text('12,345.11'), findsOneWidget);
     });
 
-    testWidgets('편집 상태에서 소수점 2자리 숫자가 마침표로 구분되어야 한다.', (tester) async {
+    testWidgets('Decimal points should be used as the decimal separator when editing a cell.', (tester) async {
       final columns = [
         PlutoColumn(
           title: 'column',
@@ -77,7 +77,7 @@ void main() {
       expect(find.text('12345.01'), findsOneWidget);
     });
 
-    testWidgets('동일한 값으로 변경 한 경우 onChanged 콜백이 호출되지 않아야 한다.', (tester) async {
+    testWidgets('The onChanged callback should not be called when the value is not changed.', (tester) async {
       final columns = [
         PlutoColumn(
           title: 'column',
@@ -115,7 +115,7 @@ void main() {
       expect(stateManager.rows.first.cells['column']?.value, 12345.01);
     });
 
-    testWidgets('값을 변경 한 경우 onChanged 콜백이 호출되어야 한다.', (tester) async {
+    testWidgets('The onChanged callback should be called when the value is changed.', (tester) async {
       final columns = [
         PlutoColumn(
           title: 'column',
@@ -154,12 +154,12 @@ void main() {
     });
   });
 
-  group('컴마를 Decimal separator 로 사용하는 국가.', () {
+  group('Countries that use commas as decimal separators', () {
     setUpAll(() {
       PlutoGrid.setDefaultLocale('da_DK');
     });
 
-    testWidgets('소수점 2자리 숫자가 컴마로 구분되어야 한다.', (tester) async {
+    testWidgets('Decimal points should be used as the decimal separator in the default locale.', (tester) async {
       final columns = [
         PlutoColumn(
           title: 'column',
@@ -181,7 +181,7 @@ void main() {
       expect(find.text('12.345,11'), findsOneWidget);
     });
 
-    testWidgets('편집 상태에서 소수점 2자리 숫자가 컴마로 구분되어야 한다.', (tester) async {
+    testWidgets('Decimal points should be used as the decimal separator when editing a cell.', (tester) async {
       final columns = [
         PlutoColumn(
           title: 'column',
@@ -207,7 +207,7 @@ void main() {
       expect(find.text('12345,01'), findsOneWidget);
     });
 
-    testWidgets('동일한 값으로 변경 한 경우 onChanged 콜백이 호출되지 않아야 한다.', (tester) async {
+    testWidgets('The onChanged callback should not be called when the value is not changed.', (tester) async {
       final columns = [
         PlutoColumn(
           title: 'column',
@@ -245,7 +245,7 @@ void main() {
       expect(stateManager.rows.first.cells['column']?.value, 12345.01);
     });
 
-    testWidgets('값을 변경 한 경우 onChanged 콜백이 호출되어야 한다.', (tester) async {
+    testWidgets('The onChanged callback should be called when the value is changed.', (tester) async {
       final columns = [
         PlutoColumn(
           title: 'column',

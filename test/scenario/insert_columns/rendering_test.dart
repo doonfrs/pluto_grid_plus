@@ -31,7 +31,8 @@ void main() {
     );
   }
 
-  testWidgets('좌측 고정 컬럼을 추가하면 렌더링 되어야 한다.', (tester) async {
+  testWidgets('When the left fixed column is added, it should be rendered.',
+      (tester) async {
     final columns = ColumnHelper.textColumn('column', count: 10);
 
     final rows = RowHelper.count(10, columns);
@@ -55,7 +56,8 @@ void main() {
     expect(find.text('column10 value new'), findsWidgets);
   });
 
-  testWidgets('우측 고정 컬럼을 추가하면 렌더링 되어야 한다.', (tester) async {
+  testWidgets('When the right fixed column is added, it should be rendered.',
+      (tester) async {
     final columns = ColumnHelper.textColumn('column', count: 10);
 
     final rows = RowHelper.count(10, columns);
@@ -79,7 +81,9 @@ void main() {
     expect(find.text('column10 value new'), findsWidgets);
   });
 
-  testWidgets('촤측 고정 컬럼을 추가하면 위치가 좌측 끝이어야 한다.', (tester) async {
+  testWidgets(
+      'When the left fixed column is added, it should be rendered at the left end.',
+      (tester) async {
     final columns = ColumnHelper.textColumn('column', count: 10);
 
     final rows = RowHelper.count(10, columns);
@@ -106,7 +110,9 @@ void main() {
     expect(position.dx, lessThan(firstPosition.dx));
   });
 
-  testWidgets('우측 고정 컬럼을 추가하면 위치가 우측 끝이어야 한다.', (tester) async {
+  testWidgets(
+      'When the right fixed column is added, it should be rendered at the right end.',
+      (tester) async {
     final columns = ColumnHelper.textColumn('column', count: 10);
 
     final rows = RowHelper.count(10, columns);
@@ -128,7 +134,7 @@ void main() {
 
     final Offset position = tester.getTopLeft(find.text('column10'));
 
-    // 화면 사이즈 1200에서 5번째 컬럼이 column4 가 마지막 보여지는 컬럼.
+    // screen size 1200, column 5 is the last column shown.
     final Offset lastPosition = tester.getTopLeft(find.text('column4'));
 
     expect(position.dx, greaterThan(lastPosition.dx));

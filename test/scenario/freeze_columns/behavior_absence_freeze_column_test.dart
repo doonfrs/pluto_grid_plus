@@ -9,7 +9,7 @@ import '../../helper/row_helper.dart';
 import '../../helper/test_helper_util.dart';
 
 void main() {
-  group('고정 컬럼이 없는 상태에서', () {
+  group('Without frozen columns', () {
     List<PlutoColumn> columns;
 
     List<PlutoRow> rows;
@@ -17,7 +17,7 @@ void main() {
     PlutoGridStateManager? stateManager;
 
     final toLeftColumn1 = PlutoWidgetTestHelper(
-      '1번 컬럼의 셀 하나를 선택하고 1번 컬럼을 왼쪽 고정',
+      'Select a cell in column 1 and freeze column 1 to the left',
       (tester) async {
         await TestHelperUtil.changeWidth(
           tester: tester,
@@ -52,19 +52,19 @@ void main() {
     );
 
     toLeftColumn1.test(
-      'currentCellPosition 이 null 이어야 한다.',
+      'currentCellPosition should be null',
       (tester) async {
         expect(stateManager!.currentCellPosition, null);
       },
     );
 
     toLeftColumn1.test(
-      '키보드로 셀 이동시 currentCellPosition 이 업데이트 되어야 한다.',
+      'currentCellPosition should update when moving cells with keyboard',
       (tester) async {
         await tester.sendKeyEvent(LogicalKeyboardKey.arrowLeft);
         await tester.pumpAndSettle();
-        // toggleFrozenColumn 호출 후에는 currentCellPosition 이 null
-        // 현재 셀이 없는 상태에서 방향키 이동시 처음 셀이 선택 된다.
+        // toggleFrozenColumn called after currentCellPosition is null
+        // When moving cells with keyboard, the first cell should be selected
         expect(stateManager!.currentCellPosition!.columnIdx, 0);
         expect(stateManager!.currentCellPosition!.rowIdx, 0);
 
@@ -105,7 +105,7 @@ void main() {
     );
   });
 
-  group('고정 컬럼이 없는 상태에서', () {
+  group('Without frozen columns', () {
     List<PlutoColumn> columns;
 
     List<PlutoRow> rows;
@@ -113,7 +113,7 @@ void main() {
     PlutoGridStateManager? stateManager;
 
     final toLeftColumn1 = PlutoWidgetTestHelper(
-      '3번 컬럼의 셀 하나를 선택하고 3번 컬럼을 오른쪽 고정',
+      'Select a cell in column 3 and freeze column 3 to the right',
       (tester) async {
         columns = [
           ...ColumnHelper.textColumn('header', count: 10),
@@ -144,14 +144,14 @@ void main() {
     );
 
     toLeftColumn1.test(
-      'currentCellPosition 가 null 이 되어야 한다.',
+      'currentCellPosition should become null',
       (tester) async {
         expect(stateManager!.currentCellPosition, null);
       },
     );
 
     toLeftColumn1.test(
-      '현재 셀이 없는 상태에서 좌측 키 이동 시 처음 셀이 선택 되어야 한다.',
+      'When there is no current cell, pressing left key should select the first cell',
       (tester) async {
         await tester.sendKeyEvent(LogicalKeyboardKey.arrowLeft);
 
@@ -159,12 +159,12 @@ void main() {
         expect(stateManager!.currentCellPosition!.rowIdx, 0);
 
         await tester.sendKeyEvent(LogicalKeyboardKey.arrowLeft);
-        // 좌측 이동시 처음 셀에서 이동 할 수 없으므로 값이 유지
+        // When moving left, the first cell cannot be moved, so the value is maintained
         expect(stateManager!.currentCellPosition!.columnIdx, 0);
         expect(stateManager!.currentCellPosition!.rowIdx, 0);
 
         await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
-        // 상단 이동시 처음 셀에서 이동 할 수 없으므로 값이 유지
+        // When moving up, the first cell cannot be moved, so the value is maintained
         expect(stateManager!.currentCellPosition!.columnIdx, 0);
         expect(stateManager!.currentCellPosition!.rowIdx, 0);
       },

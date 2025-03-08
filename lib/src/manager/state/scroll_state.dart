@@ -83,7 +83,7 @@ mixin ScrollState implements IPlutoGridState {
     PlutoMoveDirection direction,
     PlutoColumn columnToMove,
   ) {
-    // 고정 컬럼이 보여지는 상태에서 이동 할 컬럼이 고정 컬럼인 경우 스크롤 불필요
+    // When the frozen column is visible, the column to move is a frozen column, the scrolling is unnecessary.
     return !(showFrozenColumn == true && columnToMove.frozen.isFrozen);
   }
 

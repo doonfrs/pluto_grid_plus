@@ -36,7 +36,8 @@ void main() {
 
   group('updateColumnStartPosition', () {
     testWidgets(
-      '비고정 컬럼 5개. 컬럼의 startPosition 이 설정 되어야 한다.',
+      'When 5 non-frozen columns'
+      'then startPosition of the columns should be set.',
       (widgetTester) async {
         const defaultWidth = PlutoGridSettings.columnWidth;
 
@@ -59,7 +60,7 @@ void main() {
     );
 
     testWidgets(
-      '비고정 컬럼 5개를 넓이를 변경. 컬럼의 startPosition 이 설정 되어야 한다.',
+      'Non-frozen 5 columns with modified width. The startPosition of the columns should be set',
       (widgetTester) async {
         const defaultWidth = 100.0;
 
@@ -83,7 +84,7 @@ void main() {
     );
 
     testWidgets(
-      '비고정 컬럼 5개의 넓이를 각각 변경. 컬럼의 startPosition 이 설정 되어야 한다.',
+      'Non-frozen 5 columns with modified widths. The startPosition of the columns should be set',
       (widgetTester) async {
         final widths = <double>[100, 150, 80, 90, 200];
 
@@ -116,9 +117,9 @@ void main() {
     );
 
     testWidgets(
-      '그리드 넓이가 충분한 상태에서.'
-      '좌측고정 2개, 비고정 2개, 우측고정 2개. '
-      '컬럼의 startPosition 이 설정 되어야 한다.',
+      'The grid width is sufficient. '
+      '2 frozen columns on the left, 2 non-frozen columns, and 2 frozen columns on the right. '
+      'The startPosition of the columns should be set.',
       (tester) async {
         const defaultWidth = PlutoGridSettings.columnWidth;
 
@@ -158,9 +159,9 @@ void main() {
     );
 
     testWidgets(
-      '그리드 넓이가 부족한 상태에서.'
-      '좌측고정 2개, 비고정 2개, 우측고정 2개. '
-      '컬럼의 startPosition 이 설정 되어야 한다.',
+      'The grid width is insufficient. '
+      '2 frozen columns on the left, 2 non-frozen columns, and 2 frozen columns on the right. '
+      'The startPosition of the columns should be set.',
       (tester) async {
         const defaultWidth = PlutoGridSettings.columnWidth;
 
@@ -200,7 +201,7 @@ void main() {
     );
 
     testWidgets(
-      '숨김컬럼 1개, 비고정 컬럼 4개. 컬럼의 startPosition 이 설정 되어야 한다.',
+      'Hidden column 1, non-frozen columns 4. The startPosition of the columns should be set.',
       (widgetTester) async {
         const defaultWidth = PlutoGridSettings.columnWidth;
 
@@ -222,7 +223,7 @@ void main() {
           defaultWidth * 1,
         );
 
-        // 숨김컬럼은 기본값 0
+        // Hidden column is set to 0 by default
         expect(
           stateManager.refColumns.originalList[2].startPosition,
           0,
@@ -240,7 +241,7 @@ void main() {
     );
 
     testWidgets(
-      'applyViewportDimension 이 호출 되어야 한다.',
+      'applyViewportDimension should be called.',
       (widgetTester) async {
         final LinkedScrollControllerGroup horizontalScroll =
             MockLinkedScrollControllerGroup();
@@ -276,7 +277,7 @@ void main() {
 
         stateManager.scroll.setBodyRowsHorizontal(rowsScroll);
 
-        // setLayout 메서드에서 applyViewportDimension 한번 호출 되어 리셋.
+        // setLayout method is called once in applyViewportDimension.
         reset(horizontalScroll);
 
         stateManager.updateVisibilityLayout();
@@ -290,7 +291,7 @@ void main() {
     );
 
     testWidgets(
-      'notify = true 인 경우, notifyListeners 이 호출 되어야 한다.',
+      'If notify = true, notifyListeners should be called.',
       (widgetTester) async {
         final LinkedScrollControllerGroup horizontalScroll =
             MockLinkedScrollControllerGroup();
@@ -317,7 +318,7 @@ void main() {
     );
 
     testWidgets(
-      'notify = false 인 경우, notifyListeners 이 호출 되지 않아야 한다.',
+      'If notify = false, notifyListeners should not be called.',
       (widgetTester) async {
         final LinkedScrollControllerGroup horizontalScroll =
             MockLinkedScrollControllerGroup();

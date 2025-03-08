@@ -5,7 +5,7 @@ import 'package:pluto_grid_plus/pluto_grid_plus.dart';
 
 import '../../helper/pluto_widget_test_helper.dart';
 
-/// 키보드로 팝업 그리드 호출 및 선택 테스트
+/// Test for calling a popup grid with a keyboard and selecting a date
 void main() {
   PlutoGridStateManager? stateManager;
 
@@ -60,14 +60,13 @@ void main() {
       enableMoveDownAfterSelecting: true,
     ),
   ).test(
-    '문자열 입력으로 날짜 팝업을 호출 하고 날짜를 선택하면 다음 행으로 이동 되며, '
-    '다음 행에서 다시 문자열 입력으로 팝업을 호출 할 수 있어야 한다.',
+    'When the first cell is selected, '
+    'the first cell should be focused.',
     (tester) async {
-      // 0번 행인 2020년 1월 1일 을 선택
+      // Select the 0th row, which is January 1st, 2020
       await tester.tap(find.text('2020-01-01'));
 
-      // 문자열 입력으로 팝업 호출 후 2020-01-01 아래 있는
-      // 2020-01-08 날짜를 선택하고 엔터를 입력 해 다음 행으로 이동 한다.
+      // After selecting the date below 2020-01-01, select 2020-01-08 and press enter to move to the next row.
       await tester.sendKeyEvent(LogicalKeyboardKey.keyA);
       expect(stateManager!.isEditing, isTrue);
       await tester.pumpAndSettle(const Duration(milliseconds: 300));
@@ -79,30 +78,30 @@ void main() {
       await tester.sendKeyEvent(LogicalKeyboardKey.enter);
       await tester.pumpAndSettle(const Duration(milliseconds: 300));
 
-      // 기존 셀 값이 2020-01-08 로 변경 되어야 한다.
+      // The cell value should be changed to 2020-01-08.
       expect(stateManager!.rows[0].cells['date']!.value, '2020-01-08');
 
-      // 현재 셀이 다음 행으로 변경 되어야 한다.
+      // The current cell position should be changed to the next row.
       expect(stateManager!.currentCellPosition!.rowIdx, 1);
 
-      // 수정 상태가 유지 되어야 한다.
+      // The editing state should be maintained.
       expect(stateManager!.isEditing, isTrue);
 
-      // 문자열 입력으로 팝업을 다시 호출 하고 2020-01-02 아래 날짜인
-      // 2020-01-09 를 선택 하고 엔터를 입력 해 다음 행으로 이동 한다.
+      // Enter the string to call the popup again and select 2020-01-09,
+      // which is below 2020-01-02, and press enter to move to the next row.
       await tester.sendKeyEvent(LogicalKeyboardKey.keyA);
       await tester.pumpAndSettle(const Duration(milliseconds: 300));
 
       await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
       await tester.sendKeyEvent(LogicalKeyboardKey.enter);
 
-      // 기존 셀 값이 2020-01-09 로 변경 되어야 한다.
+      // The cell value should be changed to 2020-01-09.
       expect(stateManager!.rows[1].cells['date']!.value, '2020-01-09');
 
-      // 현재 셀이 다음 행으로 변경 되어야 한다.
+      // The current cell position should be changed to the next row.
       expect(stateManager!.currentCellPosition!.rowIdx, 2);
 
-      // 수정 상태가 유지 되어야 한다.
+      // The editing state should be maintained.
       expect(stateManager!.isEditing, isTrue);
     },
   );

@@ -45,9 +45,9 @@ void main() {
     when(scrollPosition.isScrollingNotifier).thenReturn(ValueNotifier(false));
   });
 
-  group('인수 값 테스트', () {
+  group('Argument test', () {
     test(
-      'offset 이 null 이 아니면 needMovingScroll 이 호출 되어야 한다.',
+      'If offset is not null, needMovingScroll must be called.',
       () {
         const offset = Offset(0, 0);
         when(stateManager.needMovingScroll(any, any)).thenReturn(false);
@@ -61,8 +61,8 @@ void main() {
     );
 
     test(
-      'needMovingScroll(offset, PlutoMoveDirection.left) 가 true 면, '
-      'horizontal scroll 의 animateTo 의 offset 이 0 으로 호출 되어야 한다.',
+      'If needMovingScroll(offset, PlutoMoveDirection.left) is true, '
+      'horizontal scroll animateTo offset should be 0.',
       () {
         const offset = Offset(0, 0);
         const scrollOffset = 10.0;
@@ -91,8 +91,8 @@ void main() {
     );
 
     test(
-      'needMovingScroll(offset, PlutoMoveDirection.right) 가 true 면, '
-      'horizontal scroll 의 animateTo 가 maxScrollExtent 으로 호출 되어야 한다.',
+      'If needMovingScroll(offset, PlutoMoveDirection.right) is true, '
+      'horizontal scroll animateTo offset should be maxScrollExtent.',
       () {
         const offset = Offset(10, 10);
         const scrollOffset = 0.0;
@@ -122,8 +122,8 @@ void main() {
     );
 
     test(
-      'needMovingScroll(offset, PlutoMoveDirection.up) 가 true 면, '
-      'vertical scroll 의 animateTo 가 offset 이 0 으로 호출 되어야 한다.',
+      'If needMovingScroll(offset, PlutoMoveDirection.up) is true, '
+      'vertical scroll animateTo offset should be 0.',
       () {
         const offset = Offset(0, 0);
         const scrollOffset = 10.0;
@@ -152,8 +152,8 @@ void main() {
     );
 
     test(
-      'needMovingScroll(offset, PlutoMoveDirection.down) 가 true 면, '
-      'vertical scroll 의 animateTo offset 이 maxScrollExtent 으로 호출 되어야 한다.',
+      'If needMovingScroll(offset, PlutoMoveDirection.down) is true, '
+      'vertical scroll animateTo offset should be maxScrollExtent.',
       () {
         const offset = Offset(0, 0);
         const scrollOffset = 10.0;

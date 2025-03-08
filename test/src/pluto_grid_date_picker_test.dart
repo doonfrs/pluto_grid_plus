@@ -78,7 +78,7 @@ void main() {
     headerFormat: 'yyyy-MM',
     onLoaded: (event) => stateManager = event.stateManager,
   ).test(
-    'Directionality 가 기본값 ltr 이어야 한다.',
+    'Directionality should be ltr by default',
     (tester) async {
       expect(stateManager.isLTR, true);
       expect(stateManager.isRTL, false);
@@ -91,7 +91,7 @@ void main() {
     onLoaded: (event) => stateManager = event.stateManager,
     textDirection: TextDirection.rtl,
   ).test(
-    'Directionality.rtl 인 경우 적용 되어야 한다.',
+    'When Directionality is rtl, it should be applied',
     (tester) async {
       expect(stateManager.isLTR, false);
       expect(stateManager.isRTL, true);
@@ -104,7 +104,7 @@ void main() {
     initDate: DateTime(2022, 7, 27),
     textDirection: TextDirection.rtl,
   ).test(
-    'Directionality.rtl 인 경우 날짜 셀의 위치가 LTR 반대로 적용 되어야 한다.',
+    'When Directionality is rtl, date cell positions should be applied in reverse of LTR',
     (tester) async {
       final day26 = find.ancestor(
         of: find.text('26'),
@@ -123,7 +123,7 @@ void main() {
       final day27Dx = tester.getTopRight(day27).dx;
       final day28Dx = tester.getTopRight(day28).dx;
 
-      // 가장 앞쪽(우측)에 있는 26일 위치에서 다음 좌측에 있는 27일 위치를 빼면 셀 넓이.
+      // When the width is 360, the columns and cells should be displayed in the correct width.
       expect(day26Dx - day27Dx, PlutoGridDatePicker.dateCellWidth);
       expect(day27Dx - day28Dx, PlutoGridDatePicker.dateCellWidth);
     },
@@ -134,7 +134,7 @@ void main() {
     headerFormat: 'yyyy-MM',
     onLoaded: (event) => stateManager = event.stateManager,
   ).test(
-    'DatePicker 는 autoSizeMode, resizeMode 가 적용되지 않아야 한다.',
+    'DatePicker should not apply autoSizeMode and resizeMode',
     (tester) async {
       expect(stateManager.enableColumnsAutoSize, false);
 
@@ -156,14 +156,14 @@ void main() {
     format: 'yyyy-MM-dd',
     headerFormat: 'yyyy-MM',
   ).test(
-    '높이와 넓이를 충족하는 위젯이 생성 되어야 한다.',
+    'Widget should be created with the required height and width',
     (tester) async {
       final size = tester.getSize(find.byType(PlutoGrid));
 
-      // 45 : 기본 행 넓이, 7 : 월~일
+      // 45 : default row width, 7 : Mon~Sun
       expect(size.width, greaterThan(45 * 7));
 
-      // 6주의 행을 보여준다.
+      // 6-week rows are displayed.
       double rowsHeight = 6 * PlutoGridSettings.rowTotalHeight;
 
       // itemHeight * 2 = Header Height + Column Height
@@ -180,7 +180,7 @@ void main() {
     format: 'yyyy-MM-dd',
     headerFormat: 'yyyy-MM',
   ).test(
-    '년,월을 변경하는 IconButton 이 출력 되어야 한다.',
+    'Year and month changing IconButtons should be displayed',
     (tester) async {
       expect(find.byType(IconButton), findsNWidgets(4));
     },
@@ -190,8 +190,8 @@ void main() {
     format: 'yyyy-MM-dd',
     headerFormat: 'yyyy-MM',
   ).test(
-    'initDate, startDate, endDate 를 전달 하지 않은 경우, '
-    '현재 달이 출력 되어야 한다.',
+    'When initDate, startDate, and endDate are not provided, '
+    'current month should be displayed',
     (tester) async {
       final headerFormat = intl.DateFormat('yyyy-MM');
 
@@ -210,7 +210,7 @@ void main() {
     headerFormat: 'yyyy-MM',
     startDate: DateTime(2022, 5, 10),
   ).test(
-    'startDate 를 설정한 경우 해당 월이 출력 되어야 한다.',
+    'When startDate is set, that month should be displayed',
     (tester) async {
       final headerFormat = intl.DateFormat('yyyy-MM');
 
@@ -225,7 +225,7 @@ void main() {
     headerFormat: 'yyyy-MM',
     initDate: DateTime(now.year, now.month, 20),
   ).test(
-    'initDate 를 설정한 경우 해당 날짜가 선택 되어야 한다.',
+    'When initDate is set, that date should be selected',
     (tester) async {
       const selectedDay = '20';
 
@@ -262,8 +262,8 @@ void main() {
     format: 'yyyy-MM-dd',
     headerFormat: 'yyyy-MM',
   ).test(
-    '현재 달에서 1일을 선택하고 키보드 방향키 위를 누르면, '
-    '이전 달이 출력 되어야 한다.',
+    'When selecting the 1st day of the current month and pressing the up arrow key, '
+    'the previous month should be displayed',
     (tester) async {
       final headerFormat = intl.DateFormat('yyyy-MM');
 
@@ -293,8 +293,8 @@ void main() {
     headerFormat: 'yyyy-MM',
     initDate: DateTime(2022, 6, 30),
   ).test(
-    '2022.6.30 일을 선택하고 키보드 방향키 아래를 입력하면, '
-    '다음 달이 출력 되어야 한다.',
+    'When selecting June 30, 2022 and pressing the down arrow key, '
+    'the next month should be displayed',
     (tester) async {
       final headerFormat = intl.DateFormat('yyyy-MM');
 
@@ -319,8 +319,8 @@ void main() {
     headerFormat: 'yyyy-MM',
     initDate: DateTime(2022, 6, 5),
   ).test(
-    '2022.6.5 일을 선택하고 키보드 방향키 왼쪽을 입력하면, '
-    '이전 년이 출력 되어야 한다.',
+    'When selecting June 5, 2022 and pressing the left arrow key, '
+    'the previous year should be displayed',
     (tester) async {
       final headerFormat = intl.DateFormat('yyyy-MM');
 
@@ -345,8 +345,8 @@ void main() {
     headerFormat: 'yyyy-MM',
     initDate: DateTime(2022, 6, 11),
   ).test(
-    '2022.6.11 일을 선택하고 키보드 방향키 오른쪽을 입력하면, '
-    '다음 년이 출력 되어야 한다.',
+    'When selecting June 11, 2022 and pressing the right arrow key, '
+    'the next year should be displayed',
     (tester) async {
       final headerFormat = intl.DateFormat('yyyy-MM');
 
@@ -372,8 +372,8 @@ void main() {
     initDate: DateTime(2022, 6, 11),
     onSelected: mockListener.oneParamReturnVoid<PlutoGridOnSelectedEvent>,
   ).test(
-    '2022.6.11 일을 선택하고 탭하면, '
-    'onSelected 콜백이 호출 되어야 한다.',
+    'When selecting June 11, 2022 and tapping, '
+    'onSelected callback should be called',
     (tester) async {
       await tester.tap(find.text('11'));
 
@@ -394,8 +394,8 @@ void main() {
     initDate: DateTime(2022, 6, 11),
     onLoaded: mockListener.oneParamReturnVoid<PlutoGridOnLoadedEvent>,
   ).test(
-    '2022.6.11 일을 선택하고 탭하면, '
-    'onSelected 콜백이 호출 되어야 한다.',
+    'When selecting June 11, 2022 and tapping, '
+    'onLoaded callback should be called',
     (tester) async {
       await tester.tap(find.text('11'));
 

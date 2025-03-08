@@ -25,7 +25,7 @@ void main() {
   }
 
   testWidgets(
-    '화면 사이즈를 넓히면 넓이에 맞게 컬럼과 셀이 출력 되어야 한다.',
+    'When the window size is widened, the columns and cells should be displayed in the correct width.',
     (tester) async {
       await TestHelperUtil.changeWidth(
         tester: tester,
@@ -96,7 +96,7 @@ void main() {
   );
 
   testWidgets(
-    '화면 사이즈를 좁히면 넓이에 맞게 컬럼과 셀이 출력 되어야 한다.',
+    'When the window size is narrowed, the columns and cells should be displayed in the correct width.',
     (tester) async {
       await TestHelperUtil.changeWidth(
         tester: tester,
@@ -140,7 +140,7 @@ void main() {
   );
 
   testWidgets(
-    'PlutoAutoSizeMode.equal 에서 화면 넓이를 넓히면 컬럼과 셀이 폭에 맞게 출력 되어야 한다.',
+    'When PlutoAutoSizeMode.equal is set, the columns and cells should be displayed in the correct width.',
     (tester) async {
       await TestHelperUtil.changeWidth(
         tester: tester,
@@ -171,7 +171,7 @@ void main() {
         matching: find.byType(PlutoBaseCell),
       );
 
-      // 넓이 550 에서 컬럼 최소 넓이 80 이면 6.8 개 출력 됨.
+      // When the width is 550, the columns and cells should be displayed in the correct width.
       expect(columnWidgets.evaluate().length, 7);
       expect(firstRowCells.evaluate().length, 7);
 
@@ -189,14 +189,14 @@ void main() {
         matching: find.byType(PlutoBaseCell),
       );
 
-      // 넓이 700 에서 컬럼 최소 넓이 80 이면 8.7 개 출력 됨.
+      // When the width is 700, the columns and cells should be displayed in the correct width.
       expect(columnWidgetsAfterResize.evaluate().length, 9);
       expect(firstRowCellsAfterResize.evaluate().length, 9);
     },
   );
 
   testWidgets(
-    'PlutoAutoSizeMode.equal 에서 화면 넓이를 충분히 넓히면 컬럼과 셀이 모두 출력 되어야 한다.',
+    'When PlutoAutoSizeMode.equal is set, the columns and cells should be displayed in the correct width.',
     (tester) async {
       await TestHelperUtil.changeWidth(
         tester: tester,
@@ -227,7 +227,7 @@ void main() {
         matching: find.byType(PlutoBaseCell),
       );
 
-      // 넓이 550 에서 컬럼 최소 넓이 80 이면 6.8 개 출력 됨.
+      // When the width is 550, the columns and cells should be displayed in the correct width.
       expect(columnWidgets.evaluate().length, 7);
       expect(firstRowCells.evaluate().length, 7);
 
@@ -245,14 +245,14 @@ void main() {
         matching: find.byType(PlutoBaseCell),
       );
 
-      // 넓이 1,000 에서 컬럼 최소 넓이 80 이면 10 개 모두 출력 됨.
+      // When the width is 1,000, the columns and cells should be displayed in the correct width.
       expect(columnWidgetsAfterResize.evaluate().length, 10);
       expect(firstRowCellsAfterResize.evaluate().length, 10);
     },
   );
 
   testWidgets(
-    'PlutoAutoSizeMode.equal 에서 화면 넓이를 좁히면 컬럼과 셀이 폭에 맞게 출력 되어야 한다.',
+    'When PlutoAutoSizeMode.equal is set, the columns and cells should be displayed in the correct width.',
     (tester) async {
       await TestHelperUtil.changeWidth(
         tester: tester,
@@ -283,7 +283,7 @@ void main() {
         matching: find.byType(PlutoBaseCell),
       );
 
-      // 넓이 1200 에서 컬럼 최소 넓이 80 이면 10 개 모두 출력 됨.
+      // When the width is 1200, the columns and cells should be displayed in the correct width.
       expect(columnWidgets.evaluate().length, 10);
       expect(firstRowCells.evaluate().length, 10);
 
@@ -301,14 +301,14 @@ void main() {
         matching: find.byType(PlutoBaseCell),
       );
 
-      // 넓이 360 에서 컬럼 최소 넓이 80 이면 4.5 개 출력 됨.
+      // When the width is 360, the columns and cells should be displayed in the correct width.
       expect(columnWidgetsAfterResize.evaluate().length, 5);
       expect(firstRowCellsAfterResize.evaluate().length, 5);
     },
   );
 
   testWidgets(
-    'PlutoAutoSizeMode.scale 에서 화면 넓이를 넓히면 컬럼과 셀이 폭에 맞게 출력 되어야 한다.',
+    'When PlutoAutoSizeMode.scale is set, the columns and cells should be displayed in the correct width.',
     (tester) async {
       await TestHelperUtil.changeWidth(
         tester: tester,
@@ -339,7 +339,7 @@ void main() {
         matching: find.byType(PlutoBaseCell),
       );
 
-      // 넓이 550 에서 컬럼 최소 넓이 80 이면 6.8 개 출력 됨.
+      // When the width is 550, the columns and cells should be displayed in the correct width.
       expect(columnWidgets.evaluate().length, 7);
       expect(firstRowCells.evaluate().length, 7);
 
@@ -357,14 +357,14 @@ void main() {
         matching: find.byType(PlutoBaseCell),
       );
 
-      // 넓이 700 에서 컬럼 최소 넓이 80 이면 8.7 개 출력 됨.
+      // When the width is 700, the columns and cells should be displayed in the correct width.
       expect(columnWidgetsAfterResize.evaluate().length, 9);
       expect(firstRowCellsAfterResize.evaluate().length, 9);
     },
   );
 
   testWidgets(
-    'PlutoAutoSizeMode.scale 에서 화면 넓이를 충분히 넓히면 컬럼과 셀이 모두 출력 되어야 한다.',
+    'When PlutoAutoSizeMode.scale is set, the columns and cells should be displayed in the correct width.',
     (tester) async {
       await TestHelperUtil.changeWidth(
         tester: tester,
@@ -395,7 +395,7 @@ void main() {
         matching: find.byType(PlutoBaseCell),
       );
 
-      // 넓이 550 에서 컬럼 최소 넓이 80 이면 6.8 개 출력 됨.
+      // When the width is 550, the columns and cells should be displayed in the correct width.
       expect(columnWidgets.evaluate().length, 7);
       expect(firstRowCells.evaluate().length, 7);
 
@@ -413,14 +413,14 @@ void main() {
         matching: find.byType(PlutoBaseCell),
       );
 
-      // 넓이 1,000 에서 컬럼 최소 넓이 80 이면 10 개 모두 출력 됨.
+      // When the width is 1000, the columns and cells should be displayed in the correct width.
       expect(columnWidgetsAfterResize.evaluate().length, 10);
       expect(firstRowCellsAfterResize.evaluate().length, 10);
     },
   );
 
   testWidgets(
-    'PlutoAutoSizeMode.scale 에서 화면 넓이를 좁히면 컬럼과 셀이 폭에 맞게 출력 되어야 한다.',
+    'When PlutoAutoSizeMode.scale is set, the columns and cells should be displayed in the correct width.',
     (tester) async {
       await TestHelperUtil.changeWidth(
         tester: tester,
@@ -451,7 +451,7 @@ void main() {
         matching: find.byType(PlutoBaseCell),
       );
 
-      // 넓이 1200 에서 컬럼 최소 넓이 80 이면 10 개 모두 출력 됨.
+      // When the width is 1200, the columns and cells should be displayed in the correct width.
       expect(columnWidgets.evaluate().length, 10);
       expect(firstRowCells.evaluate().length, 10);
 
@@ -469,7 +469,7 @@ void main() {
         matching: find.byType(PlutoBaseCell),
       );
 
-      // 넓이 360 에서 컬럼 최소 넓이 80 이면 4.5 개 출력 됨.
+      // When the width is 360, the columns and cells should be displayed in the correct width.
       expect(columnWidgetsAfterResize.evaluate().length, 5);
       expect(firstRowCellsAfterResize.evaluate().length, 5);
     },

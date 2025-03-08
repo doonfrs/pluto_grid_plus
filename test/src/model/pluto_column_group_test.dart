@@ -2,7 +2,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:pluto_grid_plus/pluto_grid_plus.dart';
 
 void main() {
-  test('fields 가 null 이면 children 이 null 인 경우 assert 에러가 발생 되어야 한다.', () {
+  test(
+      'When fields is null'
+      'and children is null'
+      'then assert error should be thrown.', () {
     expect(
       () => PlutoColumnGroup(
         title: 'column group',
@@ -13,7 +16,10 @@ void main() {
     );
   });
 
-  test('fields 가 null 이면 children 이 빈리스트인 경우 assert 에러가 발생 되어야 한다.', () {
+  test(
+      'When fields is null'
+      'and children is empty list'
+      'then assert error should be thrown.', () {
     expect(
       () => PlutoColumnGroup(
         title: 'column group',
@@ -24,7 +30,10 @@ void main() {
     );
   });
 
-  test('fields 가 null 이고 children 이 최소 한개의 요소를 가지면 에러가 발생되지 않아야 한다.', () {
+  test(
+      'When fields is null'
+      'and children has at least one element'
+      'then assert error should not be thrown.', () {
     expect(
       () => PlutoColumnGroup(
         title: 'column group',
@@ -37,7 +46,10 @@ void main() {
     );
   });
 
-  test('fields 가 [] 이고 children 이 null 이면 에러가 발생 되어야 한다.', () {
+  test(
+      'When fields is empty list'
+      'and children is null'
+      'then assert error should be thrown.', () {
     expect(
       () => PlutoColumnGroup(
         title: 'column group',
@@ -48,7 +60,10 @@ void main() {
     );
   });
 
-  test('fields 가 [] 이고 children 이 [] 이면 에러가 발생 되어야 한다.', () {
+  test(
+      'When fields is empty list'
+      'and children is empty list'
+      'then assert error should be thrown.', () {
     expect(
       () => PlutoColumnGroup(
         title: 'column group',
@@ -59,7 +74,10 @@ void main() {
     );
   });
 
-  test('fields 가 [] 이고 children 이 빈리스트가 아니어도 에러가 발생 되어야 한다.', () {
+  test(
+      'When fields is empty list'
+      'and children is not empty list'
+      'then assert error should be thrown.', () {
     expect(
       () => PlutoColumnGroup(
         title: 'column group',
@@ -72,7 +90,10 @@ void main() {
     );
   });
 
-  test('fields 가 [column1] 이고 children 이 [] 이면 에러가 발생 되어야 한다.', () {
+  test(
+      'When fields is not empty list'
+      'and children is empty list'
+      'then assert error should be thrown.', () {
     expect(
       () => PlutoColumnGroup(
         title: 'column group',
@@ -83,8 +104,10 @@ void main() {
     );
   });
 
-  test('fields 가 [column1] 이고 children 이 [PlutoColumnGroup] 이면 에러가 발생 되어야 한다.',
-      () {
+  test(
+      'When fields is not empty list'
+      'and children is not empty list'
+      'then assert error should be thrown.', () {
     expect(
       () => PlutoColumnGroup(
         title: 'column group',
@@ -97,7 +120,10 @@ void main() {
     );
   });
 
-  test('fields 가 [column1] 이고 children 이 null 이면 에러가 발생 되지 않아야 한다.', () {
+  test(
+      'When fields is not empty list'
+      'and children is null'
+      'then assert error should not be thrown.', () {
     expect(
       () => PlutoColumnGroup(
         title: 'column group',
@@ -109,8 +135,9 @@ void main() {
   });
 
   test(
-    'fields 가 null 이고 children 이 최소 한개의 요소를 가지면, '
-    'hasFields 가 false 고 hasChildren 이 true 이어야 한다.',
+    'When fields is null'
+    'and children has at least one element'
+    'then hasFields should be false and hasChildren should be true.',
     () {
       final columnGroup = PlutoColumnGroup(
         title: 'column group',
@@ -126,8 +153,9 @@ void main() {
   );
 
   test(
-    'fields 가 최소 한개의 요소를 가지고 children 이 null 이면, '
-    'hasFields 가 true 고 hasChildren 이 false 이어야 한다.',
+    'When fields has at least one element'
+    'and children is null'
+    'then hasFields should be true and hasChildren should be false.',
     () {
       final columnGroup = PlutoColumnGroup(
         title: 'column group',
@@ -140,7 +168,10 @@ void main() {
     },
   );
 
-  test('expandedColumn 이 true 이고 fields 의 요소가 1개를 초과하면 에러가 발생 되어야 한다.', () {
+  test(
+      'When expandedColumn is true'
+      'and fields has more than one element'
+      'then assert error should be thrown.', () {
     expect(
       () => PlutoColumnGroup(
         title: 'column group',
@@ -152,7 +183,10 @@ void main() {
     );
   });
 
-  test('expandedColumn 이 true 이고 fields 의 요소가 1개면 에러가 발생되지 않아야 한다.', () {
+  test(
+      'When expandedColumn is true'
+      'and fields has one element'
+      'then assert error should not be thrown.', () {
     expect(
       () => PlutoColumnGroup(
         title: 'column group',

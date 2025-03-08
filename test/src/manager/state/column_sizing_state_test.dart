@@ -6,7 +6,7 @@ import '../../../mock/shared_mocks.mocks.dart';
 
 void main() {
   group('getColumnsAutoSizeHelper', () {
-    test('columns.isEmpty 이면 assertion 이 발생 되어야 한다.', () {
+    test('When columns is empty, assertion should be thrown', () {
       final stateManager = PlutoGridStateManager(
         columns: [],
         rows: [],
@@ -27,7 +27,7 @@ void main() {
       }, throwsAssertionError);
     });
 
-    test('PlutoAutoSizeMode.none 이면 assertion 이 발생 되어야 한다.', () {
+    test('When PlutoAutoSizeMode is none, assertion should be thrown', () {
       final columns = ColumnHelper.textColumn('title', count: 5);
 
       final stateManager = PlutoGridStateManager(
@@ -50,7 +50,7 @@ void main() {
       }, throwsAssertionError);
     });
 
-    test('PlutoAutoSizeMode.equal 이면 PlutoAutoSize 를 리턴해야 한다.', () {
+    test('When PlutoAutoSizeMode is equal, should return PlutoAutoSize', () {
       final columns = ColumnHelper.textColumn('title', count: 5);
 
       final stateManager = PlutoGridStateManager(
@@ -73,7 +73,7 @@ void main() {
       expect(helper, isA<PlutoAutoSize>());
     });
 
-    test('PlutoAutoSizeMode.scale 이면 PlutoAutoSize 를 리턴해야 한다.', () {
+    test('When PlutoAutoSizeMode is scale, should return PlutoAutoSize', () {
       final columns = ColumnHelper.textColumn('title', count: 5);
 
       final stateManager = PlutoGridStateManager(
@@ -98,7 +98,7 @@ void main() {
   });
 
   group('getColumnsResizeHelper', () {
-    test('PlutoResizeMode.none 이면 assertion 이 발생 되어야 한다.', () {
+    test('When PlutoResizeMode is none, assertion should be thrown', () {
       final columns = ColumnHelper.textColumn('title', count: 5);
 
       final stateManager = PlutoGridStateManager(
@@ -122,7 +122,7 @@ void main() {
       }, throwsAssertionError);
     });
 
-    test('PlutoResizeMode.normal 이면 assertion 이 발생 되어야 한다.', () {
+    test('When PlutoResizeMode is normal, assertion should be thrown', () {
       final columns = ColumnHelper.textColumn('title', count: 5);
 
       final stateManager = PlutoGridStateManager(
@@ -146,7 +146,7 @@ void main() {
       }, throwsAssertionError);
     });
 
-    test('columns.isEmpty 이면 assertion 이 발생 되어야 한다.', () {
+    test('When columns is empty, assertion should be thrown', () {
       final columns = <PlutoColumn>[];
 
       final stateManager = PlutoGridStateManager(

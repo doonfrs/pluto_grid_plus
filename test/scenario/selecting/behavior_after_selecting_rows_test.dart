@@ -6,7 +6,7 @@ import '../../helper/column_helper.dart';
 import '../../helper/pluto_widget_test_helper.dart';
 import '../../helper/row_helper.dart';
 
-/// 행 선택(selectingRows) 상태 이후의 동작 테스트
+/// Test of behavior after selecting rows
 void main() {
   const PlutoGridSelectingMode selectingMode = PlutoGridSelectingMode.row;
 
@@ -50,7 +50,7 @@ void main() {
   }
 
   group(
-    '10개 행에서 3개 행 선택. (1 ~ 3)',
+    'Select 3 rows from 1 to 3',
     () {
       const countTotalRows = 10;
       const countSelectedRows = 3;
@@ -66,8 +66,8 @@ void main() {
       }
 
       selectRowsFrom1To3().test(
-        '0번 행을 삭제하면, '
-        '0 ~ 2 번 index 의 행이 선택 상태가 되어야 한다.',
+        'When row 0 is deleted, '
+        'rows 0 ~ 2 should be selected.',
         (tester) async {
           final rowToRemove = stateManager!.rows.first;
 
@@ -84,8 +84,8 @@ void main() {
       );
 
       selectRowsFrom1To3().test(
-        '선택 된 1 ~3번 행 앞쪽인 1번에 새로운 행을 추가하면, '
-        '2 ~ 4번 행이 선택 상태가 되어야 한다.',
+        'When a new row is added to row 0, '
+        '2 ~ 4 rows should be selected.',
         (tester) async {
           final rowToRemove = stateManager!.rows.first;
 

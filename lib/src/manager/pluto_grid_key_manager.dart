@@ -6,13 +6,13 @@ import 'package:pluto_grid_plus/pluto_grid_plus.dart';
 import 'package:rxdart/rxdart.dart';
 
 /// 2021-11-19
-/// KeyEventResult.skipRemainingHandlers 동작 오류로 인한 임시 코드
-/// 이슈 해결 후 : 삭제
+/// Temporary code due to KeyEventResult.skipRemainingHandlers operation error
+/// After issue resolution: Delete
 ///
-/// desktop 에서만 발생
-/// skipRemainingHandlers 을 리턴하면 pluto_grid_plus.dart 의 FocusScope 의
-/// 콜백이 호출 되지 않고 TextField 에 키 입력이 되어야 하는데
-/// 방향키, 백스페이스 등이 입력되지 않음.(문자등은 입력 됨)
+/// Occurs only on desktop
+/// When returning skipRemainingHandlers, the FocusScope callback in pluto_grid_plus.dart
+/// is not called and key inputs should go to TextField, but
+/// arrow keys, backspace, etc. are not input (characters are input normally)
 /// https://github.com/flutter/flutter/issues/93873
 class PlutoGridKeyEventResult {
   bool _skip = false;

@@ -367,7 +367,7 @@ void main() {
   });
 
   testWidgets(
-    '셀을 탭하면 PlutoCellGestureEvent 이벤트가 OnTapUp 으로 호출 되어야 한다.',
+    'Tapping a cell should trigger PlutoCellGestureEvent with OnTapUp',
     (WidgetTester tester) async {
       // given
       final PlutoCell cell = PlutoCell(value: 'one');
@@ -416,7 +416,7 @@ void main() {
   );
 
   testWidgets(
-    '셀을 길게 탭하면 PlutoCellGestureEvent 이벤트가 OnLongPressStart 으로 호출 되어야 한다.',
+    'Long pressing a cell should trigger PlutoCellGestureEvent with OnLongPressStart',
     (WidgetTester tester) async {
       // given
       final PlutoCell cell = PlutoCell(value: 'one');
@@ -465,8 +465,7 @@ void main() {
   );
 
   testWidgets(
-    '셀을 길게 탭하고 이동하면 PlutoCellGestureEvent 이벤트가 '
-    'onLongPressMoveUpdate 으로 호출 되어야 한다.',
+    'Moving after long pressing a cell should trigger PlutoCellGestureEvent with OnLongPressMoveUpdate',
     (WidgetTester tester) async {
       // given
       final PlutoCell cell = PlutoCell(value: 'one');
@@ -527,10 +526,10 @@ void main() {
     },
   );
 
-  group('DefaultCellWidget 렌더링 조건', () {
+  group('DefaultCellWidget rendering conditions', () {
     PlutoCell cell;
 
-    PlutoColumn column;
+    PlutoColumn? column;
 
     int rowIdx;
 
@@ -567,7 +566,7 @@ void main() {
         await tester.pumpWidget(
           buildApp(
             cell: cell,
-            column: column,
+            column: column!,
             rowIdx: rowIdx,
             row: row,
           ),
@@ -578,29 +577,29 @@ void main() {
     }
 
     aCell(isCurrentCell: false).test(
-      'currentCell 이 아니면, DefaultCellWidget 이 렌더링 되어야 한다.',
+      'If not currentCell, DefaultCellWidget should be rendered',
       (tester) async {
         expect(find.byType(PlutoDefaultCell), findsOneWidget);
       },
     );
 
     aCell(isEditing: false).test(
-      'isEditing 이 false, DefaultCellWidget 이 렌더링 되어야 한다.',
+      'If isEditing is false, DefaultCellWidget should be rendered',
       (tester) async {
         expect(find.byType(PlutoDefaultCell), findsOneWidget);
       },
     );
 
     aCell(enableEditingMode: false).test(
-      'enableEditingMode 이 false, DefaultCellWidget 이 렌더링 되어야 한다.',
+      'If enableEditingMode is false, DefaultCellWidget should be rendered',
       (tester) async {
         expect(find.byType(PlutoDefaultCell), findsOneWidget);
       },
     );
 
     aCell(isCurrentCell: true, isEditing: true, enableEditingMode: true).test(
-      'isCurrentCell, isEditing, enableEditingMode 이 true 면, '
-      'DefaultCellWidget 이 렌더링 되지 않아야 한다.',
+      'If isCurrentCell, isEditing, and enableEditingMode are true, '
+      'DefaultCellWidget should not be rendered',
       (tester) async {
         expect(find.byType(PlutoDefaultCell), findsNothing);
       },
@@ -669,7 +668,7 @@ void main() {
       ),
       readOnly: true,
     ).test(
-      'if readOnly is true, should be set the color to cellColorInReadOnlyState.',
+      'If readOnly is true, should be set the color to cellColorInReadOnlyState.',
       (tester) async {
         expect(column!.readOnly, true);
 
@@ -701,7 +700,7 @@ void main() {
       isCurrentCell: false,
       isSelectedCell: false,
     ).test(
-      'if isCurrentCell, isSelectedCell are false '
+      'If isCurrentCell, isSelectedCell are false '
       'and enableColumnBorder is true, '
       'should be set the border.',
       (tester) async {
@@ -733,7 +732,7 @@ void main() {
       isCurrentCell: false,
       isSelectedCell: false,
     ).test(
-      'if isCurrentCell, isSelectedCell are false '
+      'If isCurrentCell, isSelectedCell are false '
       'and enableColumnBorder is false, '
       'should not be set the border.',
       (tester) async {

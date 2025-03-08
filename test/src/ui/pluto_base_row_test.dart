@@ -95,7 +95,7 @@ void main() {
   }
 
   buildRowWidget(checked: true).test(
-    'row 가 checked 가 true 일 때, rowColor 에 alphaBlend 가 적용 되어야 한다.',
+    'When row is checked, rowColor should have alphaBlend applied',
     (tester) async {
       final rowContainerWidget = find
           .byType(DecoratedBox)
@@ -115,7 +115,7 @@ void main() {
   );
 
   buildRowWidget(checked: false).test(
-    'row 가 checked 가 false 일 때, rowColor 에 alphaBlend 가 적용 되지 않아야 한다.',
+    'When row is not checked, rowColor should not have alphaBlend applied',
     (tester) async {
       final rowContainerWidget = find
           .byType(DecoratedBox)
@@ -136,7 +136,7 @@ void main() {
     isDragTarget: true,
     isTopDragTarget: true,
   ).test(
-    'isDragTarget, isTopDragTarget 이 true 인 경우 border top 이 설정 되어야 한다.',
+    'When isDragTarget and isTopDragTarget are true, border top should be set',
     (tester) async {
       final rowContainerWidget = find
           .byType(DecoratedBox)
@@ -159,7 +159,7 @@ void main() {
     isDragTarget: true,
     isBottomDragTarget: true,
   ).test(
-    'isDragTarget, isBottomDragTarget 이 true 인 경우 border bottom 이 설정 되어야 한다.',
+    'When isDragTarget and isBottomDragTarget are true, border bottom should be set',
     (tester) async {
       final rowContainerWidget = find
           .byType(DecoratedBox)

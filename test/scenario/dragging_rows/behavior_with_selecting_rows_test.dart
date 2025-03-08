@@ -18,7 +18,9 @@ void main() {
     endRowIdx: 5,
     columns: columns,
   )
-      .test('선택되지 않은 행의 드래그 아이콘을 드래그 하면 선택 된 행이 무효화 되어야 한다.',
+      .test(
+          'When the drag icon of an unselected row is dragged, '
+          'the selected row should be invalidated',
           (WidgetTester tester) async {
     final selectedCell = find.text(
       grid.stateManager.refRows[0].cells['column1']!.value,
@@ -43,8 +45,9 @@ void main() {
     endRowIdx: 5,
     columns: columns,
   )
-      .test('선택되지 않은 행의 드래그 아이콘을 드래그 하면 드래그 한 행이 이동 되어야 한다.',
-          (WidgetTester tester) async {
+      .test(
+          'When the drag icon of an unselected row is dragged, '
+          'the dragged row should be moved', (WidgetTester tester) async {
     final dragRow = grid.stateManager.refRows[0];
 
     final movedRow = grid.stateManager.refRows[1];
@@ -76,8 +79,9 @@ void main() {
     endRowIdx: 5,
     columns: columns,
   )
-      .test('선택된 행의 드래그 아이콘을 드래그 하면 선택 된 행이 유지 되어야 한다.',
-          (WidgetTester tester) async {
+      .test(
+          'When the drag icon of a selected row is dragged, '
+          'the selected row should be maintained', (WidgetTester tester) async {
     final selectedCell = find.text(
       grid.stateManager.currentSelectingRows[0].cells['column1']!.value,
     );
@@ -102,9 +106,9 @@ void main() {
     columns: columns,
   )
       .test(
-          '선택 되지 않은 행의 드래그 아이콘을 길게 탭하여 드래그 하면, '
-          '기존 선택이 무효화 되고 드래그 한 행이 선택되고 드래깅은 되지 않아야 한다.',
-          (WidgetTester tester) async {
+          'When the drag icon of an unselected row is dragged, '
+          'the existing selection should be invalidated and the dragged row should be selected, '
+          'and dragging should not occur.', (WidgetTester tester) async {
     final existsSelectingRows = [...grid.stateManager.currentSelectingRows];
 
     final dragRowCellValue =

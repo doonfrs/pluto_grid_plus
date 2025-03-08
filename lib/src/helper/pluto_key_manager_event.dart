@@ -40,13 +40,13 @@ class PlutoKeyManagerEvent {
   bool get isEnd => event.logicalKey.keyId == LogicalKeyboardKey.end.keyId;
 
   bool get isPageUp {
-    // windows 에서 pageUp keyId 가 0x10700000021.
+    // On Windows, pageUp keyId is 0x10700000021.
     return event.logicalKey.keyId == LogicalKeyboardKey.pageUp.keyId ||
         event.logicalKey.keyId == 0x10700000021;
   }
 
   bool get isPageDown {
-    // windows 에서 pageDown keyId 가 0x10700000022.
+    // On Windows, pageDown keyId is 0x10700000022.
     return event.logicalKey.keyId == LogicalKeyboardKey.pageDown.keyId ||
         event.logicalKey.keyId == 0x10700000022;
   }

@@ -56,88 +56,90 @@ void main() {
     await tester.pump();
   }
 
-  testWidgets(
-    'enter 키 동작을 추가하면 엔터키 입력시 설정된 동작이 실행 되어야 한다.',
-    (tester) async {
-      final testAction = _TestAction(mock.noParamReturnVoid);
+  group('Custom Shortcut Test', () {
+    testWidgets(
+      'When a custom shortcut is defined, it should be triggered on the specified key combination',
+      (tester) async {
+        final testAction = _TestAction(mock.noParamReturnVoid);
 
-      final shortcut = PlutoGridShortcut(actions: {
-        LogicalKeySet(LogicalKeyboardKey.enter): testAction,
-      });
+        final shortcut = PlutoGridShortcut(actions: {
+          LogicalKeySet(LogicalKeyboardKey.enter): testAction,
+        });
 
-      await buildGrid(tester, shortcut: shortcut);
+        await buildGrid(tester, shortcut: shortcut);
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+        await tester.sendKeyEvent(LogicalKeyboardKey.enter);
 
-      verify(mock.noParamReturnVoid()).called(1);
-    },
-  );
+        verify(mock.noParamReturnVoid()).called(1);
+      },
+    );
 
-  testWidgets(
-    '셀을 포커스 한 후 Control + C 키를 입력하면 기본 동작이 실행 되어야 한다.',
-    (tester) async {
-      String? copied;
+    testWidgets(
+      'When a cell is focused and Control + C is pressed, the default action should be executed',
+      (tester) async {
+        String? copied;
 
-      tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
-          SystemChannels.platform, (MethodCall methodCall) async {
-        if (methodCall.method == 'Clipboard.setData') {
-          copied = (await methodCall.arguments['text']).toString();
-        }
-        return null;
-      });
+        tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+            SystemChannels.platform, (MethodCall methodCall) async {
+          if (methodCall.method == 'Clipboard.setData') {
+            copied = (await methodCall.arguments['text']).toString();
+          }
+          return null;
+        });
 
-      const shortcut = PlutoGridShortcut();
+        const shortcut = PlutoGridShortcut();
 
-      await buildGrid(tester, shortcut: shortcut);
+        await buildGrid(tester, shortcut: shortcut);
 
-      await tester.tap(find.text('column0 value 0'));
-      await tester.pump();
+        await tester.tap(find.text('column0 value 0'));
+        await tester.pump();
 
-      await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
-      await tester.sendKeyEvent(LogicalKeyboardKey.keyC);
-      await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
-      await tester.pump();
+        await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
+        await tester.sendKeyEvent(LogicalKeyboardKey.keyC);
+        await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
+        await tester.pump();
 
-      expect(copied, 'column0 value 0');
-    },
-  );
+        expect(copied, 'column0 value 0');
+      },
+    );
 
-  testWidgets(
-    '셀을 포커스 한 후 Control + C 의 동작을 재정의 하면 기본 동작이 실행 되지 않아야 한다.',
-    (tester) async {
-      String? copied;
+    testWidgets(
+      'When a cell is focused and Control + C action is redefined, the default action should not be executed',
+      (tester) async {
+        String? copied;
 
-      tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
-          SystemChannels.platform, (MethodCall methodCall) async {
-        if (methodCall.method == 'Clipboard.setData') {
-          copied = (await methodCall.arguments['text']).toString();
-        }
-        return null;
-      });
+        tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+            SystemChannels.platform, (MethodCall methodCall) async {
+          if (methodCall.method == 'Clipboard.setData') {
+            copied = (await methodCall.arguments['text']).toString();
+          }
+          return null;
+        });
 
-      final testAction = _TestAction(mock.noParamReturnVoid);
+        final testAction = _TestAction(mock.noParamReturnVoid);
 
-      final shortcut = PlutoGridShortcut(
-        actions: {
-          LogicalKeySet(LogicalKeyboardKey.control, LogicalKeyboardKey.keyC):
-              testAction,
-        },
-      );
+        final shortcut = PlutoGridShortcut(
+          actions: {
+            LogicalKeySet(LogicalKeyboardKey.control, LogicalKeyboardKey.keyC):
+                testAction,
+          },
+        );
 
-      await buildGrid(tester, shortcut: shortcut);
+        await buildGrid(tester, shortcut: shortcut);
 
-      await tester.tap(find.text('column0 value 0'));
-      await tester.pump();
+        await tester.tap(find.text('column0 value 0'));
+        await tester.pump();
 
-      await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
-      await tester.sendKeyEvent(LogicalKeyboardKey.keyC);
-      await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
-      await tester.pump();
+        await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
+        await tester.sendKeyEvent(LogicalKeyboardKey.keyC);
+        await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
+        await tester.pump();
 
-      expect(copied, null);
-      verify(mock.noParamReturnVoid()).called(1);
-    },
-  );
+        expect(copied, null);
+        verify(mock.noParamReturnVoid()).called(1);
+      },
+    );
+  });
 }
 
 class _TestAction extends PlutoGridShortcutAction {

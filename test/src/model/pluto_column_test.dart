@@ -6,7 +6,9 @@ import '../../helper/row_helper.dart';
 
 void main() {
   group('titleWithGroup', () {
-    test('group 이 null 인 경우 column.title 이 리턴 되어야 한다.', () {
+    test(
+        'When group is null'
+        'then titleWithGroup should be title.', () {
       final column = PlutoColumn(
         title: 'column',
         field: 'column',
@@ -17,7 +19,9 @@ void main() {
       expect(column.titleWithGroup, 'column');
     });
 
-    test('group 이 한개 있는 경우 컬럼 제목과 그룹 명이 리턴 되어야 한다.', () {
+    test(
+        'When group has one element'
+        'then titleWithGroup should be group name and column name.', () {
       final column = PlutoColumn(
         title: 'column',
         field: 'column',
@@ -29,7 +33,9 @@ void main() {
       expect(column.titleWithGroup, 'group column');
     });
 
-    test('group 이 여러개 있는 경우 컬럼 제목과 그룹 명이 모두 리턴 되어야 한다.', () {
+    test(
+        'When group has multiple elements'
+        'then titleWithGroup should be group name and column name.', () {
       final column = PlutoColumn(
         title: 'column',
         field: 'column',
@@ -60,7 +66,10 @@ void main() {
       expect(column.titleWithGroup, 'groupA groupA2 groupA2-1 column');
     });
 
-    test('group 이 여러개 있는데 expandedColumn 인 경우 마지막 그룹명은 출력 되지 않아야 한다.', () {
+    test(
+        'When group has multiple elements'
+        'and expandedColumn is true'
+        'then titleWithGroup should be group name and column name.', () {
       final column = PlutoColumn(
         title: 'column',
         field: 'column',
@@ -303,7 +312,8 @@ void main() {
 
   group('PlutoColumnTypeText 의 defaultValue', () {
     test(
-      'text 기본 값이 설정 되어야 한다.',
+      'When defaultValue is set'
+      'then defaultValue should be set.',
       () {
         final PlutoColumnTypeText column = PlutoColumnType.text(
           defaultValue: 'default',
@@ -314,7 +324,8 @@ void main() {
     );
 
     test(
-      'number 기본 값이 설정 되어야 한다.',
+      'When defaultValue is set'
+      'then defaultValue should be set.',
       () {
         final PlutoColumnTypeNumber column = PlutoColumnType.number(
           defaultValue: 123,
@@ -325,7 +336,8 @@ void main() {
     );
 
     test(
-      'select 기본 값이 설정 되어야 한다.',
+      'When defaultValue is set'
+      'then defaultValue should be set.',
       () {
         final PlutoColumnTypeSelect column = PlutoColumnType.select(
           <String>['One'],
@@ -337,7 +349,8 @@ void main() {
     );
 
     test(
-      'date 기본 값이 설정 되어야 한다.',
+      'When defaultValue is set'
+      'then defaultValue should be set.',
       () {
         final PlutoColumnTypeDate column = PlutoColumnType.date(
           defaultValue: DateTime.parse('2020-01-01'),
@@ -348,7 +361,8 @@ void main() {
     );
 
     test(
-      'time 기본 값이 설정 되어야 한다.',
+      'When defaultValue is set'
+      'then defaultValue should be set.',
       () {
         final PlutoColumnTypeTime column = PlutoColumnType.time(
           defaultValue: '20:30',
@@ -386,7 +400,8 @@ void main() {
         'isValid',
         () {
           test(
-            '문자인 경우 true',
+            'When value is string'
+            'then isValid should be true.',
             () {
               final PlutoColumnTypeText textColumn =
                   PlutoColumnType.text() as PlutoColumnTypeText;
@@ -395,7 +410,8 @@ void main() {
           );
 
           test(
-            '숫자인 경우 true',
+            'When value is number'
+            'then isValid should be true.',
             () {
               final PlutoColumnTypeText textColumn =
                   PlutoColumnType.text() as PlutoColumnTypeText;
@@ -404,7 +420,8 @@ void main() {
           );
 
           test(
-            '공백인 경우 true',
+            'When value is empty'
+            'then isValid should be true.',
             () {
               final PlutoColumnTypeText textColumn =
                   PlutoColumnType.text() as PlutoColumnTypeText;
@@ -413,7 +430,8 @@ void main() {
           );
 
           test(
-            'null 인 경우 false',
+            'When value is null'
+            'then isValid should be false.',
             () {
               final PlutoColumnTypeText textColumn =
                   PlutoColumnType.text() as PlutoColumnTypeText;
@@ -427,7 +445,8 @@ void main() {
         'compare',
         () {
           test(
-            '가, 나 인 경우 -1',
+            'When value1 is less than value2'
+            'then compare should return -1.',
             () {
               final PlutoColumnTypeText textColumn =
                   PlutoColumnType.text() as PlutoColumnTypeText;
@@ -436,7 +455,8 @@ void main() {
           );
 
           test(
-            '나, 가 인 경우 1',
+            'When value1 is greater than value2'
+            'then compare should return 1.',
             () {
               final PlutoColumnTypeText textColumn =
                   PlutoColumnType.text() as PlutoColumnTypeText;
@@ -445,7 +465,8 @@ void main() {
           );
 
           test(
-            '가, 가 인 경우 0',
+            'When value1 is equal to value2'
+            'then compare should return 0.',
             () {
               final PlutoColumnTypeText textColumn =
                   PlutoColumnType.text() as PlutoColumnTypeText;
@@ -459,19 +480,19 @@ void main() {
 
   group('PlutoColumnTypeNumber', () {
     group('locale', () {
-      test('numberFormat 에 기본 로케일이 설정 되어야 한다.', () {
+      test('numberFormat should have the default locale set.', () {
         final PlutoColumnTypeNumber numberColumn =
             PlutoColumnType.number() as PlutoColumnTypeNumber;
         expect(numberColumn.numberFormat.locale, 'en_US');
       });
 
-      test('numberFormat 에 denmark 로케일이 설정 되어야 한다.', () {
+      test('numberFormat should have the denmark locale set.', () {
         final PlutoColumnTypeNumber numberColumn =
             PlutoColumnType.number(locale: 'da_DK') as PlutoColumnTypeNumber;
         expect(numberColumn.numberFormat.locale, 'da');
       });
 
-      test('numberFormat 에 korea 로케일이 설정 되어야 한다.', () {
+      test('numberFormat should have the korea locale set.', () {
         final PlutoColumnTypeNumber numberColumn =
             PlutoColumnType.number(locale: 'ko_KR') as PlutoColumnTypeNumber;
         expect(numberColumn.numberFormat.locale, 'ko');
@@ -480,7 +501,8 @@ void main() {
 
     group('isValid', () {
       test(
-        '문자인 경우 false',
+        'When value is string'
+        'then isValid should be false.',
         () {
           final PlutoColumnTypeNumber numberColumn =
               PlutoColumnType.number() as PlutoColumnTypeNumber;
@@ -489,7 +511,8 @@ void main() {
       );
 
       test(
-        '123 인 경우 true',
+        'When value is number'
+        'then isValid should be true.',
         () {
           final PlutoColumnTypeNumber numberColumn =
               PlutoColumnType.number() as PlutoColumnTypeNumber;
@@ -498,7 +521,8 @@ void main() {
       );
 
       test(
-        '-123 인 경우 true',
+        'When value is negative'
+        'then isValid should be true.',
         () {
           final PlutoColumnTypeNumber numberColumn =
               PlutoColumnType.number() as PlutoColumnTypeNumber;
@@ -507,7 +531,9 @@ void main() {
       );
 
       test(
-        'negative 가 false 이고 -123 인 경우 false',
+        'When negative is false'
+        'and value is negative'
+        'then isValid should be false.',
         () {
           final PlutoColumnTypeNumber numberColumn = PlutoColumnType.number(
             negative: false,
@@ -521,7 +547,8 @@ void main() {
       'compare',
       () {
         test(
-          '1, 2 인 경우 -1',
+          'When value1 is less than value2'
+          'then compare should return -1.',
           () {
             final PlutoColumnTypeNumber column =
                 PlutoColumnType.number() as PlutoColumnTypeNumber;
@@ -530,7 +557,8 @@ void main() {
         );
 
         test(
-          '2, 1 인 경우 1',
+          'When value1 is greater than value2'
+          'then compare should return 1.',
           () {
             final PlutoColumnTypeNumber column =
                 PlutoColumnType.number() as PlutoColumnTypeNumber;
@@ -539,7 +567,8 @@ void main() {
         );
 
         test(
-          '1, 1 인 경우 0',
+          'When value1 is equal to value2'
+          'then compare should return 0.',
           () {
             final PlutoColumnTypeNumber column =
                 PlutoColumnType.number() as PlutoColumnTypeNumber;
@@ -553,7 +582,8 @@ void main() {
   group('PlutoColumnTypeSelect', () {
     group('isValid', () {
       test(
-        'items 에 포함 되어있으면 true',
+        'When item is in items'
+        'then isValid should be true.',
         () {
           final PlutoColumnTypeSelect selectColumn =
               PlutoColumnType.select(<String>[
@@ -566,7 +596,8 @@ void main() {
       );
 
       test(
-        'items 에 포함 되어 있지 않으면 false',
+        'When item is not in items'
+        'then isValid should be false.',
         () {
           final PlutoColumnTypeSelect selectColumn =
               PlutoColumnType.select(<String>[
@@ -583,7 +614,8 @@ void main() {
       'compare',
       () {
         test(
-          'Two, Three 인 경우 -1',
+          'When value1 is less than value2'
+          'then compare should return -1.',
           () {
             final PlutoColumnTypeSelect column =
                 PlutoColumnType.select(<String>[
@@ -596,7 +628,8 @@ void main() {
         );
 
         test(
-          'Three, Two  인 경우 1',
+          'When value1 is greater than value2'
+          'then compare should return 1.',
           () {
             final PlutoColumnTypeSelect column =
                 PlutoColumnType.select(<String>[
@@ -609,7 +642,8 @@ void main() {
         );
 
         test(
-          'Two, Two 인 경우 0',
+          'When value1 is equal to value2'
+          'then compare should return 0.',
           () {
             final PlutoColumnTypeSelect column =
                 PlutoColumnType.select(<String>[
@@ -627,7 +661,8 @@ void main() {
   group('PlutoColumnTypeDate', () {
     group('isValid', () {
       test(
-        '날짜 형식이 아니면 false',
+        'When value is not date'
+        'then isValid should be false.',
         () {
           final PlutoColumnTypeDate dateColumn =
               PlutoColumnType.date() as PlutoColumnTypeDate;
@@ -636,7 +671,8 @@ void main() {
       );
 
       test(
-        '날짜 형식이면 true',
+        'When value is date'
+        'then isValid should be true.',
         () {
           final PlutoColumnTypeDate dateColumn =
               PlutoColumnType.date() as PlutoColumnTypeDate;
@@ -645,7 +681,10 @@ void main() {
       );
 
       test(
-        '시작일이 있는 경우 시작일 보다 작으면 false',
+        'When value is date'
+        'and startDate is not null'
+        'and value is less than startDate'
+        'then isValid should be false.',
         () {
           final PlutoColumnTypeDate dateColumn = PlutoColumnType.date(
             startDate: DateTime.parse('2020-02-01'),
@@ -655,7 +694,10 @@ void main() {
       );
 
       test(
-        '시작일이 있는 경우 시작일과 같으면 true',
+        'When value is date'
+        'and startDate is not null'
+        'and value is equal to startDate'
+        'then isValid should be true.',
         () {
           final PlutoColumnTypeDate dateColumn = PlutoColumnType.date(
             startDate: DateTime.parse('2020-02-01'),
@@ -665,7 +707,10 @@ void main() {
       );
 
       test(
-        '시작일이 있는 경우 시작일보다 크면 true',
+        'When value is date'
+        'and startDate is not null'
+        'and value is greater than startDate'
+        'then isValid should be true.',
         () {
           final PlutoColumnTypeDate dateColumn = PlutoColumnType.date(
             startDate: DateTime.parse('2020-02-01'),
@@ -675,7 +720,10 @@ void main() {
       );
 
       test(
-        '마지막일이 있는 경우 마지막일보다 작으면 true',
+        'When value is date'
+        'and endDate is not null'
+        'and value is less than endDate'
+        'then isValid should be true.',
         () {
           final PlutoColumnTypeDate dateColumn = PlutoColumnType.date(
             endDate: DateTime.parse('2020-02-01'),
@@ -685,7 +733,10 @@ void main() {
       );
 
       test(
-        '마지막일이 있는 경우 마지막일과 같으면 true',
+        'When value is date'
+        'and endDate is not null'
+        'and value is equal to endDate'
+        'then isValid should be true.',
         () {
           final PlutoColumnTypeDate dateColumn = PlutoColumnType.date(
             endDate: DateTime.parse('2020-02-01'),
@@ -695,7 +746,10 @@ void main() {
       );
 
       test(
-        '마지막일이 있는 경우 마지막일보다 크면 false',
+        'When value is date'
+        'and endDate is not null'
+        'and value is greater than endDate'
+        'then isValid should be false.',
         () {
           final PlutoColumnTypeDate dateColumn = PlutoColumnType.date(
             endDate: DateTime.parse('2020-02-01'),
@@ -705,7 +759,11 @@ void main() {
       );
 
       test(
-        '시작일과 마지막일이 둘다 있는 경우 범위에 있으면 true',
+        'When value is date'
+        'and startDate is not null'
+        'and endDate is not null'
+        'and value is in range'
+        'then isValid should be true.',
         () {
           final PlutoColumnTypeDate dateColumn = PlutoColumnType.date(
             startDate: DateTime.parse('2020-02-01'),
@@ -716,7 +774,11 @@ void main() {
       );
 
       test(
-        '시작일과 마지막일이 둘다 있는 경우 범위보다 작으면 false',
+        'When value is date'
+        'and startDate is not null'
+        'and endDate is not null'
+        'and value is less than startDate'
+        'then isValid should be false.',
         () {
           final PlutoColumnTypeDate dateColumn = PlutoColumnType.date(
             startDate: DateTime.parse('2020-02-01'),
@@ -727,7 +789,11 @@ void main() {
       );
 
       test(
-        '시작일과 마지막일이 둘다 있는 경우 범위보다 크면 false',
+        'When value is date'
+        'and startDate is not null'
+        'and endDate is not null'
+        'and value is greater than endDate'
+        'then isValid should be false.',
         () {
           final PlutoColumnTypeDate dateColumn = PlutoColumnType.date(
             startDate: DateTime.parse('2020-02-01'),
@@ -742,7 +808,8 @@ void main() {
       'compare',
       () {
         test(
-          '2019-12-30, 2020-01-01 인 경우 -1',
+          'When value1 is less than value2'
+          'then compare should return -1.',
           () {
             final PlutoColumnTypeDate column =
                 PlutoColumnType.date() as PlutoColumnTypeDate;
@@ -750,9 +817,9 @@ void main() {
           },
         );
 
-        // 날짜 포멧이 적용 된 경우 컬럼의 compare 함수의 동작이 의도와 다르다.
-        // 포멧을 바꿔 compare 함수를 호출해야 한다. compare 함수는 포멧을 적당하게
-        // 변환하여 호출하고 포멧의 변경은 외부에서 호출 할 때 처리 한다.
+        // When the date format is applied, the behavior of the column's compare function is different from the intended behavior.
+        // You need to change the format when calling the compare function. The compare function converts the format appropriately
+        // and the format change is processed when the function is called from outside.
         test(
           '12/30/2019, 01/01/2020 인 경우 1',
           () {
@@ -764,7 +831,8 @@ void main() {
         );
 
         test(
-          '2020-01-01, 2019-12-30  인 경우 1',
+          'When value1 is greater than value2'
+          'then compare should return 1.',
           () {
             final PlutoColumnTypeDate column =
                 PlutoColumnType.date() as PlutoColumnTypeDate;
@@ -772,9 +840,9 @@ void main() {
           },
         );
 
-        // 날짜 포멧이 적용 된 경우 컬럼의 compare 함수의 동작이 의도와 다르다.
-        // 포멧을 바꿔 compare 함수를 호출해야 한다. compare 함수는 포멧을 적당하게
-        // 변환하여 호출하고 포멧의 변경은 외부에서 호출 할 때 처리 한다.
+        // When the date format is applied, the behavior of the column's compare function is different from the intended behavior.
+        // You need to change the format when calling the compare function. The compare function converts the format appropriately
+        // and the format change is processed when the function is called from outside.
         test(
           '01/01/2020, 12/30/2019  인 경우 -1',
           () {
@@ -786,7 +854,8 @@ void main() {
         );
 
         test(
-          '2020-01-01, 2020-01-01 인 경우 0',
+          'When value1 is equal to value2'
+          'then compare should return 0.',
           () {
             final PlutoColumnTypeDate column =
                 PlutoColumnType.date() as PlutoColumnTypeDate;
@@ -795,7 +864,8 @@ void main() {
         );
 
         test(
-          '01/01/2020, 01/01/2020  인 경우 0',
+          'When value1 is equal to value2'
+          'then compare should return 0.',
           () {
             final PlutoColumnTypeDate column =
                 PlutoColumnType.date(format: 'MM/dd/yyyy')
@@ -812,7 +882,8 @@ void main() {
     () {
       group('isValid', () {
         test(
-          '24:00 이면 false',
+          'When value is not time'
+          'then isValid should be false.',
           () {
             final PlutoColumnTypeTime timeColumn =
                 PlutoColumnType.time() as PlutoColumnTypeTime;
@@ -821,7 +892,8 @@ void main() {
         );
 
         test(
-          '00:60 이면 false',
+          'When value is not time'
+          'then isValid should be false.',
           () {
             final PlutoColumnTypeTime timeColumn =
                 PlutoColumnType.time() as PlutoColumnTypeTime;
@@ -830,7 +902,8 @@ void main() {
         );
 
         test(
-          '24:60 이면 false',
+          'When value is not time'
+          'then isValid should be false.',
           () {
             final PlutoColumnTypeTime timeColumn =
                 PlutoColumnType.time() as PlutoColumnTypeTime;
@@ -839,7 +912,8 @@ void main() {
         );
 
         test(
-          '00:00 이면 true',
+          'When value is time'
+          'then isValid should be true.',
           () {
             final PlutoColumnTypeTime timeColumn =
                 PlutoColumnType.time() as PlutoColumnTypeTime;
@@ -848,7 +922,8 @@ void main() {
         );
 
         test(
-          '00:59 이면 true',
+          'When value is time'
+          'then isValid should be true.',
           () {
             final PlutoColumnTypeTime timeColumn =
                 PlutoColumnType.time() as PlutoColumnTypeTime;
@@ -857,7 +932,8 @@ void main() {
         );
 
         test(
-          '23:00 이면 true',
+          'When value is time'
+          'then isValid should be true.',
           () {
             final PlutoColumnTypeTime timeColumn =
                 PlutoColumnType.time() as PlutoColumnTypeTime;
@@ -866,7 +942,8 @@ void main() {
         );
 
         test(
-          '23:59 이면 true',
+          'When value is time'
+          'then isValid should be true.',
           () {
             final PlutoColumnTypeTime timeColumn =
                 PlutoColumnType.time() as PlutoColumnTypeTime;
@@ -879,7 +956,8 @@ void main() {
 
   group('formattedValueForType', () {
     test(
-      'Number column 인 경우 12345 값이 12,345 로 포멧이 적용 되어야 한다.',
+      'When column type is number'
+      'then formatted value should be formatted by default format.',
       () {
         final PlutoColumn column = PlutoColumn(
           title: 'number column',
@@ -892,7 +970,8 @@ void main() {
     );
 
     test(
-      'Number column 인 경우 12345678 값이 12,345,678 로 포멧이 적용 되어야 한다.',
+      'When column type is number'
+      'then formatted value should be formatted by default format.',
       () {
         final PlutoColumn column = PlutoColumn(
           title: 'number column',
@@ -905,7 +984,8 @@ void main() {
     );
 
     test(
-      'Number column 이 아닌 경우 12345 값이 12345 로 포멧이 적용 되지 않아야 한다.',
+      'When column type is not number'
+      'then formatted value should not be formatted by default format.',
       () {
         final PlutoColumn column = PlutoColumn(
           title: 'number column',
@@ -920,7 +1000,8 @@ void main() {
 
   group('formattedValueForDisplay', () {
     test(
-      'formatter 가 없는 경우 Number column 의 타입에 대한 포멧만 적용되어야 한다.',
+      'When formatter is null'
+      'then formatted value should be formatted by default format.',
       () {
         final PlutoColumn column = PlutoColumn(
           title: 'number column',
@@ -933,8 +1014,8 @@ void main() {
     );
 
     test(
-      'formatter 가 있는 경우 Number column 의 타입에 대한 포멧이 아닌 '
-      'formatter 가 적용 되어야 한다.',
+      'When formatter is not null'
+      'then formatted value should be formatted by formatter.',
       () {
         final PlutoColumn column = PlutoColumn(
           title: 'number column',
@@ -966,19 +1047,32 @@ void main() {
       return RowHelper.count(1, [column]).first;
     }
 
-    test('readOnly = false, checkReadOnly = 미설정 이면 false 를 반환해야 한다.', () {
-      final column = makeColumn(readOnly: false);
+    test(
+      'When readOnly is false'
+      'and checkReadOnly is null'
+      'then checkReadOnly should return false.',
+      () {
+        final column = makeColumn(readOnly: false);
 
-      expect(column.readOnly, false);
-    });
+        expect(column.readOnly, false);
+      },
+    );
 
-    test('readOnly = true, checkReadOnly = 미설정 이면 true 를 반환해야 한다.', () {
-      final column = makeColumn(readOnly: true);
+    test(
+      'When readOnly is true'
+      'and checkReadOnly is null'
+      'then checkReadOnly should return true.',
+      () {
+        final column = makeColumn(readOnly: true);
 
-      expect(column.readOnly, true);
-    });
+        expect(column.readOnly, true);
+      },
+    );
 
-    test('readOnly = false, checkReadOnly = true 이면 true 를 반환해야 한다.', () {
+    test(
+        'When readOnly is false'
+        'and checkReadOnly is not null'
+        'then checkReadOnly should return true.', () {
       final column =
           makeColumn(readOnly: false, checkReadOnly: (_, __) => true);
 
@@ -989,7 +1083,10 @@ void main() {
       expect(column.checkReadOnly(row, cell!), true);
     });
 
-    test('readOnly = true, checkReadOnly = false 이면 false 를 반환해야 한다.', () {
+    test(
+        'When readOnly is true'
+        'and checkReadOnly is not null'
+        'then checkReadOnly should return false.', () {
       final column =
           makeColumn(readOnly: true, checkReadOnly: (_, __) => false);
 
@@ -1002,8 +1099,11 @@ void main() {
   });
 
   group('formattedValueForDisplayInEditing', () {
-    group('PlutoColumnTypeWithNumberFormat 이 아닌 컬럼.', () {
-      test('formatter 가 있고 readOnly 컬럼인 경우 formatter 가 적용 되어야 한다.', () {
+    group('When column type is not PlutoColumnTypeWithNumberFormat', () {
+      test(
+          'When formatter is not null'
+          'and readOnly is true'
+          'then formatted value should be formatted by formatter.', () {
         final column = PlutoColumn(
           title: 'column',
           field: 'column',
@@ -1020,8 +1120,10 @@ void main() {
       });
 
       test(
-        'readOnly 가 false 여도 formatter 가 있고 select 타입 컬럼인 경우 '
-        'formatter 가 적용 되어야 한다.',
+        'When readOnly is false'
+        'and formatter is not null'
+        'and type is select'
+        'then formatted value should be formatted by formatter.',
         () {
           final column = PlutoColumn(
             title: 'column',
@@ -1040,8 +1142,10 @@ void main() {
       );
 
       test(
-        'readOnly 가 false 여도 formatter 가 있고 time 타입 컬럼인 경우 '
-        'formatter 가 적용 되어야 한다.',
+        'When readOnly is false'
+        'and formatter is not null'
+        'and type is time'
+        'then formatted value should be formatted by formatter.',
         () {
           final column = PlutoColumn(
             title: 'column',
@@ -1060,8 +1164,10 @@ void main() {
       );
 
       test(
-        'readOnly 가 false 여도 formatter 가 있고 date 타입 컬럼인 경우 '
-        'formatter 가 적용 되어야 한다.',
+        'When readOnly is false'
+        'and formatter is not null'
+        'and type is date'
+        'then formatted value should be formatted by formatter.',
         () {
           final column = PlutoColumn(
             title: 'column',
@@ -1080,8 +1186,32 @@ void main() {
       );
 
       test(
-        'formatter 가 있고 readOnly 컬럼인 경우 applyFormatterInEditing 가 false 면 '
-        'formatter 가 적용 되지 않아야 한다.',
+        'When readOnly is false'
+        'and formatter is not null'
+        'and type is date'
+        'then formatted value should be formatted by formatter.',
+        () {
+          final column = PlutoColumn(
+            title: 'column',
+            field: 'column',
+            applyFormatterInEditing: true,
+            readOnly: false,
+            type: PlutoColumnType.date(),
+            formatter: (s) => '$s changed',
+          );
+
+          expect(
+            column.formattedValueForDisplayInEditing('original'),
+            'original changed',
+          );
+        },
+      );
+
+      test(
+        'When readOnly is false'
+        'and formatter is not null'
+        'and applyFormatterInEditing is false'
+        'then formatted value should not be formatted by formatter.',
         () {
           final column = PlutoColumn(
             title: 'column',

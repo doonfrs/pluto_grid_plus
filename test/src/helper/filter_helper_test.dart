@@ -171,7 +171,7 @@ void main() {
       );
 
       test(
-        'column1 이 enabledFilterColumns 에 존재하지 않을 때, '
+        'When column1 does not exist in enabledFilterColumns, '
         'filterFieldColumn : column1, '
         'filterFieldType : Contains, '
         'filterFieldValue : column1, '
@@ -232,7 +232,7 @@ void main() {
   });
 
   group('convertRowsToMap', () {
-    test('filterRows 가 비어있으면 빈 맵을 리턴해야 한다.', () {
+    test('When filterRows is empty, an empty map should be returned.', () {
       final List<PlutoRow> filterRows = [];
 
       final result = FilterHelper.convertRowsToMap(filterRows);
@@ -241,7 +241,7 @@ void main() {
       expect(result, isA<Map<String, List<Map<String, String>>>>());
     });
 
-    test('filterRows 가 설정 되어 있으면 Map 에 값이 설정되어 리턴되어야 한다.', () {
+    test('When filterRows is set, the map should be returned with values.', () {
       final List<PlutoRow> filterRows = [
         PlutoRow(cells: {
           FilterHelper.filterFieldColumn: PlutoCell(value: 'column'),
@@ -266,8 +266,8 @@ void main() {
     });
 
     test(
-        'filterRows 에 동일한 컬럼의 조건이 2개 설정 되어 있으면, '
-        'Map 에 값이 설정되어 리턴되어야 한다.', () {
+        'When filterRows has duplicate column conditions, '
+        'the map should be returned with values.', () {
       final List<PlutoRow> filterRows = [
         PlutoRow(cells: {
           FilterHelper.filterFieldColumn: PlutoCell(value: 'column'),
@@ -301,8 +301,8 @@ void main() {
     });
 
     test(
-        'filtering 조건에 모든 컬럼 조건이 포함 되어 있으면, '
-        'Map 에 기본값 all 로 설정되어 리턴되어야 한다.', () {
+        'When all columns are included in the filtering conditions, '
+        'the map should be returned with default value all.', () {
       final List<PlutoRow> filterRows = [
         PlutoRow(cells: {
           FilterHelper.filterFieldColumn: PlutoCell(value: 'column'),
@@ -333,8 +333,8 @@ void main() {
     });
 
     test(
-        'allField 을 allColumns 로 변경하면, '
-        'Map 에 기본값 allColumns 로 설정되어 리턴되어야 한다.', () {
+        'When allField is changed to allColumns, '
+        'the map should be returned with default value allColumns.', () {
       final List<PlutoRow> filterRows = [
         PlutoRow(cells: {
           FilterHelper.filterFieldColumn: PlutoCell(value: 'column'),
@@ -784,7 +784,9 @@ void main() {
     });
 
     group('stateListener', () {
-      test('filterRows 가 변경되지 않았으면 handleApplyFilter 가 호출되지 않아야 한다.', () {
+      test(
+          'When filterRows is not changed, handleApplyFilter should not be called.',
+          () {
         var mock = MockMethods();
 
         var columns = ColumnHelper.textColumn('column');
@@ -814,7 +816,8 @@ void main() {
         verifyNever(mock.oneParamReturnVoid(stateManager));
       });
 
-      test('filterRows 가 변경 되었으면 handleApplyFilter 가 호출 되어야 한다.', () {
+      test('When filterRows is changed, handleApplyFilter should be called.',
+          () {
         var mock = MockMethods();
 
         var columns = ColumnHelper.textColumn('column');
@@ -860,21 +863,21 @@ void main() {
 
       var filterColumns = filterPopupState.makeColumns();
 
-      test('3개의 컬럼이 생성 되어야 한다.', () {
+      test('3 columns should be generated.', () {
         expect(filterColumns.length, 3);
         expect(filterColumns[0].field, FilterHelper.filterFieldColumn);
         expect(filterColumns[1].field, FilterHelper.filterFieldType);
         expect(filterColumns[2].field, FilterHelper.filterFieldValue);
       });
 
-      test('filterColumns 의 첫번째 컬럼이 select type 으로 생성 되어야 한다.', () {
+      test('The first column of filterColumns should be select type.', () {
         var filterColumn = filterColumns[0];
 
         expect(filterColumn.type, isA<PlutoColumnTypeSelect>());
 
         var columnType = filterColumn.type as PlutoColumnTypeSelect;
 
-        // 전체 검색 필드가 추가 되어 +1 (FilterHelper.filterFieldAllColumns)
+        // When the filter field is added, +1 (FilterHelper.filterFieldAllColumns)
         expect(columnType.items.length, columns.length + 1);
 
         expect(columnType.items[0], FilterHelper.filterFieldAllColumns);
@@ -882,7 +885,7 @@ void main() {
         expect(columnType.items[2], columns[1].field);
         expect(columnType.items[3], columns[2].field);
 
-        // formatter (column 의 field 가 값으로써 formatter 에서 title 로 반환한다.)
+        // formatter (The column's field is used as a value and returned as a title in the formatter.)
         expect(
           filterColumn.formatter!(FilterHelper.filterFieldAllColumns),
           configuration.localeText.filterAllColumns,
@@ -896,19 +899,19 @@ void main() {
         }
       });
 
-      test('filterColumns 의 두번째 컬럼이 select type 으로 생성 되어야 한다.', () {
+      test('The second column of filterColumns should be select type.', () {
         var filterColumn = filterColumns[1];
 
         expect(filterColumn.type, isA<PlutoColumnTypeSelect>());
 
         var columnType = filterColumn.type as PlutoColumnTypeSelect;
 
-        // configuration 의 필터 수 만큼 생성 되어야 한다. (기본 8개)
+        // configuration's filter count should be created. (default 8)
         expect(configuration.columnFilter.filters.length, 8);
         expect(
             columnType.items.length, configuration.columnFilter.filters.length);
 
-        // formatter (filter 가 값으로 써 formatter 에서 title 을 반환한다.)
+        // formatter (filter value is used formatter to return title.)
         for (var i = 0; i < configuration.columnFilter.filters.length; i += 1) {
           expect(
             filterColumn.formatter!(configuration.columnFilter.filters[i]),
@@ -917,7 +920,7 @@ void main() {
         }
       });
 
-      test('filterColumns 의 세번째 컬럼이 text type 으로 생성 되어야 한다.', () {
+      test('The third column of filterColumns should be text type.', () {
         var filterColumn = filterColumns[2];
 
         expect(filterColumn.type, isA<PlutoColumnTypeText>());
@@ -927,7 +930,7 @@ void main() {
 
   group('PlutoGridFilterPopupHeader', () {
     testWidgets(
-      'add 버튼을 탭하면 handleAddNewFilter 콜백이 호출 되어야 한다.',
+      'When the add button is tapped, the handleAddNewFilter callback should be called.',
       (tester) async {
         final stateManager = MockPlutoGridStateManager();
         const configuration = PlutoGridConfiguration();
@@ -957,7 +960,8 @@ void main() {
     );
 
     testWidgets(
-      'currentSelectingRows 이 empty 인 상태에서 remove 아이콘을 탭하면 removeCurrentRow 가 호출 되어야 한다.',
+      'When currentSelectingRows is empty, '
+      'tapping the remove icon should call removeCurrentRow.',
       (tester) async {
         final stateManager = MockPlutoGridStateManager();
         const configuration = PlutoGridConfiguration();
@@ -989,7 +993,8 @@ void main() {
     );
 
     testWidgets(
-      'currentSelectingRows 이 empty 가 아닌 상태에서 remove 아이콘을 탭하면 removeRows 가 호출 되어야 한다.',
+      'When currentSelectingRows is not empty, '
+      'tapping the remove icon should call removeRows.',
       (tester) async {
         final stateManager = MockPlutoGridStateManager();
         const configuration = PlutoGridConfiguration();

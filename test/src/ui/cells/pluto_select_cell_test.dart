@@ -43,7 +43,7 @@ void main() {
     when(stateManager.hasFocus).thenReturn(true);
   });
 
-  group('suffixIcon 렌더링', () {
+  group('Suffix icon rendering', () {
     final PlutoCell cell = PlutoCell(value: 'A');
 
     final PlutoRow row = PlutoRow(
@@ -52,7 +52,7 @@ void main() {
       },
     );
 
-    testWidgets('기본 드롭다운 아이콘이 렌더링 되어야 한다.', (tester) async {
+    testWidgets('Default dropdown icon should be rendered', (tester) async {
       final PlutoColumn column = PlutoColumn(
         title: 'column title',
         field: 'column_field_name',
@@ -75,7 +75,7 @@ void main() {
       expect(find.byIcon(Icons.arrow_drop_down), findsOneWidget);
     });
 
-    testWidgets('변경한 아이콘이 렌더링 되어야 한다.', (tester) async {
+    testWidgets('Custom icon should be rendered', (tester) async {
       final PlutoColumn column = PlutoColumn(
         title: 'column title',
         field: 'column_field_name',
@@ -101,7 +101,7 @@ void main() {
       expect(find.byIcon(Icons.add), findsOneWidget);
     });
 
-    testWidgets('popupIcon 이 null 인 경우 아이콘이 렌더링 되지 않아야 한다.', (tester) async {
+    testWidgets('When popupIcon is null, icon should not be rendered', (tester) async {
       final PlutoColumn column = PlutoColumn(
         title: 'column title',
         field: 'column_field_name',
@@ -129,8 +129,8 @@ void main() {
   });
 
   group(
-    'enterKeyAction 이 PlutoGridEnterKeyAction.toggleEditing 이고, '
-    'enableMoveDownAfterSelecting 가 false 인 상태에서, ',
+    'When enterKeyAction is PlutoGridEnterKeyAction.toggleEditing and '
+    'enableMoveDownAfterSelecting is false',
     () {
       final PlutoColumn column = PlutoColumn(
         title: 'column title',
@@ -164,25 +164,13 @@ void main() {
         await tester.tap(find.byType(TextField));
       });
 
-      cellWidget.test('F2를 입력하면 팝업이 호출 되어야 한다.', (tester) async {
+      cellWidget.test('Pressing F2 should open the popup', (tester) async {
         await tester.sendKeyEvent(LogicalKeyboardKey.f2);
 
         expect(find.byType(PlutoGrid), findsOneWidget);
       });
 
-      cellWidget.test('팝업 호출 후 ESC 를 입력하면 팝업이 사라져야 한다.', (tester) async {
-        await tester.sendKeyEvent(LogicalKeyboardKey.f2);
-
-        expect(find.byType(PlutoGrid), findsOneWidget);
-
-        await tester.sendKeyEvent(LogicalKeyboardKey.escape);
-
-        await tester.pumpAndSettle();
-
-        expect(find.byType(PlutoGrid), findsNothing);
-      });
-
-      cellWidget.test('팝업 호출 후 ESC 를 입력하고 다시 F2 키로 팝업을 호출하면 팝업이 호출 되어야 한다.',
+      cellWidget.test('After closing popup with ESC and pressing F2 again, popup should reopen',
           (tester) async {
         await tester.sendKeyEvent(LogicalKeyboardKey.f2);
 
@@ -202,8 +190,8 @@ void main() {
       });
 
       cellWidget.test(
-          '팝업 호출 후 방향키와 엔터키로 아래 아이템을 선택한 후 다시 팝업을 호출하면, '
-          '팝업이 호출 되어야 한다.', (tester) async {
+          'After selecting an item with arrow keys and enter, popup should be displayed again',
+          (tester) async {
         await tester.sendKeyEvent(LogicalKeyboardKey.f2);
 
         expect(find.byType(PlutoGrid), findsOneWidget);

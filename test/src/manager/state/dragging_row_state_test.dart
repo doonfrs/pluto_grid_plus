@@ -38,8 +38,8 @@ void main() {
 
   group('setIsDraggingRow', () {
     test(
-      '기존 isDragging 값이 변경 하려는 값이랑 같은 경우, '
-      'notifyListeners 가 호출 되지 않아야 한다.',
+      'When the new isDragging value is the same as the current value, '
+      'notifyListeners should not be called',
       () {
         // given
         expect(stateManager.isDraggingRow, isFalse);
@@ -53,8 +53,8 @@ void main() {
     );
 
     test(
-      '기존 isDragging 값이 변경 하려는 값이랑 다른 경우, '
-      'notifyListeners 가 호출 되어야 한다.',
+      'When the new isDragging value is different from the current value, '
+      'notifyListeners should be called',
       () {
         // given
         expect(stateManager.isDraggingRow, isFalse);
@@ -69,8 +69,8 @@ void main() {
     );
 
     test(
-      '기존 isDragging 값이 변경 하려는 값이랑 다르지만, notify 가 false 인 경우 '
-      'notifyListeners 가 호출 되지 않아야 한다.',
+      'When the new isDragging value is different but notify is false, '
+      'notifyListeners should not be called',
       () {
         // given
         expect(stateManager.isDraggingRow, isFalse);
@@ -87,7 +87,7 @@ void main() {
 
   group('setDragRows', () {
     test(
-      '인수로 전달 한 rows 가 dragRows 에 설정 되어야 한다.',
+      'The rows passed as arguments should be set in dragRows',
       () {
         // given
         expect(stateManager.dragRows, isEmpty);
@@ -104,8 +104,8 @@ void main() {
     );
 
     test(
-      '인수로 전달 한 rows 가 dragRows 에 설정 되지만, '
-      'notify 가 false 인 경우 notifyListeners 가 호출 되지 않아야 한다.',
+      'The rows passed as arguments should be set in dragRows, '
+      'but when notify is false, notifyListeners should not be called',
       () {
         // given
         expect(stateManager.dragRows, isEmpty);
@@ -124,8 +124,8 @@ void main() {
 
   group('setDragTargetRowIdx', () {
     test(
-      '인수로 전달 한 rowIdx 가 dragTargetRowIdx 와 같다면, '
-      'notifyListeners 가 호출 되지 않아야 한다.',
+      'When the rowIdx passed as argument is the same as dragTargetRowIdx, '
+      'notifyListeners should not be called',
       () {
         // given
         stateManager.setDragTargetRowIdx(1);
@@ -141,8 +141,8 @@ void main() {
     );
 
     test(
-      '인수로 전달 한 rowIdx 가 dragTargetRowIdx 와 다르면, '
-      'notifyListeners 가 호출 되어야 한다.',
+      'When the rowIdx passed as argument is different from dragTargetRowIdx, '
+      'notifyListeners should be called',
       () {
         // given
         stateManager.setDragTargetRowIdx(1);
@@ -159,8 +159,8 @@ void main() {
     );
 
     test(
-      '인수로 전달 한 rowIdx 가 dragTargetRowIdx 와 다르지만, '
-      'notify 가 false 면 notifyListeners 가 호출 되지 않아야 한다.',
+      'When the rowIdx passed as argument is different from dragTargetRowIdx, '
+      'but notify is false, notifyListeners should not be called',
       () {
         // given
         stateManager.setDragTargetRowIdx(1);
@@ -190,27 +190,31 @@ void main() {
       stateManager.setDragRows(givenDragRows);
     });
 
-    test('rowIdx 가 null 이면 false 를 리턴해야 한다.', () {
+    test('When rowIdx is null, should return false', () {
       expect(stateManager.isRowIdxDragTarget(null), isFalse);
     });
 
-    test('rowIdx 가 주어진 rowIdx 보다 작으면 false 를 리턴 해야 한다.', () {
+    test('When rowIdx is less than the given rowIdx, should return false', () {
       expect(
         stateManager.isRowIdxDragTarget(givenDragTargetRowIdx - 1),
         isFalse,
       );
     });
 
-    test('rowIdx 가 주어진 rowIdx + dragRows.length 보다 크면 false 를 리턴해야 한다.', () {
-      expect(
-        stateManager.isRowIdxDragTarget(
-          givenDragTargetRowIdx + givenDragRows.length + 1,
-        ),
-        isFalse,
-      );
-    });
+    test(
+      'When rowIdx is greater than the given rowIdx + dragRows.length, '
+      'should return false',
+      () {
+        expect(
+          stateManager.isRowIdxDragTarget(
+            givenDragTargetRowIdx + givenDragRows.length + 1,
+          ),
+          isFalse,
+        );
+      },
+    );
 
-    test('rowIdx 가 주어진 rowIdx 와 같으면 true 를 리턴해야 한다.', () {
+    test('When rowIdx is equal to the given rowIdx, should return true', () {
       expect(
         stateManager.isRowIdxDragTarget(givenDragTargetRowIdx),
         isTrue,
@@ -218,8 +222,8 @@ void main() {
     });
 
     test(
-      'rowIdx 가 주어진 rowIdx 보다 크고 '
-      '주어진 rowIdx + dragRows.length 보다 작으면 true 를 리턴해야 한다.',
+      'When rowIdx is greater than the given rowIdx and less than '
+      'the given rowIdx + dragRows.length, should return true',
       () {
         const rowIdx = givenDragTargetRowIdx + 1;
 
@@ -247,15 +251,12 @@ void main() {
       stateManager.setDragRows(givenDragRows);
     });
 
-    test(
-      'rowIdx 가 null 이면 false 를 리턴해야 한다.',
-      () {
-        expect(stateManager.isRowIdxTopDragTarget(null), isFalse);
-      },
-    );
+    test('When rowIdx is null, should return false', () {
+      expect(stateManager.isRowIdxTopDragTarget(null), isFalse);
+    });
 
     test(
-      'rowIdx 가 dragTargetRowIdx 와 다르면 false 를 리턴해야 한다.',
+      'When rowIdx is not equal to dragTargetRowIdx, should return false',
       () {
         expect(stateManager.dragTargetRowIdx, isNot(2));
         expect(stateManager.isRowIdxTopDragTarget(2), isFalse);
@@ -263,7 +264,7 @@ void main() {
     );
 
     test(
-      'rowIdx 가 dragTargetRowIdx 와 같으면 true 를 리턴해야 한다.',
+      'When rowIdx is equal to dragTargetRowIdx, should return true',
       () {
         expect(stateManager.dragTargetRowIdx, 3);
         expect(stateManager.isRowIdxTopDragTarget(3), isTrue);
@@ -284,15 +285,13 @@ void main() {
       stateManager.setDragRows(givenDragRows);
     });
 
-    test(
-      'rowIdx 가 null 이면 false 를 리턴해야 한다.',
-      () {
-        expect(stateManager.isRowIdxBottomDragTarget(null), isFalse);
-      },
-    );
+    test('When rowIdx is null, should return false', () {
+      expect(stateManager.isRowIdxBottomDragTarget(null), isFalse);
+    });
 
     test(
-      'rowIdx 가 dragTargetRowIdx + dragRows.length - 1 과 다르면 false 를 리턴해야 한다.',
+      'When rowIdx is not equal to dragTargetRowIdx + dragRows.length - 1, '
+      'should return false',
       () {
         const int rowIdx = 2;
 
@@ -308,7 +307,8 @@ void main() {
     );
 
     test(
-      'rowIdx 가 dragTargetRowIdx + dragRows.length - 1 과 같으면 true 를 리턴해야 한다.',
+      'When rowIdx is equal to dragTargetRowIdx + dragRows.length - 1, '
+      'should return true',
       () {
         const int rowIdx = 4;
 
@@ -337,16 +337,13 @@ void main() {
 
     setUp(setDrag);
 
-    test(
-      'rowKey 가 null 이면 false 를 리턴해야 한다.',
-      () {
-        expect(stateManager.isRowBeingDragged(null), isFalse);
-      },
-    );
+    test('When rowKey is null, should return false', () {
+      expect(stateManager.isRowBeingDragged(null), isFalse);
+    });
 
     test(
-      'isDragging 이 true 인 상태에서, '
-      'rowKey 가 dragRows 에 포함 되어 있지 않으면 false 를 리턴해야 한다.',
+      'When isDragging is true and rowKey is not in dragRows, '
+      'should return false',
       () {
         stateManager.setIsDraggingRow(true);
         setDrag();
@@ -358,7 +355,7 @@ void main() {
     );
 
     test(
-      'rowKey 가 dragRows 에 포함 되어 있으면 true 를 리턴해야 한다.',
+      'When rowKey is in dragRows, should return true',
       () {
         stateManager.setIsDraggingRow(true);
         setDrag();
@@ -371,8 +368,8 @@ void main() {
     );
 
     test(
-      'rowKey 가 dragRows 에 포함 되어 있어도, '
-      'isDraggingRow 가 false 면 false 를 리턴해야 한다.',
+      'When rowKey is in dragRows but isDraggingRow is false, '
+      'should return false',
       () {
         stateManager.setIsDraggingRow(false);
         setDrag();

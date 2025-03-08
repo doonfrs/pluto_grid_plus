@@ -332,7 +332,7 @@ void main() {
       'enableEditingMode = true, '
       'setCurrentCell = true, '
       'setIsEditing = false, '
-      'notifyListener 가 호출 되지 않아야 한다.',
+      'notifyListener should not be called',
       () {
         // given
         buildState(
@@ -355,7 +355,7 @@ void main() {
       'enableEditingMode = true, '
       'setCurrentCell = true, '
       'setIsEditing = false, '
-      'notifyListener 가 호출 되어야 한다.',
+      'notifyListener should be called',
       () {
         // given
         buildState(
@@ -378,7 +378,7 @@ void main() {
       'enableEditingMode = true, '
       'setCurrentCell = false, '
       'setIsEditing = false, '
-      'notifyListener 가 호출 되지 않아야 한다.',
+      'notifyListener should not be called',
       () {
         // given
         buildState(
@@ -401,7 +401,7 @@ void main() {
       'enableEditingMode = true, '
       'setCurrentCell = true, '
       'setIsEditing = true, '
-      'notifyListener 가 호출 되지 않아야 한다.',
+      'notifyListener should not be called',
       () {
         // given
         buildState(
@@ -428,8 +428,8 @@ void main() {
     List<PlutoRow> rows = RowHelper.count(10, columns);
 
     test(
-      'force 가 false(기본값) 일 때, canNotChangeCellValue 가 true 면'
-      'onChanged 콜백이 호출 되지 않아야 한다.',
+      'force is false (default) and canNotChangeCellValue is true, '
+      'onChanged callback should not be called',
       () {
         final mock = MockMethods();
 
@@ -468,8 +468,8 @@ void main() {
     );
 
     test(
-      'force 가 true 일 때, canNotChangeCellValue 가 true 라도'
-      'onChanged 콜백이 호출 되어야 한다.',
+      'force is true and canNotChangeCellValue is true, '
+      'onChanged callback should be called',
       () {
         final mock = MockMethods();
 

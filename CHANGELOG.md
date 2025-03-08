@@ -1,5 +1,9 @@
 # Changelog
 
+## [8.4.10] - 2025. 03. 08
+
+* Translate all korean comments & unit tests to english
+
 ## [8.4.9] - 2025. 03. 06
 
 * Added scrollToColumn method

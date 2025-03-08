@@ -8,7 +8,7 @@ import '../../helper/pluto_widget_test_helper.dart';
 import '../../helper/row_helper.dart';
 
 void main() {
-  group('F3 키 테스트', () {
+  group('F3 Key Test', () {
     List<PlutoColumn> columns;
 
     List<PlutoRow> rows;
@@ -18,7 +18,7 @@ void main() {
     final focusedCell = find.text('header3 value 3');
 
     final withTheCellSelected = PlutoWidgetTestHelper(
-      '3, 3 셀이 선택 된 상태에서',
+      'With the cell selected',
       (tester) async {
         columns = [
           ...ColumnHelper.textColumn('header', count: 10),
@@ -48,8 +48,8 @@ void main() {
     );
 
     withTheCellSelected.test(
-      'F3 키 입력 시 포커스가 header3 컬럼의 필터링 입력 박스로 이동 해야 한다. '
-      '컬럼 필터링 박스로 이동 된 이후에 F3 키를 한번 더 입력하면 필터링 팝업이 호출 되어야 한다.',
+      'When F3 is pressed, the focus should move to the filter input box of the header3 column. '
+      'After moving to the filter input box, pressing F3 again should call the filter popup.',
       (tester) async {
         await tester.sendKeyEvent(LogicalKeyboardKey.f3);
 
@@ -72,8 +72,8 @@ void main() {
     );
 
     withTheCellSelected.test(
-      'F3 키 입력 하여 포커스를 header3 컬럼의 필터링 입력 박스로 이동 후, '
-      '방향키 아래를 입력하면 해당 컬럼의 첫번째 행의 셀로 포커스가 변경 되어야 한다.',
+      'When F3 is pressed to move the focus to the filter input box of the header3 column, '
+      'pressing the down arrow key should change the focus to the first row cell of the column.',
       (tester) async {
         await tester.sendKeyEvent(LogicalKeyboardKey.f3);
 
@@ -102,8 +102,8 @@ void main() {
     );
 
     withTheCellSelected.test(
-      'F3 키 입력 하여 포커스를 header3 컬럼의 필터링 입력 박스로 이동 후, '
-      '엔터키를 입력하면 해당 컬럼의 첫번째 행의 셀로 포커스가 변경 되어야 한다.',
+      'When F3 is pressed to move the focus to the filter input box of the header3 column, '
+      'pressing the Enter key should change the focus to the first row cell of the column.',
       (tester) async {
         await tester.sendKeyEvent(LogicalKeyboardKey.f3);
 
@@ -132,8 +132,8 @@ void main() {
     );
 
     withTheCellSelected.test(
-      'F3 키 입력 하여 포커스를 header3 컬럼의 필터링 입력 박스로 이동 후, '
-      'ESC 키를 입력하면 기존 셀로 포커스가 변경 되어야 한다.',
+      'When F3 is pressed to move the focus to the filter input box of the header3 column, '
+      'pressing the ESC key should change the focus to the original cell.',
       (tester) async {
         await tester.sendKeyEvent(LogicalKeyboardKey.f3);
 
@@ -162,7 +162,7 @@ void main() {
     );
 
     withTheCellSelected.test(
-      '컬럼 필터 영역이 비 활성화 된 상태에서 F3 키를 입력하면 포커스가 이동 되지 않아야 한다.',
+      'When the column filter area is disabled, pressing F3 should not move the focus.',
       (tester) async {
         stateManager.setShowColumnFilter(false);
 
@@ -179,7 +179,7 @@ void main() {
     );
 
     withTheCellSelected.test(
-      '선택 된 셀이 없는 상태에서 F3 키를 호출하면 포커스가 이동 되지 않아야 한다.',
+      'When there is no selected cell, pressing F3 should not move the focus.',
       (tester) async {
         stateManager.clearCurrentCell();
 

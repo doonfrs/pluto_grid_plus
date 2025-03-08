@@ -110,8 +110,8 @@ void main() {
     ),
     depth: 1,
   ).test(
-    'expandedColumn 가 true 이고 depth 가 1 이면, '
-    'PlutoBaseColumn 의 columnTitleHeight 이 columnHeight * 2 이어야 한다.',
+    'When expandedColumn is true and depth is 1, '
+    'PlutoBaseColumn columnTitleHeight should be columnHeight * 2',
     (tester) async {
       final baseColumn = find.byType(PlutoBaseColumn);
 
@@ -135,8 +135,8 @@ void main() {
     ),
     depth: 3,
   ).test(
-    'expandedColumn 가 true 이고 depth 가 3 이면, '
-    'PlutoBaseColumn 의 columnTitleHeight 이 columnHeight * 4 이어야 한다.',
+    'When expandedColumn is true and depth is 3, '
+    'PlutoBaseColumn columnTitleHeight should be columnHeight * 4',
     (tester) async {
       final baseColumn = find.byType(PlutoBaseColumn);
 
@@ -160,8 +160,8 @@ void main() {
     ),
     depth: 1,
   ).test(
-    'expandedColumn 가 false 이면, '
-    'group 의 title 이 출력 되어야 한다.',
+    'When expandedColumn is false, '
+    'group title should be displayed',
     (tester) async {
       final groupTitle = find.text('column group title');
 
@@ -184,8 +184,8 @@ void main() {
     ),
     depth: 3,
   ).test(
-    'expandedColumn 가 false 이고 depth 가 3 이면, '
-    'group 의 title 위젯의 높이가 3 * columnHeight 로 출력 되어야 한다.',
+    'When expandedColumn is false and depth is 3, '
+    'group title widget height should be 3 * columnHeight',
     (tester) async {
       final groupTitle = find.text('column group title');
 
@@ -217,8 +217,8 @@ void main() {
     ),
     depth: 1,
   ).test(
-    'expandedColumn 가 true 이면, '
-    'group 의 title 이 출력되지 않아야 한다.',
+    'When expandedColumn is true, '
+    'group title should not be displayed',
     (tester) async {
       final groupTitle = find.text('column group title');
 
@@ -261,7 +261,7 @@ void main() {
     ),
     depth: 4,
   ).test(
-    'expandedColumn 인 group b-2 만 제외하고 title 이 모두 출력 되어야 한다.',
+    'All titles should be displayed except for expandedColumn group b-2',
     (tester) async {
       expect(find.text('main group'), findsOneWidget);
       expect(find.text('group a'), findsOneWidget);

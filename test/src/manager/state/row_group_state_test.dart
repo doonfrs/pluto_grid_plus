@@ -27,25 +27,27 @@ void main() {
   }
 
   group('No delegate', () {
-    test('delegate 가 없으면 hasRowGroups 가 false 를 리턴 해야 한다.', () {
+    test('If there is no delegate, hasRowGroups should return false.', () {
       final stateManager = createStateManager(columns: [], rows: []);
 
       expect(stateManager.hasRowGroups, false);
     });
 
-    test('delegate 가 없으면 enabledRowGroups 가 false 를 리턴 해야 한다.', () {
+    test('If there is no delegate, enabledRowGroups should return false.', () {
       final stateManager = createStateManager(columns: [], rows: []);
 
       expect(stateManager.enabledRowGroups, false);
     });
 
-    test('delegate 가 없으면 rowGroupDelegate 가 null 를 리턴 해야 한다.', () {
+    test('If there is no delegate, rowGroupDelegate should return null.', () {
       final stateManager = createStateManager(columns: [], rows: []);
 
       expect(stateManager.rowGroupDelegate, null);
     });
 
-    test('iterateMainRowGroup 는 5개의 행을 리턴해야 한다.', () {
+    test(
+        'If there is no delegate, iterateMainRowGroup should return an empty list.',
+        () {
       final rows = [
         PlutoRow(cells: {}),
         PlutoRow(cells: {}),
@@ -59,7 +61,7 @@ void main() {
       expect(stateManager.iterateAllMainRowGroup.length, 5);
     });
 
-    group('[그룹행(3 자식), 일반행, 일반행]', () {
+    group('[Group row (3 children), Normal row, Normal row]', () {
       late PlutoGridStateManager stateManager;
 
       late PlutoRow groupedRow;
@@ -96,15 +98,15 @@ void main() {
         stateManager = createStateManager(columns: [], rows: rows);
       });
 
-      test('iterateMainRowGroup.length 는 3을 리턴해야 한다.', () {
+      test('iterateMainRowGroup.length should return 3.', () {
         expect(stateManager.iterateAllMainRowGroup.length, 3);
       });
 
-      test('iterateRowGroup.length 는 1을 리턴해야 한다.', () {
+      test('iterateRowGroup.length should return 1.', () {
         expect(stateManager.iterateAllRowGroup.length, 1);
       });
 
-      test('iterateRowAndGroup.length 는 6을 리턴해야 한다.', () {
+      test('iterateRowAndGroup should return 6.', () {
         final rowAndGroup = stateManager.iterateAllRowAndGroup;
         expect(rowAndGroup.length, 6);
         expect(rowAndGroup.elementAt(0).sortIdx, 0);
@@ -115,11 +117,11 @@ void main() {
         expect(rowAndGroup.elementAt(5).sortIdx, 2);
       });
 
-      test('iterateRow.length 는 5을 리턴해야 한다.', () {
+      test('iterateRow.length should return 5.', () {
         expect(stateManager.iterateAllRow.length, 5);
       });
 
-      test('refRows 의 행은 isMainRow 가 true 를 리턴해야 한다.', () {
+      test('refRows should return 3.', () {
         final List<bool> result = [];
 
         addResult(e) => result.add(stateManager.isMainRow(e));
@@ -130,7 +132,7 @@ void main() {
         expect(result, [true, true, true]);
       });
 
-      test('children 의 행은 isMainRow 가 false 를 리턴해야 한다.', () {
+      test('children should return false.', () {
         final List<bool> result = [];
 
         addResult(e) => result.add(stateManager.isMainRow(e));
@@ -141,7 +143,7 @@ void main() {
         expect(result, [false, false, false]);
       });
 
-      test('refRows 의 행은 isNotMainGroupedRow 가 false 를 리턴해야 한다.', () {
+      test('refRows should return false.', () {
         final List<bool> result = [];
 
         addResult(e) => result.add(stateManager.isNotMainGroupedRow(e));
@@ -152,7 +154,7 @@ void main() {
         expect(result, [false, false, false]);
       });
 
-      test('children 의 행은 isNotMainGroupedRow 가 true 를 리턴해야 한다.', () {
+      test('children should return true.', () {
         final List<bool> result = [];
 
         addResult(e) => result.add(stateManager.isNotMainGroupedRow(e));
@@ -163,7 +165,7 @@ void main() {
         expect(result, [true, true, true]);
       });
 
-      test('children 의 행은 isExpandedGroupedRow 가 false 를 리턴해야 한다.', () {
+      test('children should return false.', () {
         final List<bool> result = [];
 
         addResult(e) => result.add(stateManager.isExpandedGroupedRow(e));
@@ -175,24 +177,20 @@ void main() {
       });
 
       test(
-        'groupedRow 의 expanded 를 true 로 설정하면, '
-        'isExpandedGroupedRow 가 true 를 리턴해야 한다.',
-        () {
-          groupedRow.type.group.setExpanded(true);
+          'If groupedRow is expanded, isExpandedGroupedRow should return true.',
+          () {
+        groupedRow.type.group.setExpanded(true);
 
-          expect(stateManager.isExpandedGroupedRow(groupedRow), true);
-        },
-      );
+        expect(stateManager.isExpandedGroupedRow(groupedRow), true);
+      });
 
       test(
-        'groupedRow 의 expanded 를 false 로 설정하면, '
-        'isExpandedGroupedRow 가 false 를 리턴해야 한다.',
-        () {
-          groupedRow.type.group.setExpanded(false);
+          'If groupedRow is not expanded, isExpandedGroupedRow should return false.',
+          () {
+        groupedRow.type.group.setExpanded(false);
 
-          expect(stateManager.isExpandedGroupedRow(groupedRow), false);
-        },
-      );
+        expect(stateManager.isExpandedGroupedRow(groupedRow), false);
+      });
     });
   });
 
@@ -277,53 +275,55 @@ void main() {
       ]));
     });
 
-    test('hasRowGroups 이 true 를 리턴해야 한다.', () {
+    test('When there is a row group, return true.', () {
       expect(stateManager.hasRowGroups, true);
     });
 
-    test('enabledRowGroups 이 true 를 리턴해야 한다.', () {
+    test('When there is a row group, return true.', () {
       expect(stateManager.enabledRowGroups, true);
     });
 
-    test('rowGroupDelegate 는 PlutoRowGroupByColumnDelegate 이어야 한다.', () {
+    test('When there is a row group, return true.', () {
       expect(
         stateManager.rowGroupDelegate is PlutoRowGroupByColumnDelegate,
         true,
       );
     });
 
-    test('iterateMainRowGroup 가 2개의 행을 리턴해야 한다.', () {
+    test('When there a  re no row groups, return an empty list.', () {
       final mainRowGroup = stateManager.iterateAllMainRowGroup.toList();
 
       expect(mainRowGroup.length, 2);
     });
 
-    test('iterateRowGroup 가 6개의 행을 리턴해야 한다.', () {
+    test('When there is a row group, return 6 rows.', () {
       final mainRowGroup = stateManager.iterateAllRowGroup.toList();
 
       expect(mainRowGroup.length, 6);
     });
 
-    test('iterateRowAndGroup 가 11개의 행을 리턴해야 한다.', () {
+    test('When there is a row group, return 11 rows.', () {
       final mainRowGroup = stateManager.iterateAllRowAndGroup.toList();
 
       expect(mainRowGroup.length, 11);
     });
 
-    test('iterateRow 가 5개의 행을 리턴해야 한다.', () {
+    test('When there is a row group, return 5 rows.', () {
       final mainRowGroup = stateManager.iterateAllRow.toList();
 
       expect(mainRowGroup.length, 5);
     });
 
-    test('전체 컬럼을 지우고 새 컬럼을 추가하면 기존 행의 셀이 추가 되어야 한다.', () {
+    test(
+        'If all columns are removed and new columns are added, the cells of the existing rows should be added.',
+        () {
       stateManager.removeColumns(columns);
 
       expect(stateManager.refColumns.originalList.length, 0);
       expect(stateManager.refRows.originalList.length, 5);
 
       for (final row in stateManager.refRows.originalList) {
-        // 그룹 된 컬럼이 삭제되어 모든 행의 parent 가 null 로 초기화 되어야 한다.
+        // The parent of the grouped column should be null.
         expect(row.parent, null);
         expect(row.cells['column1'], null);
         expect(row.cells['column2'], null);
@@ -352,7 +352,7 @@ void main() {
       }
     });
 
-    test('첫번째 행을 expand 하면 refRows 는 4개의 행을 리턴해야 한다.', () {
+    test('If the first row is expanded, refRows should return 4 rows.', () {
       final firstRowGroup = stateManager.refRows.first;
 
       stateManager.toggleExpandedRowGroup(rowGroup: firstRowGroup);
@@ -361,7 +361,9 @@ void main() {
       expect(stateManager.refRows.length, 4);
     });
 
-    test('첫번째 행을 expand 하고 다시 collapse 하면 refRows 는 2개의 행을 리턴해야 한다.', () {
+    test(
+        'If the first row is expanded and then collapsed, refRows should return 2 rows.',
+        () {
       final firstRowGroup = stateManager.refRows.first;
 
       stateManager.toggleExpandedRowGroup(rowGroup: firstRowGroup);
@@ -376,8 +378,8 @@ void main() {
     });
 
     test(
-      '첫번째 행을 expand 하고 펼처진 두번째 행을 expand 하면, '
-      'refRows 는 5개의 행을 리턴해야 한다.',
+      'First row and its first child are expanded, '
+      'refRows should return 5 rows.',
       () {
         final firstRowGroup = stateManager.refRows.first;
         final firstRowGroupFirstChild = firstRowGroup.type.group.children.first;
@@ -392,9 +394,8 @@ void main() {
     );
 
     test(
-      '첫번째 행과 그 첫번째 자식을 expand 하고 첫번째 행을 다시 collapse 하면, '
-      'refRows 는 2개의 행을 리턴해야 한다.'
-      '그리고 다시 첫번째 행을 expand 하면 이미 펼쳐져 있던 첫번째 자식은 함께 펼쳐져야 한다.',
+      'First row and its first child are expanded, '
+      'refRows should return 2 rows.',
       () {
         final firstRowGroup = stateManager.refRows.first;
         final firstRowGroupFirstChild = firstRowGroup.type.group.children.first;
@@ -416,7 +417,7 @@ void main() {
       },
     );
 
-    test('refRows 가 설정한 2개의 컬럼으로 그룹핑 되어야 한다.', () {
+    test('refRows should be grouped by the 2 columns set.', () {
       final firstGroupField = columns[0].field;
 
       expect(stateManager.refRows.length, 2);
@@ -428,14 +429,14 @@ void main() {
       expect(stateManager.refRows[1].cells[firstGroupField]!.value, 'B');
     });
 
-    group('첫번째 그룹.', () {
+    group('First group.', () {
       late FilteredList<PlutoRow> aGroupChildren;
 
       setUp(() {
         aGroupChildren = stateManager.refRows[0].type.group.children;
       });
 
-      test('자식들이 두번째 컬럼으로 그룹핑 되어야 한다.', () {
+      test('Children should be grouped by the second column.', () {
         final secondGroupField = columns[1].field;
 
         expect(aGroupChildren.length, 2);
@@ -447,7 +448,7 @@ void main() {
         expect(aGroupChildren[1].cells[secondGroupField]!.value, '2');
       });
 
-      test('자식들은 각 1개의 자식을 가지고 있어야 한다.', () {
+      test('Children should have 1 child each.', () {
         final normalColumnField = columns[2].field;
 
         final aGroupFirstChildren = aGroupChildren[0].type.group.children;
@@ -465,14 +466,14 @@ void main() {
       });
     });
 
-    group('두번째 그룹.', () {
+    group('Second group.', () {
       late FilteredList<PlutoRow> bGroupChildren;
 
       setUp(() {
         bGroupChildren = stateManager.refRows[1].type.group.children;
       });
 
-      test('자식들이 두번째 컬럼으로 그룹핑 되어야 한다.', () {
+      test('Children should be grouped by the second column.', () {
         final secondGroupField = columns[1].field;
 
         expect(bGroupChildren.length, 2);
@@ -484,7 +485,7 @@ void main() {
         expect(bGroupChildren[1].cells[secondGroupField]!.value, '2');
       });
 
-      test('자식들은 각 2개, 1개의 자식을 가지고 있어야 한다.', () {
+      test('Children should have 2 children each.', () {
         final normalColumnField = columns[2].field;
 
         final bGroupFirstChildren = bGroupChildren[0].type.group.children;
@@ -504,24 +505,28 @@ void main() {
       });
     });
 
-    test('column1 을 A 값으로 필터링 하면 1개의 행이 리턴 되어야 한다.', () {
+    test('If column1 is filtered by A value, 1 row should be returned.', () {
       stateManager.setFilter((row) => row.cells['column1']!.value == 'A');
 
       expect(stateManager.refRows.length, 1);
     });
 
-    test('첫번째 행을 펼친 후 column1 을 A 값으로 필터링 하면 3개의 행이 리턴 되어야 한다.', () {
+    test(
+        'If the first row is expanded and then filtered by column1 value A, 3 rows should be returned.',
+        () {
       final firstRowGroup = stateManager.refRows.first;
 
       stateManager.toggleExpandedRowGroup(rowGroup: firstRowGroup);
 
       stateManager.setFilter((row) => row.cells['column1']!.value == 'A');
 
-      // 첫번째 행 + 첫번째 행의 2개의 자식 = 3개
+      // First row + first row's 2 children = 3 rows
       expect(stateManager.refRows.length, 3);
     });
 
-    test('두개의 행을 모두 펼친 후 column2 을 1 값으로 필터링 하면 4개의 행이 리턴 되어야 한다.', () {
+    test(
+        'If two rows are expanded and the  n filtered by column2 value 1, 4 rows should be returned.',
+        () {
       final firstRowGroup = stateManager.refRows[0];
       final secondRowGroup = stateManager.refRows[1];
 
@@ -534,7 +539,9 @@ void main() {
       expect(stateManager.refRows.length, 4);
     });
 
-    test('column1 을 descending 정렬 하면 두개의 행의 위치가 바뀌어야 한다.', () {
+    test(
+        'If column1 is sorted in descending order, the order of the two rows should be reversed.',
+        () {
       expect(stateManager.refRows[0].cells['column1']!.value, 'A');
       expect(stateManager.refRows[1].cells['column1']!.value, 'B');
 
@@ -548,8 +555,7 @@ void main() {
     });
 
     test(
-      '두번째 행을 모두 펼친 후 column3 를 descending 정렬 하면, '
-      '두번째 행의 2개의 자식의 위치가 바뀌어야 한다.',
+      'If the second row is expanded and then sorted in descending order, the order of the two children should be reversed.',
       () {
         final secondRowGroup = stateManager.refRows[1];
 
@@ -586,7 +592,9 @@ void main() {
       },
     );
 
-    test('첫번째 행에 column2 의 값이 3인 행을 추가 하면 첫번째 행의 자식은 3개가 되어야 한다.', () {
+    test(
+        'If a row with column2 value 3 is added to the first row, the first row should have 3 children.',
+        () {
       final rowToAdd = PlutoRow(cells: {
         'column1': PlutoCell(value: 'A'),
         'column2': PlutoCell(value: '3'),
@@ -600,7 +608,9 @@ void main() {
       expect(stateManager.refRows.first.type.group.children.length, 3);
     });
 
-    test('첫번째 행에 column2 의 값이 3인 행을 추가 하면 추가 된 자식의 parent 가 설정 되어야 한다.', () {
+    test(
+        'Adding a row with column2 value 3 to the first row should set the parent of the added child.',
+        () {
       final rowToAdd = PlutoRow(cells: {
         'column1': PlutoCell(value: 'A'),
         'column2': PlutoCell(value: '3'),
@@ -614,8 +624,7 @@ void main() {
     });
 
     test(
-      '정렬 된 상태에서 첫번째 행에 column2 의 값이 3인 행을 추가 하면, '
-      '추가 된 자식의 parent 가 설정 되어야 한다.',
+      'Adding a row with column2 value 3 to the first row should set the parent of the added child.',
       () {
         final rowToAdd = PlutoRow(cells: {
           'column1': PlutoCell(value: 'A'),
@@ -633,8 +642,8 @@ void main() {
     );
 
     test(
-      'prependRows 로 column2 의 값이 3인 행을 추가 하면, '
-      '추가 된 자식의 parent 가 설정 되어야 한다.',
+      'prependRows with column2 value 3, '
+      'added child should have parent set.',
       () {
         final rowToAdd = PlutoRow(cells: {
           'column1': PlutoCell(value: 'A'),
@@ -652,8 +661,8 @@ void main() {
     );
 
     test(
-      'appendRows 로 column2 의 값이 3인 행을 추가 하면, '
-      '추가 된 자식의 parent 가 설정 되어야 한다.',
+      'appendRows with column2 value 3, '
+      'added child should have parent set.',
       () {
         final rowToAdd = PlutoRow(cells: {
           'column1': PlutoCell(value: 'A'),
@@ -670,7 +679,7 @@ void main() {
       },
     );
 
-    test('첫번째 행을 삭제 하면 그 자식들도 모두 삭제 되어야 한다.', () {
+    test('First row and its children should be removed.', () {
       final firstRowGroup = stateManager.refRows.first;
 
       expect(stateManager.iterateAllRowAndGroup.length, 11);
@@ -680,7 +689,7 @@ void main() {
       expect(stateManager.iterateAllRowAndGroup.length, 6);
     });
 
-    test('column1 을 삭제 하면 column2 로 다시 그룹핑 되어야 한다.', () {
+    test('If column1 is removed, column2 should be grouped again.', () {
       final firstColumn = stateManager.refColumns.first;
 
       stateManager.removeColumns([firstColumn]);
@@ -700,7 +709,7 @@ void main() {
       }
     });
 
-    test('column1 을 숨기면 하면 column2 로 다시 그룹핑 되어야 한다.', () {
+    test('If column1 is hidden, column2 should be grouped again.', () {
       final firstColumn = stateManager.refColumns.first;
 
       stateManager.hideColumn(firstColumn, true);
@@ -720,7 +729,9 @@ void main() {
       }
     });
 
-    test('column1 을 숨기고 다시 해제 하면 column1 로 다시 그룹핑 되어야 한다.', () {
+    test(
+        'If column1 is hidden and then unhidden, column1 should be grouped again.',
+        () {
       final firstColumn = stateManager.refColumns.first;
 
       stateManager.hideColumn(firstColumn, true);
@@ -755,7 +766,7 @@ void main() {
     });
 
     group('insertRows', () {
-      test('index 0 에 (C, 1, 006) 을 추가.', () {
+      test('When inserting a row at index 0, the row should be added.', () {
         /// Before
         /// 0. A [V]
         /// 1. B
@@ -780,7 +791,7 @@ void main() {
         expect(GROUP_C_1.type.group.children.first.parent, GROUP_C_1);
       });
 
-      test('index 2 에 (C, 1, 006) 을 추가.', () {
+      test('Inserting row at index 2 should add the row.', () {
         /// Before
         /// 0. A
         /// 1. B
@@ -806,7 +817,7 @@ void main() {
         expect(GROUP_C_1.type.group.children.first.parent, GROUP_C_1);
       });
 
-      test('index 1 에 (C, 1, 006) 을 추가.', () {
+      test('Inserting row at index 1 should add the row.', () {
         /// Before
         /// 0. A
         /// 1. B [V]
@@ -852,7 +863,7 @@ void main() {
         expect(GROUP_C_1.type.group.children.first.parent, GROUP_C_1);
       });
 
-      test('index 5 에 (C, 1, 006) 을 추가.', () {
+      test('Inserting row at index 5 should add the row.', () {
         /// Before
         /// 0. A
         /// 1. B
@@ -890,7 +901,7 @@ void main() {
         expect(stateManager.refRows[5].cells['column1']!.value, 'C');
       });
 
-      test('index 5 에 (B, 3, 006) 을 추가.', () {
+      test('Inserting row at index 5 should add the row.', () {
         /// Before
         /// 0. A
         /// 1. B
@@ -921,7 +932,7 @@ void main() {
         expect(stateManager.refRows[5].cells['column2']!.value, '3');
       });
 
-      test('index 6 에 (B, 1, 006) 을 추가.', () {
+      test('Inserting row at index 6 should add the row.', () {
         /// Before
         /// 0. A
         /// 1. B
@@ -955,7 +966,7 @@ void main() {
         expect(stateManager.refRows[6].cells['column2']!.value, '2');
       });
 
-      test('index 1 에 (C, 1, 006), (B, 3, 007) 을 추가', () {
+      test('Inserting rows at index 1 should add the rows.', () {
         /// Before
         /// 0. A
         /// 1. B [V]
@@ -1010,7 +1021,7 @@ void main() {
         expect(GROUP_B_3.type.group.children.first.parent, GROUP_B_3);
       });
 
-      test('insert 5 에 (C, 2, 006), (C, 3, 007) 을 추가.', () {
+      test('Inserting rows at index 5 should add the rows.', () {
         /// Before
         /// 0. A
         /// 1. B
@@ -1055,8 +1066,7 @@ void main() {
       });
 
       test(
-        'Column1 을 Descending 정렬 상태에서 index 5 에, '
-        '(C, 1, 006), (D, 1, 007) 을 추가.',
+        'Column1 to be Descending sorted, insert 5 with (C, 1, 006), (D, 1, 007).',
         () {
           /// Before
           /// 0. B
@@ -1104,8 +1114,7 @@ void main() {
       );
 
       test(
-        'Column1 을 Descending 정렬 상태에서 insert 2 에, '
-        '(C, 1, 006), (C, 3, 007) 을 추가.',
+        'Column1 to be Descending sorted, insert 2 with (C, 1, 006), (C, 3, 007).',
         () {
           /// Before
           /// 0. B
@@ -1162,7 +1171,7 @@ void main() {
     });
 
     group('prependRows', () {
-      test('(C, 1, 006) 을 추가.', () {
+      test('Adding row (C, 1, 006) should add the row.', () {
         /// Before
         /// 0. A
         /// 1. B
@@ -1183,7 +1192,7 @@ void main() {
         expect(GROUP_C_1_006.parent?.parent, GROUP_C);
       });
 
-      test('(B, 2, 006) 을 추가.', () {
+      test('Adding row (B, 2, 006) should add the row.', () {
         /// Before
         /// 0. A
         /// 1. B
@@ -1203,7 +1212,9 @@ void main() {
         expect(GROUP_B_2_006.cells['column3']!.value, '006');
       });
 
-      test('(A, 1, 006), (B, 1, 007), (C, 1, 008) 을 추가.', () {
+      test(
+          'Adding rows (A, 1, 006), (B, 1, 007), (C, 1, 008) should add the rows.',
+          () {
         /// Before
         /// 0. A
         /// 1. B
@@ -1243,7 +1254,7 @@ void main() {
     });
 
     group('appendRows', () {
-      test('(C, 1, 006) 을 추가.', () {
+      test('Adding row (C, 1, 006) should add the row.', () {
         /// Before
         /// 0. A
         /// 1. B
@@ -1262,7 +1273,9 @@ void main() {
         expect(GROUP_C_1_006.cells['column3']!.value, '006');
       });
 
-      test('(B, 3, 006), (C, 1, 007), (C, 2, 008) 을 추가.', () {
+      test(
+          'Adding rows (B, 3, 006), (C, 1, 007), (C, 2, 008) should add the rows.',
+          () {
         /// Before
         /// 0. A
         /// 1. B
@@ -1297,7 +1310,7 @@ void main() {
     });
 
     group('removeRows', () {
-      test('A 그룹의 001 을 삭제하면 A 그룹의 1 그룹과 함께 삭제 되어야 한다.', () {
+      test('Removing row 001 should remove the row.', () {
         /// A - 1 - 001
         ///   - 2 - 002
         /// B - 1 - 003, 004
@@ -1320,7 +1333,7 @@ void main() {
         );
       });
 
-      test('B 그룹의 003 을 삭제하면 003 만 삭제 되어야 한다.', () {
+      test('Removing row 003 should remove the row.', () {
         /// A - 1 - 001
         ///   - 2 - 002
         /// B - 1 - 003, 004
@@ -1344,7 +1357,7 @@ void main() {
         );
       });
 
-      test('B 그룹의 003, 004 을 삭제하면 B_1 과 함께 삭제 되어야 한다.', () {
+      test('Removing rows 003, 004 should remove the rows.', () {
         /// A - 1 - 001
         ///   - 2 - 002
         /// B - 1 - 003, 004
@@ -1383,7 +1396,7 @@ void main() {
   ///   - G220
   ///     - R221
   ///     - R222
-  group('최대 3 뎁스로 그룹화 - PlutoRowGroupTreeDelegate', () {
+  group('Grouping up to 3 levels - PlutoRowGroupTreeDelegate', () {
     late List<PlutoColumn> columns;
 
     late List<PlutoRow> rows;
@@ -1485,41 +1498,41 @@ void main() {
       );
     });
 
-    test('hasRowGroups 가 true 를 리턴해야 한다.', () {
+    test('When there is a row group, return true.', () {
       expect(stateManager.hasRowGroups, true);
     });
 
-    test('enabledRowGroups 가 true 를 리턴해야 한다.', () {
+    test('When there is a row group, return true.', () {
       expect(stateManager.enabledRowGroups, true);
     });
 
-    test('rowGroupDelegate 가 PlutoRowGroupTreeDelegate 이어야 한다.', () {
+    test('When there is a row group, return PlutoRowGroupTreeDelegate.', () {
       expect(stateManager.rowGroupDelegate is PlutoRowGroupTreeDelegate, true);
     });
 
-    test('iterateMainRowGroup 가 2개 행을 리턴해야 한다.', () {
+    test('When there is a row group, return 2 rows.', () {
       expect(stateManager.iterateAllMainRowGroup.length, 2);
     });
 
-    test('iterateRowGroup 가 4개 행을 리턴해야 한다.', () {
+    test('When there is a row group, return 4 rows.', () {
       expect(stateManager.iterateAllRowGroup.length, 4);
     });
 
-    test('iterateRowAndGroup 가 11개 행을 리턴해야 한다.', () {
+    test('When there is a row group, return 11 rows.', () {
       expect(stateManager.iterateAllRowAndGroup.length, 11);
     });
 
-    test('iterateRow 가 7개 행을 리턴해야 한다.', () {
+    test('When there is a row group, return 7 rows.', () {
       expect(stateManager.iterateAllRow.length, 7);
     });
 
-    test('refRows 의 두개의 행이 isMainRow true 를 반환해야 한다.', () {
+    test('When there is a row group, return 2 rows.', () {
       expect(stateManager.refRows.length, 2);
       expect(stateManager.isMainRow(stateManager.refRows[0]), true);
       expect(stateManager.isMainRow(stateManager.refRows[1]), true);
     });
 
-    test('계층에 맞게 parent 가 설정 되어야 한다.', () {
+    test('When there is a row group, the parent should be set correctly.', () {
       final G100 = stateManager.refRows[0];
       final G100_CHILDREN = G100.type.group.children;
       expect(G100.parent, null);
@@ -1552,7 +1565,9 @@ void main() {
       expect(G220_CHILDREN[1].parent?.parent, G200);
     });
 
-    test('전체 컬럼을 지우고 새 컬럼을 추가하면 기존 행의 셀이 추가 되어야 한다.', () {
+    test(
+        'When all columns are removed and new columns are added, the cells of the existing rows should be added.',
+        () {
       stateManager.removeColumns(columns);
 
       expect(stateManager.refColumns.originalList.length, 0);
@@ -1608,7 +1623,7 @@ void main() {
     ///     - R221
     ///     - R222
     group('insertAll', () {
-      group('0번에 3뎁스의 그룹 추가.', () {
+      group('Adding a 3-depth group at position 0.', () {
         setUp(() {
           stateManager.insertRows(0, [
             PlutoRow(
@@ -1631,13 +1646,13 @@ void main() {
           ]);
         });
 
-        test('첫번째 행에 G300 이 추가 되어야 한다.', () {
+        test('The first row should have G300 added.', () {
           expect(stateManager.refRows[0].cells['column1']!.value, 'G300');
           expect(stateManager.refRows[1].cells['column1']!.value, 'G100');
           expect(stateManager.refRows[2].cells['column1']!.value, 'G200');
         });
 
-        test('추가 된 행들의 parent 가 설정 되어야 한다.', () {
+        test('The added rows should have their parent set.', () {
           final G300 = stateManager.refRows[0];
           final G310 = G300.type.group.children[0];
           final G320 = G300.type.group.children[1];
@@ -1652,7 +1667,7 @@ void main() {
           expect(G322.parent?.parent, G300);
         });
 
-        test('추가 된 G300의 sortIdx 가 설정 되어야 한다.', () {
+        test('The added G300 should have its sortIdx set.', () {
           final G300 = stateManager.refRows[0];
           final G100 = stateManager.refRows[1];
           final G200 = stateManager.refRows[2];
@@ -1661,7 +1676,7 @@ void main() {
           expect(G200.sortIdx, 2);
         });
 
-        test('G300 을 토글 하면 G310,G320 이 refRows 에 추가 되어야 한다.', () {
+        test('Toggling G300 should add G310 and G320 to refRows.', () {
           final G300 = stateManager.refRows[0];
           expect(G300.cells['column1']!.value, 'G300');
 
@@ -1673,8 +1688,7 @@ void main() {
         });
 
         test(
-          'G300 을 토글 후 1번 인덱스 G310에 G400을 추가하면, '
-          'G400 은 G310 의 부모인 G300 의 자식이 되어야 한다.',
+          'Toggling G300 and adding G400 to the 1st index of G310 should make G400 a child of G310.',
           () {
             final G300 = stateManager.refRows[0];
             stateManager.toggleExpandedRowGroup(rowGroup: G300);
@@ -1700,7 +1714,7 @@ void main() {
             expect(G300.type.group.children[2].sortIdx, 2);
             expect(G300.type.group.children[2].cells['column1']!.value, 'G320');
 
-            /// 다시 300 을 접으면 다음 레벨인 G100, G200 이 위치해야 한다.
+            /// Re-toggling G300 should make G100 and G200 the next level.
             stateManager.toggleExpandedRowGroup(rowGroup: G300);
             expect(stateManager.refRows[0].cells['column1']!.value, 'G300');
             expect(stateManager.refRows[1].cells['column1']!.value, 'G100');
@@ -1709,7 +1723,7 @@ void main() {
         );
 
         test(
-          'G200, G220 을 토글 후 7번 인덱스에 G400 추가하면 마지막 그룹으로 추가 되어야 한다.',
+          'Toggling G200 and G220 and adding G400 to the 7th index should add it as the last group.',
           () {
             final G200 = stateManager.refRows[2];
             final G220 = G200.type.group.children[1];

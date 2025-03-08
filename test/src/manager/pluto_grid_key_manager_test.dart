@@ -86,7 +86,7 @@ void main() {
   );
 
   testWidgets(
-    'Ctrl + C - editing 상태에서는 selectingText 값이 클립보드에 복사 되지 않는다.',
+    'Ctrl + C - when isEditing is true, the currentSelectingText value is not copied to the clipboard.',
     (WidgetTester tester) async {
       // given
       final PlutoGridKeyManager keyManager = PlutoGridKeyManager(
@@ -138,7 +138,7 @@ void main() {
   );
 
   testWidgets(
-    'Ctrl + V - pasteCellValue 가 호출 되어야 한다.',
+    'Ctrl + V - pasteCellValue should be called.',
     (WidgetTester tester) async {
       // given
       final PlutoGridKeyManager keyManager = PlutoGridKeyManager(
@@ -192,7 +192,7 @@ void main() {
   );
 
   testWidgets(
-    'Ctrl + V - currentCell 이 null 이면 pasteCellValue 가 호출 되지 않는다.',
+    'Ctrl + V - currentCell is null, pasteCellValue should not be called.',
     (WidgetTester tester) async {
       // given
       final PlutoGridKeyManager keyManager = PlutoGridKeyManager(
@@ -246,7 +246,7 @@ void main() {
   );
 
   testWidgets(
-    'Ctrl + V - isEditing 이 true 이면 pasteCellValue 가 호출 되지 않는다.',
+    'Ctrl + V - isEditing is true, pasteCellValue should not be called.',
     (WidgetTester tester) async {
       // given
       final PlutoGridKeyManager keyManager = PlutoGridKeyManager(

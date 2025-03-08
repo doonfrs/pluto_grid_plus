@@ -6,7 +6,7 @@ import '../../helper/column_helper.dart';
 import '../../helper/pluto_widget_test_helper.dart';
 import '../../helper/row_helper.dart';
 
-/// 셀 선택 상태 이후의 동작 테스트
+/// Test of behavior after selecting cells
 void main() {
   late PlutoGridStateManager stateManager;
 
@@ -93,7 +93,7 @@ void main() {
     selectingMode: selectingMode,
   );
 
-  group('(0, 1) 부터 (1, 2) 셀 선택', () {
+  group('Select cells from (0, 1) to (1, 2)', () {
     const countTotalRows = 10;
     const currentColumnIdx = 0;
     const currentRowIdx = 1;
@@ -108,8 +108,8 @@ void main() {
       columnIdxToSelect: columnIdxToSelect,
       rowIdxToSelect: rowIdxToSelect,
     ).test(
-      '0번 행에 새로운 행을 추가하면, '
-      '선택 된 셀이 (0, 2), (1, 3) 로 변경 되어야 한다.',
+      'When a new row is added to row 0, '
+      'the selected cell should be (0, 2), (1, 3).',
       (tester) async {
         // before
         expect(stateManager.currentCellPosition!.columnIdx, currentColumnIdx);
@@ -140,8 +140,8 @@ void main() {
       columnIdxToSelect: columnIdxToSelect,
       rowIdxToSelect: rowIdxToSelect,
     ).test(
-      '0번 행을 삭제 하면, '
-      '선택 된 셀이 (0, 0), (1, 1) 로 변경 되어야 한다.',
+      'When row 0 is deleted, '
+      'the selected cell should be (0, 0), (1, 1).',
       (tester) async {
         // before
         expect(stateManager.currentCellPosition!.columnIdx, currentColumnIdx);
@@ -165,7 +165,7 @@ void main() {
     );
   });
 
-  group('전체 셀을 선택', () {
+  group('Select all cells', () {
     const countTotalRows = 10;
     const countTotalColumns = 10;
     const currentColumnIdx = 0;
@@ -182,7 +182,8 @@ void main() {
       columnIdxToSelect: columnIdxToSelect,
       rowIdxToSelect: rowIdxToSelect,
     ).test(
-      '선택 된 행을 마지막 행부터 차례대로 삭제.',
+      'When rows are deleted from the last row, '
+      'the selected rows should be deleted one by one.',
       (tester) async {
         expect(stateManager.rows.length, 10);
 

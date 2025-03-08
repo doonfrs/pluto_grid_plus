@@ -5,7 +5,9 @@ import '../../helper/column_helper.dart';
 
 void main() {
   group('exists', () {
-    test('field 가 columnGroup.fields 리스트에 존재하면 true 를 반환해야 한다.', () {
+    test(
+        'When the field is in the columnGroup.fields list, true should be returned.',
+        () {
       const title = 'title';
 
       const field = 'DUMMY_FIELD';
@@ -23,7 +25,9 @@ void main() {
       );
     });
 
-    test('field 가 columnGroup.fields 리스트에 존재하지 않으면 false 를 반환해야 한다.', () {
+    test(
+        'When the field is not in the columnGroup.fields list, false should be returned.',
+        () {
       const title = 'title';
 
       const field = 'NON_EXISTS_DUMMY_FIELD';
@@ -41,7 +45,9 @@ void main() {
       );
     });
 
-    test('field 가 columnGroup.children 리스트에 존재하면 true 를 반환해야 한다.', () {
+    test(
+        'When the field is in the columnGroup.children list, true should be returned.',
+        () {
       const title = 'title';
 
       const field = 'DUMMY_FIELD';
@@ -61,7 +67,9 @@ void main() {
       );
     });
 
-    test('field 가 columnGroup.children 리스트에 존재하지 않으면 false 를 반환해야 한다.', () {
+    test(
+        'When the field is not in the columnGroup.children list, false should be returned.',
+        () {
       const title = 'title';
 
       const field = 'NON_EXISTS_DUMMY_FIELD';
@@ -81,7 +89,9 @@ void main() {
       );
     });
 
-    test('field 가 columnGroup.children 의 2뎁스 하위에 존재하면 true 를 반환해야 한다.', () {
+    test(
+        'When the field is in the columnGroup.children list of depth 2, true should be returned.',
+        () {
       const title = 'title';
 
       const field = 'DUMMY_FIELD';
@@ -105,7 +115,7 @@ void main() {
   });
 
   group('existsFromList', () {
-    test('column1 필드가 리스트에 존재하면  true 를 리턴해야 한다.', () {
+    test('When the field is in the list, true should be returned.', () {
       const field = 'column1';
 
       final columnGroupList = [
@@ -123,7 +133,7 @@ void main() {
       );
     });
 
-    test('non_exists 필드가 리스트에 존재하지 않으면 false 를 리턴해야 한다.', () {
+    test('When the field is not in the list, false should be returned.', () {
       const field = 'non_exists';
 
       final columnGroupList = [
@@ -143,7 +153,7 @@ void main() {
   });
 
   group('getGroupIfExistsFromList', () {
-    test('column1 필드가 그룹에 존재하면 해당 그룹이 리턴 되어야 한다.', () {
+    test('When the field is in the group, the group should be returned.', () {
       const field = 'column1';
 
       final columnGroup = PlutoColumnGroup(
@@ -166,7 +176,7 @@ void main() {
       );
     });
 
-    test('non_exists 필드가 그룹에 존재하지 않으면 null 이 리턴 되어야 한다.', () {
+    test('When the field is not in the group, null should be returned.', () {
       const field = 'non_exists';
 
       final columnGroupList = [
@@ -186,7 +196,8 @@ void main() {
   });
 
   group('separateLinkedGroup', () {
-    test('columnGroupList 가 empty 면 빈 리스트를 리턴해야 한다.', () {
+    test('When the columnGroupList is empty, an empty list should be returned.',
+        () {
       final columnGroupList = <PlutoColumnGroup>[];
 
       final columns = ColumnHelper.textColumn('column', count: 6, start: 1);
@@ -200,7 +211,7 @@ void main() {
       );
     });
 
-    test('columns 가 empty 면 빈 리스트를 리턴해야 한다.', () {
+    test('When the columns is empty, an empty list should be returned.', () {
       final columnGroupList = <PlutoColumnGroup>[
         PlutoColumnGroup(title: 'title', fields: ['column1', 'column2']),
         PlutoColumnGroup(title: 'title', fields: ['column3', 'column4']),
@@ -219,8 +230,8 @@ void main() {
     });
 
     test(
-      'columns 가 [column1, column2, column3, column4, column5, column6] 이면, '
-      '3개의 PlutoColumnGroupPair 를 리턴해야 한다.',
+      'When the columns is [column1, column2, column3, column4, column5, column6], '
+      '3 PlutoColumnGroupPair should be returned.',
       () {
         final columnGroupList = <PlutoColumnGroup>[
           PlutoColumnGroup(title: 'title', fields: ['column1', 'column2']),
@@ -261,10 +272,8 @@ void main() {
     );
 
     test(
-      'columns 가 [column1, column3, column4, column2, column5, column6] 이면, '
-      '4개의 PlutoColumnGroupPair '
-      '(column1), (column3, column4), (column2), (column5, column6) '
-      '를 리턴해야 한다.',
+      'When the columns is [column1, column3, column4, column2, column5, column6], '
+      '4 PlutoColumnGroupPair should be returned.',
       () {
         final columnGroupList = <PlutoColumnGroup>[
           PlutoColumnGroup(title: 'title', fields: ['column1', 'column2']),
@@ -318,8 +327,8 @@ void main() {
     );
 
     test(
-      'columns 가 [column1, column2, column3, column4, column5, column6] 이고, '
-      '그룹에 column6 이 없으면 column6이 새 그룹에 포함되어 4개의 그룹을 리턴해야 한다.',
+      'When columns is [column1, column2, column3, column4, column5, column6], '
+      'and column6 is not in the group, column6 should be included in a new group and 4 groups should be returned.',
       () {
         final columnGroupList = <PlutoColumnGroup>[
           PlutoColumnGroup(title: 'title', fields: ['column1', 'column2']),
@@ -347,7 +356,7 @@ void main() {
   });
 
   group('maxDepth', () {
-    test('그룹의 깊이가 1인 경우 1을 리턴해야 한다.', () {
+    test('When the depth of the group is 1, 1 should be returned.', () {
       const expectedDepth = 1;
 
       final columnGroupList = [
@@ -362,7 +371,7 @@ void main() {
       );
     });
 
-    test('그룹의 깊이가 2인 경우 2를 리턴해야 한다.', () {
+    test('When the depth of the group is 2, 2 should be returned.', () {
       const expectedDepth = 2;
 
       final columnGroupList = [
@@ -383,7 +392,7 @@ void main() {
       );
     });
 
-    test('그룹의 깊이가 3인 경우 3를 리턴해야 한다.', () {
+    test('When the depth of the group is 3, 3 should be returned.', () {
       const expectedDepth = 3;
 
       final columnGroupList = [
@@ -410,7 +419,7 @@ void main() {
       );
     });
 
-    test('그룹의 깊이가 3인 경우 3를 리턴해야 한다.', () {
+    test('When the depth of the group is 3, 3 should be returned.', () {
       const expectedDepth = 3;
 
       final columnGroupList = [
@@ -437,7 +446,7 @@ void main() {
       );
     });
 
-    test('그룹의 깊이가 4인 경우 4를 리턴해야 한다.', () {
+    test('When the depth of the group is 4, 4 should be returned.', () {
       const expectedDepth = 4;
 
       final columnGroupList = [
@@ -470,7 +479,7 @@ void main() {
       );
     });
 
-    test('그룹의 깊이가 5인 경우 5를 리턴해야 한다.', () {
+    test('When the depth of the group is 5, 5 should be returned.', () {
       const expectedDepth = 5;
 
       final columnGroupList = [

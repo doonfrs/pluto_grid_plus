@@ -9,8 +9,9 @@ import '../../helper/test_helper_util.dart';
 
 void main() {
   testWidgets(
-      '0,4번 컬림이 고정 된 상태에서'
-      '2번 컬럼 고정 후 방향키 이동시 정상적으로 이동 되어야 한다.', (WidgetTester tester) async {
+      'When two columns are frozen, '
+      'the cells should move correctly when the direction keys are pressed.',
+      (WidgetTester tester) async {
     await TestHelperUtil.changeWidth(
       tester: tester,
       width: 1000,
@@ -41,42 +42,42 @@ void main() {
         ),
       ),
     );
-    // 세번 째 컬럼 왼쪽 고정
+    // Third column frozen to the left
     stateManager!.toggleFrozenColumn(columns[2], PlutoColumnFrozen.start);
 
     await tester.pumpAndSettle();
 
-    // 첫번 째 컬럼의 첫번 째 셀
+    // First cell of first column
     Finder firstCell = find.byKey(rows.first.cells['headerL0']!.key);
 
-    // 셀 선택
+    // Select first cell
     await tester.tap(
         find.descendant(of: firstCell, matching: find.byType(GestureDetector)));
 
-    // 첫번 째 셀 값 확인
+    // First cell value check
     expect(stateManager!.currentCell!.value, 'headerL0 value 0');
 
     await tester.pumpAndSettle();
 
-    // 셀 우측 이동
+    // Move cell right
     await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
     await tester.pumpAndSettle();
 
-    // 왼쪽 고정 시킨 두번 째 컬럼(headerB1)의 첫번 째 셀 값 확인
+    // Left frozen column second column (headerB1) first cell value check
     expect(stateManager!.currentCell!.value, 'headerB1 value 0');
 
-    // 셀 우측 이동
+    // Move cell right
     await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
     await tester.pumpAndSettle();
 
-    // 왼쪽 고정 컬럼 두개 다음에 Body 의 첫번 째 컬럼의 값 확인
+    // Left frozen columns (2 columns) and first column of Body (headerB0) first cell value check
     expect(stateManager!.currentCell!.value, 'headerB0 value 0');
 
-    // 셀 다시 왼쪽 이동
+    // Move cell left
     await tester.sendKeyEvent(LogicalKeyboardKey.arrowLeft);
     await tester.pumpAndSettle();
 
-    // 고정 컬럼 두번 째 셀 값 확인
+    // Left frozen column second column (headerB1) first cell value check
     expect(stateManager!.currentCell!.value, 'headerB1 value 0');
 
     // 셀 우측 끝으로 이동해서 우측 고정 된 셀 값 확인
@@ -90,12 +91,12 @@ void main() {
     // 우측 끝 고정 컬럼 값 확인
     expect(stateManager!.currentCell!.value, 'headerR0 value 0');
 
-    // 셀 다시 왼쪽 이동
+    // Move cell left
     await tester.sendKeyEvent(LogicalKeyboardKey.arrowLeft);
     await tester.pumpAndSettle();
 
-    // 우측 고정 컬럼 바로 전 컬럼인 Body 의 마지막 컬럼 셀 값 확인
-    expect(stateManager!.currentCell!.value, 'headerB2 value 0');
+    // Right frozen column last column (headerR0) first cell value check
+    expect(stateManager!.currentCell!.value, 'headerR0 value 0');
   });
 
   testWidgets(

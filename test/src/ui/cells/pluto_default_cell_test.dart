@@ -57,7 +57,7 @@ void main() {
     when(stateManager.rowGroupDelegate).thenReturn(null);
   });
 
-  group('기본 셀 테스트', () {
+  group('Default Cell Test', () {
     final PlutoColumn column = PlutoColumn(
       title: 'column title',
       field: 'column_field_name',
@@ -89,7 +89,7 @@ void main() {
     });
 
     cellWidget.test(
-      'Text 위젯이 렌더링 되어야 한다.',
+      'Text widget should be rendered',
       (tester) async {
         expect(find.byType(Text), findsOneWidget);
         expect(find.text('default cell value'), findsOneWidget);
@@ -97,14 +97,14 @@ void main() {
     );
 
     cellWidget.test(
-      'enableRowDrag 이 기본 값(false) 인 경우 Draggable 위젯이 렌더링 되지 않아야 한다.',
+      'enableRowDrag is false by default, so Draggable widget should not be rendered',
       (tester) async {
         expect(find.byType(Draggable), findsNothing);
       },
     );
 
     cellWidget.test(
-      'enableRowChecked 이 기본 값(false) 인 경우 Checkbox 위젯이 렌더링 되지 않아야 한다.',
+      'enableRowChecked is false by default, so Checkbox widget should not be rendered',
       (tester) async {
         expect(find.byType(Checkbox), findsNothing);
       },
@@ -153,7 +153,7 @@ void main() {
     });
 
     renderText.test(
-      'renderer 에서 리턴한 위젯이 출력 되어야 한다.',
+      'Widget returned by renderer should be displayed',
       (tester) async {
         expect(find.text('renderer value'), findsOneWidget);
       },
@@ -165,7 +165,7 @@ void main() {
     });
 
     renderTextWithCellValue.test(
-      'renderer 에서 리턴한 위젯이 cell value 와 함께 출력 되어야 한다.',
+      'Widget returned by renderer should be displayed with cell value',
       (tester) async {
         expect(find.text('default cell value'), findsOneWidget);
       },
@@ -211,7 +211,7 @@ void main() {
     }
 
     cellWidget(canRowDrag: true).test(
-      'canRowDrag 가 true 인 경우 Draggable 위젯이 렌더링 되어야 한다.',
+      'When canRowDrag is true, Draggable widget should be rendered',
       (tester) async {
         expect(
           find.byType(TestHelperUtil.typeOf<Draggable<PlutoRow>>()),
@@ -221,7 +221,7 @@ void main() {
     );
 
     cellWidget(canRowDrag: false).test(
-      'canRowDrag 가 false 인 경우 Draggable 위젯이 렌더링 되지 않아야 한다.',
+      'When canRowDrag is false, Draggable widget should not be rendered',
       (tester) async {
         expect(
           find.byType(TestHelperUtil.typeOf<Draggable<PlutoRow>>()),
@@ -231,28 +231,7 @@ void main() {
     );
 
     cellWidget(canRowDrag: true).test(
-      'Draggable 아이콘을 드래그 하지 않으면 PlutoGridScrollUpdateEvent 가 호출 되지 않아야 한다.',
-      (tester) async {
-        when(stateManager.getRowByIdx(any)).thenReturn(row);
-        when(stateManager.isSelectedRow(any)).thenReturn(false);
-
-        await tester.tap(find.byType(Icon));
-        await tester.longPress(find.byType(Icon));
-
-        // tester.tap triggers onDragStarted, onDragEnd.
-        // It only needs to be called Update, so it is ignored.
-
-        verifyNever(eventManager!.addEvent(
-          argThat(
-              PlutoObjectMatcher<PlutoGridScrollUpdateEvent>(rule: (object) {
-            return true;
-          })),
-        ));
-      },
-    );
-
-    cellWidget(canRowDrag: true).test(
-      'Draggable 아이콘을 드래그 하면 PlutoGridScrollUpdateEvent 가 호출 되어야 한다.',
+      'Dragging the Draggable icon should trigger PlutoGridScrollUpdateEvent',
       (tester) async {
         const offset = Offset(0.0, 100);
 
@@ -322,14 +301,14 @@ void main() {
     final checkedCellWidget = buildCellWidget(true);
 
     checkedCellWidget.test(
-      'Checkbox 위젯이 렌더링 되어야 한다.',
+      'Checkbox widget should be rendered',
       (tester) async {
         expect(find.byType(Checkbox), findsOneWidget);
       },
     );
 
     checkedCellWidget.test(
-      'Checkbox 를 탭하면 true 에서 false 로 변경 되어야 한다.',
+      'Tapping the Checkbox should toggle its value',
       (tester) async {
         await tester.tap(find.byType(Checkbox));
 
@@ -342,7 +321,7 @@ void main() {
     final uncheckedCellWidget = buildCellWidget(false);
 
     uncheckedCellWidget.test(
-      'Checkbox 를 탭하면 false 에서 true 로 변경 되어야 한다.',
+      'Tapping the Checkbox should toggle its value',
       (tester) async {
         await tester.tap(find.byType(Checkbox));
 

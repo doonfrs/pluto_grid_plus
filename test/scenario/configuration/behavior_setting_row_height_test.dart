@@ -8,7 +8,7 @@ import '../../helper/column_helper.dart';
 import '../../helper/pluto_widget_test_helper.dart';
 import '../../helper/row_helper.dart';
 
-/// 행 높이 설정 후 동작 테스트
+/// Row height setting behavior test
 void main() {
   const PlutoGridSelectingMode selectingMode = PlutoGridSelectingMode.row;
 
@@ -65,8 +65,7 @@ void main() {
     const rowHeight = 90.0;
 
     buildRowsWithSettingRowHeight(rowHeight: rowHeight).test(
-      'rowHeight 를 90으로 설정 하면, '
-      'rowTotalHeight 값이 90 + PlutoDefaultSettings.rowBorderWidth 이어야 한다.',
+      'When rowHeight is set to 90, rowTotalHeight should be 90 + PlutoDefaultSettings.rowBorderWidth',
       (tester) async {
         expect(
           stateManager!.rowTotalHeight,
@@ -80,7 +79,7 @@ void main() {
     const rowHeight = 90.0;
 
     buildRowsWithSettingRowHeight(rowHeight: rowHeight).test(
-      'CellWidget 의 높이가 설정 한 높이 값을 가져야 한다.',
+      'CellWidget height should be equal to the set row height',
       (tester) async {
         final Size cellSize = tester.getSize(find.byType(PlutoBaseCell).first);
 
@@ -97,8 +96,7 @@ void main() {
             type: PlutoColumnType.select(<String>['one', 'two', 'three'])),
       ],
     ).test(
-      'CellWidget 의 높이를 설정하면 selectColumn 의 팝업의 셀 높이는 '
-      '설정한 값으로 설정 되어야 한다.',
+      'When row height is set, select column popup cell height should be equal to the set row height',
       (tester) async {
         // Editing 상태로 설정
         await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
@@ -125,8 +123,7 @@ void main() {
       rowHeight: rowHeight,
       columns: ColumnHelper.dateColumn('header', count: 10),
     ).test(
-      'CellWidget 의 높이를 설정하면 dateColumn 의 팝업의 셀 높이는 '
-      '설정한 값으로 설정 되어야 한다.',
+      'When row height is set, date column popup cell height should be equal to the set row height',
       (tester) async {
         // Editing 상태로 설정
         await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
@@ -162,8 +159,7 @@ void main() {
       rowHeight: rowHeight,
       columns: ColumnHelper.timeColumn('header', count: 10),
     ).test(
-      'CellWidget 의 높이를 설정하면 timeColumn 의 팝업의 셀 높이는 '
-      '설정한 값으로 설정 되어야 한다.',
+      'When row height is set, time column popup cell height should be equal to the set row height',
       (tester) async {
         // Editing 상태로 설정
         await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);

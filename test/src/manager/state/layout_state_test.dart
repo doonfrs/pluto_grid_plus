@@ -8,7 +8,7 @@ import '../../../helper/row_helper.dart';
 import '../../../mock/shared_mocks.mocks.dart';
 
 void main() {
-  group('속성 값 테스트.', () {
+  group('Property value tests.', () {
     late PlutoGridStateManager stateManager;
 
     PlutoGridEventManager eventManager;
@@ -19,7 +19,7 @@ void main() {
 
     makeFrozenColumnByMaxWidth(String description, double maxWidth) {
       return PlutoWidgetTestHelper(
-        '고정 컬럼이 있고 $description',
+        'With frozen columns and $description',
         (tester) async {
           columns = [
             ...ColumnHelper.textColumn(
@@ -61,12 +61,12 @@ void main() {
     }
 
     final hasFrozenColumnAndWidthEnough = makeFrozenColumnByMaxWidth(
-      '넓이가 충분한 경우',
+      'when width is sufficient',
       600,
     );
 
     hasFrozenColumnAndWidthEnough.test(
-      'bodyLeftOffset 값은 왼쪽 고정 컬럼 넓이 + 1 이어야 한다.',
+      'bodyLeftOffset value should be left frozen column width + 1',
       (tester) async {
         expect(
           stateManager.bodyLeftOffset,
@@ -76,7 +76,7 @@ void main() {
     );
 
     hasFrozenColumnAndWidthEnough.test(
-      'bodyRightOffset 값은 우측 고정 컬럼 넓이 + 1 이어야 한다.',
+      'bodyRightOffset value should be right frozen column width + 1',
       (tester) async {
         expect(
           stateManager.bodyRightOffset,
@@ -86,7 +86,7 @@ void main() {
     );
 
     hasFrozenColumnAndWidthEnough.test(
-      'bodyLeftScrollOffset 값이 일치해야 한다.',
+      'bodyLeftScrollOffset value should match',
       (tester) async {
         expect(
           stateManager.bodyLeftScrollOffset,
@@ -99,7 +99,7 @@ void main() {
     );
 
     hasFrozenColumnAndWidthEnough.test(
-      'bodyRightScrollOffset 값이 일치해야 한다.',
+      'bodyRightScrollOffset value should match',
       (tester) async {
         expect(
           stateManager.bodyRightScrollOffset,
@@ -110,12 +110,12 @@ void main() {
     );
 
     final hasFrozenColumnAndWidthNotEnough = makeFrozenColumnByMaxWidth(
-      '넓이가 부족한 경우',
+      'when width is insufficient',
       450,
     );
 
     hasFrozenColumnAndWidthNotEnough.test(
-      'bodyLeftOffset 값은 0 이어야 한다.',
+      'bodyLeftOffset value should be 0',
       (tester) async {
         expect(
           stateManager.bodyLeftOffset,
@@ -125,7 +125,7 @@ void main() {
     );
 
     hasFrozenColumnAndWidthNotEnough.test(
-      'bodyRightOffset 값은 0 이어야 한다.',
+      'bodyRightOffset value should be 0',
       (tester) async {
         expect(
           stateManager.bodyRightOffset,
@@ -135,7 +135,7 @@ void main() {
     );
 
     hasFrozenColumnAndWidthNotEnough.test(
-      'bodyLeftScrollOffset 값이 일치해야 한다.',
+      'bodyLeftScrollOffset value should match',
       (tester) async {
         expect(
           stateManager.bodyLeftScrollOffset,
@@ -148,7 +148,7 @@ void main() {
     );
 
     hasFrozenColumnAndWidthNotEnough.test(
-      'bodyRightScrollOffset 값이 일치해야 한다.',
+      'bodyRightScrollOffset value should match',
       (tester) async {
         expect(
           stateManager.bodyRightScrollOffset,

@@ -38,7 +38,7 @@ void main() {
 
   group('currentCellPosition', () {
     testWidgets(
-        'currentCellPosition - currentCell 이 선택되지 않은 경우 null 을 리턴해야 한다.',
+        'When the current cell is not selected, null should be returned',
         (WidgetTester tester) async {
       // given
       List<PlutoColumn> columns = [
@@ -66,7 +66,8 @@ void main() {
       expect(currentCellPosition, null);
     });
 
-    testWidgets('currentCellPosition - currentCell 이 선택된 경우 선택 된 위치를 리턴해야 한다.',
+    testWidgets(
+        'When the current cell is selected, it should return the selected position',
         (WidgetTester tester) async {
       // given
       List<PlutoColumn> columns = [
@@ -103,8 +104,9 @@ void main() {
     });
 
     testWidgets(
-        'currentCellPosition - currentCell 이 선택된 경우 선택 된 위치를 리턴해야 한다.'
-        '컬럼 고정 상태가 바뀌고, body 최소 넓이가 작은 경우', (WidgetTester tester) async {
+        'When the current cell is selected, it should return the selected position. '
+        'Column frozen state has changed, and body minimum width is small',
+        (WidgetTester tester) async {
       // given
       List<PlutoColumn> columns = [
         ...ColumnHelper.textColumn('body', count: 10, width: 150),
@@ -140,14 +142,15 @@ void main() {
       // when
       expect(currentCellPosition, isNot(null));
       expect(currentCellPosition.rowIdx, 5);
-      // 3번 째 컬럼을 왼쪽으로 옴겨 첫번 째 컬럼이 되었지만 그리드 최소 넓이가 300으로
-      // 충분하지 않아 고정 컬럼이 풀리고 원래 순서대로 노출 된다.
+      // The 3rd column was moved to the left and became the 1st column, but the grid's minimum width is 300,
+      // which is not enough, so the fixed column is unbound and exposed in its original order.
       expect(currentCellPosition.columnIdx, 2);
     });
 
     testWidgets(
-        'currentCellPosition - currentCell 이 선택된 경우 선택 된 위치를 리턴해야 한다.'
-        '컬럼 고정 상태가 바뀌고, body 최소 넓이가 충분한 경우', (WidgetTester tester) async {
+        'When the current cell is selected, it should return the selected position. '
+        'Column frozen state has changed, and body minimum width is sufficient',
+        (WidgetTester tester) async {
       // given
       List<PlutoColumn> columns = [
         ...ColumnHelper.textColumn('body', count: 10, width: 150),
@@ -183,15 +186,16 @@ void main() {
       // when
       expect(currentCellPosition, isNot(null));
       expect(currentCellPosition.rowIdx, 5);
-      // 3번 째 컬럼을 왼쪽으로 고정 후 넓이가 충분하여 첫번 째 컬럼이 된다.
+      // The 3rd column was moved to the left and became the 1st column, but the grid's minimum width is 300,
+      // which is not enough, so the fixed column is unbound and exposed in its original order.
       expect(currentCellPosition.columnIdx, 0);
     });
   });
 
   group('setCurrentCellPosition', () {
     testWidgets(
-      'cellPosition 이 currentCellPosition 과 같다면 '
-      'currentCellPosition 이 업데이트 되지 않아야 한다.',
+      'If cellPosition is the same as currentCellPosition, '
+      'currentCellPosition should not be updated',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -231,8 +235,8 @@ void main() {
     );
 
     testWidgets(
-      'cellPosition 의 columnIdx 가 currentCellPosition 의 columnIdx 와 다르면 '
-      'currentCellPosition 이 업데이트 되어야 한다.',
+      'If cellPosition columnIdx is different from currentCellPosition columnIdx, '
+      'currentCellPosition should be updated',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -280,9 +284,9 @@ void main() {
     );
 
     testWidgets(
-      'cellPosition 의 columnIdx 가 currentCellPosition 의 columnIdx 와 다르지만 '
-      'column 의 index 범위가 아니면 '
-      'currentCellPosition 이 업데이트 되지 않아야 한다.',
+      'If cellPosition columnIdx is different from currentCellPosition columnIdx, '
+      'but column index is out of range, '
+      'currentCellPosition should not be updated',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [

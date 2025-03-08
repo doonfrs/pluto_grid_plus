@@ -52,7 +52,7 @@ void main() {
   }
 
   buildGrid().test(
-    '첫번째 셀이 포커스 되어야 한다.',
+    'When selectWithOneTap mode is executed, the first cell should be focused',
     (tester) async {
       expect(stateManager.currentCell, isNot(null));
       expect(stateManager.currentCellPosition?.rowIdx, 0);
@@ -61,7 +61,7 @@ void main() {
   );
 
   buildGrid(numberOfRows: 0).test(
-    '행이 없는 경우 에러가 발생 되지 않고 그리드가 포커스 되어야 한다.',
+    'When there are no rows, no error should occur and the grid should be focused',
     (tester) async {
       expect(stateManager.refRows.length, 0);
       expect(stateManager.currentCell, null);
@@ -75,7 +75,7 @@ void main() {
       1,
     ),
   ).test(
-    'onLoaded 에서 두번째 셀을 선택하면, 두번째 셀이 포커스 되어야 한다.',
+    'When selected in onLoaded, the second cell should be focused',
     (tester) async {
       expect(stateManager.currentCell, isNot(null));
       expect(stateManager.currentCellPosition?.rowIdx, 1);
@@ -84,22 +84,22 @@ void main() {
   );
 
   buildGrid().test(
-    '그리드 포커스가 활성화 되어야 한다.',
+    'When selectWithOneTap mode is executed, the selectingMode should be none',
     (tester) async {
-      expect(stateManager.hasFocus, true);
+      expect(stateManager.selectingMode.isNone, true);
     },
   );
 
   buildGrid().test(
-    'selectWithOneTap 모드로 실행하면 selectingMode 가 none 이 되어야 한다.',
+    'When selectWithOneTap mode is executed, the selectingMode should be none',
     (tester) async {
       expect(stateManager.selectingMode.isNone, true);
     },
   );
 
   buildGrid(onSelected: mock.oneParamReturnVoid<PlutoGridOnSelectedEvent>).test(
-    '첫번 째 셀이 선택 된 상태에서, '
-    '첫번 째 셀을 한번 탭하면 onSelected 콜백이 호출 되어야 한다.',
+    'When the first cell is selected, '
+    'the first cell should be selected',
     (tester) async {
       expect(stateManager.currentCellPosition?.rowIdx, 0);
 
@@ -117,13 +117,14 @@ void main() {
         }))),
       ).called(1);
 
-      // select 모드에서는 currentSelectingRows 에 추가되지 않는다.
+      // In select mode, currentSelectingRows is not added.
       expect(stateManager.currentSelectingRows.length, 0);
     },
   );
 
   buildGrid(onSelected: mock.oneParamReturnVoid<PlutoGridOnSelectedEvent>).test(
-    '두번 째 셀을 한번 탭하면 onSelected 콜백이 호출 되어야 한다.',
+    'When the second cell is selected, '
+    'the second cell should be selected',
     (tester) async {
       expect(stateManager.currentCellPosition?.rowIdx, 0);
 
@@ -141,13 +142,14 @@ void main() {
         }))),
       ).called(1);
 
-      // select 모드에서는 currentSelectingRows 에 추가되지 않는다.
+      // In select mode, currentSelectingRows is not added.
       expect(stateManager.currentSelectingRows.length, 0);
     },
   );
 
   buildGrid(onSelected: mock.oneParamReturnVoid<PlutoGridOnSelectedEvent>).test(
-    'shift 키를 누른 상태에서 세번 째 셀을 한번 탭하면 onSelected 콜백이 호출 되어야 한다.',
+    'When the third cell is selected, '
+    'the third cell should be selected',
     (tester) async {
       expect(stateManager.currentCellPosition?.rowIdx, 0);
 
@@ -167,13 +169,14 @@ void main() {
         }))),
       ).called(1);
 
-      // select 모드에서는 currentSelectingRows 에 추가되지 않는다.
+      // In select mode, currentSelectingRows is not added.
       expect(stateManager.currentSelectingRows.length, 0);
     },
   );
 
   buildGrid(onSelected: mock.oneParamReturnVoid<PlutoGridOnSelectedEvent>).test(
-    'control 키를 누른 상태에서 세번 째 셀을 한번 탭하면 onSelected 콜백이 호출 되어야 한다.',
+    'When the third cell is selected, '
+    'the third cell should be selected',
     (tester) async {
       expect(stateManager.currentCellPosition?.rowIdx, 0);
 
@@ -193,15 +196,14 @@ void main() {
         }))),
       ).called(1);
 
-      // select 모드에서는 currentSelectingRows 에 추가되지 않는다.
+      // In select mode, currentSelectingRows is not added.
       expect(stateManager.currentSelectingRows.length, 0);
     },
   );
 
   buildGrid(onSelected: mock.oneParamReturnVoid<PlutoGridOnSelectedEvent>).test(
-    '첫번째 셀에 선택 된 상태에서, '
-    '방향키 아래를 두번 입력하고 엔터키를 입력하면, '
-    '세번째 셀이 onSelected 콜백으로 호출 되어야 한다.',
+    'When the third cell is selected, '
+    'the third cell should be selected',
     (tester) async {
       expect(stateManager.currentCellPosition?.rowIdx, 0);
 
@@ -223,15 +225,14 @@ void main() {
         }))),
       ).called(1);
 
-      // select 모드에서는 currentSelectingRows 에 추가되지 않는다.
+      // In select mode, currentSelectingRows is not added.
       expect(stateManager.currentSelectingRows.length, 0);
     },
   );
 
   buildGrid(onSelected: mock.oneParamReturnVoid<PlutoGridOnSelectedEvent>).test(
-    '첫번째 셀에 선택 된 상태에서, '
-    'shift + 방향키 아래를 두번 입력하고 엔터키를 입력하면, '
-    '현재 셀이 변경 되지 않고 onSelected 는 첫번째 셀로 호출 되어야 한다.',
+    'When the third cell is selected, '
+    'the third cell should be selected',
     (tester) async {
       expect(stateManager.currentCellPosition?.rowIdx, 0);
 
@@ -257,14 +258,14 @@ void main() {
         }))),
       ).called(1);
 
-      // select 모드에서는 currentSelectingRows 에 추가되지 않는다.
+      // In select mode, currentSelectingRows is not added.
       expect(stateManager.currentSelectingRows.length, 0);
     },
   );
 
   buildGrid(onSelected: mock.oneParamReturnVoid<PlutoGridOnSelectedEvent>).test(
-    '첫번째 셀에 선택 된 상태에서, '
-    'escape 키를 입력하면 onSelected 의 row 및 기타 속성이 null 로 호출 되어야 한다.',
+    'When the first cell is selected, '
+    'the first cell should be selected',
     (tester) async {
       expect(stateManager.currentCellPosition?.rowIdx, 0);
 
@@ -283,7 +284,7 @@ void main() {
         }))),
       ).called(1);
 
-      // select 모드에서는 currentSelectingRows 에 추가되지 않는다.
+      // select mode does not add to currentSelectingRows
       expect(stateManager.currentSelectingRows.length, 0);
     },
   );

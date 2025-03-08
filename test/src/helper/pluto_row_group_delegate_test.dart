@@ -66,7 +66,7 @@ void main() {
     expect(byColumn.isByColumn, true);
   });
 
-  group('PlutoRowGroupTreeDelegate 최대 3뎁스로 그룹핑.', () {
+  group('PlutoRowGroupTreeDelegate maximum depth of 3 groups.', () {
     late List<PlutoColumn> columns;
 
     late List<PlutoRow> rows;
@@ -138,7 +138,7 @@ void main() {
     }
 
     group('toGroup', () {
-      test('리스트의 length 는 5 를 리턴해야 한다.', () {
+      test('The list length should be 5.', () {
         final delegate = createDelegate();
 
         final groups = delegate.toGroup(rows: rows);
@@ -146,7 +146,7 @@ void main() {
         expect(groups.length, 5);
       });
 
-      test('1, 4 번 행은 그룹이어야 한다.', () {
+      test('The 1st and 4th rows should be groups.', () {
         final delegate = createDelegate();
 
         final groups = delegate.toGroup(rows: rows);
@@ -158,7 +158,7 @@ void main() {
         expect(groups[4].type.isGroup, true);
       });
 
-      test('B 그룹의 첫번째 뎁스의 자식의 길이가 4를 리턴해야 한다.', () {
+      test('The first depth of the B group should return 4.', () {
         final delegate = createDelegate();
 
         final groups = delegate.toGroup(rows: rows);
@@ -166,7 +166,7 @@ void main() {
         expect(groups[1].type.group.children.length, 4);
       });
 
-      test('B 그룹의 행들이 위치에 맞게 parent 가 설정 되어야 한다.', () {
+      test('The rows of the B group should be set correctly.', () {
         final delegate = createDelegate();
 
         final groups = delegate.toGroup(rows: rows);
@@ -201,7 +201,8 @@ void main() {
         expect(B432.parent?.parent?.parent, B);
       });
 
-      test('isEditableCell 이 설정한 showText 조건으로 리턴 되어야 한다.', () {
+      test('The isEditableCell should return true for the showText condition.',
+          () {
         final delegate = createDelegate(
           showText: (cell) => cell.column.field == 'column1',
         );
@@ -214,7 +215,9 @@ void main() {
         expect(delegate.isEditableCell(sampleRow.cells['column2']!), false);
       });
 
-      test('isExpandableCell 이 설정한 resolveColumnDepth 조건으로 리턴 되어야 한다.', () {
+      test(
+          'isExpandableCell should return true for the resolveColumnDepth condition.',
+          () {
         final delegate = createDelegate(
           resolveColumnDepth: (column) => {
             'column1': 0,
@@ -327,27 +330,27 @@ void main() {
       ]);
     });
 
-    test('type 이 byColumn 을 리턴해야 한다.', () {
+    test('type should return byColumn.', () {
       expect(delegate.type, PlutoRowGroupDelegateType.byColumn);
     });
 
-    test('enabled 가 true 를 리턴해야 한다.', () {
+    test('enabled should return true.', () {
       expect(delegate.enabled, true);
     });
 
-    test('visibleColumns.length 가 3 이어야 한다.', () {
+    test('visibleColumns.length should return 3.', () {
       expect(delegate.visibleColumns.length, 3);
     });
 
-    test('visibleColumns 1개 hide 하면 length 가 2 를 리턴해야 한다.', () {
+    test('1  visibleColumns 2  return 2.', () {
       delegate.visibleColumns.first.hide = true;
       expect(delegate.enabled, true);
       expect(delegate.visibleColumns.length, 2);
     });
 
     test(
-      'visibleColumns 를 모두 hide 하면, '
-      'length 가 0 을 리턴하고 enabled 가 false 를 리턴해야 한다.',
+      'When all columns are hidden, '
+      'length should be 0 and enabled should be false.',
       () {
         setHide(c) => c.hide = true;
         delegate.visibleColumns.forEach(setHide);
@@ -356,7 +359,7 @@ void main() {
       },
     );
 
-    test('셀의 행이 그룹이 아니면 isEditableCell 이 true 를 리턴해야 한다.', () {
+    test('The isEditableCell should return true for the non-group row.', () {
       final sampleColumn = columns[3]; // 그룹 컬럼이 아님.
       final sampleRow = PlutoRow(cells: {}, type: PlutoRowType.normal());
       final sampleCell = PlutoCell()
@@ -366,7 +369,7 @@ void main() {
       expect(delegate.isEditableCell(sampleCell), true);
     });
 
-    test('셀의 행이 그룹이면 isEditableCell 이 false 를 리턴해야 한다.', () {
+    test('The isEditableCell should return false for the group row.', () {
       final sampleColumn = columns[1];
       final sampleGroup = PlutoRow(
         cells: {},
@@ -379,7 +382,7 @@ void main() {
       expect(delegate.isEditableCell(sampleCell), false);
     });
 
-    test('셀의 행이 그룹이 아니면 isExpandableCell 이 false 를 리턴해야 한다.', () {
+    test('The isExpandableCell should return false for the non-group row.', () {
       final sampleColumn = columns[1];
       final sampleRow = PlutoRow(cells: {}, type: PlutoRowType.normal());
       final sampleCell = PlutoCell()
@@ -390,8 +393,9 @@ void main() {
     });
 
     test(
-      '셀의 행이 그룹이고 컬럼도 그룹컬럼이며 둘의 depth 가 맞다면, '
-      'isExpandableCell 이 true 를 리턴해야 한다.',
+      'When the row is a group and the column is a group column '
+      'and the depth matches, '
+      'isExpandableCell should return true.',
       () {
         final grouped = delegate.toGroup(rows: rows);
         final sampleColumn = columns[0]; // 0 depth
@@ -405,8 +409,8 @@ void main() {
     );
 
     test(
-      '셀의 행이 그룹이고 컬럼도 그룹컬럼이며 둘의 depth 가 다르면, '
-      'isExpandableCell 이 false 를 리턴해야 한다.',
+      'The isExpandableCell should return false for the group row '
+      'and column depth does not match.',
       () {
         final grouped = delegate.toGroup(rows: rows);
         final sampleColumn = columns[1]; // 1 depth
@@ -419,26 +423,27 @@ void main() {
       },
     );
 
-    test('그룹 설정 된 column1 을 isRowGroupColumn 로 호출하면 true 를 리턴해야 한다.', () {
+    test('The isRowGroupColumn should return true for the group column.', () {
       final sampleColumn = columns[1];
 
       expect(delegate.isRowGroupColumn(sampleColumn), true);
     });
 
-    test('그룹 설정 되지 않은 column4 을 isRowGroupColumn 로 호출하면 false 를 리턴해야 한다.', () {
+    test('The isRowGroupColumn should return false for the non-group column.',
+        () {
       final sampleColumn = columns[4];
 
       expect(delegate.isRowGroupColumn(sampleColumn), false);
     });
 
     group('toGroup', () {
-      test('2개의 그룹행을 리턴해야 한다.', () {
+      test('2 groups should be returned.', () {
         final grouped = delegate.toGroup(rows: rows);
 
         expect(grouped.length, 2);
       });
 
-      test('첫번째 그룹의 자식들의 길이와 parent 가 상태에 맞게 설정 되어야 한다.', () {
+      test('The first group should have the correct children and parent.', () {
         /// (G) A-1-11
         /// (R)      -A111-01
         /// (G)    -12

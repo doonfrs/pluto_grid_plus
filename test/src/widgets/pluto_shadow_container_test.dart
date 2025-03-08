@@ -4,7 +4,7 @@ import 'package:pluto_grid_plus/pluto_grid_plus.dart';
 
 void main() {
   testWidgets(
-    'child 가 렌더링 되어야 한다.',
+    'Child should be rendered',
     (WidgetTester tester) async {
       // given
       const child = Text('child widget');

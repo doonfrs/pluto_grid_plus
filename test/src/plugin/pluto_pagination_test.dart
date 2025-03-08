@@ -54,21 +54,21 @@ void main() {
     }
 
     buildWidget().test(
-      '페이지 번호 1이 렌더링 되어야 한다.',
+      'The page number should be rendered.',
       (tester) async {
         expect(find.text('1'), findsOneWidget);
       },
     );
 
     buildWidget().test(
-      'IconButton 이 4개 렌더링 되어야 한다. (처음, 이전, 다음, 마지막 버튼)',
+      'Four IconButton should be rendered. (First, Previous, Next, Last buttons)',
       (tester) async {
         expect(find.byType(IconButton), findsNWidgets(4));
       },
     );
 
     buildWidget(totalPage: 3).test(
-      'totalPage 가 3인 경우 TextButton 이 3개 렌더링 되어야 한다.',
+      'When totalPage is 3, 3 TextButtons should be rendered.',
       (tester) async {
         expect(find.text('1'), findsOneWidget);
         expect(find.text('2'), findsOneWidget);
@@ -80,7 +80,7 @@ void main() {
     buildWidget(
       totalPage: 10,
     ).test(
-      '넓이가 449 이면 totalPage 가 10인 경우 TextButton 가 1개 렌더링 되어야 한다.',
+      'When width is 449, 1 TextButton should be rendered.',
       (tester) async {
         await TestHelperUtil.changeWidth(
           tester: tester,
@@ -96,7 +96,7 @@ void main() {
     buildWidget(
       totalPage: 10,
     ).test(
-      '넓이가 450 이면 totalPage 가 10인 경우 TextButton 가 3개 렌더링 되어야 한다.',
+      'When width is 450, 3 TextButtons should be rendered.',
       (tester) async {
         await TestHelperUtil.changeWidth(
           tester: tester,
@@ -114,7 +114,7 @@ void main() {
     buildWidget(
       totalPage: 10,
     ).test(
-      '넓이가 549 이면 totalPage 가 10인 경우 TextButton 가 3개 렌더링 되어야 한다.',
+      'When width is 549, 3 TextButtons should be rendered.',
       (tester) async {
         await TestHelperUtil.changeWidth(
           tester: tester,
@@ -132,7 +132,7 @@ void main() {
     buildWidget(
       totalPage: 10,
     ).test(
-      '넓이가 550 이면 totalPage 가 10인 경우 TextButton 가 5개 렌더링 되어야 한다.',
+      'When width is 550, 5 TextButtons should be rendered.',
       (tester) async {
         await TestHelperUtil.changeWidth(
           tester: tester,
@@ -152,7 +152,7 @@ void main() {
     buildWidget(
       totalPage: 10,
     ).test(
-      '넓이가 649 이면 totalPage 가 10인 경우 TextButton 가 5개 렌더링 되어야 한다.',
+      'When width is 649, 5 TextButtons should be rendered.',
       (tester) async {
         await TestHelperUtil.changeWidth(
           tester: tester,
@@ -172,7 +172,7 @@ void main() {
     buildWidget(
       totalPage: 10,
     ).test(
-      '넓이가 650 이면 totalPage 가 10인 경우 TextButton 가 7개 렌더링 되어야 한다.',
+      'When width is 650, 7 TextButtons should be rendered.',
       (tester) async {
         await TestHelperUtil.changeWidth(
           tester: tester,
@@ -194,7 +194,7 @@ void main() {
     buildWidget(
       totalPage: 10,
     ).test(
-      '넓이가 1280 이면 totalPage 가 10인 경우 TextButton 가 7개 렌더링 되어야 한다.',
+      'When width is 1280, 7 TextButtons should be rendered.',
       (tester) async {
         await TestHelperUtil.changeWidth(
           tester: tester,
@@ -216,7 +216,7 @@ void main() {
     buildWidget(
       totalPage: 10,
     ).test(
-      '다음 페이지 버튼을 탭하면 setPage 가 8로 호출 되어야 한다.',
+      'When the next page button is tapped, setPage should be called with 8.',
       (tester) async {
         await TestHelperUtil.changeWidth(
           tester: tester,
@@ -234,7 +234,7 @@ void main() {
       totalPage: 10,
       pageSizeToMove: 1,
     ).test(
-      'pageSizeToMove 를 1로 설정하고 다음 페이지 버튼을 탭하면 setPage 가 2로 호출 되어야 한다.',
+      'When pageSizeToMove is 1, the next page button is tapped, setPage should be called with 2.',
       (tester) async {
         await TestHelperUtil.changeWidth(
           tester: tester,
@@ -253,7 +253,7 @@ void main() {
       totalPage: 10,
       pageSizeToMove: 1,
     ).test(
-      '5페이지에서 pageSizeToMove 를 1로 설정하고 이전 페이지 버튼을 탭하면 setPage 가 4로 호출 되어야 한다.',
+      'When pageSizeToMove is 1, the previous page button is tapped, setPage should be called with 4.',
       (tester) async {
         await TestHelperUtil.changeWidth(
           tester: tester,

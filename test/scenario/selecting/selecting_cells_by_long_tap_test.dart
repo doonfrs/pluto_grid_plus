@@ -15,7 +15,8 @@ void main() {
     );
 
     fiveByFiveGrid.test(
-      '(1, 1), (2, 4) 셀을 선택하면, 8개의 셀이 선택 되어야 한다.',
+      'When cells (1, 1) and (2, 4) are selected, '
+      '8 cells should be selected.',
       (tester) async {
         await grid.selectCells(
           startCellValue: 'column1 value 1',
@@ -49,7 +50,8 @@ void main() {
     );
 
     fiveByFiveGrid.test(
-      '(1, 1), (2, 1) 셀을 선택하면, 2개의 셀이 선택 되어야 한다.',
+      'When cells (1, 1) and (2, 1) are selected, '
+      '2 cells should be selected.',
       (tester) async {
         await grid.selectCells(
           startCellValue: 'column1 value 1',
@@ -90,7 +92,8 @@ void main() {
     );
 
     fiveByFiveGrid.test(
-      '(1, 0), (0, 1) 셀을 선택하면, 5개의 셀이 선택 되어야 한다.',
+      'When cells (1, 0) and (0, 1) are selected, '
+      '5 cells should be selected.',
       (tester) async {
         await grid.selectCells(
           startCellValue: 'column1 value 0',
@@ -122,7 +125,8 @@ void main() {
     );
 
     fiveByFiveGrid.test(
-      '(0, 1), (1, 0) 셀을 선택하면, 5개의 셀이 선택 되어야 한다.',
+      'When cells (0, 1) and (1, 0) are selected, '
+      '5 cells should be selected.',
       (tester) async {
         await grid.selectCells(
           startCellValue: 'column0 value 1',
@@ -154,7 +158,8 @@ void main() {
     );
 
     fiveByFiveGrid.test(
-      '(0, 1), (0, 1) 셀을 선택하면, 1개의 셀이 선택 되어야 한다.',
+      'When cells (0, 1) and (0, 1) are selected, '
+      '1 cell should be selected.',
       (tester) async {
         await grid.selectCells(
           startCellValue: 'column0 value 1',
@@ -185,7 +190,8 @@ void main() {
     );
 
     fiveByFiveGrid.test(
-      '(0, 1), (1, 1) 셀을 선택하면, 2개의 셀이 선택 되어야 한다.',
+      'When cells (0, 1) and (1, 1) are selected, '
+      '2 cells should be selected.',
       (tester) async {
         await grid.selectCells(
           startCellValue: 'column0 value 1',
@@ -216,7 +222,8 @@ void main() {
     );
 
     fiveByFiveGrid.test(
-      '(1, 1), (0, 1) 셀을 선택하면, 2개의 셀이 선택 되어야 한다.',
+      'When cells (1, 1) and (0, 1) are selected, '
+      '2 cells should be selected.',
       (tester) async {
         await grid.selectCells(
           startCellValue: 'column1 value 1',

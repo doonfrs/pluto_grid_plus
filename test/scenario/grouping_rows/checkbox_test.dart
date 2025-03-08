@@ -76,7 +76,7 @@ void main() {
     return findCheckbox(cellValue).first.evaluate().first.widget as Checkbox;
   }
 
-  group('PlutoRowGroupTreeDelegate - 3 뎁스로 그룹핑.', () {
+  group('Row Group Tree Delegate - 3 Level Grouping', () {
     late List<PlutoColumn> columns;
 
     late List<PlutoRow> rows;
@@ -133,7 +133,9 @@ void main() {
       );
     });
 
-    testWidgets('전체 체크박스를 체크하면 모든 그룹과 행이 체크 되어야 한다.', (tester) async {
+    testWidgets(
+        'When all checkboxes are checked, all groups and rows should be checked',
+        (tester) async {
       await buildGrid(
         tester: tester,
         columns: columns,
@@ -154,7 +156,8 @@ void main() {
       expect(findCheckboxWidget('E').value, true);
     });
 
-    testWidgets('E 그룹을 체크 하면 E 그룹의 하위 행들이 체크 되어야 한다.', (tester) async {
+    testWidgets('When group E is checked, its child rows should be checked',
+        (tester) async {
       await buildGrid(
         tester: tester,
         columns: columns,
@@ -162,13 +165,13 @@ void main() {
         delegate: delegate,
       );
 
-      // 최초 아무것도 체크 되지 않은 상태 tristate 는 false
+      // When all checkboxes are unchecked, the tristate is false
       expect(findAllCheckboxWidget('column1').value, false);
 
       await tester.tap(findCheckbox('E'));
       await tester.pumpAndSettle();
 
-      // 행 하나가 체크 되어 tristate 가 null
+      // When one row is checked, the tristate is null
       expect(findAllCheckboxWidget('column1').value, null);
 
       expect(findCheckboxWidget('E').value, true);
@@ -181,8 +184,7 @@ void main() {
     });
 
     testWidgets(
-      'E 그룹을 체크후 하위 행 E1을 체크 해제 하면, '
-      'All 체크박스와 E 그룹의 체크박스의 tristate 가 null 이어야 한다.',
+      'When group E is checked and then row E1 is unchecked, the tristate of the all checkbox and group E checkbox should be null',
       (tester) async {
         await buildGrid(
           tester: tester,
@@ -208,7 +210,9 @@ void main() {
       },
     );
 
-    testWidgets('전체 체크박스를 체크후 하위 그룹을 열면 하위 행들이 체크 되어 있어야 한다.', (tester) async {
+    testWidgets(
+        'When all checkboxes are checked and then a group is expanded, its child rows should be checked',
+        (tester) async {
       await buildGrid(
         tester: tester,
         columns: columns,
@@ -235,7 +239,7 @@ void main() {
       expect(findCheckboxWidget('B3').value, true);
       expect(findCheckboxWidget('B4').value, true);
 
-      // showFirstExpandableIcon 가 false 이므로 두번째 컬럼의 셀에 확장 아이콘이 있다.
+      // showFirstExpandableIcon is false, so the second column cell has an expand icon.
       final B4_GROUP_EXPAND_ICON = findExpandIcon('b4-1');
       await tester.tap(B4_GROUP_EXPAND_ICON);
       await tester.pumpAndSettle();
@@ -247,7 +251,7 @@ void main() {
       expect(findCheckboxWidget('B42').value, true);
       expect(findCheckboxWidget('B43').value, true);
 
-      // showFirstExpandableIcon 가 false 이므로 세번째 컬럼의 셀에 확장 아이콘이 있다.
+      // showFirstExpandableIcon is false, so the third column cell has an expand icon.
       final B43_GROUP_EXPAND_ICON = findExpandIcon('b43-2');
       await tester.tap(B43_GROUP_EXPAND_ICON);
       await tester.pumpAndSettle();

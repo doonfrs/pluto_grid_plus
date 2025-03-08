@@ -45,7 +45,7 @@ void main() {
     )..setEventManager(eventManager);
   }
 
-  testWidgets('columnIndexes - columns 에 맞는 index list 가 리턴 되어야 한다.',
+  testWidgets('columnIndexes - columns should return the index list.',
       (WidgetTester tester) async {
     // given
     PlutoGridStateManager stateManager = getStateManager(
@@ -67,7 +67,8 @@ void main() {
     expect(result, [0, 1, 2]);
   });
 
-  testWidgets('columnIndexesForShowFrozen - 고정 컬럼 순서에 맞게 리턴 되어야 한다.',
+  testWidgets(
+      'columnIndexesForShowFrozen - frozen columns should return the index list.',
       (WidgetTester tester) async {
     // given
     PlutoGridStateManager stateManager = getStateManager(
@@ -99,7 +100,7 @@ void main() {
     expect(result, [2, 1, 0]);
   });
 
-  testWidgets('columnsWidth - 컬럼 넓이 합계를 리턴 해야 한다.',
+  testWidgets('columnsWidth - columns should return the sum of column widths.',
       (WidgetTester tester) async {
     // given
     PlutoGridStateManager stateManager = getStateManager(
@@ -135,7 +136,7 @@ void main() {
     expect(result, 600);
   });
 
-  testWidgets('leftFrozenColumns - 왼쪽 고정 컬럼 리스트만 리턴 되어야 한다.',
+  testWidgets('leftFrozenColumns - left frozen columns should return the list.',
       (WidgetTester tester) async {
     // given
     PlutoGridStateManager stateManager = getStateManager(
@@ -168,7 +169,8 @@ void main() {
     expect(result[1].title, 'left2');
   });
 
-  testWidgets('leftFrozenColumnIndexes - 왼쪽 고정 컬럼 인덱스 리스트만 리턴 되어야 한다.',
+  testWidgets(
+      'leftFrozenColumnIndexes - left frozen column indexes should return the list.',
       (WidgetTester tester) async {
     // given
     PlutoGridStateManager stateManager = getStateManager(
@@ -200,7 +202,8 @@ void main() {
     expect(result[0], 2);
   });
 
-  testWidgets('leftFrozenColumnsWidth - 왼쪽 고정 컬럼 넓이 합계를 리턴해야 한다.',
+  testWidgets(
+      'leftFrozenColumnsWidth - left frozen columns width should return the sum of column widths.',
       (WidgetTester tester) async {
     // given
     PlutoGridStateManager stateManager = getStateManager(
@@ -238,7 +241,8 @@ void main() {
     expect(result, 300);
   });
 
-  testWidgets('rightFrozenColumns - 오른쪽 고정 컬럼 리스트만 리턴 되어야 한다.',
+  testWidgets(
+      'rightFrozenColumns - right frozen columns should return the list.',
       (WidgetTester tester) async {
     // given
     PlutoGridStateManager stateManager = getStateManager(
@@ -270,7 +274,8 @@ void main() {
     expect(result[0].title, 'right1');
   });
 
-  testWidgets('rightFrozenColumnIndexes - 오른쪽 고정 컬럼 인덱스 리스트만 리턴 되어야 한다.',
+  testWidgets(
+      'rightFrozenColumnIndexes - right frozen column indexes should return the list.',
       (WidgetTester tester) async {
     // given
     PlutoGridStateManager stateManager = getStateManager(
@@ -303,7 +308,8 @@ void main() {
     expect(result[1], 2);
   });
 
-  testWidgets('rightFrozenColumnsWidth - 오른쪽 고정 컬럼 넓이 합계를 리턴해야 한다.',
+  testWidgets(
+      'rightFrozenColumnsWidth - right frozen columns width should return the sum of column widths.',
       (WidgetTester tester) async {
     // given
     PlutoGridStateManager stateManager = getStateManager(
@@ -348,7 +354,7 @@ void main() {
     expect(result, 240);
   });
 
-  testWidgets('bodyColumns - body 컬럼 리스트만 리턴 되어야 한다.',
+  testWidgets('bodyColumns - body columns should return the list.',
       (WidgetTester tester) async {
     // given
     PlutoGridStateManager stateManager = getStateManager(
@@ -376,7 +382,7 @@ void main() {
     expect(result[2].title, 'body2');
   });
 
-  testWidgets('bodyColumnIndexes - body 컬럼 인덱스 리스트만 리턴 되어야 한다.',
+  testWidgets('bodyColumnIndexes - body column indexes should return the list.',
       (WidgetTester tester) async {
     // given
     PlutoGridStateManager stateManager = getStateManager(
@@ -402,7 +408,8 @@ void main() {
     expect(result[2], 5);
   });
 
-  testWidgets('bodyColumnsWidth - body 컬럼 넓이 합계를 리턴해야 한다.',
+  testWidgets(
+      'bodyColumnsWidth - body columns width should return the sum of column widths.',
       (WidgetTester tester) async {
     // given
     PlutoGridStateManager stateManager = getStateManager(
@@ -425,7 +432,7 @@ void main() {
     expect(result, 450);
   });
 
-  testWidgets('currentColumn - currentColumnField 값이 없는 경우 null 을 리턴해야 한다.',
+  testWidgets('When currentColumnField is null, return null.',
       (WidgetTester tester) async {
     // given
     PlutoGridStateManager stateManager = getStateManager(
@@ -448,7 +455,7 @@ void main() {
     expect(currentColumn, null);
   });
 
-  testWidgets('currentColumn - currentCell 이 선택 된 경우 currentColumn 을 리턴해야 한다.',
+  testWidgets('currentColumn - currentCell is selected, return currentColumn',
       (WidgetTester tester) async {
     // given
     List<PlutoColumn> columns = [
@@ -484,7 +491,8 @@ void main() {
     expect(currentColumn.width, 150);
   });
 
-  testWidgets('currentColumnField - currentCell 이 선택되지 않는 경우 null 을 리턴해야 한다.',
+  testWidgets(
+      'currentColumnField - currentCell is not selected, null should be returned',
       (WidgetTester tester) async {
     // given
     List<PlutoColumn> columns = [
@@ -512,7 +520,7 @@ void main() {
   });
 
   testWidgets(
-      'currentColumnField - currentCell 이 선택 된 경우 선택 된 컬럼의 field 를 리턴해야 한다.',
+      'currentColumnField - currentCell is selected, return the field of the selected column',
       (WidgetTester tester) async {
     // given
     List<PlutoColumn> columns = [
@@ -546,7 +554,7 @@ void main() {
   });
 
   group('getSortedColumn', () {
-    test('Sort 컬럼이 없는 경우 null 을 리턴해야 한다.', () {
+    test('If there is no sort column, return null', () {
       final columns = ColumnHelper.textColumn('title', count: 3);
 
       PlutoGridStateManager stateManager = getStateManager(
@@ -559,7 +567,7 @@ void main() {
       expect(stateManager.getSortedColumn, null);
     });
 
-    test('Sort 컬럼이 있는 경우 sort 된 컬럼을 리턴해야 한다.', () {
+    test('When there is a sort column, return the sorted column.', () {
       final columns = ColumnHelper.textColumn('title', count: 3);
       columns[1].sort = PlutoColumnSort.ascending;
 
@@ -576,8 +584,8 @@ void main() {
 
   group('columnIndexesByShowFrozen', () {
     testWidgets(
-        '고정 컬럼이 없는 상태에서 '
-        'columnIndexes 가 리턴 되어야 한다.', (WidgetTester tester) async {
+        'If there are no frozen columns, '
+        'columnIndexes should be returned.', (WidgetTester tester) async {
       // given
       List<PlutoColumn> columns = [
         ...ColumnHelper.textColumn('body', count: 3, width: 150),
@@ -600,10 +608,11 @@ void main() {
     });
 
     testWidgets(
-        '고정 컬럼이 없는 상태에서 '
-        '3번 째 컬럼을 왼쪽 고정 토글 하고 '
-        '넓이가 충분한 경우 '
-        'columnIndexesForShowFrozen 가 리턴 되어야 한다.', (WidgetTester tester) async {
+        'If there are no frozen columns, '
+        '3rd column toggle left frozen and '
+        'If the width is sufficient, '
+        'columnIndexesForShowFrozen should be returned.',
+        (WidgetTester tester) async {
       // given
       List<PlutoColumn> columns = [
         ...ColumnHelper.textColumn('body', count: 5, width: 150),
@@ -635,10 +644,10 @@ void main() {
     });
 
     testWidgets(
-        '고정 컬럼이 없는 상태에서 '
-        '3번 째 컬럼을 왼쪽 고정 토글 하고 '
-        '넓이가 충분하지 않은 경우 '
-        'columnIndexes 가 리턴 되어야 한다.', (WidgetTester tester) async {
+        'If there are no frozen columns, '
+        '3rd column toggle left frozen and '
+        'If the width is insufficient, '
+        'columnIndexes should be returned.', (WidgetTester tester) async {
       // given
       List<PlutoColumn> columns = [
         ...ColumnHelper.textColumn('body', count: 5, width: 150),
@@ -669,9 +678,9 @@ void main() {
     });
 
     testWidgets(
-        '고정 컬럼이 있는 상태에서 '
-        '넓이가 충분한 경우 '
-        'columnIndexes 가 리턴 되어야 한다.', (WidgetTester tester) async {
+        'If there are frozen columns, '
+        'If the width is sufficient, '
+        'columnIndexes should be returned.', (WidgetTester tester) async {
       // given
       List<PlutoColumn> columns = [
         ...ColumnHelper.textColumn(
@@ -707,10 +716,11 @@ void main() {
     });
 
     testWidgets(
-        '고정 컬럼이 있는 상태에서 '
-        '고정 컬럼 하나를 토글하여 왼쪽 추가하고  '
-        '넓이가 충분한 경우 '
-        'columnIndexesForShowFrozen 가 리턴 되어야 한다.', (WidgetTester tester) async {
+        'If there are frozen columns, '
+        'If one frozen column is toggled to the left, '
+        'If the width is sufficient, '
+        'columnIndexesForShowFrozen should be returned.',
+        (WidgetTester tester) async {
       // given
       List<PlutoColumn> columns = [
         ...ColumnHelper.textColumn(
@@ -753,10 +763,11 @@ void main() {
     });
 
     testWidgets(
-        '고정 컬럼이 있는 상태에서 '
-        '고정 컬럼 하나를 토글하여 오른쪽 추가하고  '
-        '넓이가 충분한 경우 '
-        'columnIndexesForShowFrozen 가 리턴 되어야 한다.', (WidgetTester tester) async {
+        'If there are frozen columns, '
+        'If one frozen column is toggled to the right, '
+        'If the width is sufficient, '
+        'columnIndexesForShowFrozen should be returned.',
+        (WidgetTester tester) async {
       // given
       List<PlutoColumn> columns = [
         ...ColumnHelper.textColumn(
@@ -800,8 +811,10 @@ void main() {
   });
 
   testWidgets(
-    '고정 컬럼이 있고 넓이가 넓이가 충분한 경우 고정 컬럼이 보여지는 상태에서, '
-    '고정 컬럼 넓이를 제약범위보다 크게 변경하면 넓이가 변경 되지 않아야 한다.',
+    'If there are frozen columns, '
+    'If one frozen column is toggled to the right, '
+    'If the width is sufficient, '
+    'columnIndexesForShowFrozen should be returned.',
     (WidgetTester tester) async {
       List<PlutoColumn> columns = [
         ...ColumnHelper.textColumn(
@@ -828,14 +841,14 @@ void main() {
         scroll: scroll,
       );
 
-      // 150 + 200 + 150 = 최소 500 필요
+      // 150 + 200 + 150 = minimum width 500
       stateManager
           .setLayout(const BoxConstraints(maxWidth: 550, maxHeight: 600));
 
       expect(stateManager.showFrozenColumn, true);
       expect(columns.first.width, 150);
 
-      // 최소 넓이에서 남는 50 이상 크기를 키움
+      // When the width is 550, the columns and cells should be displayed in the correct width.
       stateManager.resizeColumn(columns.first, 60);
 
       expect(stateManager.showFrozenColumn, true);
@@ -844,8 +857,10 @@ void main() {
   );
 
   testWidgets(
-    '고정 컬럼이 있지만 넓이가 좁아 고정 컬럼이 풀리면, '
-    '고정 시킨 컬럼 설정이 풀려야 된다.',
+    'If there are frozen columns, '
+    'If one frozen column is toggled to the right, '
+    'If the width is insufficient, '
+    'columnIndexesForShowFrozen should be returned.',
     (WidgetTester tester) async {
       List<PlutoColumn> columns = [
         ...ColumnHelper.textColumn(
@@ -888,8 +903,8 @@ void main() {
 
   group('toggleFrozenColumn', () {
     test(
-        'columnSizeConfig.restoreAutoSizeAfterFrozenColumn 이 false 면, '
-        'activatedColumnsAutoSize 가 false 로 변경 되어야 한다.', () {
+        'columnSizeConfig.restoreAutoSizeAfterFrozenColumn is false, '
+        'activatedColumnsAutoSize should be false.', () {
       final columns = ColumnHelper.textColumn('title', count: 5);
 
       PlutoGridStateManager stateManager = getStateManager(
@@ -919,7 +934,7 @@ void main() {
 
   group('insertColumns', () {
     testWidgets(
-      '기존 컬럼이 없는 상태에서 0번 인덱스에 컬럼 1개가 추가 되어야 한다.',
+      'When there are no columns, a column should be added at index 0',
       (WidgetTester tester) async {
         const columnIdxToInsert = 0;
 
@@ -948,7 +963,7 @@ void main() {
     );
 
     testWidgets(
-      '기존 컬럼 1개 있는 상태에서 0번 인덱스에 컬럼 1개가 추가 되어야 한다.',
+      'When there is one column, a column should be added at index 0',
       (WidgetTester tester) async {
         const columnIdxToInsert = 0;
 
@@ -984,7 +999,7 @@ void main() {
     );
 
     testWidgets(
-      '기존 컬럼 1개 있는 상태에서 추가된 컬럼의 셀이 행에 추가 되어야 한다.',
+      'When there is one column, the cell of the inserted column should be added to the row',
       (WidgetTester tester) async {
         const columnIdxToInsert = 0;
 
@@ -1029,8 +1044,9 @@ void main() {
     );
 
     test(
-        'columnSizeConfig.restoreAutoSizeAfterInsertColumn 이 false 면, '
-        'activatedColumnsAutoSize 가 false 로 변경 되어야 한다.', () {
+        'When columnSizeConfig.restoreAutoSizeAfterInsertColumn is false, '
+        'activatedColumnsAutoSize should be false after inserting a column',
+        () {
       final columns = ColumnHelper.textColumn('title', count: 5);
 
       PlutoGridStateManager stateManager = getStateManager(
@@ -1060,7 +1076,7 @@ void main() {
 
   group('removeColumns', () {
     testWidgets(
-      '0번 컬럼을 삭제하면 컬럼이 삭제되어야 한다.',
+      'When the 0th column is deleted, the column should be removed',
       (WidgetTester tester) async {
         final List<PlutoColumn> columns = ColumnHelper.textColumn(
           'column',
@@ -1085,7 +1101,7 @@ void main() {
     );
 
     testWidgets(
-      '0번 컬럼을 삭제하면 해당 컬럼의 셀이 삭제 되어야 한다.',
+      'When the 0th column is deleted, the cells of that column should be removed',
       (WidgetTester tester) async {
         final List<PlutoColumn> columns = ColumnHelper.textColumn(
           'column',
@@ -1112,7 +1128,7 @@ void main() {
     );
 
     testWidgets(
-      '8, 8번 컬럼을 삭제하면 해당 컬럼의 셀이 삭제 되어야 한다.',
+      'When the 8th column is deleted, the cells of that column should be removed',
       (WidgetTester tester) async {
         final List<PlutoColumn> columns = ColumnHelper.textColumn(
           'column',
@@ -1139,7 +1155,7 @@ void main() {
     );
 
     testWidgets(
-      '컬럼 그룹이 있는 상태에서 컬럼을 삭제하면 빈 그룹이 삭제 되어야 한다.',
+      'When there is a column group, deleting a column should remove the empty group',
       (WidgetTester tester) async {
         final List<PlutoColumn> columns = ColumnHelper.textColumn(
           'column',
@@ -1177,7 +1193,7 @@ void main() {
     );
 
     testWidgets(
-      '컬럼 그룹이 있는 상태에서 컬럼을 삭제하면 해당 그룹에서 컬럼이 삭제되어야 한다.',
+      'When there is a column group, deleting a column should remove the column from the group',
       (WidgetTester tester) async {
         final List<PlutoColumn> columns = ColumnHelper.textColumn(
           'column',
@@ -1220,7 +1236,7 @@ void main() {
     );
 
     testWidgets(
-      '하위 컬럼 그룹이 있는 상태에서 컬럼을 삭제하면 빈 해당 하위 그룹이 삭제 되어야 한다.',
+      'When there is a column group with sub groups, deleting a column should remove the empty sub group',
       (WidgetTester tester) async {
         final List<PlutoColumn> columns = ColumnHelper.textColumn(
           'column',
@@ -1267,7 +1283,7 @@ void main() {
     );
 
     testWidgets(
-      '필터가 있는 컬럼을 삭제 한 경우 해당 컬럼의 필터가 삭제 되어야 한다.',
+      'When a column with a filter is deleted, the filter should be removed',
       (WidgetTester tester) async {
         final List<PlutoColumn> columns = ColumnHelper.textColumn(
           'column',
@@ -1309,8 +1325,8 @@ void main() {
     );
 
     test(
-        'columnSizeConfig.restoreAutoSizeAfterRemoveColumn 이 false 면, '
-        'activatedColumnsAutoSize 가 false 로 변경 되어야 한다.', () {
+        'columnSizeConfig.restoreAutoSizeAfterRemoveColumn is false, '
+        'activatedColumnsAutoSize should be false.', () {
       final columns = ColumnHelper.textColumn('title', count: 5);
 
       PlutoGridStateManager stateManager = getStateManager(
@@ -1339,7 +1355,9 @@ void main() {
   });
 
   group('moveColumn', () {
-    test('고정 컬럼 제한으로 컬럼이동이 불가하면 notifyListeners 가 호출 되지 않아야 한다.', () async {
+    test(
+        'If the column movement is not possible due to frozen column limit, notifyListeners should not be called.',
+        () async {
       final columns = ColumnHelper.textColumn('title', count: 5);
 
       PlutoGridStateManager stateManager = getStateManager(
@@ -1367,7 +1385,9 @@ void main() {
       verifyNever(listeners.noParamReturnVoid());
     });
 
-    test('고정 컬럼 넓이가 충분하면 notifyListeners 가 호출 되어야 한다.', () async {
+    test(
+        'When the frozen column width is sufficient, notifyListeners should be called',
+        () async {
       final columns = ColumnHelper.textColumn('title', count: 5);
 
       PlutoGridStateManager stateManager = getStateManager(
@@ -1395,7 +1415,9 @@ void main() {
       verify(listeners.noParamReturnVoid()).called(1);
     });
 
-    test('0 번 비고정 컬럼을 4번 우측 고정 컬럼으로 이동 시키면 컬럼 순서가 바뀌어야 한다.', () async {
+    test(
+        'When the 0th column is moved to the 4th right frozen column, the column order should be changed',
+        () async {
       final columns = ColumnHelper.textColumn('title', count: 5);
 
       columns[0].frozen = PlutoColumnFrozen.none;
@@ -1425,7 +1447,9 @@ void main() {
       expect(stateManager.refColumns[4].title, 'title0');
     });
 
-    test('4 번 비고정 컬럼을 1번 좌측 고정 컬럼으로 이동 시키면 컬럼 순서가 바뀌어야 한다.', () async {
+    test(
+        'When the 4th column is moved to the 1st left frozen column, the column order should be changed',
+        () async {
       final columns = ColumnHelper.textColumn('title', count: 5);
 
       columns[0].frozen = PlutoColumnFrozen.none;
@@ -1455,7 +1479,9 @@ void main() {
       expect(stateManager.refColumns[4].title, 'title3');
     });
 
-    test('3번 좌측 고정을 1번 비고정 컬럼으로 이동 시키면 컬럼 순서가 바뀌어야 한다.', () async {
+    test(
+        'When the 3rd left frozen column is moved to the 1st non-frozen column, the column order should be changed',
+        () async {
       final columns = ColumnHelper.textColumn('title', count: 5);
 
       columns[0].frozen = PlutoColumnFrozen.none;
@@ -1478,9 +1504,9 @@ void main() {
         targetColumn: columns[1],
       );
 
-      // 3번이 좌측 고정 되어있어 1번 보다 우측에 있다.
-      // 3번 컬럼이 1번 컬럼 우측으로 이동하면 1번 좌측에 있는 3번이 빠지면서
-      // 3번이 1번의 위치에 위치한다.
+      // 3rd is left frozen and is to the right of 1st.
+      // When the 3rd column moves to the right of the 1st column,
+      // the 3rd column will be removed from the left of the 1st column.
       expect(stateManager.refColumns[0].title, 'title0');
       expect(stateManager.refColumns[1].title, 'title1');
       expect(stateManager.refColumns[2].title, 'title3');
@@ -1488,7 +1514,9 @@ void main() {
       expect(stateManager.refColumns[4].title, 'title4');
     });
 
-    test('1번 우측 고정을 4번 비고정 컬럼으로 이동 시키면 컬럼 순서가 바뀌어야 한다.', () async {
+    test(
+        'When the 1st right frozen column is moved to the 4th non-frozen column, the column order should be changed',
+        () async {
       final columns = ColumnHelper.textColumn('title', count: 5);
 
       columns[0].frozen = PlutoColumnFrozen.none;
@@ -1511,8 +1539,9 @@ void main() {
         targetColumn: columns[4],
       );
 
-      // 1번이 우측 고정 되어 4번 보다 우측에 있는 상태에서
-      // 1번이 4번 위치로 가고 4번은 1번 좌측에 위치하게 된다.
+      // 1st is right frozen and is to the right of 4th.
+      // When the 1st column moves to the right of the 4th column,
+      // the 1st column will be removed from the left of the 4th column.
       expect(stateManager.refColumns[0].title, 'title0');
       expect(stateManager.refColumns[1].title, 'title2');
       expect(stateManager.refColumns[2].title, 'title3');
@@ -1521,8 +1550,8 @@ void main() {
     });
 
     test(
-        'columnSizeConfig.restoreAutoSizeAfterMoveColumn 이 false 면, '
-        'activatedColumnsAutoSize 가 false 로 변경 되어야 한다.', () {
+        'When columnSizeConfig.restoreAutoSizeAfterMoveColumn is false, '
+        'activatedColumnsAutoSize should be false after moving a column', () {
       final columns = ColumnHelper.textColumn('title', count: 5);
 
       PlutoGridStateManager stateManager = getStateManager(
@@ -1554,7 +1583,8 @@ void main() {
   });
 
   group('resizeColumn', () {
-    test('columnsResizeMode.isNone 이면 notifyResizingListeners 가 호출 되지 않아야 한다.',
+    test(
+        'When columnsResizeMode is none, notifyResizingListeners should not be called',
         () {
       final columns = ColumnHelper.textColumn('title', count: 5);
       final mockListener = MockMethods();
@@ -1586,7 +1616,7 @@ void main() {
     });
 
     test(
-        'column.enableDropToResize 가 false 이면 notifyResizingListeners 가 호출 되지 않아야 한다.',
+        'When column.enableDropToResize is false, notifyResizingListeners should not be called',
         () {
       final columns = ColumnHelper.textColumn('title', count: 5);
       final mockListener = MockMethods();
@@ -1617,7 +1647,7 @@ void main() {
       );
     });
 
-    test('offset 10 만큼 컬럼의 넓이가 늘어나야 한다.', () {
+    test('When offset is 10, the column width should increase', () {
       final columns = ColumnHelper.textColumn('title', count: 5);
       final mockListener = MockMethods();
 
@@ -1651,7 +1681,7 @@ void main() {
     });
 
     test(
-      'PlutoResizeMode.pushAndPull 인경우 scroll.horizontal.notifyListeners 호출 되어야 한다.',
+      'When PlutoResizeMode.pushAndPull, scroll.horizontal.notifyListeners should be called',
       () {
         final columns = ColumnHelper.textColumn('title', count: 5);
 
@@ -1678,7 +1708,9 @@ void main() {
   });
 
   group('autoFitColumn', () {
-    testWidgets('가장 넓은 셀이 컬럼 최소 넓이보다 작은 경우 최소 넓이로 변경 되어야 한다.', (tester) async {
+    testWidgets(
+        'When the widest cell is smaller than the column minimum width, '
+        'it should be changed to the minimum width', (tester) async {
       final columns = ColumnHelper.textColumn('title');
 
       final rows = RowHelper.count(3, columns);
@@ -1720,8 +1752,9 @@ void main() {
       expect(columns.first.width, lessThan(oldWidth));
     });
 
-    testWidgets('가장 넓은 셀이 컬럼 최소 넓이보다 큰 경우 최소 넓이 이상으로 변경 되어야 한다.',
-        (tester) async {
+    testWidgets(
+        'When the widest cell is larger than the column minimum width, '
+        'it should be changed to the minimum width', (tester) async {
       final columns = ColumnHelper.textColumn('title');
 
       final rows = RowHelper.count(3, columns);
@@ -1764,7 +1797,7 @@ void main() {
   });
 
   group('hideColumn', () {
-    testWidgets('flag 를 true 로 호출 한 경우 컬럼의 hide 가 true 로 변경 되어야 한다.',
+    testWidgets('When the flag is true, the column hide should be true',
         (WidgetTester tester) async {
       // given
       var columns = [
@@ -1791,8 +1824,7 @@ void main() {
       expect(stateManager.refColumns.originalList.first.hide, isTrue);
     });
 
-    testWidgets(
-        'hide 가 true 인 컬럼을 flag 를 false 로 호출하여 hide 가 false 로 변경 되어야 한다.',
+    testWidgets('When the flag is false, the column hide should be false',
         (WidgetTester tester) async {
       // given
       var columns = [
@@ -1825,8 +1857,8 @@ void main() {
     });
 
     testWidgets(
-      '고정 컬럼인 hide 가 true 인 컬럼을 flag 를 false 로 호출 할 때, '
-      '고정 컬럼 제약 넓이가 좁은 경우 컬럼의 고정 상태가 풀려야 한다.',
+      'When calling hideColumn with flag false on a fixed column with hide true, '
+      'if the constraint width of the fixed column is narrow, the column should be unfrozen.',
       (WidgetTester tester) async {
         // given
         var columns = [
@@ -1864,7 +1896,7 @@ void main() {
       },
     );
 
-    testWidgets('flag 를 true 로 호출 한 경우 notifyListeners 가 호출 되어야 한다.',
+    testWidgets('If the flag is true, notifyListeners should be called.',
         (WidgetTester tester) async {
       // given
       var columns = [
@@ -1895,8 +1927,7 @@ void main() {
       verify(listeners.noParamReturnVoid()).called(1);
     });
 
-    testWidgets(
-        'hide 가 false 이 경우 flag 를 false 로 호출 하면 notifyListeners 가 호출 되지 않아야 한다.',
+    testWidgets('If hide is false, notifyListeners should not be called.',
         (WidgetTester tester) async {
       // given
       var columns = [
@@ -1927,7 +1958,8 @@ void main() {
   });
 
   group('hideColumns', () {
-    test('columns 가 empty 면 notifyListeners 가 호출 되지 않아야 한다.', () async {
+    test('If columns is empty, notifyListeners should not be called.',
+        () async {
       final columns = <PlutoColumn>[];
 
       PlutoGridStateManager stateManager = getStateManager(
@@ -1946,7 +1978,8 @@ void main() {
       verifyNever(listeners.noParamReturnVoid());
     });
 
-    test('columns 가 empty 가 아니면 notifyListeners 가 호출 되어야 한다.', () async {
+    test('If columns is not empty, notifyListeners should be called.',
+        () async {
       final columns = ColumnHelper.textColumn('title', count: 5);
 
       PlutoGridStateManager stateManager = getStateManager(
@@ -1967,7 +2000,7 @@ void main() {
       verify(listeners.noParamReturnVoid()).called(1);
     });
 
-    test('hide 가 true 면 컬럼이 모두 업데이트 되어야 한다.', () async {
+    test('When hide is true, columns should be updated.', () async {
       final columns = ColumnHelper.textColumn('title', count: 5);
 
       PlutoGridStateManager stateManager = getStateManager(
@@ -1989,7 +2022,7 @@ void main() {
     });
 
     test(
-      '0, 1 번 컬럼을 hide 를 false 로 호출 하면 컬럼이 모두 업데이트 되어야 한다.',
+      'When hide is false, columns should be updated.',
       () async {
         final columns = ColumnHelper.textColumn('title', count: 5, hide: true);
 
@@ -2004,10 +2037,10 @@ void main() {
 
         stateManager.hideColumns(columns.getRange(0, 2).toList(), false);
 
-        // 호출 한 컬럼
+        // called columns
         expect(columns[0].hide, false);
         expect(columns[1].hide, false);
-        // 호출 하지 않은 컬럼
+        // not called columns
         expect(columns[2].hide, true);
         expect(columns[3].hide, true);
         expect(columns[4].hide, true);
@@ -2015,8 +2048,7 @@ void main() {
     );
 
     test(
-      '고정 컬럼 제약 조건이 부족한 상태에서 0, 1번 컬럼을 hide 를 false 로 호출 하면 '
-      'frozen 컬럼이 none 으로 변경 되어야 한다.',
+      'When hide is false, frozen columns should be none.',
       () async {
         final columns = ColumnHelper.textColumn(
           'title',
@@ -2034,20 +2066,19 @@ void main() {
 
         stateManager.setLayout(const BoxConstraints(maxWidth: 300));
 
-        // setLayout 실행 시 고정 컬럼이 하나도 없어 showFrozenColumn 이 false 이면
-        // 모든 컬럼의 frozen 을 none 으로 초기화 하여 테스트를 위해 다시 고정 컬럼으로 설정.
+        // Initialize all columns' frozen to none for testing purposes.
         for (final column in columns) {
           column.frozen = PlutoColumnFrozen.start;
         }
 
         stateManager.hideColumns(columns.getRange(0, 2).toList(), false);
 
-        // 호출 한 컬럼
+        // called columns
         expect(columns[0].hide, false);
         expect(columns[0].frozen, PlutoColumnFrozen.none);
         expect(columns[1].hide, false);
         expect(columns[1].frozen, PlutoColumnFrozen.none);
-        // 호출 하지 않은 컬럼
+        // not called columns
         expect(columns[2].hide, true);
         expect(columns[2].frozen, PlutoColumnFrozen.start);
         expect(columns[3].hide, true);
@@ -2059,7 +2090,7 @@ void main() {
   });
 
   group('limitResizeColumn', () {
-    test('offset 이 0 보다 작으면 false 를 리턴해야 한다.', () {
+    test('When offset is less than 0, false should be returned.', () {
       final PlutoColumn column = PlutoColumn(
         title: 'title',
         field: 'field',
@@ -2078,7 +2109,7 @@ void main() {
       expect(stateManager.limitResizeColumn(column, offset), false);
     });
 
-    test('column 의 frozen 이 none 이면 false 를 리턴해야 한다.', () {
+    test('When column frozen is none, false should be returned.', () {
       final PlutoColumn column = PlutoColumn(
         title: 'title',
         field: 'field',
@@ -2098,7 +2129,7 @@ void main() {
       expect(stateManager.limitResizeColumn(column, offset), false);
     });
 
-    test('고정 컬럼의 넓이를 제약 조건 범위에서 offset 을 호출 하면 false 를 리턴해야 한다.', () {
+    test('When column frozen is start, false should be returned.', () {
       final PlutoColumn column = PlutoColumn(
         title: 'title',
         field: 'field',
@@ -2119,11 +2150,11 @@ void main() {
 
       stateManager.setLayout(const BoxConstraints(maxWidth: 500));
 
-      // 500 - 306 = 194 보다 작게 크기 증가 가능.
+      // The size can be increased by up to 194, which is less than 500 - 306.
       // print(stateManager.maxWidth);
-      // 좌측 고정 컬럼 하나 100
+      // One left frozen column of 100
       // print(stateManager.leftFrozenColumnsWidth);
-      // 우측 고정 컬럼 없음 0
+      // No right frozen columns, so 0
       // print(stateManager.rightFrozenColumnsWidth);
       // 200
       // print(PlutoGridSettings.bodyMinWidth);
@@ -2133,7 +2164,7 @@ void main() {
       expect(stateManager.limitResizeColumn(column, 193.0), false);
     });
 
-    test('고정 컬럼의 넓이를 제약 조건 범위 보다 크게 offset 을 호출 하면 true 를 리턴해야 한다.', () {
+    test('When column frozen is end, false should be returned.', () {
       final PlutoColumn column = PlutoColumn(
         title: 'title',
         field: 'field',
@@ -2154,11 +2185,11 @@ void main() {
 
       stateManager.setLayout(const BoxConstraints(maxWidth: 500));
 
-      // 500 - 306 = 194 보다 작게 크기 증가 가능.
+      // The size can be increased by up to 194, which is less than 500 - 306.
       // print(stateManager.maxWidth);
-      // 좌측 고정 컬럼 하나 100
+      // One left frozen column of 100
       // print(stateManager.leftFrozenColumnsWidth);
-      // 우측 고정 컬럼 없음 0
+      // No right frozen columns, so 0
       // print(stateManager.rightFrozenColumnsWidth);
       // 200
       // print(PlutoGridSettings.bodyMinWidth);
@@ -2171,7 +2202,7 @@ void main() {
 
   group('limitMoveColumn', () {
     test(
-      'column 이 고정 컬럼이면 고정 컬럼 넓이 제약을 초과 하지 않으므로 false 를 리턴 해야 한다.',
+      'When column frozen is start, false should be returned.',
       () async {
         final PlutoColumn column = PlutoColumn(
           title: 'title1',
@@ -2201,11 +2232,11 @@ void main() {
 
         stateManager.setLayout(const BoxConstraints(maxWidth: 500));
 
-        // 500 - 406 = 94 보다 작은 컬럼 이동 가능.
+        // The size can be increased by up to 194, which is less than 500 - 306.
         // print(stateManager.maxWidth);
-        // 좌측 고정 컬럼 하나 100
+        // One left frozen column of 100
         // print(stateManager.leftFrozenColumnsWidth);
-        // 우측 고정 컬럼 하나 100
+        // One right frozen column of 100
         // print(stateManager.rightFrozenColumnsWidth);
         // 200
         // print(PlutoGridSettings.bodyMinWidth);
@@ -2223,7 +2254,7 @@ void main() {
     );
 
     test(
-      '고정 컬럼을 일반 컬럼 영역으로 이동 하면 제약이 없으므로 false 를 리턴 해야 한다.',
+      'When column frozen is none, false should be returned.',
       () async {
         final PlutoColumn column = PlutoColumn(
           title: 'title1',
@@ -2253,11 +2284,11 @@ void main() {
 
         stateManager.setLayout(const BoxConstraints(maxWidth: 500));
 
-        // 500 - 306 = 294 보다 작은 컬럼 이동 가능.
+        // The size can be increased by up to 294, which is less than 500 - 306.
         // print(stateManager.maxWidth);
-        // 좌측 고정 컬럼 하나 100
+        // One left frozen column of 100
         // print(stateManager.leftFrozenColumnsWidth);
-        // 우측 고정 컬럼 없음 0
+        // One right frozen column of 100
         // print(stateManager.rightFrozenColumnsWidth);
         // 200
         // print(PlutoGridSettings.bodyMinWidth);
@@ -2275,7 +2306,7 @@ void main() {
     );
 
     test(
-      '일반 컬럼을 고정 컬럼 영역으로 이동 할 때 제약 조건 넓이가 충분하면 false 를 리턴 해야 한다.',
+      'When column frozen is none, false should be returned.',
       () async {
         final PlutoColumn column = PlutoColumn(
           title: 'title1',
@@ -2305,11 +2336,11 @@ void main() {
 
         stateManager.setLayout(const BoxConstraints(maxWidth: 500));
 
-        // 500 - 306 = 294 보다 작은 컬럼 이동 가능.
+        // The size can be increased by up to 294, which is less than 500 - 306.
         // print(stateManager.maxWidth);
-        // 좌측 고정 컬럼 하나 100
+        // One left frozen column of 100
         // print(stateManager.leftFrozenColumnsWidth);
-        // 우측 고정 컬럼 없음 0
+        // One right frozen column of 100
         // print(stateManager.rightFrozenColumnsWidth);
         // 200
         // print(PlutoGridSettings.bodyMinWidth);
@@ -2327,7 +2358,7 @@ void main() {
     );
 
     test(
-      '일반 컬럼을 고정 컬럼 영역으로 이동 할 때 제약 조건 넓이가 부족하면 true 를 리턴 해야 한다.',
+      'When column frozen is none, true should be returned.',
       () async {
         final PlutoColumn column = PlutoColumn(
           title: 'title1',
@@ -2357,11 +2388,11 @@ void main() {
 
         stateManager.setLayout(const BoxConstraints(maxWidth: 500));
 
-        // 500 - 306 = 294 보다 작은 컬럼 이동 가능.
+        // The size can be increased by up to 294, which is less than 500 - 306.
         // print(stateManager.maxWidth! - column.width);
-        // 좌측 고정 컬럼 하나 100
+        // One left frozen column of 100
         // print(stateManager.leftFrozenColumnsWidth);
-        // 우측 고정 컬럼 없음 0
+        // One right frozen column of 100
         // print(stateManager.rightFrozenColumnsWidth);
         // 200
         // print(PlutoGridSettings.bodyMinWidth);
@@ -2381,8 +2412,7 @@ void main() {
 
   group('limitToggleFrozenColumn', () {
     test(
-      'column 의 frozen 이 isFrozen 이면 토글 되었을 때 고정이 풀리므로 '
-      '제약조건을 받지 않아 false 를 리턴 해야 한다.',
+      'When column frozen is start, false should be returned.',
       () async {
         final PlutoColumn column = PlutoColumn(
           title: 'title1',
@@ -2412,8 +2442,7 @@ void main() {
     );
 
     test(
-      'column 의 frozen 이 none 이고 frozen 컬럼으로 토글 할 때, '
-      '제약 조건 범위가 충분하면 false 를 리턴 해야 한다.',
+      'When column frozen is none, false should be returned.',
       () async {
         final PlutoColumn column = PlutoColumn(
           title: 'title1',
@@ -2435,11 +2464,11 @@ void main() {
 
         stateManager.setLayout(const BoxConstraints(maxWidth: 500));
 
-        // 500 - 206 = 394 보다 작은 컬럼 이동 가능.
+        // The size can be increased by up to 394, which is less than 500 - 206.
         // print(stateManager.maxWidth! - column.width);
-        // 좌측 고정 컬럼 없음 0
+        // One left frozen column of 100
         // print(stateManager.leftFrozenColumnsWidth);
-        // 우측 고정 컬럼 없음 0
+        // One right frozen column of 100
         // print(stateManager.rightFrozenColumnsWidth);
         // 200
         // print(PlutoGridSettings.bodyMinWidth);
@@ -2454,8 +2483,7 @@ void main() {
     );
 
     test(
-      'column 의 frozen 이 none 이고 frozen 컬럼으로 토글 할 때, '
-      '제약 조건 범위가 부족하면 true 를 리턴 해야 한다.',
+      'When column frozen is none, true should be returned.',
       () async {
         final PlutoColumn column = PlutoColumn(
           title: 'title1',
@@ -2477,11 +2505,11 @@ void main() {
 
         stateManager.setLayout(const BoxConstraints(maxWidth: 500));
 
-        // 500 - 206 = 394 보다 작은 컬럼 이동 가능.
+        // The size can be increased by up to 394, which is less than 500 - 206.
         // print(stateManager.maxWidth! - column.width);
-        // 좌측 고정 컬럼 없음 0
+        // One left frozen column of 100
         // print(stateManager.leftFrozenColumnsWidth);
-        // 우측 고정 컬럼 없음 0
+        // One right frozen column of 100
         // print(stateManager.rightFrozenColumnsWidth);
         // 200
         // print(PlutoGridSettings.bodyMinWidth);
@@ -2498,7 +2526,7 @@ void main() {
 
   group('limitHideColumn', () {
     test(
-      'column 의 hide 를 true 로 호출하면 숨겨지므로 제약조건을 받지 않아 false 를 리턴 해야 한다.',
+      'When column hidden is true, false should be returned.',
       () async {
         final PlutoColumn column = PlutoColumn(
           title: 'title1',
@@ -2525,7 +2553,7 @@ void main() {
     );
 
     test(
-      'column 의 frozen 이 none 이면 제약 조건을 받지 않으므로 false 를 리턴 해야 한다.',
+      'When column frozen is none, false should be returned.',
       () async {
         final PlutoColumn column = PlutoColumn(
           title: 'title1',
@@ -2553,7 +2581,7 @@ void main() {
     );
 
     test(
-      '고정 컬럼을 숨김 해제 해도 제약 조건이 충분하면 false 를 리턴 해야 한다.',
+      'When column frozen is start, false should be returned.',
       () async {
         final PlutoColumn column = PlutoColumn(
           title: 'title1',
@@ -2575,16 +2603,15 @@ void main() {
         );
 
         stateManager.setLayout(const BoxConstraints(maxWidth: 500));
-
-        // stateManager.setLayout 에서 showFrozenColumn 이 아닌 경우
-        // 강제로 컬럼의 고정 상태를 none 으로 업데이트 해서 강제로 left 로 변경.
+        // If showFrozenColumn is false in stateManager.setLayout,
+        // Force the column's frozen state to none and change it to left.
         column.frozen = PlutoColumnFrozen.start;
 
-        // 500 - 206 = 394 보다 작은 컬럼 숨김 해제 가능.
+        // Column width should be greater than 394 for column unhide.
         // print(stateManager.maxWidth! - column.width);
-        // 좌측 고정 컬럼 없음 0
+        // No left frozen column 0
         // print(stateManager.leftFrozenColumnsWidth);
-        // 우측 고정 컬럼 없음 0
+        // No right frozen column 0
         // print(stateManager.rightFrozenColumnsWidth);
         // 200
         // print(PlutoGridSettings.bodyMinWidth);

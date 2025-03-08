@@ -4,9 +4,10 @@ import 'package:pluto_grid_plus/pluto_grid_plus.dart';
 void main() {
   group('PlutoDebounce', () {
     test(
-      'duration 이 1ms 인 상태에서, '
-      '1ms 동안 콜백을 10번 호출 하면, '
-      '총 1번이 호출 되어야 한다.',
+      'duration is 1ms, '
+      '1ms duration, '
+      '10 callbacks, '
+      '1 call',
       () async {
         const duration = Duration(milliseconds: 1);
         final debounce = PlutoDebounce(duration: duration);
@@ -24,9 +25,10 @@ void main() {
     );
 
     test(
-      'duration 이 1ms 인 상태에서, '
-      '2ms 동안 콜백을 10번 호출 하면, '
-      '총 2번이 호출 되어야 한다.',
+      'duration is 1ms, '
+      '2ms duration, '
+      '10 callbacks, '
+      '2 calls',
       () async {
         const duration = Duration(milliseconds: 1);
         final debounce = PlutoDebounce(duration: duration);
@@ -47,9 +49,10 @@ void main() {
 
   group('PlutoDebounceByHashCode', () {
     test(
-      'duration 이 1ms 인 상태에서, '
-      '1ms 동안 콜백을 10번 호출 하면, '
-      'isDebounced false 조건이 총 1번이 호출 되어야 한다.',
+      'duration is 1ms, '
+      '1ms duration, '
+      '10 callbacks, '
+      '1 call',
       () async {
         const duration = Duration(milliseconds: 1);
         final debounce = PlutoDebounceByHashCode(duration: duration);
@@ -69,9 +72,10 @@ void main() {
     );
 
     test(
-      'duration 이 1ms 인 상태에서, '
-      '2ms 동안 콜백을 10번 호출 하면, '
-      'isDebounced false 조건이 총 2번이 호출 되어야 한다.',
+      'duration is 1ms, '
+      '2ms duration, '
+      '10 callbacks, '
+      '2 calls',
       () async {
         const duration = Duration(milliseconds: 1);
         final debounce = PlutoDebounceByHashCode(duration: duration);
@@ -92,9 +96,10 @@ void main() {
     );
 
     test(
-      'duration 이 1ms 인 상태에서, '
-      '1ms 동안 다른 hashCode 로 콜백을 10번 호출 하면, '
-      'isDebounced false 조건이 총 2번이 호출 되어야 한다.',
+      'duration is 1ms, '
+      '1ms duration, '
+      '10 callbacks, '
+      '2 calls',
       () async {
         const duration = Duration(milliseconds: 1);
         final debounce = PlutoDebounceByHashCode(duration: duration);

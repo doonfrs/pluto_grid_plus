@@ -76,7 +76,7 @@ void main() {
     });
   }
 
-  group('number 컬럼.', () {
+  group('number column.', () {
     final columns = [
       PlutoColumn(
         title: 'column',
@@ -89,7 +89,9 @@ void main() {
       column: columns.first,
       rows: FilteredList<PlutoRow>(initialList: []),
       type: PlutoAggregateColumnType.sum,
-    ).test('행이 없는 경우 sum 값은 0이 되어야 한다.', (tester) async {
+    ).test(
+        'When sum is set, the value should be displayed in the specified format.',
+        (tester) async {
       final found = find.text('0');
 
       expect(found, findsOneWidget);
@@ -99,7 +101,9 @@ void main() {
       column: columns.first,
       rows: FilteredList<PlutoRow>(initialList: []),
       type: PlutoAggregateColumnType.average,
-    ).test('행이 없는 경우 average 값은 0이 되어야 한다.', (tester) async {
+    ).test(
+        'When average is set, the value should be displayed in the specified format.',
+        (tester) async {
       final found = find.text('0');
 
       expect(found, findsOneWidget);
@@ -109,7 +113,9 @@ void main() {
       column: columns.first,
       rows: FilteredList<PlutoRow>(initialList: []),
       type: PlutoAggregateColumnType.min,
-    ).test('행이 없는 경우 min 값은 빈문자열이 출력되어야 한다.', (tester) async {
+    ).test(
+        'When min is set, the value should be displayed in the specified format.',
+        (tester) async {
       final found = find.text('');
 
       expect(found, findsOneWidget);
@@ -119,7 +125,9 @@ void main() {
       column: columns.first,
       rows: FilteredList<PlutoRow>(initialList: []),
       type: PlutoAggregateColumnType.max,
-    ).test('행이 없는 경우 max 값은 빈문자열이 출력되어야 한다.', (tester) async {
+    ).test(
+        'When max is set, the value should be displayed in the specified format.',
+        (tester) async {
       final found = find.text('');
 
       expect(found, findsOneWidget);
@@ -129,7 +137,9 @@ void main() {
       column: columns.first,
       rows: FilteredList<PlutoRow>(initialList: []),
       type: PlutoAggregateColumnType.count,
-    ).test('행이 없는 경우 max 값은 0이 출력되어야 한다.', (tester) async {
+    ).test(
+        'When count is set, the value should be displayed in the specified format.',
+        (tester) async {
       final found = find.text('0');
 
       expect(found, findsOneWidget);
@@ -143,7 +153,9 @@ void main() {
         PlutoRow(cells: {'column': PlutoCell(value: 3000)}),
       ]),
       type: PlutoAggregateColumnType.sum,
-    ).test('행이 있는 경우 sum 값은 포멧에 맞게 6,000이 출력 되어야 한다.', (tester) async {
+    ).test(
+        'When sum is set, the value should be displayed in the specified format.',
+        (tester) async {
       final found = find.text('6,000');
 
       expect(found, findsOneWidget);
@@ -157,7 +169,9 @@ void main() {
         PlutoRow(cells: {'column': PlutoCell(value: 3000)}),
       ]),
       type: PlutoAggregateColumnType.average,
-    ).test('행이 있는 경우 average 값은 포멧에 맞게 2,000이 출력 되어야 한다.', (tester) async {
+    ).test(
+        'When average is set, the value should be displayed in the specified format.',
+        (tester) async {
       final found = find.text('2,000');
 
       expect(found, findsOneWidget);
@@ -171,7 +185,9 @@ void main() {
         PlutoRow(cells: {'column': PlutoCell(value: 3000)}),
       ]),
       type: PlutoAggregateColumnType.min,
-    ).test('행이 있는 경우 min 값은 포멧에 맞게 1,000이 출력 되어야 한다.', (tester) async {
+    ).test(
+        'When min is set, the value should be displayed in the specified format.',
+        (tester) async {
       final found = find.text('1,000');
 
       expect(found, findsOneWidget);
@@ -185,7 +201,9 @@ void main() {
         PlutoRow(cells: {'column': PlutoCell(value: 3000)}),
       ]),
       type: PlutoAggregateColumnType.max,
-    ).test('행이 있는 경우 max 값은 포멧에 맞게 3,000이 출력 되어야 한다.', (tester) async {
+    ).test(
+        'When max is set, the value should be displayed in the specified format.',
+        (tester) async {
       final found = find.text('3,000');
 
       expect(found, findsOneWidget);
@@ -199,7 +217,9 @@ void main() {
         PlutoRow(cells: {'column': PlutoCell(value: 3000)}),
       ]),
       type: PlutoAggregateColumnType.count,
-    ).test('행이 있는 경우 count 값은 포멧에 맞게 3이 출력 되어야 한다.', (tester) async {
+    ).test(
+        'When count is set, the value should be displayed in the specified format.',
+        (tester) async {
       final found = find.text('3');
 
       expect(found, findsOneWidget);
@@ -214,7 +234,9 @@ void main() {
       ]),
       type: PlutoAggregateColumnType.count,
       filter: (cell) => cell.value > 1000,
-    ).test('filter 가 설정 된 경우 count 값은 필터 조건에 맞게 2이 출력 되어야 한다.', (tester) async {
+    ).test(
+        'When filter is set, the count value should be displayed based on the filter condition.',
+        (tester) async {
       final found = find.text('2');
 
       expect(found, findsOneWidget);
@@ -230,7 +252,7 @@ void main() {
       type: PlutoAggregateColumnType.count,
       format: 'Total : #,###',
     ).test(
-      '행이 있는 경우 count 값은 설정한 포멧에 맞게 Total : 3이 출력 되어야 한다.',
+      'When count is set, the value should be displayed in the specified format.',
       (tester) async {
         final found = find.text('Total : 3');
 
@@ -254,8 +276,7 @@ void main() {
         ];
       },
     ).test(
-      'titleSpanBuilder 이 있는 경우 sum 값은 설정한 위젯에 맞게 '
-      'Left Value : 6,000 Right 이 출력 되어야 한다.',
+      'When titleSpanBuilder is set, the sum value should be displayed in the specified widget.',
       (tester) async {
         expect(find.text('Left '), findsOneWidget);
         expect(find.text('Value : 6,000'), findsOneWidget);
@@ -273,7 +294,7 @@ void main() {
         ..setFilter((element) => element.cells['column']!.value > 1000),
       type: PlutoAggregateColumnType.sum,
     ).test(
-      '필터가 적용 된 경우 필터 된 결과만 집계 되어야 한다.',
+      'When filter is applied, only the filtered results should be aggregated.',
       (tester) async {
         expect(find.text('5,000'), findsOneWidget);
       },
@@ -289,7 +310,7 @@ void main() {
         ..setFilterRange(FilteredListRange(0, 2)),
       type: PlutoAggregateColumnType.sum,
     ).test(
-      '페이지네이션이 적용 된 경우 페이지네이션 된 결과만 집계 되어야 한다.',
+      'When pagination is applied, only the paginated results should be aggregated.',
       (tester) async {
         expect(find.text('3,000'), findsOneWidget);
       },
@@ -306,7 +327,7 @@ void main() {
       type: PlutoAggregateColumnType.sum,
       iterateRowType: PlutoAggregateColumnIterateRowType.all,
     ).test(
-      'iterateRowType 이 all 인 경우 페이지네이션이 적용되어도 전체 행이 집계 되어야 한다.',
+      'When iterateRowType is all, even if pagination is applied, all rows should be included in the aggregation.',
       (tester) async {
         expect(find.text('6,000'), findsOneWidget);
       },
@@ -324,7 +345,7 @@ void main() {
       type: PlutoAggregateColumnType.sum,
       iterateRowType: PlutoAggregateColumnIterateRowType.filtered,
     ).test(
-      'iterateRowType 이 filtered 인 경우 페이지네이션 된 결과를 무시하고 필터링 된 결과만 집계에 포함 해야 한다.',
+      'When iterateRowType is filtered, pagination should be ignored and only the filtered results should be included in the aggregation.',
       (tester) async {
         expect(find.text('5,000'), findsOneWidget);
       },
@@ -341,7 +362,7 @@ void main() {
       type: PlutoAggregateColumnType.sum,
       iterateRowType: PlutoAggregateColumnIterateRowType.all,
     ).test(
-      'iterateRowType 이 all 인 경우 필터가 적용되어도 모든 행이 집계 되어야 한다.',
+      'When iterateRowType is all, even if the filter is applied, all rows should be included in the aggregation.',
       (tester) async {
         expect(find.text('6,000'), findsOneWidget);
       },
@@ -381,8 +402,8 @@ void main() {
         ];
       },
     ).test(
-      'GroupedRowType 이 all 인 경우 '
-      'Value : 10,000 이 출력 되어야 한다.',
+      'When GroupedRowType is all, '
+      'Value : 10,000 should be displayed.',
       (tester) async {
         expect(find.text('Value : 10,000'), findsOneWidget);
       },
@@ -412,8 +433,8 @@ void main() {
         ];
       },
     ).test(
-      'GroupedRowType 이 expandedAll 이고 그룹행이 접혀진 경우 '
-      'Value : 6,000 이 출력 되어야 한다.',
+      'When GroupedRowType is expandedAll and the group row is collapsed, '
+      'Value : 6,000 should be displayed.',
       (tester) async {
         expect(find.text('Value : 6,000'), findsOneWidget);
       },
@@ -445,8 +466,8 @@ void main() {
         ];
       },
     ).test(
-      'GroupedRowType 이 expandedAll 이고 그룹행이 펼쳐진 경우 '
-      'Value : 10,000 이 출력 되어야 한다.',
+      'When GroupedRowType is expandedAll and the group row is expanded, '
+      'Value : 10,000 should be displayed.',
       (tester) async {
         expect(find.text('Value : 10,000'), findsOneWidget);
       },
@@ -478,8 +499,8 @@ void main() {
         ];
       },
     ).test(
-      'GroupedRowType 이 rows 인 경우 '
-      'Value : 9,000 이 출력 되어야 한다.',
+      'When GroupedRowType is rows, '
+      'Value : 9,000 should be displayed.',
       (tester) async {
         expect(find.text('Value : 9,000'), findsOneWidget);
       },
@@ -511,8 +532,8 @@ void main() {
         ];
       },
     ).test(
-      'GroupedRowType 이 expandedRows 이고 그룹행이 접혀진 경우 '
-      'Value : 5,000 이 출력 되어야 한다.',
+      'When GroupedRowType is expandedRows and the group row is collapsed, '
+      'Value : 5,000 should be displayed.',
       (tester) async {
         expect(find.text('Value : 5,000'), findsOneWidget);
       },
@@ -544,8 +565,8 @@ void main() {
         ];
       },
     ).test(
-      'GroupedRowType 이 expandedRows 이고 그룹행이 펼쳐진 경우 '
-      'Value : 9,000 이 출력 되어야 한다.',
+      'When GroupedRowType is expandedRows and the group row is expanded, '
+      'Value : 9,000 should be displayed.',
       (tester) async {
         expect(find.text('Value : 9,000'), findsOneWidget);
       },
@@ -573,7 +594,7 @@ void main() {
       groupedRowType: PlutoAggregateColumnGroupedRowType.all,
       enabledRowGroups: true,
     ).test(
-      '필터가 적용 된 경우 필터가 적용 된 결과만 집계에 포함 되어야 한다.',
+      'When the filter is applied, only the filtered results should be included in the aggregation.',
       (tester) async {
         expect(find.text('5,000'), findsOneWidget);
       },
@@ -601,7 +622,7 @@ void main() {
       groupedRowType: PlutoAggregateColumnGroupedRowType.all,
       enabledRowGroups: true,
     ).test(
-      '페이지네이션이 설정 된 경우 페이지네이션 된 결과만 집계에 포함 되어야 한다.',
+      'When pagination is set, only the paginated results should be included in the aggregation.',
       (tester) async {
         expect(find.text('7,000'), findsOneWidget);
       },
@@ -630,7 +651,7 @@ void main() {
       groupedRowType: PlutoAggregateColumnGroupedRowType.all,
       enabledRowGroups: true,
     ).test(
-      'iterateRowType 가 all 인 경우 필터가 적용되어도 전체 행이 집계에 포함 되어야 한다.',
+      'When iterateRowType is all, even if the filter is applied, all rows should be included in the aggregation.',
       (tester) async {
         expect(find.text('10,000'), findsOneWidget);
       },
@@ -660,7 +681,7 @@ void main() {
       groupedRowType: PlutoAggregateColumnGroupedRowType.all,
       enabledRowGroups: true,
     ).test(
-      'iterateRowType 가 filtered 인 경우 페이지네이션을 무시하고 필터링 된 결과만 집계에 포함 되어야 한다.',
+      'When iterateRowType is filtered, pagination should be ignored and only the filtered results should be included in the aggregation.',
       (tester) async {
         expect(find.text('5,000'), findsOneWidget);
       },

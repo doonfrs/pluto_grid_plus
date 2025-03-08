@@ -130,7 +130,7 @@ void main() {
   ) async {
     final textField = findFilterTextField(columnTitle);
 
-    // 텍스트 박스가 최초에 포커스를 받으려면 두번 탭.
+    // To receive focus, tap the text box twice.
     await tester.tap(textField);
     await tester.tap(textField);
 
@@ -139,225 +139,248 @@ void main() {
     }
   }
 
-  testWidgets('최초 20개 행이 렌더링 되어야 한다.', (tester) async {
-    final dummyRows = RowHelper.count(90, columns);
-    final fetch = makeFetch(dummyRows: dummyRows);
-
-    await buildGrid(tester, fetch: fetch);
-    await tester.pumpAndSettle(const Duration(milliseconds: 30));
-
-    expect(stateManager.refRows.length, 20);
-
-    expect(
-      dummyRows.getRange(0, 20).map((e) => e.key),
-      stateManager.refRows.map((e) => e.key),
-    );
-
-    expect(find.text('column0 value 0'), findsOneWidget);
-    expect(find.text('column4 value 0'), findsOneWidget);
-    expect(find.text('column0 value 7'), findsOneWidget);
-    expect(find.text('column4 value 7'), findsOneWidget);
-    expect(find.text('column0 value 16'), findsOneWidget);
-    expect(find.text('column4 value 16'), findsOneWidget);
-  });
-
-  testWidgets('initialFetch 가 false 인 경우 행이 렌더링 되지 않아야 한다.', (tester) async {
-    final dummyRows = RowHelper.count(90, columns);
-    final fetch = makeFetch(dummyRows: dummyRows);
-
-    await buildGrid(tester, fetch: fetch, initialFetch: false);
-    await tester.pumpAndSettle(const Duration(milliseconds: 30));
-
-    expect(stateManager.refRows.length, 0);
-    expect(find.byType(PlutoBaseRow), findsNothing);
-  });
-
-  testWidgets('fetchWithSorting 를 true 로 설정하면 sortOnlyEvent 의 값도 변경 되어야 한다.',
+  group('Infinity Scroll Test', () {
+    testWidgets(
+      'When scrolling to the bottom, more rows should be loaded',
       (tester) async {
-    final dummyRows = RowHelper.count(90, columns);
-    final fetch = makeFetch(dummyRows: dummyRows);
+        final dummyRows = RowHelper.count(90, columns);
+        final fetch = makeFetch(dummyRows: dummyRows);
 
-    await buildGrid(
-      tester,
-      fetch: fetch,
-      initialFetch: false,
-      fetchWithSorting: true,
+        await buildGrid(tester, fetch: fetch);
+        await tester.pumpAndSettle(const Duration(milliseconds: 30));
+
+        expect(stateManager.refRows.length, 20);
+
+        expect(
+          dummyRows.getRange(0, 20).map((e) => e.key),
+          stateManager.refRows.map((e) => e.key),
+        );
+
+        expect(find.text('column0 value 0'), findsOneWidget);
+        expect(find.text('column4 value 0'), findsOneWidget);
+        expect(find.text('column0 value 7'), findsOneWidget);
+        expect(find.text('column4 value 7'), findsOneWidget);
+        expect(find.text('column0 value 16'), findsOneWidget);
+        expect(find.text('column4 value 16'), findsOneWidget);
+      },
     );
 
-    expect(stateManager.sortOnlyEvent, true);
-  });
-
-  testWidgets(
-      'fetchWithFiltering 를 true 로 설정하면 filterOnlyEvent 의 값도 변경 되어야 한다.',
+    testWidgets(
+      'When initialFetch is false, no rows should be rendered initially',
       (tester) async {
-    final dummyRows = RowHelper.count(90, columns);
-    final fetch = makeFetch(dummyRows: dummyRows);
+        final dummyRows = RowHelper.count(90, columns);
+        final fetch = makeFetch(dummyRows: dummyRows);
 
-    await buildGrid(
-      tester,
-      fetch: fetch,
-      initialFetch: false,
-      fetchWithFiltering: true,
+        await buildGrid(tester, fetch: fetch, initialFetch: false);
+        await tester.pumpAndSettle(const Duration(milliseconds: 30));
+
+        expect(stateManager.refRows.length, 0);
+        expect(find.byType(PlutoBaseRow), findsNothing);
+      },
     );
 
-    expect(stateManager.filterOnlyEvent, true);
-  });
+    testWidgets(
+      'When fetchWithSorting is true, sortOnlyEvent should be true',
+      (tester) async {
+        final dummyRows = RowHelper.count(90, columns);
+        final fetch = makeFetch(dummyRows: dummyRows);
 
-  testWidgets(
-      'initialFetch 가 false 이고 PlutoGrid 에 20개의 행을 전달한 경우, '
-      '20개 행이 렌더링 되어야 한다.', (tester) async {
-    final dummyRows = RowHelper.count(90, columns);
-    final fetch = makeFetch(dummyRows: dummyRows);
+        await buildGrid(
+          tester,
+          fetch: fetch,
+          initialFetch: false,
+          fetchWithSorting: true,
+        );
 
-    rows = dummyRows.getRange(0, 20).toList();
-    await buildGrid(tester, fetch: fetch, initialFetch: false);
-    await tester.pumpAndSettle();
-
-    expect(stateManager.refRows.length, 20);
-    // 화면 사이즈가 17개 행을 표현
-    expect(find.byType(PlutoBaseRow), findsNWidgets(17));
-  });
-
-  testWidgets('가장 아래로 스크롤 되면 20개 행이 더 렌더링 되어야 한다.', (tester) async {
-    final dummyRows = RowHelper.count(90, columns);
-    final fetch = makeFetch(dummyRows: dummyRows);
-
-    await buildGrid(tester, fetch: fetch);
-    await tester.pumpAndSettle(const Duration(milliseconds: 30));
-
-    expect(stateManager.refRows.length, 20);
-
-    await tester.scrollUntilVisible(
-      find.text('column0 value 19'),
-      500.0,
-      scrollable: find.descendant(
-        of: find.byType(ListView),
-        matching: find.byType(Scrollable),
-      ),
-    );
-    await tester.pumpAndSettle(const Duration(milliseconds: 30));
-
-    expect(stateManager.refRows.length, 40);
-
-    await tester.tap(find.text('column0 value 19'));
-    await tester.pumpAndSettle();
-
-    await tester.sendKeyEvent(LogicalKeyboardKey.pageDown);
-    await tester.pumpAndSettle();
-
-    expect(find.text('column0 value 35'), findsOneWidget);
-  });
-
-  testWidgets(
-      'PageDown 버튼으로 가장 아래로 이동하면, '
-      '20개 행이 더 렌더링 되어야 한다.', (tester) async {
-    final dummyRows = RowHelper.count(90, columns);
-    final fetch = makeFetch(dummyRows: dummyRows);
-
-    await buildGrid(tester, fetch: fetch);
-    await tester.pumpAndSettle(const Duration(milliseconds: 30));
-
-    expect(stateManager.refRows.length, 20);
-
-    await tester.tap(find.text('column0 value 15'));
-    await tester.pumpAndSettle();
-    await tester.sendKeyEvent(LogicalKeyboardKey.pageDown);
-    await tester.pumpAndSettle(const Duration(milliseconds: 30));
-
-    expect(stateManager.refRows.length, 40);
-
-    await tester.sendKeyEvent(LogicalKeyboardKey.pageDown);
-    await tester.pumpAndSettle();
-
-    expect(find.text('column0 value 30'), findsOneWidget);
-  });
-
-  testWidgets(
-      '40 개 이상의 행을 렌더링 한 후 컬럼 정렬을 하면, '
-      '새로 정렬된 20개 행이 렌더링 되어야 한다.', (tester) async {
-    final dummyRows = RowHelper.count(90, columns);
-    final fetch = makeFetch(dummyRows: dummyRows);
-
-    await buildGrid(tester, fetch: fetch);
-    await tester.pumpAndSettle(const Duration(milliseconds: 30));
-
-    await tester.tap(find.text('column0 value 15'));
-    await tester.pumpAndSettle();
-    await tester.sendKeyEvent(LogicalKeyboardKey.pageDown);
-    await tester.pumpAndSettle(const Duration(milliseconds: 30));
-
-    expect(stateManager.refRows.length, 40);
-
-    await tester.tap(find.text('column0'));
-    await tester.pumpAndSettle();
-
-    expect(stateManager.refRows.length, 20);
-  });
-
-  testWidgets(
-      '40 개 이상의 행을 렌더링 한 후 column0 의 필터링 값을 설정하면, '
-      '필터링이 적용된 새로운 행이 렌더링 되어야 한다.', (tester) async {
-    final dummyRows = RowHelper.count(90, columns);
-    final fetch = makeFetch(dummyRows: dummyRows);
-
-    await buildGrid(tester, fetch: fetch, showColumnFilter: true);
-    await tester.pumpAndSettle(const Duration(milliseconds: 30));
-
-    await tester.tap(find.text('column0 value 14'));
-    await tester.pumpAndSettle();
-    await tester.sendKeyEvent(LogicalKeyboardKey.pageDown);
-    await tester.pumpAndSettle(const Duration(milliseconds: 30));
-
-    expect(stateManager.refRows.length, 40);
-
-    await tapAndEnterTextColumnFilter(tester, 'column0', 'value');
-    await tester.pumpAndSettle(const Duration(seconds: 1));
-
-    expect(stateManager.refRows.length, 20);
-  });
-
-  testWidgets(
-      '필터링이 적용된 상태에서, '
-      '필터링 아이콘이 렌더링 되어야 한다.', (tester) async {
-    final dummyRows = RowHelper.count(90, columns);
-    final fetch = makeFetch(dummyRows: dummyRows);
-
-    await buildGrid(tester, fetch: fetch, showColumnFilter: true);
-    await tester.pumpAndSettle(const Duration(milliseconds: 30));
-
-    expect(stateManager.hasFilter, false);
-
-    await tapAndEnterTextColumnFilter(tester, 'column0', 'value');
-    await tester.pumpAndSettle(const Duration(seconds: 1));
-
-    expect(stateManager.hasFilter, true);
-    expect(find.byIcon(Icons.filter_alt_outlined), findsOneWidget);
-  });
-
-  testWidgets(
-      '마지막 페이지까지 스크롤을 하면, '
-      '총 90 개의 행이 렌더링 되어야 한다.', (tester) async {
-    final dummyRows = RowHelper.count(90, columns);
-    final fetch = makeFetch(dummyRows: dummyRows);
-
-    await buildGrid(tester, fetch: fetch);
-    await tester.pumpAndSettle(const Duration(milliseconds: 30));
-
-    await tester.scrollUntilVisible(
-      find.text('column0 value 89'),
-      500.0,
-      scrollable: find.descendant(
-        of: find.byType(ListView),
-        matching: find.byType(Scrollable),
-      ),
+        expect(stateManager.sortOnlyEvent, true);
+      },
     );
 
-    expect(stateManager.refRows.length, 90);
+    testWidgets(
+      'When fetchWithFiltering is true, filterOnlyEvent should be true',
+      (tester) async {
+        final dummyRows = RowHelper.count(90, columns);
+        final fetch = makeFetch(dummyRows: dummyRows);
 
-    await tester.tap(find.text('column0 value 89'));
-    await tester.sendKeyEvent(LogicalKeyboardKey.pageDown);
-    await tester.pumpAndSettle(const Duration(milliseconds: 30));
+        await buildGrid(
+          tester,
+          fetch: fetch,
+          initialFetch: false,
+          fetchWithFiltering: true,
+        );
 
-    expect(stateManager.refRows.length, 90);
+        expect(stateManager.filterOnlyEvent, true);
+      },
+    );
+
+    testWidgets(
+      'When initialFetch is false and 20 rows are passed to PlutoGrid, '
+      '20 rows should be rendered',
+      (tester) async {
+        final dummyRows = RowHelper.count(90, columns);
+        final fetch = makeFetch(dummyRows: dummyRows);
+
+        rows = dummyRows.getRange(0, 20).toList();
+        await buildGrid(tester, fetch: fetch, initialFetch: false);
+        await tester.pumpAndSettle();
+
+        expect(stateManager.refRows.length, 20);
+        // The screen size displays 17 rows
+        expect(find.byType(PlutoBaseRow), findsNWidgets(17));
+      },
+    );
+
+    testWidgets(
+      'When scrolling to the bottom, more rows should be loaded',
+      (tester) async {
+        final dummyRows = RowHelper.count(90, columns);
+        final fetch = makeFetch(dummyRows: dummyRows);
+
+        await buildGrid(tester, fetch: fetch);
+        await tester.pumpAndSettle(const Duration(milliseconds: 30));
+
+        expect(stateManager.refRows.length, 20);
+
+        await tester.scrollUntilVisible(
+          find.text('column0 value 19'),
+          500.0,
+          scrollable: find.descendant(
+            of: find.byType(ListView),
+            matching: find.byType(Scrollable),
+          ),
+        );
+        await tester.pumpAndSettle(const Duration(milliseconds: 30));
+
+        expect(stateManager.refRows.length, 40);
+
+        await tester.tap(find.text('column0 value 19'));
+        await tester.pumpAndSettle();
+
+        await tester.sendKeyEvent(LogicalKeyboardKey.pageDown);
+        await tester.pumpAndSettle();
+
+        expect(find.text('column0 value 35'), findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      'When PageDown button is pressed, more rows should be loaded',
+      (tester) async {
+        final dummyRows = RowHelper.count(90, columns);
+        final fetch = makeFetch(dummyRows: dummyRows);
+
+        await buildGrid(tester, fetch: fetch);
+        await tester.pumpAndSettle(const Duration(milliseconds: 30));
+
+        expect(stateManager.refRows.length, 20);
+
+        await tester.tap(find.text('column0 value 15'));
+        await tester.pumpAndSettle();
+        await tester.sendKeyEvent(LogicalKeyboardKey.pageDown);
+        await tester.pumpAndSettle(const Duration(milliseconds: 30));
+
+        expect(stateManager.refRows.length, 40);
+
+        await tester.sendKeyEvent(LogicalKeyboardKey.pageDown);
+        await tester.pumpAndSettle();
+
+        expect(find.text('column0 value 30'), findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      'When sorting is applied after loading more than 40 rows, '
+      'newly sorted rows should be loaded',
+      (tester) async {
+        final dummyRows = RowHelper.count(90, columns);
+        final fetch = makeFetch(dummyRows: dummyRows);
+
+        await buildGrid(tester, fetch: fetch);
+        await tester.pumpAndSettle(const Duration(milliseconds: 30));
+
+        await tester.tap(find.text('column0 value 15'));
+        await tester.pumpAndSettle();
+        await tester.sendKeyEvent(LogicalKeyboardKey.pageDown);
+        await tester.pumpAndSettle(const Duration(milliseconds: 30));
+
+        expect(stateManager.refRows.length, 40);
+
+        await tester.tap(find.text('column0'));
+        await tester.pumpAndSettle();
+
+        expect(stateManager.refRows.length, 20);
+      },
+    );
+
+    testWidgets(
+      'When filtering is applied after loading more than 40 rows, '
+      'newly filtered rows should be loaded',
+      (tester) async {
+        final dummyRows = RowHelper.count(90, columns);
+        final fetch = makeFetch(dummyRows: dummyRows);
+
+        await buildGrid(tester, fetch: fetch, showColumnFilter: true);
+        await tester.pumpAndSettle(const Duration(milliseconds: 30));
+
+        await tester.tap(find.text('column0 value 14'));
+        await tester.pumpAndSettle();
+        await tester.sendKeyEvent(LogicalKeyboardKey.pageDown);
+        await tester.pumpAndSettle(const Duration(milliseconds: 30));
+
+        expect(stateManager.refRows.length, 40);
+
+        await tapAndEnterTextColumnFilter(tester, 'column0', 'value');
+        await tester.pumpAndSettle(const Duration(seconds: 1));
+
+        expect(stateManager.refRows.length, 20);
+      },
+    );
+
+    testWidgets(
+      'When filtering is applied, filter icon should be displayed',
+      (tester) async {
+        final dummyRows = RowHelper.count(90, columns);
+        final fetch = makeFetch(dummyRows: dummyRows);
+
+        await buildGrid(tester, fetch: fetch, showColumnFilter: true);
+        await tester.pumpAndSettle(const Duration(milliseconds: 30));
+
+        expect(stateManager.hasFilter, false);
+
+        await tapAndEnterTextColumnFilter(tester, 'column0', 'value');
+        await tester.pumpAndSettle(const Duration(seconds: 1));
+
+        expect(stateManager.hasFilter, true);
+        expect(find.byIcon(Icons.filter_alt_outlined), findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      'When scrolling to the last page, all 90 rows should be loaded',
+      (tester) async {
+        final dummyRows = RowHelper.count(90, columns);
+        final fetch = makeFetch(dummyRows: dummyRows);
+
+        await buildGrid(tester, fetch: fetch);
+        await tester.pumpAndSettle(const Duration(milliseconds: 30));
+
+        await tester.scrollUntilVisible(
+          find.text('column0 value 89'),
+          500.0,
+          scrollable: find.descendant(
+            of: find.byType(ListView),
+            matching: find.byType(Scrollable),
+          ),
+        );
+
+        expect(stateManager.refRows.length, 90);
+
+        await tester.tap(find.text('column0 value 89'));
+        await tester.sendKeyEvent(LogicalKeyboardKey.pageDown);
+        await tester.pumpAndSettle(const Duration(milliseconds: 30));
+
+        expect(stateManager.refRows.length, 90);
+      },
+    );
   });
 }

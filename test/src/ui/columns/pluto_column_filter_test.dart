@@ -42,7 +42,7 @@ void main() {
   });
 
   testWidgets(
-    'TextField 를 탭하면 setKeepFocus 가 false 로 호출 되어야 한다.',
+    'Tapping TextField should call setKeepFocus with false',
     (WidgetTester tester) async {
       // given
       final PlutoColumn column = PlutoColumn(
@@ -71,7 +71,7 @@ void main() {
   );
 
   testWidgets(
-    'TextField 에 텍스트를 입력하면 PlutoChangeColumnFilterEvent 가 호출 되어야 한다.',
+    'Entering text in TextField should trigger PlutoChangeColumnFilterEvent',
     (WidgetTester tester) async {
       // given
       final PlutoColumn column = PlutoColumn(
@@ -108,7 +108,7 @@ void main() {
 
   group('enabled', () {
     testWidgets(
-      'enableFilterMenuItem 이 false 면 TextField 의 enabled 가 false 이어야 한다.',
+      'If enableFilterMenuItem is false, TextField should be disabled',
       (WidgetTester tester) async {
         // given
         final PlutoColumn column = PlutoColumn(
@@ -140,8 +140,7 @@ void main() {
     );
 
     testWidgets(
-      'enableFilterMenuItem 이 true 이고, '
-      'filterRows.length 가 2 이상 이면 TextField 의 enabled 가 false 이어야 한다.',
+      'If enableFilterMenuItem is true and filterRows.length is 2 or more, TextField should be disabled',
       (WidgetTester tester) async {
         // given
         final PlutoColumn column = PlutoColumn(
@@ -182,10 +181,7 @@ void main() {
     );
 
     testWidgets(
-      'enableFilterMenuItem 이 true 이고, '
-      'filterRows.length 가 2 미만이고, '
-      'filterRows 에 filterFieldAllColumns 가 있으면, '
-      'TextField 의 enabled 가 false 이어야 한다.',
+      'If enableFilterMenuItem is true and filterRows.length is less than 2 and filterRows contains filterFieldAllColumns, TextField should be disabled',
       (WidgetTester tester) async {
         // given
         final PlutoColumn column = PlutoColumn(
@@ -223,10 +219,7 @@ void main() {
     );
 
     testWidgets(
-      'enableFilterMenuItem 이 true 이고, '
-      'filterRows.length 가 2 미만이고, '
-      'filterRows 에 filterFieldAllColumns 가 없으면, '
-      'TextField 의 enabled 가 true 이어야 한다.',
+      'If enableFilterMenuItem is true and filterRows.length is less than 2 and filterRows does not contain filterFieldAllColumns, TextField should be enabled',
       (WidgetTester tester) async {
         // given
         final PlutoColumn column = PlutoColumn(

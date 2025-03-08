@@ -4,7 +4,7 @@ import 'package:pluto_grid_plus/pluto_grid_plus.dart';
 
 void main() {
   testWidgets(
-    'checkbox 가 렌더링 되어야 한다.',
+    'Checkbox should be rendered',
     (WidgetTester tester) async {
       // given
       const bool value = false;
@@ -29,7 +29,7 @@ void main() {
   );
 
   testWidgets(
-    'checkbox 를 탭하면 handleOnChanged 가 호출 되어야 한다.',
+    'Tapping checkbox should call handleOnChanged',
     (WidgetTester tester) async {
       // given
       bool? value = false;

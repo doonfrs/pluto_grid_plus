@@ -53,7 +53,7 @@ void main() {
   }
 
   buildGrid().test(
-    '첫번째 셀이 포커스 되어야 한다.',
+    'When the first cell is focused',
     (tester) async {
       expect(stateManager.currentCell, isNot(null));
       expect(stateManager.currentCellPosition?.rowIdx, 0);
@@ -62,7 +62,7 @@ void main() {
   );
 
   buildGrid(numberOfRows: 0).test(
-    '행이 없는 경우 에러가 발생 되지 않고 그리드가 포커스 되어야 한다.',
+    'When there are no rows, no error should occur and the grid should be focused',
     (tester) async {
       expect(stateManager.refRows.length, 0);
       expect(stateManager.currentCell, null);
@@ -76,7 +76,7 @@ void main() {
       1,
     ),
   ).test(
-    'onLoaded 에서 두번째 셀을 선택하면, 두번째 셀이 포커스 되어야 한다.',
+    'When selected in onLoaded, the second cell should be focused',
     (tester) async {
       expect(stateManager.currentCell, isNot(null));
       expect(stateManager.currentCellPosition?.rowIdx, 1);
@@ -85,21 +85,21 @@ void main() {
   );
 
   buildGrid().test(
-    '그리드 포커스가 활성화 되어야 한다.',
+    'When running in grid mode, the grid should be focused.',
     (tester) async {
       expect(stateManager.hasFocus, true);
     },
   );
 
   buildGrid().test(
-    'multiSelect 모드로 실행하면 selectingMode 가 row 가 되어야 한다.',
+    'When running in multiSelect mode, the selectingMode should be row.',
     (tester) async {
       expect(stateManager.selectingMode.isRow, true);
     },
   );
 
   buildGrid(onSelected: mock.oneParamReturnVoid<PlutoGridOnSelectedEvent>).test(
-    '0, 2, 4 행을 탭하면 onSelected 콜백의 selectedRows 에 탭한 행이 포함 되어야 한다.',
+    'When 0, 2, 4 rows are selected, the selectedRows of the onSelected callback should contain the selected rows.',
     (tester) async {
       await tester.tap(find.text('column0 value 0'));
       await tester.pumpAndSettle();
@@ -148,8 +148,8 @@ void main() {
   );
 
   buildGrid(onSelected: mock.oneParamReturnVoid<PlutoGridOnSelectedEvent>).test(
-    '0, 2, 4 행을 탭하고 0, 2 를 다시 탭하면, '
-    '4번 행만 onSelected 콜백의 selectedRows 에 포함 되어야 한다.',
+    'When 0, 2, 4 rows are selected and 0, 2 are selected again, '
+    '4th row should be the only one in the selectedRows of the onSelected callback.',
     (tester) async {
       await tester.tap(find.text('column0 value 0'));
       await tester.pumpAndSettle();
@@ -196,9 +196,9 @@ void main() {
   );
 
   buildGrid(onSelected: mock.oneParamReturnVoid<PlutoGridOnSelectedEvent>).test(
-    '첫번째 셀이 선택 된 상태에서, '
-    'shift + arrowDown 키를 3번 입력하고 엔터키를 입력하면, '
-    'onSelected 콜백이 0, 1, 2, 3 행을 포함해야 한다.',
+    'When the first cell is selected, '
+    'press shift + arrowDown 3 times and enter to input, '
+    'the onSelected callback should contain rows 0, 1, 2, 3.',
     (tester) async {
       await tester.sendKeyDownEvent(LogicalKeyboardKey.shift);
       await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
@@ -229,9 +229,9 @@ void main() {
   );
 
   buildGrid(onSelected: mock.oneParamReturnVoid<PlutoGridOnSelectedEvent>).test(
-    '첫번째 셀이 선택 된 상태에서, '
-    'shift + tap 으로 2번 행을 탭하면, '
-    'onSelected 콜백이 0, 1, 2 행을 포함해야 한다.',
+    'When the first cell is selected, '
+    'press shift + tap row 2, '
+    'the onSelected callback should contain rows 0, 1, 2.',
     (tester) async {
       await tester.sendKeyDownEvent(LogicalKeyboardKey.shift);
       await tester.tap(find.text('column0 value 2'));
@@ -254,9 +254,9 @@ void main() {
   );
 
   buildGrid(onSelected: mock.oneParamReturnVoid<PlutoGridOnSelectedEvent>).test(
-    '첫번째 셀이 선택 된 상태에서, '
-    'control + tap 으로 3번 행을 탭하면, '
-    'onSelected 콜백이 3 행을 포함해야 한다.',
+    'When the first cell is selected, '
+    'control + tap row 3, '
+    'the onSelected callback should contain row 3.',
     (tester) async {
       await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
       await tester.tap(find.text('column0 value 3'));
@@ -277,9 +277,9 @@ void main() {
   );
 
   buildGrid(onSelected: mock.oneParamReturnVoid<PlutoGridOnSelectedEvent>).test(
-    '1, 3, 5 행이 선택 된 상태에서, '
-    'escape 키를 입력하면, '
-    'onSelected 콜백의 selectedRows 가 null 로 호출 되어야 한다.',
+    'When rows 1, 3, 5 are selected, '
+    'press escape to clear selection, '
+    'the onSelected callback should have null selectedRows.',
     (tester) async {
       await tester.tap(find.text('column0 value 1'));
       await tester.pumpAndSettle();
@@ -318,8 +318,8 @@ void main() {
   );
 
   buildGrid(onSelected: mock.oneParamReturnVoid<PlutoGridOnSelectedEvent>).test(
-    '2 ~ 5 행을 드래그해서 선택하면, '
-    'onSelected 콜백의 selectedRows 가 2 ~ 5 행을 포함하여 호출 되어야 한다.',
+    'When rows 2 ~ 5 are selected by drag, '
+    'the onSelected callback should contain rows 2 ~ 5.',
     (tester) async {
       final gridHelper = BuildGridHelper();
 

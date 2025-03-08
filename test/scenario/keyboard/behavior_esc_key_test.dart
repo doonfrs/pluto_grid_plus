@@ -10,7 +10,7 @@ import '../../helper/row_helper.dart';
 import '../../mock/mock_methods.dart';
 
 void main() {
-  group('ESC 키 테스트', () {
+  group('ESC Key Test', () {
     List<PlutoColumn> columns;
 
     List<PlutoRow> rows;
@@ -25,7 +25,7 @@ void main() {
 
     withTheCellSelected([PlutoGridMode mode = PlutoGridMode.normal]) {
       return PlutoWidgetTestHelper(
-        '0, 0 셀이 선택 된 상태에서',
+        '0, 0 cell is selected',
         (tester) async {
           columns = [
             ...ColumnHelper.textColumn('header', count: 10),
@@ -57,7 +57,7 @@ void main() {
     }
 
     withTheCellSelected(PlutoGridMode.select).test(
-      '그리드가 Select 모드 라면 onSelected 이벤트가 발생 되어야 한다.',
+      'When the grid is in Select mode, the onSelected event should be triggered.',
       (tester) async {
         verify(mock.oneParamReturnVoid(any)).called(1);
 
@@ -66,8 +66,8 @@ void main() {
     );
 
     withTheCellSelected().test(
-      '그리드가 Select 모드가 아니고, '
-      'editing true 상태라면 editing 이 false 가 되어야 한다.',
+      'When the grid is not in Select mode and is in editing state, '
+      'editing should be set to false.',
       (tester) async {
         expect(stateManager!.mode.isSelect, isFalse);
 
@@ -80,8 +80,8 @@ void main() {
     );
 
     withTheCellSelected().test(
-      '그리드가 Select 모드가 아니고,'
-      'Cell 값이 변경 된 상태라면 원래 셀 값으로 되돌려 져야 한다.',
+      'When the grid is not in Select mode and the cell value has changed, '
+      'the cell value should be restored to its original value.',
       (tester) async {
         expect(stateManager!.mode.isSelect, isFalse);
 

@@ -76,7 +76,7 @@ void main() {
     );
   }
 
-  testWidgets('컬럼 타이틀이 출력 되어야 한다.', (WidgetTester tester) async {
+  testWidgets('Column title should be displayed', (WidgetTester tester) async {
     // given
     final PlutoColumn column = PlutoColumn(
       title: 'column title',
@@ -93,7 +93,7 @@ void main() {
     expect(find.text('column title'), findsOneWidget);
   });
 
-  testWidgets('ColumnIcon 이 출력 되어야 한다.', (WidgetTester tester) async {
+  testWidgets('ColumnIcon should be displayed', (WidgetTester tester) async {
     // given
     final PlutoColumn column = PlutoColumn(
       title: 'column title',
@@ -111,8 +111,8 @@ void main() {
   });
 
   testWidgets(
-      'enableSorting 가 기본값 true 인 상태에서 '
-      'title 을 탭하면 toggleSortColumn 함수가 호출 되어야 한다.',
+      'When enableSorting is true (default), '
+      'tapping title should call toggleSortColumn function',
       (WidgetTester tester) async {
     // given
     final PlutoColumn column = PlutoColumn(
@@ -133,8 +133,9 @@ void main() {
   });
 
   testWidgets(
-      'enableSorting 가 false 인 상태에서 '
-      'GestureDetector 위젯이 없어야 한다.', (WidgetTester tester) async {
+      'When enableSorting is false, '
+      'GestureDetector widget should not exist',
+      (WidgetTester tester) async {
     // given
     final PlutoColumn column = PlutoColumn(
       title: 'header',
@@ -157,8 +158,9 @@ void main() {
   });
 
   testWidgets(
-      'WHEN Column 이 enableDraggable false'
-      'THEN Draggable 이 노출 되지 않아야 한다.', (WidgetTester tester) async {
+      'WHEN Column has enableDraggable false '
+      'THEN Draggable should not be visible',
+      (WidgetTester tester) async {
     // given
     final PlutoColumn column = PlutoColumn(
       title: 'header',
@@ -179,8 +181,9 @@ void main() {
   });
 
   testWidgets(
-      'WHEN Column 이 enableDraggable true'
-      'THEN Draggable 이 노출 되어야 한다.', (WidgetTester tester) async {
+      'WHEN Column has enableDraggable true '
+      'THEN Draggable should be visible',
+      (WidgetTester tester) async {
     // given
     final PlutoColumn column = PlutoColumn(
       title: 'header',
@@ -203,8 +206,8 @@ void main() {
   });
 
   testWidgets(
-    'enableContextMenu 이 false, enableDropToResize 가 false 면 '
-    'ColumnIcon 이 출력 되지 않아야 한다.',
+    'When enableContextMenu is false and enableDropToResize is false, '
+    'ColumnIcon should not be displayed',
     (WidgetTester tester) async {
       // given
       final PlutoColumn column = PlutoColumn(
@@ -226,8 +229,8 @@ void main() {
   );
 
   testWidgets(
-    'enableContextMenu 이 true, enableDropToResize 가 true 면 '
-    'ColumnIcon 이 출력 되어야 한다.',
+    'When enableContextMenu is true and enableDropToResize is true, '
+    'ColumnIcon should be displayed',
     (WidgetTester tester) async {
       // given
       final PlutoColumn column = PlutoColumn(
@@ -254,8 +257,8 @@ void main() {
   );
 
   testWidgets(
-    'enableContextMenu 이 true, enableDropToResize 가 false 면 '
-    'ColumnIcon 이 출력 되어야 한다.',
+    'When enableContextMenu is true and enableDropToResize is false, '
+    'ColumnIcon should be displayed',
     (WidgetTester tester) async {
       // given
       final PlutoColumn column = PlutoColumn(
@@ -283,8 +286,8 @@ void main() {
   );
 
   testWidgets(
-    'enableContextMenu 이 false, enableDropToResize 가 true 면 '
-    'ColumnIcon 이 출력 되어야 한다.',
+    'When enableContextMenu is false and enableDropToResize is true, '
+    'ColumnIcon should be displayed',
     (WidgetTester tester) async {
       // given
       final PlutoColumn column = PlutoColumn(
@@ -330,7 +333,7 @@ void main() {
     final columnHasNotCheckbox = buildColumn(false);
 
     columnHasNotCheckbox.test(
-      'checkbox 위젯이 이 출력 되지 않아야 한다.',
+      'Checkbox widget should not be displayed',
       (tester) async {
         expect(find.byType(Checkbox), findsNothing);
       },
@@ -339,14 +342,14 @@ void main() {
     final columnHasCheckbox = buildColumn(true);
 
     columnHasCheckbox.test(
-      'checkbox 위젯이 이 출력 되어야 한다.',
+      'Checkbox widget should be displayed',
       (tester) async {
         expect(find.byType(Checkbox), findsOneWidget);
       },
     );
 
     columnHasCheckbox.test(
-      'checkbox 를 탭하면 toggleAllRowChecked 가 호출 되어야 한다.',
+      'Tapping checkbox should call toggleAllRowChecked',
       (tester) async {
         await tester.tap(find.byType(Checkbox));
 
@@ -355,7 +358,7 @@ void main() {
     );
   });
 
-  group('고정 컬럼이 아닌 경우', () {
+  group('Non-frozen column', () {
     final PlutoColumn column = PlutoColumn(
       title: 'column title',
       field: 'column_field_name',
@@ -377,13 +380,13 @@ void main() {
       await gesture.up();
     });
 
-    tapColumn.test('기본 메뉴가 출력 되어야 한다.', (tester) async {
+    tapColumn.test('Default menu should be displayed', (tester) async {
       expect(find.text('Freeze to start'), findsOneWidget);
       expect(find.text('Freeze to end'), findsOneWidget);
       expect(find.text('Auto fit'), findsOneWidget);
     });
 
-    tapColumn.test('Freeze to start 를 탭하면 toggleFrozenColumn 이 호출 되어야 한다.',
+    tapColumn.test('Tapping Freeze to start should call toggleFrozenColumn',
         (tester) async {
       await tester.tap(find.text('Freeze to start'));
 
@@ -393,7 +396,7 @@ void main() {
       )).called(1);
     });
 
-    tapColumn.test('Freeze to end 를 탭하면 toggleFrozenColumn 이 호출 되어야 한다.',
+    tapColumn.test('Tapping Freeze to end should call toggleFrozenColumn',
         (tester) async {
       await tester.tap(find.text('Freeze to end'));
 
@@ -403,7 +406,7 @@ void main() {
       )).called(1);
     });
 
-    tapColumn.test('Auto fit 를 탭하면 autoFitColumn 이 호출 되어야 한다.', (tester) async {
+    tapColumn.test('Tapping Auto fit should call autoFitColumn', (tester) async {
       when(stateManager.rows).thenReturn([
         PlutoRow(cells: {
           'column_field_name': PlutoCell(value: 'cell value'),
@@ -419,7 +422,7 @@ void main() {
     });
   });
 
-  group('왼쪽 고정 컬럼인 경우', () {
+  group('Frozen column at the start', () {
     final PlutoColumn column = PlutoColumn(
       title: 'column title',
       field: 'column_field_name',
@@ -442,14 +445,14 @@ void main() {
       await gesture.up();
     });
 
-    tapColumn.test('고정 컬럼의 기본 메뉴가 출력 되어야 한다.', (tester) async {
+    tapColumn.test('Frozen column menu should be displayed', (tester) async {
       expect(find.text('Unfreeze'), findsOneWidget);
       expect(find.text('Freeze to start'), findsNothing);
       expect(find.text('Freeze to end'), findsNothing);
       expect(find.text('Auto fit'), findsOneWidget);
     });
 
-    tapColumn.test('Unfreeze 를 탭하면 toggleFrozenColumn 이 호출 되어야 한다.',
+    tapColumn.test('Tapping Unfreeze should call toggleFrozenColumn',
         (tester) async {
       await tester.tap(find.text('Unfreeze'));
 
@@ -459,7 +462,7 @@ void main() {
       )).called(1);
     });
 
-    tapColumn.test('Auto fit 를 탭하면 autoFitColumn 이 호출 되어야 한다.', (tester) async {
+    tapColumn.test('Tapping Auto fit should call autoFitColumn', (tester) async {
       when(stateManager.rows).thenReturn([]);
 
       await tester.tap(find.text('Auto fit'));
@@ -471,7 +474,7 @@ void main() {
     });
   });
 
-  group('우측 고정 컬럼인 경우', () {
+  group('Frozen column at the end', () {
     final PlutoColumn column = PlutoColumn(
       title: 'column title',
       field: 'column_field_name',
@@ -494,14 +497,14 @@ void main() {
       await gesture.up();
     });
 
-    tapColumn.test('고정 컬럼의 기본 메뉴가 출력 되어야 한다.', (tester) async {
+    tapColumn.test('Frozen column menu should be displayed', (tester) async {
       expect(find.text('Unfreeze'), findsOneWidget);
       expect(find.text('Freeze to start'), findsNothing);
       expect(find.text('Freeze to end'), findsNothing);
       expect(find.text('Auto fit'), findsOneWidget);
     });
 
-    tapColumn.test('Unfreeze 를 탭하면 toggleFrozenColumn 이 호출 되어야 한다.',
+    tapColumn.test('Tapping Unfreeze should call toggleFrozenColumn',
         (tester) async {
       await tester.tap(find.text('Unfreeze'));
 
@@ -511,7 +514,7 @@ void main() {
       )).called(1);
     });
 
-    tapColumn.test('Auto fit 를 탭하면 autoFitColumn 이 호출 되어야 한다.', (tester) async {
+    tapColumn.test('Tapping Auto fit should call autoFitColumn', (tester) async {
       when(stateManager.rows).thenReturn([]);
 
       await tester.tap(find.text('Auto fit'));
@@ -573,12 +576,12 @@ void main() {
     }
 
     /**
-     * (기본 값이 4, Positioned 위젯 right -3)
+     * (Default value is 4, Positioned widget right -3)
      */
     dragAColumn(
       const Offset(50.0, 0.0),
     ).test(
-      'resizeColumn 이 30 이상으로 호출 되어야 한다.',
+      'resizeColumn should be called with a value greater than or equal to 30',
       (tester) async {
         verify(stateManager.resizeColumn(
           column,
@@ -590,7 +593,7 @@ void main() {
     dragAColumn(
       const Offset(-50.0, 0.0),
     ).test(
-      'resizeColumn 이 -30 이하로 호출 되어야 한다.',
+      'resizeColumn should be called with a value less than or equal to -30',
       (tester) async {
         verify(stateManager.resizeColumn(
           column,
@@ -629,7 +632,7 @@ void main() {
         borderColor: Colors.deepOrange,
       ),
     )).test(
-      'if enableColumnBorder is true, should be set the border.',
+      'If enableColumnBorder is true, border should be set',
       (tester) async {
         expect(
           stateManager.configuration.style.enableColumnBorderVertical,
@@ -658,7 +661,7 @@ void main() {
         borderColor: Colors.deepOrange,
       ),
     )).test(
-      'if enableColumnBorder is false, should not be set the border.',
+      'If enableColumnBorder is false, border should not be set',
       (tester) async {
         expect(
           stateManager.configuration.style.enableColumnBorderVertical,
@@ -696,7 +699,7 @@ void main() {
         sort: PlutoColumnSort.ascending,
       ),
     ).test(
-      'If columnAscendingIcon is set, the set icon should appear.',
+      'If columnAscendingIcon is set, the set icon should appear',
       (tester) async {
         final target = find.descendant(
           of: find.byType(PlutoColumnTitle),
@@ -726,7 +729,7 @@ void main() {
         sort: PlutoColumnSort.descending,
       ),
     ).test(
-      'If columnDescendingIcon is set, the set icon should appear.',
+      'If columnDescendingIcon is set, the set icon should appear',
       (tester) async {
         final target = find.descendant(
           of: find.byType(PlutoColumnTitle),

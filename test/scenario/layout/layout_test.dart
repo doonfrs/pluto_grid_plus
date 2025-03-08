@@ -61,7 +61,9 @@ void main() {
     );
   }
 
-  testWidgets('컬럼 그룹을 숨기면 컬럼 영역의 높이가 변경 되어야 한다.', (tester) async {
+  testWidgets(
+      'When the column group is hidden, the column area height should be changed.',
+      (tester) async {
     columns[2].frozen = PlutoColumnFrozen.start;
     columns[3].frozen = PlutoColumnFrozen.end;
 
@@ -102,7 +104,9 @@ void main() {
     );
   });
 
-  testWidgets('컬럼 그룹을 숨기면 컬럼 그룹이 제거 되어야 한다.', (tester) async {
+  testWidgets(
+      'When the column group is hidden, the column group should be removed.',
+      (tester) async {
     columns[2].frozen = PlutoColumnFrozen.start;
     columns[3].frozen = PlutoColumnFrozen.end;
 
@@ -123,7 +127,9 @@ void main() {
     expect(find.text('group1-1'), findsNothing);
   });
 
-  testWidgets('컬럼 그룹을 숨기면 컬럼 높이가 변경 되어야 한다.', (tester) async {
+  testWidgets(
+      'When the column group is hidden, the column height should be changed.',
+      (tester) async {
     columns[2].frozen = PlutoColumnFrozen.start;
     columns[3].frozen = PlutoColumnFrozen.end;
 
@@ -184,7 +190,9 @@ void main() {
     );
   });
 
-  testWidgets('컬럼 그룹을 숨기면 행 영역의 높이가 변경 되어야 한다.', (tester) async {
+  testWidgets(
+      'When the column group is hidden, the row area height should be changed.',
+      (tester) async {
     columns[2].frozen = PlutoColumnFrozen.start;
     columns[3].frozen = PlutoColumnFrozen.end;
 
@@ -217,7 +225,9 @@ void main() {
     expect(afterRightSize.width - changedSize.width, rightSize.width);
   });
 
-  testWidgets('화면 크기를 좁게 변경하면 고정 컬럼이 풀려야 한다.', (tester) async {
+  testWidgets(
+      'When the screen size is narrowed, the frozen columns should be removed.',
+      (tester) async {
     columns[2].frozen = PlutoColumnFrozen.start;
     columns[3].frozen = PlutoColumnFrozen.end;
 
@@ -272,7 +282,8 @@ void main() {
     );
   });
 
-  testWidgets('컬럼을 숨기면 컬럼 영역의 높이가 0이 되어야 한다.', (tester) async {
+  testWidgets('When the column is hidden, the column area height should be 0.',
+      (tester) async {
     columns[2].frozen = PlutoColumnFrozen.start;
     columns[3].frozen = PlutoColumnFrozen.end;
 
@@ -291,7 +302,9 @@ void main() {
     expect(tester.getSize(find.byType(PlutoRightFrozenColumns)).height, 0);
   });
 
-  testWidgets('컬럼을 숨기면 행 영역의 높이가 변경 되어야 한다.', (tester) async {
+  testWidgets(
+      'When the column is hidden, the row area height should be changed.',
+      (tester) async {
     columns[2].frozen = PlutoColumnFrozen.start;
     columns[3].frozen = PlutoColumnFrozen.end;
 

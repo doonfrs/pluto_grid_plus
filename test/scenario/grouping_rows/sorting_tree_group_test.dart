@@ -86,7 +86,7 @@ void main() {
       ];
     });
 
-    testWidgets('5개의 행이 출력 되어야 한다.', (tester) async {
+    testWidgets('5 rows should be displayed.', (tester) async {
       await buildGrid(tester: tester, columns: columns, rows: rows);
 
       final A = find.text('A');
@@ -102,7 +102,9 @@ void main() {
       expect(E, findsOneWidget);
     });
 
-    testWidgets('기본 행의 순서가 위치에 맞아야 한다.', (tester) async {
+    testWidgets(
+        'When the default order is applied, the order should be correct.',
+        (tester) async {
       await buildGrid(tester: tester, columns: columns, rows: rows);
 
       final A = tester.getTopLeft(find.text('A'));
@@ -118,7 +120,9 @@ void main() {
       expect(E.dy, greaterThan(D.dy));
     });
 
-    testWidgets('column1 을 descending 정렬하면 순서가 바뀌어야 한다.', (tester) async {
+    testWidgets(
+        'When column1 is sorted in descending order, the order should change.',
+        (tester) async {
       await buildGrid(tester: tester, columns: columns, rows: rows);
 
       await tester.tap(find.text('column1'));
@@ -138,7 +142,9 @@ void main() {
       expect(A.dy, greaterThan(B.dy));
     });
 
-    testWidgets('column2 을 descending 정렬하면 순서가 바뀌어야 한다.', (tester) async {
+    testWidgets(
+        'When column2 is sorted in descending order, the order should change.',
+        (tester) async {
       await buildGrid(tester: tester, columns: columns, rows: rows);
 
       await tester.tap(find.text('column2'));
@@ -158,7 +164,8 @@ void main() {
       expect(A1.dy, greaterThan(B1.dy));
     });
 
-    testWidgets('B 를 expand 후 column1 을 descending 정렬하면 순서가 바뀌어야 한다.',
+    testWidgets(
+        'When B is expanded and column1 is sorted in descending order, the order should change.',
         (tester) async {
       await buildGrid(tester: tester, columns: columns, rows: rows);
 
@@ -199,7 +206,7 @@ void main() {
     });
 
     testWidgets(
-        'column1 을 descending 정렬후 B 를 expand 하면 B1~4 도 정렬 되어 출력 되어야 한다.',
+        'When column1 is sorted in descending order, B should be expanded and B1~4 should be sorted and displayed.',
         (tester) async {
       await buildGrid(tester: tester, columns: columns, rows: rows);
 
@@ -258,8 +265,8 @@ void main() {
     });
 
     testWidgets(
-        'column1 을 b 로 필터링 후 column1 을 descending 정렬후, '
-        '필터를 풀면 순서가 바뀌어야 한다.', (tester) async {
+        'When column1 is filtered with b and sorted in descending order, '
+        'when the filter is cleared, the order should change.', (tester) async {
       await buildGrid(tester: tester, columns: columns, rows: rows);
 
       stateManager.setShowColumnFilter(true);
@@ -314,7 +321,7 @@ void main() {
     });
 
     testWidgets(
-      '2개로 pagination 후 column3 을 정렬 하면 하면 페이지의 행들의 위치가 정렬 되어야 한다.',
+      'When 2 rows are paginated, the order of the rows in the page should be sorted.',
       (tester) async {
         await buildGrid(
           tester: tester,

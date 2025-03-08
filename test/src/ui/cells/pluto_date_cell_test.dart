@@ -37,7 +37,7 @@ void main() {
     when(stateManager.hasFocus).thenReturn(true);
   });
 
-  group('suffixIcon 렌더링', () {
+  group('Suffix icon rendering', () {
     final PlutoCell cell = PlutoCell(value: '2020-01-01');
 
     final PlutoRow row = PlutoRow(
@@ -46,7 +46,7 @@ void main() {
       },
     );
 
-    testWidgets('기본 날짜 아이콘이 렌더링 되어야 한다.', (tester) async {
+    testWidgets('Default date icon should be rendered', (tester) async {
       final PlutoColumn column = PlutoColumn(
         title: 'column title',
         field: 'column_field_name',
@@ -69,7 +69,7 @@ void main() {
       expect(find.byIcon(Icons.date_range), findsOneWidget);
     });
 
-    testWidgets('변경한 아이콘이 렌더링 되어야 한다.', (tester) async {
+    testWidgets('Custom icon should be rendered', (tester) async {
       final PlutoColumn column = PlutoColumn(
         title: 'column title',
         field: 'column_field_name',
@@ -94,7 +94,7 @@ void main() {
       expect(find.byIcon(Icons.add), findsOneWidget);
     });
 
-    testWidgets('popupIcon 이 null 인 경우 아이콘이 렌더링 되지 않아야 한다.', (tester) async {
+    testWidgets('When popupIcon is null, icon should not be rendered', (tester) async {
       final PlutoColumn column = PlutoColumn(
         title: 'column title',
         field: 'column_field_name',
@@ -120,7 +120,7 @@ void main() {
     });
   });
 
-  group('기본 date 컬럼', () {
+  group('Default date column', () {
     final PlutoColumn column = PlutoColumn(
       title: 'column title',
       field: 'column_field_name',
@@ -150,11 +150,11 @@ void main() {
       );
     });
 
-    tapCell.test('2020-01-01 이 출력 되어야 한다.', (tester) async {
+    tapCell.test('Should display 2020-01-01', (tester) async {
       expect(find.text('2020-01-01'), findsOneWidget);
     });
 
-    tapCell.test('탭하면 팝업이 호출 되어 년월일이 출력 되어야 한다.', (tester) async {
+    tapCell.test('Tapping should open popup and display year, month, and day', (tester) async {
       await tester.tap(find.byType(TextField));
 
       await tester.pumpAndSettle();
@@ -166,7 +166,7 @@ void main() {
       expect(find.text('2020-01'), findsOneWidget);
     });
 
-    tapCell.test('탭하면 팝업이 호출 되어 요일이 출력 되어야 한다.', (tester) async {
+    tapCell.test('Tapping should open popup and display day of week', (tester) async {
       await tester.tap(find.byType(TextField));
 
       await tester.pumpAndSettle();
@@ -183,7 +183,7 @@ void main() {
     });
   });
 
-  group('format MM/dd/yyyy', () {
+  group('Format MM/dd/yyyy', () {
     makeDateCell(String date) {
       PlutoColumn column = PlutoColumn(
         title: 'column title',
@@ -199,7 +199,7 @@ void main() {
         },
       );
 
-      return PlutoWidgetTestHelper('DateCell 생성', (tester) async {
+      return PlutoWidgetTestHelper('Create DateCell', (tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
@@ -216,21 +216,21 @@ void main() {
     }
 
     makeDateCell('01/30/2020').test(
-      '01/30/2020 이 출력 되어야 한다.',
+      'Should display 01/30/2020',
       (tester) async {
         expect(find.text('01/30/2020'), findsOneWidget);
       },
     );
 
     makeDateCell('06/15/2020').test(
-      '06/15/2020 이 출력 되어야 한다.',
+      'Should display 06/15/2020',
       (tester) async {
         expect(find.text('06/15/2020'), findsOneWidget);
       },
     );
 
     makeDateCell('01/30/2020').test(
-      '탭하면 팝업이 호출 되어 년월일이 출력 되어야 한다.',
+      'Tapping should open popup and display year, month, and day',
       (tester) async {
         await tester.tap(find.byType(TextField));
 
@@ -245,7 +245,7 @@ void main() {
     );
 
     makeDateCell('09/12/2020').test(
-      '탭하면 팝업이 호출 되어 년월일이 출력 되어야 한다.',
+      'Tapping should open popup and display year, month, and day',
       (tester) async {
         await tester.tap(find.byType(TextField));
 
@@ -260,7 +260,7 @@ void main() {
     );
 
     makeDateCell('01/30/2020').test(
-      '탭하면 팝업이 호출 되어 요일이 출력 되어야 한다.',
+      'Tapping should open popup and display day of week',
       (tester) async {
         await tester.tap(find.byType(TextField));
 
@@ -279,7 +279,7 @@ void main() {
     );
 
     makeDateCell('01/30/2020').test(
-      '위쪽 방향키를 입력하고 엔터를 입력하면 1월 23이 선택 되어야 한다.',
+      'Pressing up arrow and enter should select January 23',
       (tester) async {
         await tester.tap(find.byType(TextField));
 
@@ -296,7 +296,7 @@ void main() {
     );
 
     makeDateCell('01/30/2020').test(
-      '왼쪽 방향키를 입력하고 엔터를 입력하면 1월 29이 선택 되어야 한다.',
+      'Pressing left arrow and enter should select January 29',
       (tester) async {
         await tester.tap(find.byType(TextField));
 
@@ -313,7 +313,7 @@ void main() {
     );
 
     makeDateCell('01/30/2020').test(
-      '오른쪽 방향키를 입력하고 엔터를 입력하면 1월 31이 선택 되어야 한다.',
+      'Pressing right arrow and enter should select January 31',
       (tester) async {
         await tester.tap(find.byType(TextField));
 
@@ -330,7 +330,7 @@ void main() {
     );
   });
 
-  group('format yyyy년 MM월 dd일', () {
+  group('Format yyyy-MM-dd', () {
     makeDateCell(
       String date, {
       DateTime? startDate,
@@ -339,7 +339,7 @@ void main() {
         title: 'column title',
         field: 'column_field_name',
         type: PlutoColumnType.date(
-          format: 'yyyy년 MM월 dd일',
+          format: 'yyyy-MM-dd',
           startDate: startDate,
         ),
       );
@@ -352,7 +352,7 @@ void main() {
         },
       );
 
-      return PlutoWidgetTestHelper('DateCell 생성', (tester) async {
+      return PlutoWidgetTestHelper('Create DateCell', (tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
@@ -368,18 +368,18 @@ void main() {
       });
     }
 
-    makeDateCell('2020년 12월 01일').test(
-      '2020년 12월 01일 이 출력 되어야 한다.',
+    makeDateCell('2020-12-01').test(
+      'Should display 2020-12-01',
       (tester) async {
-        expect(find.text('2020년 12월 01일'), findsOneWidget);
+        expect(find.text('2020-12-01'), findsOneWidget);
       },
     );
 
     makeDateCell(
-      '2020년 12월 01일',
+      '2020-12-01',
       startDate: DateTime.parse('2020-12-01'),
     ).test(
-      '왼쪽 방향키를 입력하고 엔터를 입력해도 startDate 보다 작아 선택 되지 않아야 한다.',
+      'Pressing left arrow and enter should not select a date before startDate',
       (tester) async {
         await tester.tap(find.byType(TextField));
 
@@ -394,10 +394,10 @@ void main() {
 
         verifyNever(stateManager.handleAfterSelectingRow(
           any,
-          '2020년 11월 30일',
+          '2020-11-30',
         ));
 
-        expect(find.text('2020년 12월 01일'), findsOneWidget);
+        expect(find.text('2020-12-01'), findsOneWidget);
       },
     );
   });

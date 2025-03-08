@@ -7,7 +7,7 @@ import '../../helper/column_helper.dart';
 import '../../helper/pluto_widget_test_helper.dart';
 import '../../helper/row_helper.dart';
 
-/// enterKeyAction 설정 후 테스트
+/// When enterKeyAction is set, test.
 void main() {
   group('Enter key test.', () {
     List<PlutoColumn> columns;
@@ -18,7 +18,7 @@ void main() {
 
     withEnterKeyAction(PlutoGridEnterKeyAction enterKeyAction) {
       return PlutoWidgetTestHelper(
-        '2, 2 셀이 선택 된 상태에서',
+        '2, 2 cell is selected',
         (tester) async {
           columns = [
             ...ColumnHelper.textColumn('header', count: 10),
@@ -51,7 +51,8 @@ void main() {
     }
 
     withEnterKeyAction(PlutoGridEnterKeyAction.none).test(
-      'PlutoEnterKeyAction.None 인 경우 기존 상태에서 아무 변화가 없어야 한다.',
+      'When enterKeyAction is PlutoGridEnterKeyAction.none, '
+      'pressing enter should not edit cell or move',
       (tester) async {
         stateManager!.setEditing(true);
         expect(stateManager!.isEditing, true);
@@ -64,7 +65,8 @@ void main() {
     );
 
     withEnterKeyAction(PlutoGridEnterKeyAction.toggleEditing).test(
-      'PlutoEnterKeyAction.ToggleEditing 인 경우 editing 이 false 가 되어야 한다.',
+      'When enterKeyAction is PlutoGridEnterKeyAction.toggleEditing, '
+      'pressing enter should toggle edit mode',
       (tester) async {
         stateManager!.setEditing(true);
         expect(stateManager!.isEditing, true);
@@ -78,7 +80,8 @@ void main() {
     );
 
     withEnterKeyAction(PlutoGridEnterKeyAction.toggleEditing).test(
-      'PlutoEnterKeyAction.ToggleEditing 인 경우 editing 이 true 가 되어야 한다.',
+      'When enterKeyAction is PlutoGridEnterKeyAction.toggleEditing, '
+      'pressing enter should toggle edit mode',
       (tester) async {
         stateManager!.setEditing(false);
         expect(stateManager!.isEditing, false);
@@ -92,7 +95,8 @@ void main() {
     );
 
     withEnterKeyAction(PlutoGridEnterKeyAction.editingAndMoveDown).test(
-      'PlutoEnterKeyAction.EditingAndMoveDown 인 경우 아래로 이동 되어야 한다.',
+      'When enterKeyAction is PlutoGridEnterKeyAction.editingAndMoveDown, '
+      'pressing enter should edit cell and move down',
       (tester) async {
         stateManager!.setEditing(true);
         expect(stateManager!.isEditing, true);
@@ -106,7 +110,8 @@ void main() {
     );
 
     withEnterKeyAction(PlutoGridEnterKeyAction.editingAndMoveDown).test(
-      'PlutoEnterKeyAction.EditingAndMoveDown 인 경우 위로 이동 되어야 한다.',
+      'When enterKeyAction is PlutoGridEnterKeyAction.editingAndMoveDown, '
+      'pressing enter with shift should edit cell and move up',
       (tester) async {
         stateManager!.setEditing(true);
         expect(stateManager!.isEditing, true);
@@ -122,7 +127,8 @@ void main() {
     );
 
     withEnterKeyAction(PlutoGridEnterKeyAction.editingAndMoveRight).test(
-      'PlutoEnterKeyAction.EditingAndMoveRight 인 경우 우측으로 이동 되어야 한다.',
+      'When enterKeyAction is PlutoGridEnterKeyAction.editingAndMoveRight, '
+      'pressing enter should edit cell and move right',
       (tester) async {
         stateManager!.setEditing(true);
         expect(stateManager!.isEditing, true);
@@ -136,7 +142,8 @@ void main() {
     );
 
     withEnterKeyAction(PlutoGridEnterKeyAction.editingAndMoveRight).test(
-      'PlutoEnterKeyAction.EditingAndMoveRight 인 경우 좌측으로 이동 되어야 한다.',
+      'When enterKeyAction is PlutoGridEnterKeyAction.editingAndMoveRight, '
+      'pressing enter with shift should edit cell and move left',
       (tester) async {
         stateManager!.setEditing(true);
         expect(stateManager!.isEditing, true);

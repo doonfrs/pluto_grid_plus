@@ -45,7 +45,7 @@ void main() {
 
   group('checkedRows', () {
     testWidgets(
-      '선택 된 행이 없는 경우 빈 List 를 리턴 해야 한다.',
+      'If there are no checked rows, it should return an empty list.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns =
@@ -67,7 +67,7 @@ void main() {
     );
 
     testWidgets(
-      '선택 된 행이 있는 경우 선택 된 List 를 리턴 해야 한다.',
+      'If there are checked rows, it should return the list of checked rows.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns =
@@ -99,7 +99,7 @@ void main() {
 
   group('unCheckedRows', () {
     testWidgets(
-      '선택 된 행이 없는 경우 모든 List 를 리턴 해야 한다.',
+      'If there are no checked rows, it should return all rows.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns =
@@ -121,7 +121,7 @@ void main() {
     );
 
     testWidgets(
-      '선택 된 행이 있는 경우 선택 된 List 를 제외하고 리턴 해야 한다.',
+      'If there are checked rows, it should return the list of unchecked rows.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns =
@@ -153,7 +153,7 @@ void main() {
 
   group('hasCheckedRow', () {
     testWidgets(
-      '선택 된 행이 없는 경우 false 를 리턴 해야 한다.',
+      'If there are no checked rows, it should return false.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns =
@@ -175,7 +175,7 @@ void main() {
     );
 
     testWidgets(
-      '선택 된 행이 있는 경우 true 를 리턴 해야 한다.',
+      'If there are checked rows, it should return true.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns =
@@ -201,7 +201,7 @@ void main() {
 
   group('hasUnCheckedRow', () {
     testWidgets(
-      '선택 된 행이 없는 경우 true 를 리턴 해야 한다.',
+      'If there are no checked rows, it should return true.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns =
@@ -223,7 +223,7 @@ void main() {
     );
 
     testWidgets(
-      '선택 되지 않은 행이 하나라도 있는 경우 true 를 리턴해야 한다.',
+      'If there is at least one unchecked row, it should return true.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns =
@@ -249,7 +249,7 @@ void main() {
     );
 
     testWidgets(
-      '모든 행이 선택 된 경우 false 를 리턴해야 한다.',
+      'If all rows are checked, it should return false.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns =
@@ -274,7 +274,8 @@ void main() {
   });
 
   group('currentRowIdx', () {
-    testWidgets('currentCell 이 선택되지 않는 경우 null 을 리턴해야 한다.',
+    testWidgets(
+        'When the current cell is not selected, null should be returned',
         (WidgetTester tester) async {
       // given
       List<PlutoColumn> columns = [
@@ -301,7 +302,8 @@ void main() {
       expect(currentRowIdx, null);
     });
 
-    testWidgets('currentCell 이 선택 된 경우 선택 된 셀의 rowIdx 를 리턴해야 한다.',
+    testWidgets(
+        'When the current cell is selected, return the row index of the selected cell',
         (WidgetTester tester) async {
       // given
       List<PlutoColumn> columns = [
@@ -335,7 +337,8 @@ void main() {
   });
 
   group('currentRow', () {
-    testWidgets('currentCell 이 선택되지 않는 경우 null 을 리턴해야 한다.',
+    testWidgets(
+        'When the current cell is not selected, null should be returned',
         (WidgetTester tester) async {
       // given
       List<PlutoColumn> columns = [
@@ -362,7 +365,7 @@ void main() {
       expect(currentRow, null);
     });
 
-    testWidgets('currentCell 이 선택 된 경우 선택 된 row 를 리턴해야 한다.',
+    testWidgets('If the current cell is selected, return the selected row.',
         (WidgetTester tester) async {
       // given
       List<PlutoColumn> columns = [
@@ -426,7 +429,7 @@ void main() {
     }
 
     buildRows().test(
-      '0 번 row 보다 위인 offset 인 경우 null 을 리턴해야 한다.',
+      'The offset is above the 0th row.',
       (tester) async {
         final rowIdx =
             stateManager.getRowIdxByOffset(stateManager.rowTotalHeight * 0.7);
@@ -436,7 +439,7 @@ void main() {
     );
 
     buildRows().test(
-      '0 번 row 의 중간 offset.',
+      'The middle offset of the 0th row.',
       (tester) async {
         final rowIdx =
             stateManager.getRowIdxByOffset(stateManager.rowTotalHeight * 1.5);
@@ -446,7 +449,7 @@ void main() {
     );
 
     buildRows().test(
-      '1 번 row 의 중간 offset.',
+      'The middle offset of the 1st row.',
       (tester) async {
         final rowIdx =
             stateManager.getRowIdxByOffset(stateManager.rowTotalHeight * 2.5);
@@ -456,7 +459,7 @@ void main() {
     );
 
     buildRows().test(
-      '마지막 9번 row 의 중간 offset.',
+      'The middle offset of the last 9th row.',
       (tester) async {
         final rowIdx =
             stateManager.getRowIdxByOffset(stateManager.rowTotalHeight * 10.5);
@@ -466,7 +469,7 @@ void main() {
     );
 
     buildRows().test(
-      '마지막 row 보다 아래 offset 을 전달 한 경우 null 을 리턴해야 한다.',
+      'The offset is below the last row.',
       (tester) async {
         final rowIdx =
             stateManager.getRowIdxByOffset(stateManager.rowTotalHeight * 11.5);
@@ -478,7 +481,7 @@ void main() {
 
   group('getRowByIdx', () {
     testWidgets(
-      'rowIdx 가 null 인 경우 null 을 리턴해야 한다.',
+      'The rowIdx is null.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -503,7 +506,7 @@ void main() {
     );
 
     testWidgets(
-      'rowIdx 가 0보다 작은 경우 null 을 리턴해야 한다.',
+      'The rowIdx is less than 0.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -528,7 +531,7 @@ void main() {
     );
 
     testWidgets(
-      'rowIdx 가 rows 범위보다 큰 경우 null 을 리턴해야 한다.',
+      'The rowIdx is larger than the rows range.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -553,7 +556,7 @@ void main() {
     );
 
     testWidgets(
-      'rowIdx 가 rows 범위 안에 있는 경우 PlutoRow 를 리턴해야 한다.',
+      'The rowIdx is within the rows range.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -580,7 +583,7 @@ void main() {
 
   group('setRowChecked', () {
     testWidgets(
-      '해당 row 가 없는 경우 notifyListener 가 호출 되지 않아야 한다.',
+      'The row does not exist.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -609,7 +612,7 @@ void main() {
     );
 
     testWidgets(
-      '해당 row 가 있는 경우 notifyListener 가 호출 되고 checked 가 true 로 변경 되어야 한다.',
+      'The row exists.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -649,7 +652,7 @@ void main() {
 
   group('insertRows', () {
     testWidgets(
-      '삽입 할 위치가 rows 인덱스 범위가 0 보다 작으면 0에 최대 index 보다 크면 최대 index 에 insert 된다.',
+      'The insert position is less than 0 or greater than the maximum index.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -697,7 +700,7 @@ void main() {
     );
 
     testWidgets(
-      '삽입 할 위치가 rows 인덱스 범위에 있으면 행이 추가 되어야 한다.',
+      'The insert position is within the rows index range.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -737,7 +740,7 @@ void main() {
     );
 
     testWidgets(
-      '컬럼 정렬 상태가 없으면 sortIdx 가 0부터 증가 되어야 한다.',
+      'The columns are not sorted.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -767,9 +770,9 @@ void main() {
     );
 
     testWidgets(
-      '컬럼 정렬 상태가 있으면 삽입 할 rows 의 sortIdx 는 삽입 할 위치부터 증가되고, '
-      '기존 rows 의 sortIdx 는 삽입 할 위치보다 작으면 유지되고, '
-      '삽입 할 위치보다 크면 삽입 할 rows 크기 만큼 증가 되어야 한다.',
+      'When there is a column sort state, the sortIdx of rows to be inserted should increase from the insertion position, '
+      'the sortIdx of existing rows should be maintained if less than the insertion position, '
+      'and if greater than the insertion position, it should increase by the size of the rows to be inserted.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -840,7 +843,7 @@ void main() {
 
   group('prependNewRows', () {
     testWidgets(
-      'count 기본값 1 만큼 rows 앞쪽에 추가 되어야 한다.',
+      'count default value 1, rows should be added to the front.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -860,21 +863,21 @@ void main() {
         stateManager.prependNewRows();
 
         // then
-        // 추가된 행의 기본 값 및 sortIdx
+        // Added row default value and sortIdx
         expect(stateManager.rows.length, 6);
         expect(
           stateManager.rows[0].cells['text0']!.value,
           columns[0].type.defaultValue,
         );
         expect(stateManager.rows[0].sortIdx, 0);
-        // 원래 있던 첫번 째 Row 의 셀이 두번 째로 이동
+        // The first row that was already there moved to the second
         expect(stateManager.rows[1].cells['text0']!.value, 'text0 value 0');
         expect(stateManager.rows[1].sortIdx, 1);
       },
     );
 
     testWidgets(
-      'count 5 만큼 rows 앞쪽에 추가 되어야 한다.',
+      'count 5 should be added to the front of rows.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -895,7 +898,7 @@ void main() {
 
         // then
         expect(stateManager.rows.length, 10);
-        // 원래 있던 첫번 째 Row 의 셀이 6번 째로 이동
+        // The first row that was already there moved to the sixth
         expect(stateManager.rows[5].cells['text0']!.value, 'text0 value 0');
         expect(stateManager.rows[5].sortIdx, 5);
       },
@@ -954,10 +957,10 @@ void main() {
     });
 
     testWidgets(
-        'WHEN currentCell 이 있는 상태에서 '
+        'WHEN currentCell is present '
         'THEN '
-        'currentRowIdx 와 currentCellPosition 이 '
-        'rows 가 추가 된 만큼에 따라 업데이트 되어야 한다.', (WidgetTester tester) async {
+        'currentRowIdx and currentCellPosition should be updated '
+        'to match the number of rows added.', (WidgetTester tester) async {
       // given
       List<PlutoColumn> columns = [
         ...ColumnHelper.textColumn('text', count: 3, width: 150),
@@ -986,7 +989,7 @@ void main() {
       stateManager.prependRows(newRows);
 
       // then
-      // 앞에 새로운 Row 가 추가 되면 현재 idx 에 추가 된 row 수량 만큼 더해 포커스를 유지.
+      // When a new row is added to the front, the current idx is added to the number of rows added.
       final rowIdxAfterPrependRows = newRows.length + rowIdxBeforePrependRows;
 
       expect(stateManager.currentRowIdx, rowIdxAfterPrependRows);
@@ -997,8 +1000,8 @@ void main() {
     });
 
     testWidgets(
-        'WHEN _currentSelectingPosition 이 있는 상태에서 '
-        'THEN currentSelectingPosition 이 업데이트 되어야 한다.',
+        'WHEN _currentSelectingPosition is present '
+        'THEN currentSelectingPosition should be updated.',
         (WidgetTester tester) async {
       // given
       List<PlutoColumn> columns = [
@@ -1045,7 +1048,7 @@ void main() {
 
   group('appendNewRows', () {
     testWidgets(
-      'count 기본값 1 만큼 rows 뒤쪽에 추가 되어야 한다.',
+      'count default value 1, rows should be added to the end.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -1068,19 +1071,19 @@ void main() {
 
         // then
         expect(stateManager.rows.length, 6);
-        // 마지막 Row 에 추가 됨
+        // Added row default value and sortIdx
         expect(
           stateManager.rows[5].cells['text0']!.value,
           columns[0].type.defaultValue,
         );
-        // sortIdx 가 마지막
+        // sortIdx is last
         expect(stateManager.rows[4].sortIdx, 4);
         expect(stateManager.rows[5].sortIdx, 5);
       },
     );
 
     testWidgets(
-      'count 5 만큼 rows 뒤쪽에 추가 되어야 한다.',
+      'count 5, rows should be added to the end.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -1101,7 +1104,7 @@ void main() {
 
         // then
         expect(stateManager.rows.length, 10);
-        // 추가 된 5~9 번 셀의 기본 값
+        // Added 5~9 cells default value
         expect(
           stateManager.rows[5].cells['text0']!.value,
           columns[0].type.defaultValue,
@@ -1230,9 +1233,8 @@ void main() {
 
   group('getNewRows', () {
     testWidgets(
-      'count 기본값 1 만큼 생성 되어야 한다.',
+      'count default value 1, should be created.',
       (WidgetTester tester) async {
-        // given
         // given
         List<PlutoColumn> columns = [
           ...ColumnHelper.textColumn('text', count: 2),
@@ -1255,9 +1257,8 @@ void main() {
     );
 
     testWidgets(
-      'count 3 만큼 생성 되어야 한다.',
+      'count 3, should be created.',
       (WidgetTester tester) async {
-        // given
         // given
         List<PlutoColumn> columns = [
           ...ColumnHelper.textColumn('text', count: 2),
@@ -1419,7 +1420,7 @@ void main() {
 
   group('moveRowsByOffset', () {
     testWidgets(
-      '0번 row 를 1번 row 로 이동 시키기',
+      'Move the 0th row to the 1st row.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -1466,7 +1467,7 @@ void main() {
     );
 
     testWidgets(
-      '2번 row 를 1번 row 로 이동 시키기',
+      'Move the 2nd row to the 1st row.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -1513,7 +1514,7 @@ void main() {
     );
 
     testWidgets(
-      '이동 할 index + 이동 할 row 개수가 전체 rows 길이보다 크면 마지막 행으로 이동',
+      'Move the index + number of rows to be moved is greater than the total number of rows.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -1560,7 +1561,7 @@ void main() {
     );
 
     testWidgets(
-      'offset 값이 0 보다 작으면 notifyListener 가 호출 되지 않아야 한다.',
+      'When the offset value is less than 0, notifyListener should not be called.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -1603,7 +1604,7 @@ void main() {
     );
 
     testWidgets(
-      'offset 값이 행 범위 보다 크면 notifyListener 가 호출 되지 않아야 한다.',
+      'When the offset value is greater than the row range, notifyListener should not be called.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -1647,7 +1648,7 @@ void main() {
     );
 
     testWidgets(
-      'createHeader 가 있는 상태에서 1번 row 를 0번 row 로 이동 시키기',
+      'When createHeader is present, move the 1st row to the 0th row.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -1698,7 +1699,7 @@ void main() {
 
   group('moveRowsByIndex', () {
     testWidgets(
-      '0번 row 를 1번 row 로 이동 시키기',
+      'Move the 0th row to the 1st row.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -1734,7 +1735,7 @@ void main() {
     );
 
     testWidgets(
-      '2번 row 를 1번 row 로 이동 시키기',
+      'Move the 2nd row to the 1st row.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -1770,7 +1771,7 @@ void main() {
     );
 
     testWidgets(
-      '행 2개가 있는 상태에서 0번 컬럼을 1번으로 이동 할 경우 타입에러가 발생되지 않고 이동 되어야 한다.',
+      'When there are 2 rows, move the 0th row to the 1st row.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -1808,7 +1809,7 @@ void main() {
 
   group('toggleAllRowChecked', () {
     testWidgets(
-      '전체 행이 checked true 로 변경 되어야 한다.',
+      'All rows should be changed to checked true.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns =
@@ -1838,7 +1839,7 @@ void main() {
     );
 
     testWidgets(
-      '전체 행이 checked false 로 변경 되어야 한다.',
+      'All rows should be changed to checked false.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns =
@@ -1868,7 +1869,7 @@ void main() {
     );
 
     testWidgets(
-      'notify 가 false 인 경우 notifyListener 가 호출 되지 않아야 한다.',
+      'When notify is false, notifyListener should not be called.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns =

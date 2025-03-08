@@ -4,7 +4,7 @@ import 'package:pluto_grid_plus/pluto_grid_plus.dart';
 
 void main() {
   testWidgets(
-    'dark 생성자를 호출 할 수 있어야 한다.',
+    'When the dark constructor is called, the configuration should be created.',
     (WidgetTester tester) async {
       const PlutoGridConfiguration configuration = PlutoGridConfiguration.dark(
         style: PlutoGridStyleConfig(
@@ -17,7 +17,7 @@ void main() {
   );
 
   group('PlutoGridStyleConfig.copyWith', () {
-    test('oddRowColor 를 null 로 설정하면 값이 변경 되어야 한다.', () {
+    test('When oddRowColor is set to null, the value should be changed.', () {
       const style = PlutoGridStyleConfig(
         oddRowColor: Colors.cyan,
       );
@@ -29,7 +29,7 @@ void main() {
       expect(copiedStyle.oddRowColor, null);
     });
 
-    test('evenRowColor 를 null 로 설정하면 값이 변경 되어야 한다.', () {
+    test('When evenRowColor is set to null, the value should be changed.', () {
       const style = PlutoGridStyleConfig(
         evenRowColor: Colors.cyan,
       );
@@ -43,7 +43,7 @@ void main() {
   });
 
   group('PlutoGridColumnSizeConfig.copyWith', () {
-    test('autoSizeMode 를 scale 설정하면 값이 변경 되어야 한다.', () {
+    test('When autoSizeMode is set to scale, the value should be changed.', () {
       const size = PlutoGridColumnSizeConfig(
         autoSizeMode: PlutoAutoSizeMode.none,
       );
@@ -53,7 +53,8 @@ void main() {
       expect(copiedSize.autoSizeMode, PlutoAutoSizeMode.scale);
     });
 
-    test('resizeMode 를 none 으로 설정하면 값이 변경 되어야 한다.', () {
+    test('When resizeMode is set to pushAndPull, the value should be changed.',
+        () {
       const size = PlutoGridColumnSizeConfig(
         resizeMode: PlutoResizeMode.normal,
       );
@@ -65,7 +66,9 @@ void main() {
   });
 
   group('configuration', () {
-    test('configuration 의 값이 동일한 경우 동등 비교가 true 여야 한다.', () {
+    test(
+        'When the values of configuration A and B are the same, the comparison should be true.',
+        () {
       const configurationA = PlutoGridConfiguration(
         enableMoveDownAfterSelecting: true,
         enterKeyAction: PlutoGridEnterKeyAction.editingAndMoveRight,
@@ -97,7 +100,9 @@ void main() {
       expect(configurationA == configurationB, true);
     });
 
-    test('configuration 의 값이 동일한 경우 hashCode 비교가 true 여야 한다.', () {
+    test(
+        'When the values of configuration A and B are the same, the comparison should be true.',
+        () {
       const configurationA = PlutoGridConfiguration(
         enableMoveDownAfterSelecting: true,
         enterKeyAction: PlutoGridEnterKeyAction.editingAndMoveRight,
@@ -129,7 +134,9 @@ void main() {
       expect(configurationA.hashCode == configurationB.hashCode, true);
     });
 
-    test('enableMoveDownAfterSelecting 값이 다른 경우 동등 비교가 false 여야 한다.', () {
+    test(
+        'When the enableMoveDownAfterSelecting value is different, the comparison should be false.',
+        () {
       const configurationA = PlutoGridConfiguration(
         enableMoveDownAfterSelecting: true,
         enterKeyAction: PlutoGridEnterKeyAction.editingAndMoveRight,
@@ -161,7 +168,9 @@ void main() {
       expect(configurationA == configurationB, false);
     });
 
-    test('isAlwaysShown 값이 다른 경우 동등 비교가 false 여야 한다.', () {
+    test(
+        'When the isAlwaysShown value is different, the comparison should be false.',
+        () {
       const configurationA = PlutoGridConfiguration(
         enableMoveDownAfterSelecting: true,
         enterKeyAction: PlutoGridEnterKeyAction.editingAndMoveRight,
@@ -193,7 +202,9 @@ void main() {
       expect(configurationA == configurationB, false);
     });
 
-    test('localeText 값이 다른 경우 동등 비교가 false 여야 한다.', () {
+    test(
+        'When the localeText value is different, the comparison should be false.',
+        () {
       const configurationA = PlutoGridConfiguration(
         enableMoveDownAfterSelecting: true,
         enterKeyAction: PlutoGridEnterKeyAction.editingAndMoveRight,
@@ -227,7 +238,9 @@ void main() {
   });
 
   group('style', () {
-    test('값이 동일한 경우 동등 비교가 true 여야 한다.', () {
+    test(
+        'When the values of style A and B are the same, the comparison should be true.',
+        () {
       const styleA = PlutoGridStyleConfig(
         enableGridBorderShadow: true,
         oddRowColor: Colors.lightGreen,
@@ -247,7 +260,9 @@ void main() {
       expect(styleA == styleB, true);
     });
 
-    test('값이 동일한 경우 hashCode 비교가 true 여야 한다.', () {
+    test(
+        'When the values of style A and B are the same, the comparison should be true.',
+        () {
       const styleA = PlutoGridStyleConfig(
         enableGridBorderShadow: true,
         oddRowColor: Colors.lightGreen,
@@ -267,7 +282,9 @@ void main() {
       expect(styleA.hashCode == styleB.hashCode, true);
     });
 
-    test('enableGridBorderShadow 값이 다른 경우 동등 비교가 false 여야 한다.', () {
+    test(
+        'When the enableGridBorderShadow value is different, the comparison should be false.',
+        () {
       const styleA = PlutoGridStyleConfig(
         enableGridBorderShadow: true,
         oddRowColor: Colors.lightGreen,
@@ -287,7 +304,9 @@ void main() {
       expect(styleA == styleB, false);
     });
 
-    test('oddRowColor 값이 다른 경우 동등 비교가 false 여야 한다.', () {
+    test(
+        'When the oddRowColor value is different, the comparison should be false.',
+        () {
       const styleA = PlutoGridStyleConfig(
         enableGridBorderShadow: true,
         oddRowColor: Colors.lightGreen,
@@ -307,7 +326,9 @@ void main() {
       expect(styleA == styleB, false);
     });
 
-    test('gridBorderRadius 값이 다른 경우 동등 비교가 false 여야 한다.', () {
+    test(
+        'When the gridBorderRadius value is different, the comparison should be false.',
+        () {
       const styleA = PlutoGridStyleConfig(
         enableGridBorderShadow: true,
         oddRowColor: Colors.lightGreen,
@@ -329,7 +350,9 @@ void main() {
   });
 
   group('scrollbar', () {
-    test('값이 동일한 경우 동등 비교가 true 여야 한다.', () {
+    test(
+        'When the values of scrollbar A and B are the same, the comparison should be true.',
+        () {
       const scrollA = PlutoGridScrollbarConfig(
         draggableScrollbar: true,
         isAlwaysShown: true,
@@ -345,7 +368,9 @@ void main() {
       expect(scrollA == scrollB, true);
     });
 
-    test('값이 동일한 경우 hashCode 비교가 true 여야 한다.', () {
+    test(
+        'When the values of scrollbar A and B are the same, the comparison should be true.',
+        () {
       const scrollA = PlutoGridScrollbarConfig(
         draggableScrollbar: true,
         isAlwaysShown: true,
@@ -361,7 +386,9 @@ void main() {
       expect(scrollA.hashCode == scrollB.hashCode, true);
     });
 
-    test('isAlwaysShown 값이 다른 경우 동등 비교가 false 여야 한다.', () {
+    test(
+        'When the isAlwaysShown value is different, the comparison should be false.',
+        () {
       const scrollA = PlutoGridScrollbarConfig(
         draggableScrollbar: true,
         isAlwaysShown: true,
@@ -377,7 +404,9 @@ void main() {
       expect(scrollA == scrollB, false);
     });
 
-    test('scrollbarRadiusWhileDragging 값이 다른 경우 동등 비교가 false 여야 한다.', () {
+    test(
+        'When the scrollbarRadiusWhileDragging value is different, the comparison should be false.',
+        () {
       const scrollA = PlutoGridScrollbarConfig(
         draggableScrollbar: true,
         isAlwaysShown: true,
@@ -395,7 +424,9 @@ void main() {
   });
 
   group('columnFilter', () {
-    test('값이 동일한 경우 동등 비교가 true 여야 한다.', () {
+    test(
+        'When the values of columnFilter A and B are the same, the comparison should be true.',
+        () {
       const columnFilterA = PlutoGridColumnFilterConfig(
         filters: [
           ...FilterHelper.defaultFilters,
@@ -413,7 +444,9 @@ void main() {
       expect(columnFilterA == columnFilterB, true);
     });
 
-    test('값이 동일한 경우 hashCode 비교가 true 여야 한다.', () {
+    test(
+        'When the values of columnFilter A and B are the same, the comparison should be true.',
+        () {
       const columnFilterA = PlutoGridColumnFilterConfig(
         filters: [
           ...FilterHelper.defaultFilters,
@@ -431,7 +464,8 @@ void main() {
       expect(columnFilterA.hashCode == columnFilterB.hashCode, true);
     });
 
-    test('filters 값이 다른 경우 동등 비교가 false 여야 한다.', () {
+    test('When the filters value is different, the comparison should be false.',
+        () {
       final columnFilterA = PlutoGridColumnFilterConfig(
         filters: [
           ...FilterHelper.defaultFilters,
@@ -449,7 +483,9 @@ void main() {
       expect(columnFilterA == columnFilterB, false);
     });
 
-    test('debounceMilliseconds 값이 다른 경우 동등 비교가 false 여야 한다.', () {
+    test(
+        'When the debounceMilliseconds value is different, the comparison should be false.',
+        () {
       const columnFilterA = PlutoGridColumnFilterConfig(
         filters: [
           ...FilterHelper.defaultFilters,
@@ -469,7 +505,9 @@ void main() {
   });
 
   group('columnSize', () {
-    test('PlutoGridColumnSizeConfig 의 속성이 동일한 경우 동등 비교가 true 여야 한다.', () {
+    test(
+        'When the properties of PlutoGridColumnSizeConfig are the same, the comparison should be true.',
+        () {
       const sizeA = PlutoGridColumnSizeConfig(
         autoSizeMode: PlutoAutoSizeMode.scale,
         resizeMode: PlutoResizeMode.none,
@@ -493,7 +531,9 @@ void main() {
       expect(sizeA == sizeB, true);
     });
 
-    test('PlutoGridColumnSizeConfig 의 속성이 동일한 경우 hashCode 비교가 true 여야 한다.', () {
+    test(
+        'When the properties of PlutoGridColumnSizeConfig are the same, the comparison should be true.',
+        () {
       const sizeA = PlutoGridColumnSizeConfig(
         autoSizeMode: PlutoAutoSizeMode.scale,
         resizeMode: PlutoResizeMode.none,
@@ -517,7 +557,9 @@ void main() {
       expect(sizeA.hashCode == sizeB.hashCode, true);
     });
 
-    test('PlutoGridColumnSizeConfig 의 속성이 다른 경우 동등 비교가 false 여야 한다.', () {
+    test(
+        'When the properties of PlutoGridColumnSizeConfig are different, the comparison should be false.',
+        () {
       const sizeA = PlutoGridColumnSizeConfig(
         autoSizeMode: PlutoAutoSizeMode.scale,
         resizeMode: PlutoResizeMode.none,
@@ -543,121 +585,127 @@ void main() {
   });
 
   group('locale', () {
-    test('locale 값이 동일한 경우 동등 비교가 true 여야 한다.', () {
+    test(
+        'When the values of locale A and B are the same, the comparison should be true.',
+        () {
       const localeA = PlutoGridLocaleText(
-        unfreezeColumn: '고정해제',
-        filterContains: '포함',
-        loadingText: '로딩중',
+        unfreezeColumn: 'Unfreeze',
+        filterContains: 'Contains',
+        loadingText: 'Loading',
       );
 
       const localeB = PlutoGridLocaleText(
-        unfreezeColumn: '고정해제',
-        filterContains: '포함',
-        loadingText: '로딩중',
+        unfreezeColumn: 'Unfreeze',
+        filterContains: 'Contains',
+        loadingText: 'Loading',
       );
 
       expect(localeA == localeB, true);
     });
 
-    test('locale 값이 동일한 경우 hashCode 비교가 true 여야 한다.', () {
+    test(
+        'When the values of locale A and B are the same, the comparison should be true.',
+        () {
       const localeA = PlutoGridLocaleText(
-        unfreezeColumn: '고정해제',
-        filterContains: '포함',
-        loadingText: '로딩중',
+        unfreezeColumn: 'Unfreeze',
+        filterContains: 'Contains',
+        loadingText: 'Loading',
       );
 
       const localeB = PlutoGridLocaleText(
-        unfreezeColumn: '고정해제',
-        filterContains: '포함',
-        loadingText: '로딩중',
+        unfreezeColumn: 'Unfreeze',
+        filterContains: 'Contains',
+        loadingText: 'Loading',
       );
 
       expect(localeA.hashCode == localeB.hashCode, true);
     });
 
-    test('locale 값이 다른 경우 동등 비교가 false 여야 한다.', () {
+    test(
+        'When the values of locale A and B are different, the comparison should be false.',
+        () {
       const localeA = PlutoGridLocaleText(
-        unfreezeColumn: '고정해제',
-        filterContains: '포함',
-        loadingText: '로딩중 입니다.',
+        unfreezeColumn: 'Unfreeze',
+        filterContains: 'Contains',
+        loadingText: 'Loading',
       );
 
       const localeB = PlutoGridLocaleText(
-        unfreezeColumn: '고정해제',
-        filterContains: '포함',
-        loadingText: '로딩중',
+        unfreezeColumn: 'Unfreeze',
+        filterContains: 'Contains',
+        loadingText: 'Loading',
       );
 
       expect(localeA == localeB, false);
     });
 
-    test('china 가 호출 되어야 한다.', () {
+    test('When the locale is called, the value should be correct.', () {
       const locale = PlutoGridLocaleText.china();
 
       expect(locale.loadingText, '加载中');
     });
 
-    test('korean 이 호출 되어야 한다.', () {
+    test('When the locale is called, the value should be correct.', () {
       const locale = PlutoGridLocaleText.korean();
 
       expect(locale.loadingText, '로딩중');
     });
 
-    test('russian 이 호출 되어야 한다.', () {
+    test('When the locale is called, the value should be correct.', () {
       const locale = PlutoGridLocaleText.russian();
 
       expect(locale.loadingText, 'Загрузка');
     });
 
-    test('czech 이 호출 되어야 한다.', () {
+    test('When the locale is called, the value should be correct.', () {
       const locale = PlutoGridLocaleText.czech();
 
       expect(locale.loadingText, 'Načítání');
     });
 
-    test('brazilianPortuguese 이 호출 되어야 한다.', () {
+    test('When the locale is called, the value should be correct.', () {
       const locale = PlutoGridLocaleText.brazilianPortuguese();
 
       expect(locale.loadingText, 'Carregando');
     });
 
-    test('spanish 이 호출 되어야 한다.', () {
+    test('When the locale is called, the value should be correct.', () {
       const locale = PlutoGridLocaleText.spanish();
 
       expect(locale.loadingText, 'Cargando');
     });
 
-    test('persian 이 호출 되어야 한다.', () {
+    test('When the locale is called, the value should be correct.', () {
       const locale = PlutoGridLocaleText.persian();
 
       expect(locale.loadingText, 'در حال بارگیری');
     });
 
-    test('arabic 이 호출 되어야 한다.', () {
+    test('When the locale is called, the value should be correct.', () {
       const locale = PlutoGridLocaleText.arabic();
 
       expect(locale.loadingText, 'جاري التحميل');
     });
 
-    test('norway 이 호출 되어야 한다.', () {
+    test('When the locale is called, the value should be correct.', () {
       const locale = PlutoGridLocaleText.norway();
 
       expect(locale.loadingText, 'Laster');
     });
 
-    test('german 이 호출 되어야 한다.', () {
+    test('When the locale is called, the value should be correct.', () {
       const locale = PlutoGridLocaleText.german();
 
       expect(locale.loadingText, 'Lädt');
     });
 
-    test('turkish 이 호출 되어야 한다.', () {
+    test('When the locale is called, the value should be correct.', () {
       const locale = PlutoGridLocaleText.turkish();
 
       expect(locale.loadingText, 'Yükleniyor');
     });
 
-    test('japanese 이 호출 되어야 한다.', () {
+    test('When the locale is called, the value should be correct.', () {
       const locale = PlutoGridLocaleText.japanese();
 
       expect(locale.loadingText, 'にゃ〜');

@@ -8,7 +8,7 @@ import '../../helper/pluto_widget_test_helper.dart';
 import '../../helper/row_helper.dart';
 
 void main() {
-  group('Enter 키 테스트', () {
+  group('Enter Key Test', () {
     List<PlutoColumn> columns;
 
     List<PlutoRow> rows;
@@ -16,7 +16,7 @@ void main() {
     PlutoGridStateManager? stateManager;
 
     final withTheCellSelected = PlutoWidgetTestHelper(
-      '3, 3 셀이 선택 된 상태에서',
+      'With the cell selected at 3, 3',
       (tester) async {
         columns = [
           ...ColumnHelper.textColumn('header', count: 10),
@@ -45,7 +45,7 @@ void main() {
     );
 
     withTheCellSelected.test(
-      'editing 상태에서 shift + enter 입력 시 위 셀로 이동 되어야 한다.',
+      'In editing state, pressing shift + enter should move to the cell above.',
       (tester) async {
         stateManager!.setEditing(true);
         expect(stateManager!.currentCell!.value, 'header3 value 3');
@@ -63,7 +63,7 @@ void main() {
     );
 
     withTheCellSelected.test(
-      'editing 상태에서 enter 입력 시 아래 셀로 이동 되어야 한다.',
+      'In editing state, pressing enter should move to the cell below.',
       (tester) async {
         stateManager!.setEditing(true);
         expect(stateManager!.currentCell!.value, 'header3 value 3');

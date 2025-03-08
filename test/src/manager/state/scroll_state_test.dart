@@ -32,7 +32,7 @@ void main() {
     return stateManager;
   }
 
-  group('고정 컬럼이 있는 상태에서 needMovingScroll', () {
+  group('When there are frozen columns, needMovingScroll', () {
     late PlutoGridStateManager stateManager;
 
     List<PlutoColumn> columns;
@@ -62,8 +62,8 @@ void main() {
     });
 
     testWidgets(
-      '스크롤 할 offset.dx 값이 bodyLeftScrollOffset 보다 작으면 true'
-      '하지만, selectingMode 가 None 이면 false 를 리턴해야 한다.',
+      'When scroll offset.dx is less than bodyLeftScrollOffset'
+      'but selectingMode is None, should return false.',
       (WidgetTester tester) async {
         stateManager.setSelectingMode(PlutoGridSelectingMode.none);
 
@@ -80,7 +80,7 @@ void main() {
     );
 
     testWidgets(
-      '스크롤 할 offset.dx 값이 bodyLeftScrollOffset 보다 작으면 true',
+      'When scroll offset.dx is less than bodyLeftScrollOffset, should return true.',
       (WidgetTester tester) async {
         expect(
           stateManager.needMovingScroll(
@@ -93,7 +93,7 @@ void main() {
     );
 
     testWidgets(
-      '스크롤 할 offset.dx 값이 bodyLeftScrollOffset 와 같으면 false',
+      'When scroll offset.dx is equal to bodyLeftScrollOffset, should return false.',
       (WidgetTester tester) async {
         expect(
           stateManager.needMovingScroll(
@@ -106,7 +106,7 @@ void main() {
     );
 
     testWidgets(
-      '스크롤 할 offset.dx 값이 bodyLeftScrollOffset 보다 크면 false',
+      'When scroll offset.dx is greater than bodyLeftScrollOffset, should return false.',
       (WidgetTester tester) async {
         expect(
           stateManager.needMovingScroll(
@@ -119,8 +119,8 @@ void main() {
     );
 
     testWidgets(
-      '스크롤 할 offset.dx 값이 bodyRightScrollOffset 보다 크면 true'
-      '하지만, selectingMode 가 None 이면 false 를 리턴해야 한다.',
+      'When scroll offset.dx is greater than bodyRightScrollOffset'
+      'but selectingMode is None, should return false.',
       (WidgetTester tester) async {
         stateManager.setSelectingMode(PlutoGridSelectingMode.none);
 
@@ -137,7 +137,7 @@ void main() {
     );
 
     testWidgets(
-      '스크롤 할 offset.dx 값이 bodyRightScrollOffset 보다 크면 true',
+      'When scroll offset.dx is greater than bodyRightScrollOffset, should return true.',
       (WidgetTester tester) async {
         expect(
           stateManager.needMovingScroll(
@@ -150,7 +150,7 @@ void main() {
     );
 
     testWidgets(
-      '스크롤 할 offset.dx 값이 bodyRightScrollOffset 같으면 false',
+      'When scroll offset.dx is equal to bodyRightScrollOffset, should return false.',
       (WidgetTester tester) async {
         expect(
           stateManager.needMovingScroll(
@@ -163,7 +163,7 @@ void main() {
     );
 
     testWidgets(
-      '스크롤 할 offset.dx 값이 bodyRightScrollOffset 보다 작으면 false',
+      'When scroll offset.dx is less than bodyRightScrollOffset, should return false.',
       (WidgetTester tester) async {
         expect(
           stateManager.needMovingScroll(
@@ -176,7 +176,7 @@ void main() {
     );
 
     testWidgets(
-      '스크롤 할 offset.dy 값이 bodyUpScrollOffset 보다 작으면 true',
+      'When scroll offset.dy is less than bodyUpScrollOffset, should return true.',
       (WidgetTester tester) async {
         expect(
           stateManager.needMovingScroll(
@@ -189,7 +189,7 @@ void main() {
     );
 
     testWidgets(
-      '스크롤 할 offset.dy 값이 bodyUpScrollOffset 같으면 false',
+      'When scroll offset.dy is equal to bodyUpScrollOffset, should return false.',
       (WidgetTester tester) async {
         expect(
           stateManager.needMovingScroll(
@@ -202,7 +202,7 @@ void main() {
     );
 
     testWidgets(
-      '스크롤 할 offset.dy 값이 bodyUpScrollOffset 보다 크면 false',
+      'When scroll offset.dy is greater than bodyUpScrollOffset, should return false.',
       (WidgetTester tester) async {
         expect(
           stateManager.needMovingScroll(
@@ -215,7 +215,7 @@ void main() {
     );
 
     testWidgets(
-      '스크롤 할 offset.dy 값이 bodyDownScrollOffset 보다 크면 true',
+      'When scroll offset.dy is greater than bodyDownScrollOffset, should return true.',
       (WidgetTester tester) async {
         expect(
           stateManager.needMovingScroll(
@@ -228,7 +228,7 @@ void main() {
     );
 
     testWidgets(
-      '스크롤 할 offset.dy 값이 bodyDownScrollOffset 같으면 false',
+      'When scroll offset.dy is equal to bodyDownScrollOffset, should return false.',
       (WidgetTester tester) async {
         expect(
           stateManager.needMovingScroll(
@@ -241,7 +241,7 @@ void main() {
     );
 
     testWidgets(
-      '스크롤 할 offset.dy 값이 bodyDownScrollOffset 보다 작으면 false',
+      'When scroll offset.dy is less than bodyDownScrollOffset, should return false.',
       (WidgetTester tester) async {
         expect(
           stateManager.needMovingScroll(

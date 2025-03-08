@@ -20,7 +20,7 @@ void main() {
     when(stateManager.isEditing).thenReturn(true);
   });
 
-  testWidgets('셀 값이 출력 되어야 한다.', (WidgetTester tester) async {
+  testWidgets('Cell value should be displayed', (WidgetTester tester) async {
     // given
     final PlutoColumn column = PlutoColumn(
       title: 'column title',

@@ -16,7 +16,7 @@ void main() {
   late PlutoGridStateManager stateManager;
 
   final tenByTenGrid = PlutoWidgetTestHelper(
-    '10 개 컬럼과 10개 행을 생성. ',
+    '10 columns and 10 rows are created. ',
     (tester) async {
       columns = ColumnHelper.textColumn('column', count: 10);
 
@@ -52,14 +52,14 @@ void main() {
   }
 
   Future<void> tapFilter(WidgetTester tester, Finder filter) async {
-    // 텍스트 박스가 최초에 포커스를 받으려면 두번 탭.
+    // The text box must be tapped twice to receive focus for the first time.
     await tester.tap(filter);
     await tester.pump();
     await tester.tap(filter);
     await tester.pump();
   }
 
-  tenByTenGrid.test('0번 컬럼의 필터를 탭한 후 우측 방향키 이동', (tester) async {
+  tenByTenGrid.test('Tap the filter of the 0th column and move right with the arrow key', (tester) async {
     final firstColumnFilter = findFilter('column0');
 
     await tapFilter(tester, firstColumnFilter);
@@ -75,7 +75,7 @@ void main() {
     expect(stateManager.refColumns[2].filterFocusNode!.hasFocus, true);
   });
 
-  tenByTenGrid.test('2번 컬럼의 필터를 탭한 후 좌측 방향키 이동', (tester) async {
+  tenByTenGrid.test('Tap the filter of the 2nd column and move left with the arrow key', (tester) async {
     final firstColumnFilter = findFilter('column2');
 
     await tapFilter(tester, firstColumnFilter);
@@ -91,7 +91,7 @@ void main() {
     expect(stateManager.refColumns[0].filterFocusNode!.hasFocus, true);
   });
 
-  tenByTenGrid.test('0번 컬럼의 필터를 탭한 후 탭키 이동', (tester) async {
+  tenByTenGrid.test('Tap the filter of the 0th column and move with the Tab key', (tester) async {
     final firstColumnFilter = findFilter('column0');
 
     await tapFilter(tester, firstColumnFilter);
@@ -107,7 +107,7 @@ void main() {
     expect(stateManager.refColumns[2].filterFocusNode!.hasFocus, true);
   });
 
-  tenByTenGrid.test('2번 컬럼의 필터를 탭한 후 쉬프트 + 탭키 이동', (tester) async {
+  tenByTenGrid.test('Tap the filter of the 2nd column and move with Shift+Tab key', (tester) async {
     final firstColumnFilter = findFilter('column2');
 
     await tapFilter(tester, firstColumnFilter);

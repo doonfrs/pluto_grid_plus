@@ -35,7 +35,7 @@ void main() {
   }
 
   testWidgets(
-    '컬럼의 footerRenderer 가 없는 경우 컬럼 푸터 위젯들이 렌더링 되지 않아야 한다.',
+    'When footerRenderer is not set, column footer widgets should not be rendered',
     (tester) async {
       final columns = [
         ...ColumnHelper.textColumn(
@@ -66,8 +66,8 @@ void main() {
   );
 
   testWidgets(
-    '컬럼의 footerRenderer 가 없어도 setShowColumnFooter 를 true 로 호출하면 '
-    '컬럼 푸터 위젯들이 렌더링 되어야 한다.',
+    'When footerRenderer is not set, setShowColumnFooter is called with true, '
+    'column footer widgets should be rendered.',
     (tester) async {
       final columns = [
         ...ColumnHelper.textColumn(
@@ -102,7 +102,7 @@ void main() {
   );
 
   testWidgets(
-    '컬럼의 footerRenderer 가 있는 경우 컬럼 푸터 위젯들이 렌더링 되어야 한다.',
+    'When footerRenderer is set, column footer widgets should be rendered',
     (tester) async {
       final columns = [
         ...ColumnHelper.textColumn(

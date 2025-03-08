@@ -5,7 +5,9 @@ import '../../matcher/pluto_object_matcher.dart';
 
 void main() {
   group('fromJson', () {
-    test('단일 행 text.', () {
+    test(
+        'When all checkboxes are checked, all groups and rows should be checked',
+        () {
       final json = {
         'column1': 'value1',
         'column2': 'value2',
@@ -24,7 +26,9 @@ void main() {
       );
     });
 
-    test('단일 행 number.', () {
+    test(
+        'When all checkboxes are checked, all groups and rows should be checked',
+        () {
       final json = {
         'column1': 123,
         'column2': 3.12,
@@ -43,7 +47,9 @@ void main() {
       );
     });
 
-    test('그룹행 1뎁스.', () {
+    test(
+        'When childrenField is children'
+        'then type should be group.', () {
       final json = {
         'column1': 'group value1',
         'column2': 'group value2',
@@ -95,7 +101,7 @@ void main() {
       );
     });
 
-    test('그룹행 1뎁스. childrenField 가 items', () {
+    test('When childrenField is items', () {
       final json = {
         'column1': 'group value1',
         'column2': 'group value2',
@@ -147,7 +153,9 @@ void main() {
       );
     });
 
-    test('그룹행 1뎁스. childrenField 가 null 이면 type 이 normal 이어야 한다.', () {
+    test(
+        'When childrenField is null'
+        'then type should be normal.', () {
       final json = {
         'column1': 'group value1',
         'column2': 'group value2',
@@ -179,7 +187,9 @@ void main() {
       );
     });
 
-    test('그룹행 2뎁스.', () {
+    test(
+        'When childrenField is not null'
+        'then type should be group.', () {
       final json = {
         'column1': 'group value1',
         'column2': 'group value2',
@@ -272,7 +282,9 @@ void main() {
   });
 
   group('toJson', () {
-    test('단일 행 text.', () {
+    test(
+        'When type is normal'
+        'then json should be as expected.', () {
       final PlutoRow row = PlutoRow(cells: {
         'column1': PlutoCell(value: 'value1'),
         'column2': PlutoCell(value: 'value2'),
@@ -286,7 +298,7 @@ void main() {
       });
     });
 
-    test('단일 행 number.', () {
+    test('When type is normal', () {
       final PlutoRow row = PlutoRow(cells: {
         'column1': PlutoCell(value: 123),
         'column2': PlutoCell(value: 3.12),
@@ -300,7 +312,7 @@ void main() {
       });
     });
 
-    test('그룹행 1뎁스.', () {
+    test('When type is group', () {
       final PlutoRow row = PlutoRow(
         cells: {
           'column1': PlutoCell(value: 'group value1'),
@@ -346,7 +358,9 @@ void main() {
       });
     });
 
-    test('그룹행 1뎁스. includeChildren 가 false 면 children 이 포함 되지 않아야 한다.', () {
+    test(
+        'When includeChildren is false'
+        'then children should not be included.', () {
       final PlutoRow row = PlutoRow(
         cells: {
           'column1': PlutoCell(value: 'group value1'),
@@ -380,7 +394,9 @@ void main() {
       });
     });
 
-    test('그룹행 2뎁스.', () {
+    test(
+        'When includeChildren is false'
+        'then children should not be included.', () {
       final PlutoRow row = PlutoRow(
         cells: {
           'column1': PlutoCell(value: 'group value1'),
@@ -456,7 +472,9 @@ void main() {
       });
     });
 
-    test('그룹행 2뎁스. childrenField 가 items 면 자식 필드가 items 로 리턴 되어야 한다.', () {
+    test(
+        'When childrenField is items'
+        'then children should be as expected.', () {
       final PlutoRow row = PlutoRow(
         cells: {
           'column1': PlutoCell(value: 'group value1'),

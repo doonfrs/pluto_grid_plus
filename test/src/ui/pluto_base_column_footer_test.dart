@@ -40,7 +40,7 @@ void main() {
   }
 
   testWidgets(
-    'footerRenderer 가 없는 경우 SizedBox 가 렌더링 되어야 한다.',
+    'When footerRenderer is not provided, SizedBox should be rendered',
     (tester) async {
       final column = PlutoColumn(
         title: 'column',
@@ -55,7 +55,7 @@ void main() {
   );
 
   testWidgets(
-    'footerRenderer 가 있는 경우 전달한 위젯이 렌더링 되어야 한다.',
+    'When footerRenderer is provided, the provided widget should be rendered',
     (tester) async {
       final column = PlutoColumn(
         title: 'column',
@@ -73,7 +73,7 @@ void main() {
   );
 
   testWidgets(
-    'border.end 가 렌더링 되어야 한다. (enableColumnBorderVertical 기본값 true)',
+    'Border.end should be rendered (enableColumnBorderVertical default is true)',
     (tester) async {
       final column = PlutoColumn(
         title: 'column',
@@ -104,7 +104,7 @@ void main() {
   );
 
   testWidgets(
-    'enableColumnBorderVertical 가 false 인 경우 border.end 가 렌더링 되지 않아야 한다.',
+    'When enableColumnBorderVertical is false, border.end should not be rendered',
     (tester) async {
       final column = PlutoColumn(
         title: 'column',
@@ -137,7 +137,7 @@ void main() {
   );
 
   testWidgets(
-    'column 의 backgroundColor 가 적용 되어야 한다.',
+    'Column backgroundColor should be applied',
     (tester) async {
       final column = PlutoColumn(
         title: 'column',

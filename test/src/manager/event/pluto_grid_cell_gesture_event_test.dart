@@ -64,8 +64,9 @@ void main() {
       'hasFocus = false, '
       'isCurrentCell = true, '
       'Then, '
-      'setKeepFocus(true) 가 호출 되고, '
-      'isCurrentCell 가 true 인 경우 return 되어야 한다.',
+      'setKeepFocus(true) should be called, '
+      'isCurrentCell is true, '
+      'return should be called.',
       () {
         // given
         when(stateManager.hasFocus).thenReturn(false);
@@ -78,7 +79,7 @@ void main() {
 
         // then
         verify(stateManager.setKeepFocus(true)).called(1);
-        // return 이후 호출 되지 않아야 할 메소드
+        // Methods that should not be called after return
         verifyNever(stateManager.setEditing(any));
         verifyNever(stateManager.setCurrentCell(any, any));
       },
@@ -92,8 +93,8 @@ void main() {
       'PlutoMode = normal, '
       'isEditing = true, '
       'Then, '
-      'setKeepFocus(true) 가 호출 되고, '
-      'setCurrentCell 이 호출 되어야 한다.',
+      'setKeepFocus(true) should be called, '
+      'setCurrentCell should be called.',
       () {
         // given
         when(stateManager.hasFocus).thenReturn(false);
@@ -117,7 +118,7 @@ void main() {
         // then
         verify(stateManager.setKeepFocus(true)).called(1);
         verify(stateManager.setCurrentCell(cell, rowIdx)).called(1);
-        // 호출 되지 않아야 할 메소드
+        // Methods that should not be called after return
         verifyNever(stateManager.setEditing(any));
       },
     );
@@ -130,7 +131,7 @@ void main() {
       'PlutoMode = normal, '
       'isEditing = false, '
       'Then, '
-      'setEditing(true) 가 호출 되어야 한다.',
+      'setEditing(true) should be called.',
       () {
         // given
         when(stateManager.hasFocus).thenReturn(true);
@@ -153,7 +154,7 @@ void main() {
 
         // then
         verify(stateManager.setEditing(true)).called(1);
-        // 호출 되지 않아야 할 메소드
+        // Methods that should not be called after return
         verifyNever(stateManager.setKeepFocus(true));
         verifyNever(stateManager.setCurrentCell(any, any));
       },
@@ -165,7 +166,7 @@ void main() {
       'isSelectingInteraction = true, '
       'keyPressed.shift = true, '
       'Then, '
-      'setCurrentSelectingPosition 가 호출 되어야 한다.',
+      'setCurrentSelectingPosition should be called.',
       () {
         // given
         final column = ColumnHelper.textColumn('column').first;
@@ -196,7 +197,7 @@ void main() {
             rowIdx: rowIdx,
           )),
         ).called(1);
-        // 호출 되지 않아야 할 메소드
+        // Methods that should not be called after return
         verifyNever(stateManager.setKeepFocus(true));
         verifyNever(stateManager.toggleSelectingRow(any));
       },
@@ -208,7 +209,7 @@ void main() {
       'isSelectingInteraction = true, '
       'keyPressed.ctrl = true, '
       'Then, '
-      'toggleSelectingRow 가 호출 되어야 한다.',
+      'toggleSelectingRow should be called.',
       () {
         // given
         final cell = PlutoCell(value: 'value');
@@ -231,7 +232,7 @@ void main() {
         verify(
           stateManager.toggleSelectingRow(rowIdx),
         ).called(1);
-        // 호출 되지 않아야 할 메소드
+        // Methods that should not be called after return
         verifyNever(stateManager.setKeepFocus(true));
         verifyNever(stateManager.setCurrentSelectingPosition(
           cellPosition: anyNamed('cellPosition'),
@@ -246,7 +247,7 @@ void main() {
       'PlutoMode = select, '
       'isCurrentCell = true, '
       'Then, '
-      'handleOnSelected 가 호출 되어야 한다.',
+      'handleOnSelected should be called.',
       () {
         // given
         final cell = PlutoCell(value: 'value');
@@ -268,7 +269,7 @@ void main() {
 
         // then
         verify(stateManager.handleOnSelected()).called(1);
-        // 호출 되지 않아야 할 메소드
+        // Methods that should not be called after return
         verifyNever(stateManager.setCurrentCell(any, any));
       },
     );
@@ -280,7 +281,7 @@ void main() {
       'PlutoMode = select, '
       'isCurrentCell = false, '
       'Then, '
-      'setCurrentCell 가 호출 되어야 한다.',
+      'setCurrentCell should be called.',
       () {
         // given
         final cell = PlutoCell(value: 'value');
@@ -302,7 +303,7 @@ void main() {
 
         // then
         verify(stateManager.setCurrentCell(cell, rowIdx));
-        // 호출 되지 않아야 할 메소드
+        // Methods that should not be called after return
         verifyNever(stateManager.handleOnSelected());
       },
     );
@@ -313,7 +314,7 @@ void main() {
       'When, '
       'isCurrentCell = false, '
       'Then, '
-      'setCurrentCell, setSelecting 이 호출 되어야 한다.',
+      'setCurrentCell, setSelecting should be called.',
       () {
         // given
         final cell = PlutoCell(value: 'value');
@@ -344,7 +345,7 @@ void main() {
       'When, '
       'isCurrentCell = true, '
       'Then, '
-      'setCurrentCell 이 호출 되지 않아야 한다.',
+      'setCurrentCell should not be called.',
       () {
         // given
         final cell = PlutoCell(value: 'value');
@@ -374,7 +375,7 @@ void main() {
       'isCurrentCell = false, '
       'selectingMode = Row, '
       'Then, '
-      'toggleSelectingRow 가 호출 되어야 한다.',
+      'toggleSelectingRow should be called.',
       () {
         // given
         final cell = PlutoCell(value: 'value');
@@ -400,7 +401,11 @@ void main() {
 
   group('onLongPressMoveUpdate', () {
     test(
-      'setCurrentSelectingPositionWithOffset, addEvent 가 호출 되어야 한다.',
+      'When, '
+      'isCurrentCell = false, '
+      'selectingMode = Row, '
+      'Then, '
+      'setCurrentSelectingPositionWithOffset should be called.',
       () {
         // given
         const offset = Offset(2.0, 3.0);
@@ -432,7 +437,10 @@ void main() {
 
   group('onLongPressEnd', () {
     test(
-      'setSelecting 이 false 로 호출 되어야 한다.',
+      'When, '
+      'isCurrentCell = true, '
+      'Then, '
+      'setSelecting(false) should be called.',
       () {
         // given
         final cell = PlutoCell(value: 'value');

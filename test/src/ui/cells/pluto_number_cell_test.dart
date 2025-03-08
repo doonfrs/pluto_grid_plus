@@ -80,7 +80,7 @@ void main() {
       applyFormatOnInit: true,
       allowFirstDot: false,
     ).test(
-      '기본값 0 이 출력 되어야 한다.',
+      'Default value 0 should be displayed',
       (tester) async {
         expect(find.text('0'), findsOneWidget);
       },
@@ -93,7 +93,7 @@ void main() {
       applyFormatOnInit: true,
       allowFirstDot: false,
     ).test(
-      'locale 이 기본값인 경우 1234.02 이 출력 되어야 한다.',
+      'When locale is default, 1234.02 should be displayed',
       (tester) async {
         expect(find.text('1234.02'), findsOneWidget);
       },
@@ -107,7 +107,7 @@ void main() {
       allowFirstDot: false,
       locale: 'da_DK',
     ).test(
-      'locale 이 컴마를 사용하는 덴마크인 경우 1234,02 이 출력 되어야 한다.',
+      'When locale is Danish (using comma), 1234,02 should be displayed',
       (tester) async {
         expect(find.text('1234,02'), findsOneWidget);
       },
@@ -138,7 +138,8 @@ void main() {
     }
 
     test(
-      'decimalRange 가 2, decimalSeparator 가 컴마인 경우 123.01 을 입력하면 0 이 리턴 되어야 한다.',
+      'When decimalRange is 2 and decimalSeparator is comma, '
+      'input of 123.01 should return 0',
       () {
         expect(
           updatedValue(
@@ -155,7 +156,8 @@ void main() {
     );
 
     test(
-      'decimalRange 가 2, decimalSeparator 가 컴마인 경우 123,01 을 입력하면 123,01 이 리턴 되어야 한다.',
+      'When decimalRange is 2 and decimalSeparator is comma, '
+      'input of 123,01 should return 123,01',
       () {
         expect(
           updatedValue(
@@ -172,7 +174,8 @@ void main() {
     );
 
     test(
-      'decimalRange 가 0, decimalSeparator 가 컴마인 경우 123,01 을 입력하면 123 이 리턴 되어야 한다.',
+      'When decimalRange is 0 and decimalSeparator is comma, '
+      'input of 123,01 should return 123',
       () {
         expect(
           updatedValue(
@@ -189,7 +192,7 @@ void main() {
     );
 
     test(
-      'decimalRange 가 2 인 상태에서 0.12 을 입력하면 0.12 가 리턴 되어야 한다.',
+      'When decimalRange is 2, input of 0.12 should return 0.12',
       () {
         expect(
           updatedValue(
@@ -205,7 +208,7 @@ void main() {
     );
 
     test(
-      'decimalRange 가 2 인 상태에서 0.123 을 입력하면 0 이 리턴 되어야 한다.',
+      'When decimalRange is 2, input of 0.123 should return 0',
       () {
         expect(
           updatedValue(
@@ -221,7 +224,7 @@ void main() {
     );
 
     test(
-      'activatedNegativeValues 가 true 인 상태에서 -0.12 을 입력하면 -0.12 이 리턴 되어야 한다.',
+      'When activatedNegativeValues is true, input of -0.12 should return -0.12',
       () {
         expect(
           updatedValue(
@@ -237,7 +240,7 @@ void main() {
     );
 
     test(
-      'activatedNegativeValues 가 false 인 상태에서 -0.12 을 입력하면 0 이 리턴 되어야 한다.',
+      'When activatedNegativeValues is false, input of -0.12 should return 0',
       () {
         expect(
           updatedValue(
@@ -253,8 +256,8 @@ void main() {
     );
 
     test(
-      'activatedNegativeValues 가 true, allowFirstDot 이 false 인 상태에서, '
-      '.0.12 을 입력하면 0 이 리턴 되어야 한다.',
+      'When activatedNegativeValues is true and allowFirstDot is false, '
+      'input of .0.12 should return 0',
       () {
         expect(
           updatedValue(
@@ -270,8 +273,8 @@ void main() {
     );
 
     test(
-      'activatedNegativeValues 가 true, allowFirstDot 이 true 인 상태에서, '
-      '.0.12 을 입력하면 .0.12 가 리턴 되어야 한다.',
+      'When activatedNegativeValues is true and allowFirstDot is true, '
+      'input of .0.12 should return .0.12',
       () {
         expect(
           updatedValue(
@@ -287,8 +290,8 @@ void main() {
     );
 
     test(
-      'activatedNegativeValues 가 true, allowFirstDot 이 true 인 상태에서, '
-      '..0.12 을 입력하면 0 가 리턴 되어야 한다.',
+      'When activatedNegativeValues is true and allowFirstDot is true, '
+      'input of ..0.12 should return 0',
       () {
         expect(
           updatedValue(
@@ -304,8 +307,8 @@ void main() {
     );
 
     test(
-      'activatedNegativeValues 가 true, allowFirstDot 이 true 인 상태에서, '
-      '-.0.12 을 입력하면 0 가 리턴 되어야 한다.',
+      'When activatedNegativeValues is true and allowFirstDot is true, '
+      'input of -.0.12 should return 0',
       () {
         expect(
           updatedValue(

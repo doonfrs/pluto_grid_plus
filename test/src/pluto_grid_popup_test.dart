@@ -92,8 +92,8 @@ void main() {
   }
 
   testWidgets(
-      'Directionality.ltr 인 경우, '
-      'stateManager.isLTR, isRTL 이 적용 되어야 한다.', (tester) async {
+      'When Directionality is ltr, '
+      'stateManager.isLTR and isRTL should be applied', (tester) async {
     final columns = ColumnHelper.textColumn('title', count: 10);
     final rows = RowHelper.count(10, columns);
 
@@ -113,8 +113,8 @@ void main() {
   });
 
   testWidgets(
-      'Directionality.rtl 인 경우, '
-      'stateManager.isLTR, isRTL 이 적용 되어야 한다.', (tester) async {
+      'When Directionality is rtl, '
+      'stateManager.isLTR and isRTL should be applied', (tester) async {
     final columns = ColumnHelper.textColumn('title', count: 10);
     final rows = RowHelper.count(10, columns);
 
@@ -134,7 +134,7 @@ void main() {
   });
 
   testWidgets(
-    'Directionality.rtl 인 경우 컬럼의 위치가 RTL 적용 되어야 한다.',
+    'When Directionality is rtl, column positions should be RTL applied',
     (tester) async {
       final columns = ColumnHelper.textColumn('title', count: 10);
       final rows = RowHelper.count(10, columns);
@@ -164,10 +164,10 @@ void main() {
       final lastColumn = find.text('title9');
       final lastStartPosition = tester.getTopRight(lastColumn);
 
-      // 처음 컬럼의 dx 가 우측에 위치해 가장 크고 두번째 컬럼은 컬럼 넓이 만큼 작다.
+      // The first column's dx is located on the rightmost and is the largest, and the second column is the width of the column.
       expect(firstStartPosition.dx - secondStartPosition.dx, columnWidth);
 
-      // 마지막 컬럼은 앞의 9개 컬럼의 넓이에서 스크롤을 뺀 위치에 있다.
+      // The last column is located at the position where the scroll is subtracted from the width of the 9 columns before it.
       expect(
         firstStartPosition.dx - lastStartPosition.dx,
         (columnWidth * 9) - scrollOffset,
@@ -176,7 +176,7 @@ void main() {
   );
 
   testWidgets(
-    'Directionality.rtl 인 경우 셀의 위치가 RTL 적용 되어야 한다.',
+    'When Directionality is rtl, cell positions should be RTL applied',
     (tester) async {
       final columns = ColumnHelper.textColumn('title', count: 10);
       final rows = RowHelper.count(10, columns);
@@ -206,10 +206,10 @@ void main() {
       final lastCell = find.text('title9 value 0');
       final lastStartPosition = tester.getTopRight(lastCell);
 
-      // 처음 셀의 dx 가 우측에 위치해 가장 크고 두번째 셀은 컬럼 넓이 만큼 작다.
+      // The first cell's dx is located on the rightmost and is the largest, and the second cell is the width of the column.
       expect(firstStartPosition.dx - secondStartPosition.dx, columnWidth);
 
-      // 마지막 셀은 앞의 9개 셀의 넓이에서 스크롤을 뺀 위치에 있다.
+      // The last cell is located at the position where the scroll is subtracted from the width of the 9 cells before it.
       expect(
         firstStartPosition.dx - lastStartPosition.dx,
         (columnWidth * 9) - scrollOffset,
@@ -217,7 +217,8 @@ void main() {
     },
   );
 
-  testWidgets('셀 값을 변경 하면 onChanged 콜백이 동작해야 한다.', (tester) async {
+  testWidgets('Cell value changes should trigger the onChanged callback',
+      (tester) async {
     final columns = ColumnHelper.textColumn('title', count: 10);
     final rows = RowHelper.count(10, columns);
 
@@ -249,7 +250,8 @@ void main() {
     expect(event!.rowIdx, 0);
   });
 
-  testWidgets('mode 가 select 인 상태에서 행을 두번 탭하면 onSelected 콜백이 호출 되어야 한다.',
+  testWidgets(
+      'In select mode, double-tapping a row should trigger the onSelected callback',
       (tester) async {
     final columns = ColumnHelper.textColumn('title', count: 10);
     final rows = RowHelper.count(10, columns);
@@ -278,7 +280,8 @@ void main() {
     expect(event!.cell!.value, 'title1 value 3');
   });
 
-  testWidgets('mode 가 selectWithOneTap 인 상태에서 행을 탭하면 onSelected 콜백이 호출 되어야 한다.',
+  testWidgets(
+      'In selectWithOneTap mode, tapping a row should trigger the onSelected callback',
       (tester) async {
     final columns = ColumnHelper.textColumn('title', count: 10);
     final rows = RowHelper.count(10, columns);
@@ -305,7 +308,8 @@ void main() {
     expect(event!.cell!.value, 'title2 value 4');
   });
 
-  testWidgets('컬럼을 탭하면 onSorted 콜백이 호출 되어야 한다.', (tester) async {
+  testWidgets('Tapping a column should trigger the onSorted callback',
+      (tester) async {
     final columns = ColumnHelper.textColumn('title', count: 10);
     final rows = RowHelper.count(10, columns);
 
@@ -348,8 +352,9 @@ void main() {
   });
 
   testWidgets(
-      'PlutoColumn.enableRowChecked 가 true 인 상태에서 '
-      '셀의 체크박스를 체크 하면 onRowChecked 콜백이 호출 되어야 한다.', (tester) async {
+      'When PlutoColumn.enableRowChecked is true, '
+      'checking a cell checkbox should trigger the onRowChecked callback',
+      (tester) async {
     final columns = ColumnHelper.textColumn('title', count: 10);
     final rows = RowHelper.count(10, columns);
 
@@ -382,7 +387,9 @@ void main() {
     expect(event!.isRow, true);
   });
 
-  testWidgets('셀을 두번 탭하면 onRowDoubleTap 콜백이 호출 되어야 한다.', (tester) async {
+  testWidgets(
+      'Double-tapping a cell should trigger the onRowDoubleTap callback',
+      (tester) async {
     final columns = ColumnHelper.textColumn('title', count: 10);
     final rows = RowHelper.count(10, columns);
 
@@ -409,7 +416,8 @@ void main() {
     expect(event!.cell.value, 'title2 value 2');
   });
 
-  testWidgets('Secondary 버튼을 탭하면 onRowSecondaryTap 콜백이 호출 되어야 한다.',
+  testWidgets(
+      'Secondary button tap should trigger the onRowSecondaryTap callback',
       (tester) async {
     final columns = ColumnHelper.textColumn('title', count: 10);
     final rows = RowHelper.count(10, columns);
@@ -435,7 +443,8 @@ void main() {
     expect(event!.cell.value, 'title3 value 5');
   });
 
-  testWidgets('행을 드래그 하면 onRowsMoved 콜백이 호출 되어야 한다.', (tester) async {
+  testWidgets('Dragging a row should trigger the onRowsMoved callback',
+      (tester) async {
     final columns = ColumnHelper.textColumn('title', count: 10);
     final rows = RowHelper.count(10, columns);
 
@@ -458,7 +467,7 @@ void main() {
       of: find.ancestor(of: cell, matching: find.byType(PlutoBaseCell)),
       matching: find.byType(Icon),
     );
-    // 행 기본 높이 45 * 2 (2개 행 아래로 드래그)
+    // When dragging a row, the row height is 45 * 2 (2 rows below)
     await tester.drag(dragIcon, const Offset(0, 90));
     await tester.pump();
 
@@ -468,7 +477,7 @@ void main() {
     expect(event!.rows[0].cells['title0']!.value, 'title0 value 0');
   });
 
-  testWidgets('createHeader 위젯이 렌더링 되어야 한다.', (tester) async {
+  testWidgets('createHeader widget should be rendered', (tester) async {
     final columns = ColumnHelper.textColumn('title', count: 10);
     final rows = RowHelper.count(10, columns);
 
@@ -488,7 +497,7 @@ void main() {
     expect(header, findsOneWidget);
   });
 
-  testWidgets('createFooter 위젯이 렌더링 되어야 한다.', (tester) async {
+  testWidgets('createFooter widget should be rendered', (tester) async {
     final columns = ColumnHelper.textColumn('title', count: 10);
     final rows = RowHelper.count(10, columns);
 
@@ -508,7 +517,7 @@ void main() {
     expect(footer, findsOneWidget);
   });
 
-  testWidgets('rowColorCallback 이 적용 되어야 한다.', (tester) async {
+  testWidgets('rowColorCallback should be applied', (tester) async {
     final columns = ColumnHelper.textColumn('title', count: 10);
     final rows = RowHelper.count(10, columns);
 
@@ -546,7 +555,8 @@ void main() {
     expect(colors.elementAt(3), Colors.cyan);
   });
 
-  testWidgets('columnMenuDelegate 를 설정 한 경우 컬럼 메뉴가 변경 되어야 한다.', (tester) async {
+  testWidgets('When columnMenuDelegate is set, column menu should be changed',
+      (tester) async {
     final columns = ColumnHelper.textColumn('title', count: 10);
     final rows = RowHelper.count(10, columns);
 
@@ -573,7 +583,8 @@ void main() {
     expect(find.text('test menu 2'), findsOneWidget);
   });
 
-  testWidgets('컬럼을 좌측 고정 하면 onColumnsMoved 콜백이 호출 되어야 한다.', (tester) async {
+  testWidgets('Left-fixing a column should trigger the onColumnsMoved callback',
+      (tester) async {
     final mock = MockMethods();
     final columns = ColumnHelper.textColumn('column', count: 10);
     final rows = RowHelper.count(10, columns);
@@ -597,7 +608,9 @@ void main() {
     }))).called(1);
   });
 
-  testWidgets('컬럼을 우측 고정 하면 onColumnsMoved 콜백이 호출 되어야 한다.', (tester) async {
+  testWidgets(
+      'Right-fixing a column should trigger the onColumnsMoved callback',
+      (tester) async {
     final mock = MockMethods();
     final columns = ColumnHelper.textColumn('column', count: 10);
     final rows = RowHelper.count(10, columns);
@@ -621,7 +634,8 @@ void main() {
     }))).called(1);
   });
 
-  testWidgets('컬럼을 드래그하여 이동하면 onColumnsMoved 콜백이 호출 되어야 한다.', (tester) async {
+  testWidgets('Dragging a column should trigger the onColumnsMoved callback',
+      (tester) async {
     final mock = MockMethods();
     final columns = ColumnHelper.textColumn('column', count: 10);
     final rows = RowHelper.count(10, columns);
@@ -649,7 +663,8 @@ void main() {
   });
 
   group('noRowsWidget', () {
-    testWidgets('행이 없는 경우 noRowsWidget 이 렌더링 되어야 한다.', (tester) async {
+    testWidgets('When there are no rows, noRowsWidget should be rendered',
+        (tester) async {
       final columns = ColumnHelper.textColumn('column', count: 10);
       final rows = <PlutoRow>[];
       const noRowsWidget = Center(
@@ -670,7 +685,8 @@ void main() {
       expect(find.byKey(noRowsWidget.key!), findsOneWidget);
     });
 
-    testWidgets('행을 삭제하는 경우 noRowsWidget 이 렌더링 되어야 한다.', (tester) async {
+    testWidgets('When rows are deleted, noRowsWidget should be rendered',
+        (tester) async {
       final columns = ColumnHelper.textColumn('column', count: 10);
       final rows = RowHelper.count(10, columns);
       const noRowsWidget = Center(
@@ -697,7 +713,8 @@ void main() {
       expect(find.byKey(noRowsWidget.key!), findsOneWidget);
     });
 
-    testWidgets('행을 추가하는 경우 noRowsWidget 이 렌더링 되지 않아야 한다.', (tester) async {
+    testWidgets('When rows are added, noRowsWidget should not be rendered',
+        (tester) async {
       final columns = ColumnHelper.textColumn('column', count: 10);
       final rows = <PlutoRow>[];
       const noRowsWidget = Center(

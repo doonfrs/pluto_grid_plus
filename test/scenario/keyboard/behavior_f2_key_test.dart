@@ -8,7 +8,7 @@ import '../../helper/pluto_widget_test_helper.dart';
 import '../../helper/row_helper.dart';
 
 void main() {
-  group('F2 키 테스트', () {
+  group('F2 Key Test', () {
     List<PlutoColumn> columns;
 
     List<PlutoRow> rows;
@@ -16,7 +16,7 @@ void main() {
     PlutoGridStateManager? stateManager;
 
     final withTheCellSelected = PlutoWidgetTestHelper(
-      '0, 0 셀이 선택 된 상태에서',
+      'With the cell selected',
       (tester) async {
         columns = [
           ...ColumnHelper.textColumn('header', count: 10),
@@ -45,7 +45,7 @@ void main() {
     );
 
     withTheCellSelected.test(
-      'F2 키 입력 시 편집 상태가 아니면 편집 상태로 변경 되어야 한다.',
+      'When F2 is pressed in non-editing state, cell should enter edit mode',
       (tester) async {
         expect(stateManager!.isEditing, false);
 

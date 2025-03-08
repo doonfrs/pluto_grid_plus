@@ -41,7 +41,7 @@ void main() {
   ) async {
     final textField = findFilterTextField();
 
-    // 텍스트 박스가 최초에 포커스를 받으려면 두번 탭.
+    // To receive focus, tap the text box twice.
     await tester.tap(textField);
     await tester.tap(textField);
 
@@ -51,7 +51,8 @@ void main() {
   }
 
   testWidgets(
-    '기본 필터 상태에서 필터 값을 value 1 로 설정하면 필터 값에 해당 되는 행만 출력 되어야 한다.',
+    'When filtering with "contains" condition and value "value 1", '
+    'only rows containing "value 1" should be shown',
     (tester) async {
       final columns = ColumnHelper.textColumn('column');
 
@@ -82,7 +83,8 @@ void main() {
   );
 
   testWidgets(
-    '기본 필터 상태에서 필터 값을 value 11 로 설정하면 필터 값에 해당 되는 행만 출력 되어야 한다.',
+    'When filtering with "equals" condition and value "value 11", '
+    'only rows with exact match should be shown',
     (tester) async {
       final columns = ColumnHelper.textColumn('column');
 
@@ -103,8 +105,8 @@ void main() {
   );
 
   testWidgets(
-    '필터 값이 value 11 로 설정된 상태에서, '
-    'Ctrl + A 를 입력 후 백스페이스를 입력하면 전체 행이 출력 되어야 한다.',
+    'When filtering with "starts with" condition and value "value 11", '
+    'and then pressing Ctrl + A and backspace, all rows should be shown',
     (tester) async {
       final columns = ColumnHelper.textColumn('column');
 

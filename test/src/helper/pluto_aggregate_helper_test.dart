@@ -3,7 +3,7 @@ import 'package:pluto_grid_plus/pluto_grid_plus.dart';
 
 void main() {
   group('sum', () {
-    test('숫자 컬럼이 아닌경우 0이 리턴 되어야 한다.', () {
+    test('When the column is not a number, 0 should be returned.', () {
       final column = PlutoColumn(
         title: 'column',
         field: 'column',
@@ -21,7 +21,9 @@ void main() {
       expect(PlutoAggregateHelper.sum(rows: rows, column: column), 0);
     });
 
-    test('[양수] condition 이 없이 sum 을 호출 한 경우 전체 합계 값이 리턴 되어야 한다.', () {
+    test(
+        'When sum is called without a condition, the total sum should be returned.',
+        () {
       final column = PlutoColumn(
         title: 'column',
         field: 'column',
@@ -39,7 +41,9 @@ void main() {
       expect(PlutoAggregateHelper.sum(rows: rows, column: column), 150);
     });
 
-    test('[음수] condition 이 없이 sum 을 호출 한 경우 전체 합계 값이 리턴 되어야 한다.', () {
+    test(
+        'When sum is called without a condition, the total sum should be returned.',
+        () {
       final column = PlutoColumn(
         title: 'column',
         field: 'column',
@@ -57,7 +61,9 @@ void main() {
       expect(PlutoAggregateHelper.sum(rows: rows, column: column), -150);
     });
 
-    test('[소수] condition 이 없이 sum 을 호출 한 경우 전체 합계 값이 리턴 되어야 한다.', () {
+    test(
+        'When sum is called without a condition, the total sum should be returned.',
+        () {
       final column = PlutoColumn(
         title: 'column',
         field: 'column',
@@ -75,7 +81,9 @@ void main() {
       expect(PlutoAggregateHelper.sum(rows: rows, column: column), 50.005);
     });
 
-    test('condition 이 있는 경우 조건에 맞는 아이템의 합계 값이 리턴 되어야 한다.', () {
+    test(
+        'When a condition is present, the sum of the items that match the condition should be returned.',
+        () {
       final column = PlutoColumn(
         title: 'column',
         field: 'column',
@@ -100,7 +108,9 @@ void main() {
       );
     });
 
-    test('condition 이 있는 경우 조건에 맞는 아이템이 없다면 0이 리턴 되어야 한다.', () {
+    test(
+        'When a condition is present, if there are no matching items, 0 should be returned.',
+        () {
       final column = PlutoColumn(
         title: 'column',
         field: 'column',
@@ -127,7 +137,9 @@ void main() {
   });
 
   group('average', () {
-    test('[양수] condition 이 없이 average 을 호출 한 경우 전체 합계 값이 리턴 되어야 한다.', () {
+    test(
+        'When average is called without a condition, the total average should be returned.',
+        () {
       final column = PlutoColumn(
         title: 'column',
         field: 'column',
@@ -145,7 +157,9 @@ void main() {
       expect(PlutoAggregateHelper.average(rows: rows, column: column), 30);
     });
 
-    test('[음수] condition 이 없이 average 을 호출 한 경우 전체 합계 값이 리턴 되어야 한다.', () {
+    test(
+        'When average is called without a condition, the total average should be returned.',
+        () {
       final column = PlutoColumn(
         title: 'column',
         field: 'column',
@@ -163,7 +177,9 @@ void main() {
       expect(PlutoAggregateHelper.average(rows: rows, column: column), -30);
     });
 
-    test('[소수] condition 이 없이 average 을 호출 한 경우 전체 합계 값이 리턴 되어야 한다.', () {
+    test(
+        'When average is called without a condition, the total average should be returned.',
+        () {
       final column = PlutoColumn(
         title: 'column',
         field: 'column',
@@ -183,7 +199,9 @@ void main() {
   });
 
   group('min', () {
-    test('[양수] condition 이 없이 min 을 호출 한 경우 최소 값이 리턴 되어야 한다.', () {
+    test(
+        'When min is called without a condition, the minimum value should be returned.',
+        () {
       final column = PlutoColumn(
         title: 'column',
         field: 'column',
@@ -201,7 +219,9 @@ void main() {
       expect(PlutoAggregateHelper.min(rows: rows, column: column), 101);
     });
 
-    test('[음수] condition 이 없이 min 을 호출 한 경우 최소 값이 리턴 되어야 한다.', () {
+    test(
+        'When min is called without a condition, the minimum value should be returned.',
+        () {
       final column = PlutoColumn(
         title: 'column',
         field: 'column',
@@ -219,7 +239,9 @@ void main() {
       expect(PlutoAggregateHelper.min(rows: rows, column: column), -105);
     });
 
-    test('[소수] condition 이 없이 min 을 호출 한 경우 최소 값이 리턴 되어야 한다.', () {
+    test(
+        'When min is called without a condition, the minimum value should be returned.',
+        () {
       final column = PlutoColumn(
         title: 'column',
         field: 'column',
@@ -237,7 +259,9 @@ void main() {
       expect(PlutoAggregateHelper.min(rows: rows, column: column), 10.001);
     });
 
-    test('condition 이 있는 경우 조건에 맞는 아이템이 있다면 조건내에서 최소값이 리턴 되어야 한다.', () {
+    test(
+        'When a condition is present, the minimum value of the items that match the condition should be returned.',
+        () {
       final column = PlutoColumn(
         title: 'column',
         field: 'column',
@@ -262,7 +286,9 @@ void main() {
       );
     });
 
-    test('condition 이 있는 경우 조건에 맞는 아이템이 없다면 null 이 리턴 되어야 한다.', () {
+    test(
+        'When a condition is present, if there are no matching items, null should be returned.',
+        () {
       final column = PlutoColumn(
         title: 'column',
         field: 'column',
@@ -289,7 +315,9 @@ void main() {
   });
 
   group('max', () {
-    test('condition 이 있는 경우 조건에 맞는 아이템이 있다면 조건내에서 최대값이 리턴 되어야 한다.', () {
+    test(
+        'When a condition is present, the maximum value of the items that match the condition should be returned.',
+        () {
       final column = PlutoColumn(
         title: 'column',
         field: 'column',
@@ -314,7 +342,9 @@ void main() {
       );
     });
 
-    test('condition 이 있는 경우 조건에 맞는 아이템이 없다면 null 이 리턴 되어야 한다.', () {
+    test(
+        'When a condition is present, if there are no matching items, null should be returned.',
+        () {
       final column = PlutoColumn(
         title: 'column',
         field: 'column',
@@ -341,7 +371,9 @@ void main() {
   });
 
   group('count', () {
-    test('condition 이 없는 경우 전체 리스트 개수가 리턴 되어야 한다.', () {
+    test(
+        'When count is called without a condition, the total count should be returned.',
+        () {
       final column = PlutoColumn(
         title: 'column',
         field: 'column',
@@ -359,7 +391,9 @@ void main() {
       expect(PlutoAggregateHelper.count(rows: rows, column: column), 5);
     });
 
-    test('condition 이 있는 경우 조건에 맞는 아이템이 있다면 조건에 맞는 아이템 개수가 리턴 되어야 한다.', () {
+    test(
+        'When a condition is present, the count of the items that match the condition should be returned.',
+        () {
       final column = PlutoColumn(
         title: 'column',
         field: 'column',
@@ -384,7 +418,9 @@ void main() {
       );
     });
 
-    test('condition 이 있는 경우 조건에 맞는 아이템이 없다면 0 이 리턴 되어야 한다.', () {
+    test(
+        'When a condition is present, if there are no matching items, 0 should be returned.',
+        () {
       final column = PlutoColumn(
         title: 'column',
         field: 'column',

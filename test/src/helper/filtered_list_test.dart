@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:pluto_grid_plus/pluto_grid_plus.dart';
 
 void main() {
-  group('Int List 를 짝수로 필터링.', () {
+  group('Filtering Int List for even numbers.', () {
     List<int> originalList;
 
     late FilteredList<int> list;
@@ -16,7 +16,7 @@ void main() {
     });
 
     test(
-      'originalList 가 필터 적용 되지 않은 값이 리턴 되어야 한다.',
+      'originalList should return unfiltered values',
       () {
         expect(list.originalList.length, 9);
 
@@ -27,7 +27,7 @@ void main() {
     );
 
     test(
-      'filteredList 가 필터 적용 된 값이 리턴 되어야 한다.',
+      'filteredList should return filtered values',
       () {
         expect(list.filteredList.length, 4);
 
@@ -38,7 +38,7 @@ void main() {
     );
 
     test(
-      'length 가 적용 되어야 한다.',
+      'length should be applied',
       () {
         expect(list.length, 4);
 
@@ -49,7 +49,7 @@ void main() {
     );
 
     test(
-      '특정 index 의 값을 리턴 해야 한다.',
+      'should return value at specific index',
       () {
         expect(list[0], 2);
         expect(list.first, 2);
@@ -68,7 +68,7 @@ void main() {
     );
 
     test(
-      'Destructuring 리턴 값이 반영 되어야 한다.',
+      'Destructuring return values should be reflected',
       () {
         expect([...list], [2, 4, 6, 8]);
 
@@ -78,13 +78,13 @@ void main() {
       },
     );
 
-    group('요소를 수정.', () {
+    group('Modifying elements.', () {
       setUp(() {
         list[1] = 40;
       });
 
       test(
-        '수정 한 요소가 반영 되어야 한다.',
+        'Modified elements should be reflected',
         () {
           expect(list, [2, 40, 6, 8]);
 
@@ -95,7 +95,7 @@ void main() {
       );
 
       test(
-        'sort 시 수정 한 요소가 반영 되어야 한다.',
+        'Modified elements should be reflected when sorting',
         () {
           list.sort();
 
@@ -116,13 +116,13 @@ void main() {
       );
     });
 
-    group('요소를 추가.', () {
+    group('Adding elements.', () {
       setUp(() {
         list.add(10);
       });
 
       test(
-        '추가 한 요소가 반영 되어야 한다.',
+        'Added elements should be reflected',
         () {
           expect(list, [2, 4, 6, 8, 10]);
 
@@ -133,7 +133,7 @@ void main() {
       );
 
       test(
-        'length 가 반영 되어야 한다.',
+        'length should be reflected',
         () {
           expect(list.length, 5);
 
@@ -144,9 +144,9 @@ void main() {
       );
     });
 
-    group('remove 로 요소를 삭제.', () {
+    group('Removing elements using remove.', () {
       setUp(() {
-        // filtering 된 상태에서 필터링 범위 밖의 리스트는 삭제 되지 않는다.
+        // When filtering, elements outside the filter range cannot be deleted
         var removeOne = list.remove(1);
         expect(removeOne, isFalse);
 
@@ -155,7 +155,7 @@ void main() {
       });
 
       test(
-        'length 가 반영 되어야 한다.',
+        'length should be reflected',
         () {
           expect(list.length, 3);
 
@@ -170,7 +170,7 @@ void main() {
       );
     });
 
-    group('removeFromOriginal 로 요소를 삭제.', () {
+    group('Removing elements using removeFromOriginal.', () {
       setUp(() {
         var removeOne = list.removeFromOriginal(1);
         expect(removeOne, isTrue);
@@ -180,7 +180,7 @@ void main() {
       });
 
       test(
-        'length 가 반영 되어야 한다.',
+        'length should be reflected',
         () {
           expect(list.length, 3);
 
@@ -195,15 +195,15 @@ void main() {
       );
     });
 
-    group('removeWhere 로 요소를 삭제.', () {
+    group('Removing elements using removeWhere.', () {
       setUp(() {
-        // filtering 된 상태에서 필터링 범위 밖의 리스트는 삭제 되지 않는다.
+        // When filtering, elements outside the filter range cannot be deleted
         list.removeWhere((element) => element == 1);
         list.removeWhere((element) => element == 2);
       });
 
       test(
-        'length 가 반영 되어야 한다.',
+        'length should be reflected',
         () {
           expect(list.length, 3);
 
@@ -218,14 +218,14 @@ void main() {
       );
     });
 
-    group('removeWhereFromOriginal 로 요소를 삭제.', () {
+    group('Removing elements using removeWhereFromOriginal.', () {
       setUp(() {
         list.removeWhereFromOriginal((element) => element == 1);
         list.removeWhereFromOriginal((element) => element == 2);
       });
 
       test(
-        'length 가 반영 되어야 한다.',
+        'length should be reflected',
         () {
           expect(list.length, 3);
 
@@ -240,14 +240,14 @@ void main() {
       );
     });
 
-    group('retainWhere 로 요소를 삭제.', () {
+    group('Removing elements using retainWhere.', () {
       setUp(() {
-        // filtering 된 상태에서 필터링 범위 밖의 리스트는 삭제 되지 않는다.
+        // When filtering, elements outside the filter range cannot be deleted
         list.retainWhere((element) => element > 2);
       });
 
       test(
-        'length 가 반영 되어야 한다.',
+        'length should be reflected',
         () {
           expect(list.length, 3);
 
@@ -262,13 +262,13 @@ void main() {
       );
     });
 
-    group('retainWhereFromOriginal 로 요소를 삭제.', () {
+    group('Removing elements using retainWhereFromOriginal.', () {
       setUp(() {
         list.retainWhereFromOriginal((element) => element > 2);
       });
 
       test(
-        'length 가 반영 되어야 한다.',
+        'length should be reflected',
         () {
           expect(list.length, 3);
 
@@ -283,14 +283,14 @@ void main() {
       );
     });
 
-    group('clear 로 요소를 삭제.', () {
+    group('Removing elements using clear.', () {
       setUp(() {
-        // filtering 된 상태에서 필터링 범위 밖의 리스트는 삭제 되지 않는다.
+        // When filtering, elements outside the filter range cannot be deleted
         list.clear();
       });
 
       test(
-        'length 가 반영 되어야 한다.',
+        'length should be reflected',
         () {
           expect(list.length, 0);
 
@@ -305,13 +305,13 @@ void main() {
       );
     });
 
-    group('clearFromOriginal 로 요소를 삭제.', () {
+    group('Removing elements using clearFromOriginal.', () {
       setUp(() {
         list.clearFromOriginal();
       });
 
       test(
-        'length 가 반영 되어야 한다.',
+        'length should be reflected',
         () {
           expect(list.length, 0);
 
@@ -326,13 +326,13 @@ void main() {
       );
     });
 
-    group('removeLast 로 요소를 삭제.', () {
+    group('Removing elements using removeLast.', () {
       setUp(() {
         list.removeLast();
       });
 
       test(
-        'length 가 반영 되어야 한다.',
+        'length should be reflected',
         () {
           expect(list.length, 3);
 
@@ -347,13 +347,13 @@ void main() {
       );
     });
 
-    group('removeLastFromOriginal 로 요소를 삭제.', () {
+    group('Removing elements using removeLastFromOriginal.', () {
       setUp(() {
         list.removeLastFromOriginal();
       });
 
       test(
-        'length 가 반영 되어야 한다.',
+        'length should be reflected',
         () {
           expect(list.length, 4);
 
@@ -368,13 +368,13 @@ void main() {
       );
     });
 
-    group('shuffle 로 요소를 변경.', () {
+    group('Shuffling elements.', () {
       setUp(() {
         list.shuffle();
       });
 
       test(
-        'length 가 반영 되어야 한다.',
+        'length should be reflected',
         () {
           expect(list.length, 4);
 
@@ -415,13 +415,15 @@ void main() {
       },
     );
 
-    group('insert 로 2 앞에  -2 요소를 추가.', () {
+    group('Inserting elements using insert.', () {
       setUp(() {
+        list.setFilter(null);
+
         list.insert(0, -2);
       });
 
       test(
-        'length 가 반영 되어야 한다.',
+        'length should be reflected',
         () {
           expect(list.length, 5);
 
@@ -436,13 +438,13 @@ void main() {
       );
     });
 
-    group('insert 로 8 뒤에  10 요소를 추가.', () {
+    group('Inserting elements using insertAll.', () {
       setUp(() {
         list.insert(4, 10);
       });
 
       test(
-        'length 가 반영 되어야 한다.',
+        'length should be reflected',
         () {
           expect(list.length, 5);
 
@@ -457,13 +459,13 @@ void main() {
       );
     });
 
-    group('removeAt 으로 4 요소를 삭제.', () {
+    group('Removing 4 elements with removeAt.', () {
       setUp(() {
         list.removeAt(1);
       });
 
       test(
-        'length 가 반영 되어야 한다.',
+        'length should be reflected',
         () {
           expect(list.length, 3);
 
@@ -478,7 +480,7 @@ void main() {
       );
 
       test(
-        '필터링 된 범위 밖의 index 접근 시 오류를 발생 시켜야 한다.',
+        'index out of range error should be thrown when removing element outside the filter range',
         () {
           expect(list.length, 3);
 
@@ -495,13 +497,13 @@ void main() {
       );
     });
 
-    group('insertAll 로 2 앞에  [-3, -2] 요소를 추가.', () {
+    group('Inserting elements using insertAll.', () {
       setUp(() {
         list.insertAll(0, [-3, -2]);
       });
 
       test(
-        'length 가 반영 되어야 한다.',
+        'length should be reflected',
         () {
           expect(list.length, 5);
 
@@ -516,7 +518,7 @@ void main() {
       );
     });
 
-    group('insertAll 로 9 앞에  [-9, -10] 요소를 추가.', () {
+    group('Inserting elements at position 8', () {
       setUp(() {
         list.setFilter(null);
 
@@ -524,7 +526,7 @@ void main() {
       });
 
       test(
-        'length 가 반영 되어야 한다.',
+        'length should be reflected',
         () {
           expect(list.length, 11);
 
@@ -533,7 +535,7 @@ void main() {
       );
     });
 
-    group('insertAll 로 9 뒤에  [10, 11] 요소를 추가.', () {
+    group('Inserting elements at end', () {
       setUp(() {
         list.setFilter(null);
 
@@ -541,7 +543,7 @@ void main() {
       });
 
       test(
-        'length 가 반영 되어야 한다.',
+        'length should be reflected',
         () {
           expect(list.length, 11);
 
@@ -563,7 +565,7 @@ void main() {
     });
 
     test(
-      '최초 0, 3 을 설정하면 [1, 2, 3] 이 리턴 되어야 한다.',
+      'Setting initial range 0, 3 should return [1, 2, 3]',
       () {
         list.setFilterRange(FilteredListRange(0, 3));
 
@@ -573,7 +575,7 @@ void main() {
     );
 
     test(
-      '3, 6 을 설정하면 [4, 5, 6] 이 리턴 되어야 한다.',
+      'Setting range 3, 6 should return [4, 5, 6]',
       () {
         list.setFilterRange(FilteredListRange(3, 6));
 
@@ -583,7 +585,7 @@ void main() {
     );
 
     test(
-      'filterRange 를 null 로 설정하면 originalList 가 리턴 되어야 한다.',
+      'Setting filterRange to null should return originalList',
       () {
         list.setFilterRange(null);
 
@@ -593,7 +595,7 @@ void main() {
     );
 
     test(
-      '다시 3, 6 을 설정하면 [4, 5, 6] 이 리턴 되어야 한다.',
+      'Setting range back to 3, 6 should return [4, 5, 6]',
       () {
         list.setFilterRange(FilteredListRange(3, 6));
 
@@ -614,54 +616,69 @@ void main() {
       list = FilteredList(initialList: originalList);
     });
 
-    test('0, 3 으로 필터링 한 후 3 다음에 [31, 32] 가 insertAll 되어야 한다.', () {
-      list.setFilterRange(FilteredListRange(0, 3));
+    test(
+      'After filtering with 0, 3, insertAll [31, 32] after 3',
+      () {
+        list.setFilterRange(FilteredListRange(0, 3));
 
-      expect(list, [1, 2, 3]);
+        expect(list, [1, 2, 3]);
 
-      list.insertAll(3, [31, 32]);
+        list.insertAll(3, [31, 32]);
 
-      expect(list.originalList, [1, 2, 3, 31, 32, 4, 5, 6, 7, 8, 9]);
-    });
+        expect(list.originalList, [1, 2, 3, 31, 32, 4, 5, 6, 7, 8, 9]);
+      },
+    );
 
-    test('0, 3 으로 필터링 한 후 1 앞에 [31, 32] 가 insertAll 되어야 한다.', () {
-      list.setFilterRange(FilteredListRange(0, 3));
+    test(
+      'After filtering with 0, 3, insertAll [31, 32] before 1',
+      () {
+        list.setFilterRange(FilteredListRange(0, 3));
 
-      expect(list, [1, 2, 3]);
+        expect(list, [1, 2, 3]);
 
-      list.insertAll(0, [31, 32]);
+        list.insertAll(0, [31, 32]);
 
-      expect(list.originalList, [31, 32, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
-    });
+        expect(list.originalList, [31, 32, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+      },
+    );
 
-    test('7, 9 으로 필터링 한 후 9 다음에 [91, 92] 가 insertAll 되어야 한다.', () {
-      list.setFilterRange(FilteredListRange(7, 9));
+    test(
+      'After filtering with 7, 9, insertAll [91, 92] after 9',
+      () {
+        list.setFilterRange(FilteredListRange(7, 9));
 
-      expect(list, [8, 9]);
+        expect(list, [8, 9]);
 
-      list.insertAll(2, [91, 92]);
+        list.insertAll(2, [91, 92]);
 
-      expect(list.originalList, [1, 2, 3, 4, 5, 6, 7, 8, 9, 91, 92]);
-    });
+        expect(list.originalList, [1, 2, 3, 4, 5, 6, 7, 8, 9, 91, 92]);
+      },
+    );
 
-    test('7, 9 으로 필터링 한 후 8 다음에 [91, 92] 가 insertAll 되어야 한다.', () {
-      list.setFilterRange(FilteredListRange(7, 9));
+    test(
+      'After filtering with 7, 9, insertAll [91, 92] after 8',
+      () {
+        list.setFilterRange(FilteredListRange(7, 9));
 
-      expect(list, [8, 9]);
+        expect(list, [8, 9]);
 
-      list.insertAll(1, [91, 92]);
+        list.insertAll(1, [91, 92]);
 
-      expect(list.originalList, [1, 2, 3, 4, 5, 6, 7, 8, 91, 92, 9]);
-    });
+        expect(list.originalList, [1, 2, 3, 4, 5, 6, 7, 8, 91, 92, 9]);
+      },
+    );
 
-    test('8, 10 으로 필터링 한 후 8 앞에 [91, 92] 가 insertAll 되어야 한다.', () {
-      list.setFilterRange(FilteredListRange(7, 9));
+    test(
+      'After filtering with 8, 10, insertAll [91, 92] before 8',
+      () {
+        list.setFilterRange(FilteredListRange(7, 9));
 
-      expect(list, [8, 9]);
+        expect(list, [8, 9]);
 
-      list.insertAll(0, [91, 92]);
+        list.insertAll(0, [91, 92]);
 
-      expect(list.originalList, [1, 2, 3, 4, 5, 6, 7, 91, 92, 8, 9]);
-    });
+        expect(list.originalList, [1, 2, 3, 4, 5, 6, 7, 91, 92, 8, 9]);
+      },
+    );
   });
 }

@@ -33,7 +33,7 @@ TextStyle textStyleFromTextButton(TextButton button) {
 }
 
 void main() {
-  group('숫자 버튼으로 페이지 이동 테스트', () {
+  group('Pagination Button Navigation Test', () {
     List<PlutoColumn> columns;
 
     List<PlutoRow> rows;
@@ -49,7 +49,7 @@ void main() {
     const headerName = 'header0';
 
     final grid = PlutoWidgetTestHelper(
-      '100개 행과 기본 페이지 크기 40',
+      '100 rows and default page size 40',
       (tester) async {
         columns = [
           ...ColumnHelper.textColumn('header', count: 1),
@@ -83,15 +83,15 @@ void main() {
       },
     );
 
-    grid.test('PlutoPagination 위젯이 렌더링 되어야 한다.', (tester) async {
+    grid.test('PlutoPagination widget should be rendered.', (tester) async {
       expect(find.byType(PlutoPagination), findsOneWidget);
     });
 
-    grid.test('페이징 버튼이 3개 렌더링 되어야 한다.', (tester) async {
+    grid.test('Three pagination buttons should be rendered.', (tester) async {
       expect(pageButtons, findsNWidgets(3));
     });
 
-    grid.test('페이징 버튼이 1,2,3 이 렌더링 되어야 한다.', (tester) async {
+    grid.test('Pagination buttons should be rendered as 1, 2, 3.', (tester) async {
       List<TextButton> pageButtonsAsTextButton = buttonsToWidgets(pageButtons);
 
       expect(textFromTextButton(pageButtonsAsTextButton[0]), '1');
@@ -99,7 +99,7 @@ void main() {
       expect(textFromTextButton(pageButtonsAsTextButton[2]), '3');
     });
 
-    grid.test('1번 페이징 버튼이 활성화 되어야 한다.', (tester) async {
+    grid.test('The first pagination button should be activated.', (tester) async {
       List<TextButton> pageButtonsAsTextButton = buttonsToWidgets(pageButtons);
 
       final style1 = textStyleFromTextButton(pageButtonsAsTextButton[0]);
@@ -107,7 +107,7 @@ void main() {
       expect(style1.color, activateButtonColor);
     });
 
-    grid.test('2, 3번 페이징 버튼은 비 활성화 되어야 한다.', (tester) async {
+    grid.test('The second and third pagination buttons should not be activated.', (tester) async {
       List<TextButton> pageButtonsAsTextButton = buttonsToWidgets(pageButtons);
 
       final style2 = textStyleFromTextButton(pageButtonsAsTextButton[1]);
@@ -119,8 +119,8 @@ void main() {
       expect(style3.color, defaultButtonColor);
     });
 
-    grid.test('100 개의 행의 셀 값이 0~99 까지 설정 되어야 한다.', (tester) async {
-      // 테스트를 위해 셀 값을 순서대로 0~99 까지 설정.
+    grid.test('Cell values of 100 rows should be set from 0 to 99.', (tester) async {
+      // Set cell values in order from 0 to 99 for testing.
       final rows = stateManager.refRows.originalList;
 
       expect(rows[0].cells[headerName]!.value, 0);
@@ -130,7 +130,7 @@ void main() {
       expect(rows[99].cells[headerName]!.value, 99);
     });
 
-    grid.test('첫페이지의 행이 40개 렌더링 되어야 한다.', (tester) async {
+    grid.test('The first page should render 40 rows.', (tester) async {
       final rows = stateManager.rows;
 
       expect(rows.first.cells[headerName]!.value, 0);
@@ -140,7 +140,7 @@ void main() {
       expect(rows.length, 40);
     });
 
-    grid.test('2 페이지로 이동 하면 2번 페이징 버튼이 활성화 되어야 한다.', (tester) async {
+    grid.test('When clicking the second pagination button, the second button should be activated.', (tester) async {
       await tester.tap(pageButtons.at(1));
 
       await tester.pumpAndSettle(const Duration(milliseconds: 300));
@@ -156,7 +156,7 @@ void main() {
       expect(style2.color, activateButtonColor);
     });
 
-    grid.test('2 페이지로 이동 하면 현재 행의 셀 값이 40~79 까지 렌더링 되어야 한다.', (tester) async {
+    grid.test('When clicking the second pagination button, the current rows should render cell values from 40 to 79.', (tester) async {
       await tester.tap(pageButtons.at(1));
 
       await tester.pumpAndSettle(const Duration(milliseconds: 300));
@@ -170,7 +170,7 @@ void main() {
       expect(rows.last.cells[headerName]!.value, 79);
     });
 
-    grid.test('3 페이지로 이동 하면 3번 페이징 버튼이 활성화 되어야 한다.', (tester) async {
+    grid.test('When clicking the third pagination button, the third button should be activated.', (tester) async {
       await tester.tap(pageButtons.at(2));
 
       await tester.pumpAndSettle(const Duration(milliseconds: 300));
@@ -190,7 +190,7 @@ void main() {
       expect(style3.color, activateButtonColor);
     });
 
-    grid.test('3 페이지로 이동 하면 현재 행의 셀 값이 80~99 까지 렌더링 되어야 한다.', (tester) async {
+    grid.test('When clicking the third pagination button, the current rows should render cell values from 80 to 99.', (tester) async {
       await tester.tap(pageButtons.at(2));
 
       await tester.pumpAndSettle(const Duration(milliseconds: 300));
@@ -204,7 +204,7 @@ void main() {
       expect(rows.last.cells[headerName]!.value, 99);
     });
 
-    grid.test('Alt + Page Down/Up 조합으로 페이지를 이동 할 수 있어야 한다.', (tester) async {
+    grid.test('Alt + Page Down/Up key combination should navigate pages.', (tester) async {
       await tester.tap(find.byType(PlutoBaseCell).first);
 
       await tester.pump();
@@ -227,7 +227,7 @@ void main() {
 
       expect(stateManager.page, 3);
 
-      // 마지막 페이지에서 한번 더 다음 페이지를 호출하면 여전히 마지막 페이지 여야 한다.
+      // Clicking next page on the last page should still be on the last page.
       await tester.sendKeyDownEvent(LogicalKeyboardKey.alt);
       await tester.sendKeyEvent(LogicalKeyboardKey.pageDown);
       await tester.sendKeyUpEvent(LogicalKeyboardKey.alt);
@@ -252,7 +252,7 @@ void main() {
 
       expect(stateManager.page, 1);
 
-      // 첫 페이지에서 한번 더 이전 페이지를 호출하면 여전히 첫 페이지 여야 한다.
+      // Clicking previous page on the first page should still be on the first page.
       await tester.sendKeyDownEvent(LogicalKeyboardKey.alt);
       await tester.sendKeyEvent(LogicalKeyboardKey.pageUp);
       await tester.sendKeyUpEvent(LogicalKeyboardKey.alt);

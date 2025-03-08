@@ -36,8 +36,8 @@ void main() {
 
   group('currentSelectingPositionList', () {
     testWidgets(
-      'selectingMode.Row 상태에서'
-      '빈 배열을 리턴해야 한다.',
+      'selectingMode.Row status'
+      'should return an empty array.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -68,8 +68,8 @@ void main() {
     );
 
     testWidgets(
-      'selectingMode.Square 상태에서'
-      '(1, 3) ~ (2, 4) 선택 시 4개의 선택 된 셀이 리턴 되어야 한다.',
+      'selectingMode.Square status'
+      '(1, 3) ~ (2, 4) selection should return 4 selected cells.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -451,7 +451,7 @@ void main() {
 
   group('setSelecting', () {
     testWidgets(
-      'selectingMode == None 면 isSelecting 가 변경 되지 않아야 한다.',
+      'When selectingMode is None, should not change isSelecting.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -478,9 +478,9 @@ void main() {
     );
 
     testWidgets(
-      'selectingMode == Square'
-      'currentCell == null 이면'
-      'isSelecting 이 변경 되지 않아야 한다.',
+      'When selectingMode is Square'
+      'and currentCell is null'
+      'then isSelecting should not change.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -508,9 +508,9 @@ void main() {
     );
 
     testWidgets(
-      'selectingMode == Row'
-      'currentCell == null 이면'
-      'isSelecting 이 변경 되지 않아야 한다.',
+      'When selectingMode is Row'
+      'and currentCell is null'
+      'then isSelecting should not change.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -538,9 +538,9 @@ void main() {
     );
 
     testWidgets(
-      'selectingMode == Row'
-      'currentCell != null 이면'
-      'isSelecting 이 변경 된다.',
+      'When selectingMode is Row'
+      'and currentCell is not null'
+      'then isSelecting should change.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -571,10 +571,10 @@ void main() {
     );
 
     testWidgets(
-      'selectingMode == Row'
-      'currentCell != null 이면'
-      'isSelecting 이 변경 된다.'
-      'isEditing 이 true 면 isEditing 이 false 로 변경 된다.',
+      'When selectingMode is Row'
+      'and currentCell is not null'
+      'then isSelecting should change.'
+      'isEditing is true then isEditing should change to false.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -610,7 +610,8 @@ void main() {
 
   group('clearCurrentSelectingPosition', () {
     testWidgets(
-      'currentSelectingPosition 이 null 이 아니라면 null 이 되어야 한다.',
+      'When currentSelectingPosition is not null'
+      'then currentSelectingPosition should be null.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -649,7 +650,8 @@ void main() {
 
   group('clearCurrentSelectingRows', () {
     testWidgets(
-      'currentSelectingRows 에 값이 있다면 빈 배열로 설정 되어야 한다.',
+      'When currentSelectingRows is not empty'
+      'then currentSelectingRows should be empty.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -683,10 +685,8 @@ void main() {
 
   group('setAllCurrentSelecting', () {
     testWidgets(
-        'WHEN '
-        'rows == null '
-        'THEN'
-        '', (WidgetTester tester) async {
+        'When rows is null'
+        'then currentCell should be null.', (WidgetTester tester) async {
       // given
       List<PlutoColumn> columns = [
         ...ColumnHelper.textColumn('text', count: 3, width: 150),
@@ -710,10 +710,8 @@ void main() {
     });
 
     testWidgets(
-        'WHEN '
-        'rows.length < 1 '
-        'THEN'
-        '', (WidgetTester tester) async {
+        'When rows.length < 1'
+        'then currentCell should be null.', (WidgetTester tester) async {
       // given
       List<PlutoColumn> columns = [
         ...ColumnHelper.textColumn('text', count: 3, width: 150),
@@ -737,11 +735,10 @@ void main() {
     });
 
     testWidgets(
-        'WHEN '
-        'selectingMode.Square '
-        'rows.length > 0 '
-        'THEN '
-        '현재 셀은 처음 셀로, 선택 된 셀 위치는 마지막 셀 위치로 설정 되어야 한다.',
+        'When selectingMode is Square'
+        'and rows.length > 0'
+        'then current cell should be first cell, '
+        'selected cell position should be last cell position.',
         (WidgetTester tester) async {
       // given
       List<PlutoColumn> columns = [
@@ -770,11 +767,10 @@ void main() {
     });
 
     testWidgets(
-        'WHEN '
-        'selectingMode.Row '
-        'rows.length > 0 '
-        'THEN '
-        '선택 된 Row 의 개수가 맞아야 한다.', (WidgetTester tester) async {
+        'When selectingMode is Row'
+        'and rows.length > 0'
+        'then The number of selected rows should be correct.',
+        (WidgetTester tester) async {
       // given
       List<PlutoColumn> columns = [
         ...ColumnHelper.textColumn('text', count: 3, width: 150),
@@ -803,11 +799,9 @@ void main() {
     });
 
     testWidgets(
-        'WHEN'
-        'selectingMode.None'
-        'rows.length > 0'
-        'THEN'
-        '아무것도 선택되지 않아야 한다.', (WidgetTester tester) async {
+        'When selectingMode is None'
+        'and rows.length > 0'
+        'then Nothing should be selected.', (WidgetTester tester) async {
       // given
       List<PlutoColumn> columns = [
         ...ColumnHelper.textColumn('text', count: 3, width: 150),
@@ -837,8 +831,8 @@ void main() {
 
   group('setCurrentSelectingPosition', () {
     testWidgets(
-      'selectingMode == Row'
-      'currentRowIdx, rowIdx 로 currentSelectingRows 가 설정 되어야 한다.',
+      'When selectingMode is Row'
+      'then currentRowIdx, rowIdx should be set to currentSelectingRows.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -867,7 +861,7 @@ void main() {
         );
 
         // then
-        // 3, 4 번 Row 선택 됨.
+        // Rows 3 and 4 are selected.
         expect(stateManager.currentSelectingRows.length, 2);
 
         final List<Key> keys =
@@ -881,8 +875,9 @@ void main() {
 
   group('toggleSelectingRow', () {
     testWidgets(
-      'selectingMode == Row, '
-      '이미 선택 된 Row 라면 다시 해제 되어야 한다.',
+      'When selectingMode is Row'
+      'and the row is already selected'
+      'then it should be removed.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -915,7 +910,8 @@ void main() {
 
   group('isSelectingInteraction', () {
     testWidgets(
-      'selectingMode 가 None 인 경우 false',
+      'When selectingMode is None'
+      'then isSelectingInteraction should return false.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -941,8 +937,9 @@ void main() {
     );
 
     testWidgets(
-      'selectingMode 가 None 이 아니지만, '
-      'shift or ctrl 키가 눌려지지 않으면 false',
+      'When selectingMode is not None'
+      'and shift or ctrl key is not pressed'
+      'then isSelectingInteraction should return false.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -968,9 +965,10 @@ void main() {
     );
 
     testWidgets(
-      'selectingMode 가 None 이 아니지만, '
-      'shift 가 눌려졌지만, '
-      'currentCell 이 null 인경우 false',
+      'When selectingMode is not None'
+      'and shift key is pressed'
+      'and currentCell is null'
+      'then isSelectingInteraction should return false.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -997,9 +995,10 @@ void main() {
     );
 
     testWidgets(
-      'selectingMode 가 None 이 아니지만, '
-      'ctrl 가 눌려졌지만, '
-      'currentCell 이 null 인경우 false',
+      'When selectingMode is not None'
+      'and ctrl key is pressed'
+      'and currentCell is null'
+      'then isSelectingInteraction should return false.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -1026,9 +1025,10 @@ void main() {
     );
 
     testWidgets(
-      'selectingMode 가 None 이 아니고, '
-      'shift 가 눌려졌고, '
-      'currentCell 이 null 이 아닌 경우 true',
+      'When selectingMode is not None'
+      'and shift key is pressed'
+      'and currentCell is not null'
+      'then isSelectingInteraction should return true.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -1056,9 +1056,10 @@ void main() {
     );
 
     testWidgets(
-      'selectingMode 가 None 이 아니고, '
-      'ctrl 가 눌려졌고, '
-      'currentCell 이 null 이 아닌 경우 true',
+      'When selectingMode is not None'
+      'and ctrl key is pressed'
+      'and currentCell is not null'
+      'then isSelectingInteraction should return true.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -1087,11 +1088,8 @@ void main() {
   });
 
   group('isSelectedCell', () {
-    testWidgets(
-        'WHEN'
-        '아무것도 선택되지 않음.'
-        'THEN'
-        '모든 셀이 false.', (WidgetTester tester) async {
+    testWidgets('When nothing is selected, all cells should be false',
+        (WidgetTester tester) async {
       // given
       List<PlutoColumn> columns = [
         ...ColumnHelper.textColumn('text', count: 3, width: 150),
@@ -1127,10 +1125,10 @@ void main() {
 
     testWidgets(
         'WHEN '
-        '현재 셀이 0번 Row, 0번 Column 이고 '
-        '0번 Row, 1번 Column 이 선택 됨. '
+        'current cell is 0th row, 0th column, '
+        '0th row, 1st column is selected. '
         'THEN '
-        '해당 셀이 true.', (WidgetTester tester) async {
+        'the cell should be true.', (WidgetTester tester) async {
       // given
       List<PlutoColumn> columns = [
         ...ColumnHelper.textColumn('text', count: 3, width: 150),
@@ -1186,10 +1184,10 @@ void main() {
 
     testWidgets(
         'WHEN '
-        '현재 셀이 1번 Row, 1번 Column 이고 '
-        '3번 Row, 2번 Column 이 선택 됨. '
+        'current cell is 1st row, 1st column, '
+        '3rd row, 2nd column is selected. '
         'THEN '
-        '해당 셀이 true.', (WidgetTester tester) async {
+        'the cell should be true.', (WidgetTester tester) async {
       // given
       List<PlutoColumn> columns = [
         ...ColumnHelper.textColumn('text', count: 3, width: 150),
@@ -1247,9 +1245,8 @@ void main() {
 
   group('handleAfterSelectingRow', () {
     testWidgets(
-      'WHEN '
-      'enableMoveDownAfterSelecting 이 false 이면 '
-      '셀 값 변경 후 다음 행으로 이동 되지 않아야 한다.',
+      'When enableMoveDownAfterSelecting is false'
+      'then cell value change should not move to the next row.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [
@@ -1294,9 +1291,8 @@ void main() {
     );
 
     testWidgets(
-      'WHEN '
-      'enableMoveDownAfterSelecting 이 true 이면 '
-      '셀 값 변경 후 다음 행으로 이동 되어야 한다.',
+      'When enableMoveDownAfterSelecting is true'
+      'then cell value change should move to the next row.',
       (WidgetTester tester) async {
         // given
         List<PlutoColumn> columns = [

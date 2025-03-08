@@ -8,7 +8,7 @@ import '../../helper/pluto_widget_test_helper.dart';
 import '../../helper/row_helper.dart';
 
 void main() {
-  group('Ctrl + A 키 테스트', () {
+  group('Ctrl+A Key Test', () {
     List<PlutoColumn> columns;
 
     List<PlutoRow> rows;
@@ -16,7 +16,7 @@ void main() {
     PlutoGridStateManager? stateManager;
 
     final withTheCellSelected = PlutoWidgetTestHelper(
-      '0, 0 셀이 선택 된 상태에서',
+      '0, 0 cell is selected',
       (tester) async {
         columns = [
           ...ColumnHelper.textColumn('header', count: 10),
@@ -45,7 +45,7 @@ void main() {
     );
 
     withTheCellSelected.test(
-      'editing 상태가 아니면 Ctrl + A 키 입력 시 전체 셀이 선택 되어야 한다.',
+      'When Ctrl+A is pressed in normal mode, all cells should be selected',
       (tester) async {
         expect(stateManager!.selectingMode.isCell, true);
         expect(stateManager!.isEditing, false);
@@ -63,7 +63,7 @@ void main() {
     );
 
     withTheCellSelected.test(
-      'editing 상태가 맞다면 Ctrl + A 키 입력 시 셀 선택이 되지 않아야 한다.',
+      'When Ctrl+A is pressed in editing mode, cell selection should not occur',
       (tester) async {
         expect(stateManager!.selectingMode.isCell, true);
         stateManager!.setEditing(true);

@@ -81,7 +81,7 @@ void main() {
     );
   }
 
-  testWidgets('8개의 행이 렌더링 되어야 한다.', (tester) async {
+  testWidgets('8 rows should be rendered', (tester) async {
     await buildWidget(tester);
     // visible
     expect(find.byKey(const ValueKey('0')), findsOneWidget);
@@ -98,7 +98,7 @@ void main() {
   });
 
   testWidgets(
-    '세로 스크롤바를 hover 하여 스크롤을 이동 할 수 있어야 한다.',
+    'Should be able to scroll by hovering over the vertical scrollbar',
     (tester) async {
       await buildWidget(tester, enableHover: true);
 
@@ -126,7 +126,7 @@ void main() {
   );
 
   testWidgets(
-    '가로 스크롤바를 hover 하여 스크롤을 이동 할 수 있어야 한다.',
+    'Should be able to scroll by hovering over the horizontal scrollbar',
     (tester) async {
       await buildWidget(tester, enableHover: true);
 

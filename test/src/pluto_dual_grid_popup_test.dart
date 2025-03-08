@@ -12,7 +12,7 @@ void main() {
   const columnWidth = PlutoGridSettings.columnWidth;
 
   testWidgets(
-    'Directionality 가 RTL 인 경우 컬럼이 RTL 에 맞게 위치해야 한다.',
+    'When Directionality is RTL, columns should be positioned according to RTL layout.',
     (WidgetTester tester) async {
       // given
       await TestHelperUtil.changeWidth(
@@ -80,15 +80,17 @@ void main() {
       expect(gridAColumn1Dx - gridAColumn2Dx, columnWidth);
       expect(gridAColumn2Dx - gridAColumn3Dx, columnWidth);
 
-      // 그리드의 넓이로 스크롤에 대한 위치는 체크하지 않고
-      // 위치상 gridA 마지막 컬럼이 gridB 의 처음 컬럼의 좌측에 위치하는지만 체크.
+      // Check only if the last column of gridA is positioned to the left of the first column of gridB,
+      // not checking the position relative to scrolling based on grid width.
       expect(gridBColumn1Dx, lessThan(gridAColumn3Dx));
       expect(gridBColumn1Dx - gridBColumn2Dx, columnWidth);
       expect(gridBColumn2Dx - gridBColumn3Dx, columnWidth);
     },
   );
 
-  testWidgets('그리드 팝업이 호출 되고 셀 값이 출력 되어야 한다.', (WidgetTester tester) async {
+  testWidgets(
+      'When the grid popup is called, the cell values should be displayed.',
+      (WidgetTester tester) async {
     // given
     final gridAColumns = ColumnHelper.textColumn('headerA');
     final gridARows = RowHelper.count(3, gridAColumns);

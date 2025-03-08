@@ -7,7 +7,7 @@ void main() {
 
   const columnTitle = 'column1';
 
-  group('10개 행이 있는 상태에서 3~5번 행을 선택 한 후, ', () {
+  group('With 10 rows and selecting 3~5th row, ', () {
     selectRowsFrom3To5(
       String description,
       Future<void> Function(WidgetTester tester) testWithSelectedRowsFrom3To5,
@@ -28,7 +28,7 @@ void main() {
     }
 
     selectRowsFrom3To5(
-      '다른 행을 탭하면 이전 선택 된 행이 무효화 되어야 한다.',
+      'When another row is tapped, the previous selected row should be invalidated.',
       (tester) async {
         final nonSelectedRow = grid.stateManager.refRows[0];
 
@@ -45,7 +45,7 @@ void main() {
     );
 
     selectRowsFrom3To5(
-      '다른 행을 길게 탭하면 이전의 선택 된 행이 무효화 되고 길게 탭한 행이 선택 되어야 한다.',
+      'When another row is long-tapped, the previous selected row should be invalidated and the long-tapped row should be selected.',
       (tester) async {
         await grid.selectRows(
           columnTitle: columnTitle,
@@ -64,7 +64,7 @@ void main() {
     );
 
     selectRowsFrom3To5(
-      'setCurrentCell 로 현재 셀을 변경 하면 선택 된 행들이 무효화 되어야 한다.',
+      'When setCurrentCell is called to change the current cell, the selected rows should be invalidated.',
       (tester) async {
         final cell = grid.stateManager.refRows[8].cells[columnTitle];
 
@@ -81,7 +81,7 @@ void main() {
     );
 
     selectRowsFrom3To5(
-      '탭하여 현재 셀을 변경 하면 선택 된 행들이 무효화 되어야 한다.',
+      'When a cell is tapped to change the current cell, the selected rows should be invalidated.',
       (tester) async {
         final cell = grid.stateManager.refRows[7].cells[columnTitle];
 
@@ -96,7 +96,7 @@ void main() {
     );
 
     selectRowsFrom3To5(
-      'setEditing 으로 편집상태로 변경 하면 선택 된 행들이 무효화 되어야 한다.',
+      'When setEditing is called to change the editing state, the selected rows should be invalidated.',
       (tester) async {
         final currentCell = grid.stateManager.currentCell;
 
@@ -111,7 +111,7 @@ void main() {
     );
 
     selectRowsFrom3To5(
-      '현재 셀을 탭하여 편집상태로 변경 하면 선택 된 행들이 무효화 되어야 한다.',
+      'When a cell is tapped to change the editing state, the selected rows should be invalidated.',
       (tester) async {
         expect(grid.stateManager.isEditing, false);
 

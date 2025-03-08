@@ -37,7 +37,7 @@ void main() {
   ) async {
     final textField = findFilterTextField();
 
-    // 텍스트 박스가 최초에 포커스를 받으려면 두번 탭.
+    // To receive focus, tap the text box twice.
     await tester.tap(textField);
     await tester.tap(textField);
 
@@ -46,7 +46,7 @@ void main() {
     }
   }
 
-  group('기본 숫자 컬럼 테스트.', () {
+  group('Number Column Filtering Test', () {
     final columns = [
       PlutoColumn(
         title: 'column',
@@ -68,7 +68,7 @@ void main() {
       PlutoRow(cells: {'column': PlutoCell(value: 3133)}),
     ];
 
-    testWidgets('렌더링 테스트', (tester) async {
+    testWidgets('Rendering Test', (tester) async {
       await tester.pumpWidget(buildGrid(columns: columns, rows: rows));
 
       expect(find.text('0'), findsOneWidget);
@@ -83,7 +83,10 @@ void main() {
       expect(find.text('3,133'), findsOneWidget);
     });
 
-    testWidgets('300 보다 큰 수 필터링.', (tester) async {
+    testWidgets(
+        'When filtering with "greater than" condition and value "300", '
+        'only rows with values greater than 300 should be shown',
+        (tester) async {
       await tester.pumpWidget(buildGrid(columns: columns, rows: rows));
       await tester.pump();
 
@@ -97,7 +100,10 @@ void main() {
       expect(values, [123000, 311, 3133]);
     });
 
-    testWidgets('300 보다 크거나 같은 수 필터링.', (tester) async {
+    testWidgets(
+        'When filtering with "greater than or equal to" condition and value "300", '
+        'only rows with values greater than or equal to 300 should be shown',
+        (tester) async {
       await tester.pumpWidget(buildGrid(columns: columns, rows: rows));
       await tester.pump();
 

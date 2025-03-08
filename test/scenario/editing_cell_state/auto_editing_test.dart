@@ -8,7 +8,7 @@ import '../../helper/pluto_widget_test_helper.dart';
 import '../../helper/row_helper.dart';
 
 void main() {
-  group('autoEditing 이 true 인 상태에서', () {
+  group('Auto Editing Test', () {
     List<PlutoColumn> columns;
 
     List<PlutoRow> rows;
@@ -16,7 +16,7 @@ void main() {
     PlutoGridStateManager? stateManager;
 
     final plutoGrid = PlutoWidgetTestHelper(
-      '5개의 컬럼과 10개의 행을 생성',
+      '5 columns and 10 rows are created',
       (tester) async {
         columns = [
           ...ColumnHelper.textColumn('header', count: 5),
@@ -42,7 +42,7 @@ void main() {
     );
 
     plutoGrid.test(
-      '첫번째 셀을 탭하면 editing 상태가 true 가 되어야 한다.',
+      'When clicking the first cell, the editing state should be true.',
       (tester) async {
         expect(stateManager!.isEditing, false);
 
@@ -55,7 +55,7 @@ void main() {
     );
 
     plutoGrid.test(
-      '첫번째 셀을 탭하고 탭키를 입력하면 두번째 셀이 editing 상태가 되어야 한다.',
+      'When clicking the first cell and pressing the tab key, the second cell should be in editing state.',
       (tester) async {
         expect(stateManager!.isEditing, false);
 
@@ -70,7 +70,7 @@ void main() {
     );
 
     plutoGrid.test(
-      '첫번째 셀을 탭하고 엔터키를 입력하면 두번째 행의 첫번째 셀이 editing 상태가 되어야 한다.',
+      'When clicking the first cell and pressing the enter key, the first cell of the second row should be in editing state.',
       (tester) async {
         expect(stateManager!.isEditing, false);
 
@@ -85,7 +85,7 @@ void main() {
     );
 
     plutoGrid.test(
-      '첫번째 셀을 탭하고 ESC 키를 입력하면 editing 상태가 true 에서 false 변경 되야야 한다.',
+      'When clicking the first cell and pressing the ESC key, the editing state should change from true to false.',
       (tester) async {
         expect(stateManager!.isEditing, false);
 
@@ -102,7 +102,7 @@ void main() {
     );
 
     plutoGrid.test(
-      '첫번째 셀을 탭하고 ESC 키를 입력 후 end 키를 입력하면 마지막 셀이 editing 상태가 되어야 한다.',
+      'When clicking the first cell and pressing the ESC key, then pressing the end key, the last cell should be in editing state.',
       (tester) async {
         await tester.tap(find.text('header0 value 0'));
 
@@ -117,7 +117,7 @@ void main() {
     );
 
     plutoGrid.test(
-      '첫번째 셀을 탭하고 ESC 키를 입력 후 아래 방향키를 입력하면 두번째 셀이 editing 상태가 되어야 한다.',
+      'When clicking the first cell and pressing the ESC key, then pressing the down arrow key, the second cell should be in editing state.',
       (tester) async {
         await tester.tap(find.text('header0 value 0'));
 
@@ -132,7 +132,7 @@ void main() {
     );
 
     plutoGrid.test(
-      '첫번째 셀을 탭하고 ESC 키를 입력 후 우측 방향키를 입력하면 두번째 셀이 editing 상태가 되어야 한다.',
+      'When clicking the first cell and pressing the ESC key, then pressing the right arrow key, the second cell should be in editing state.',
       (tester) async {
         await tester.tap(find.text('header0 value 0'));
 

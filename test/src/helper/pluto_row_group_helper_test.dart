@@ -8,7 +8,7 @@ void main() {
   final mock = MockMethods();
 
   group('applyFilter', () {
-    test('rows 가 비어있는 경우 filter 가 호출되지 않아야 한다.', () {
+    test('When the rows is empty, the filter should not be called.', () {
       final FilteredList<PlutoRow> rows = FilteredList();
 
       final mockFilter = mock.oneParamReturnBool<PlutoRow>;
@@ -20,7 +20,7 @@ void main() {
       verifyNever(mockFilter(any));
     });
 
-    test('row 가 있는 경우 filter 가 호출 되어야 한다.', () {
+    test('When the rows is not empty, the filter should be called.', () {
       final FilteredList<PlutoRow> rows = FilteredList(initialList: [
         PlutoRow(cells: {}),
       ]);
@@ -36,7 +36,7 @@ void main() {
       verify(mockFilter(any)).called(1);
     });
 
-    test('filter 가 설정 된 상태에서 null 로 호출하면 필터가 삭제 되어야 한다.', () {
+    test('When the filter is set, calling null should remove the filter.', () {
       final FilteredList<PlutoRow> rows = FilteredList(initialList: [
         PlutoRow(cells: {'column1': PlutoCell(value: 'test1')}),
         PlutoRow(cells: {'column1': PlutoCell(value: 'test2')}),
@@ -60,7 +60,7 @@ void main() {
       expect(rows.hasFilter, false);
     });
 
-    test('그룹 행이 포함 된 경우 그룹행의 filter 를 포함해서 호출 되어야 한다.', () {
+    test('When the group row is included, the filter should be included.', () {
       final FilteredList<PlutoRow> rows = FilteredList(initialList: [
         PlutoRow(cells: {'column1': PlutoCell(value: 'test1')}),
         PlutoRow(cells: {'column1': PlutoCell(value: 'test2')}),
@@ -84,7 +84,9 @@ void main() {
       verify(mockFilter(any)).called(greaterThanOrEqualTo(2));
     });
 
-    test('그룹의 자식 행을 필터링 한 후 필터를 제거하면 자식 행이 리스트에 포함 되어야 한다.', () {
+    test(
+        'When the child rows of the group are filtered and the filter is removed, '
+        'the child rows should be included in the list.', () {
       final FilteredList<PlutoRow> rows = FilteredList(initialList: [
         PlutoRow(cells: {'column1': PlutoCell(value: 'test1')}),
         PlutoRow(cells: {'column1': PlutoCell(value: 'test2')}),

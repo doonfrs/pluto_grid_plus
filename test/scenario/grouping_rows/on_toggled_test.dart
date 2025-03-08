@@ -81,7 +81,7 @@ void main() {
       ];
     });
 
-    testWidgets('B 그룹을 토글 하면 onToggled 콜백이 호출 되어야 한다.', (tester) async {
+    testWidgets('When group B is toggled, the onToggled callback should be called.', (tester) async {
       PlutoRow? toggledRow;
       bool? isExpanded;
 
@@ -134,7 +134,7 @@ void main() {
       ];
     });
 
-    testWidgets('A 그룹을 토글하면 onToggled 콜백이 호출 되어야 한다.', (tester) async {
+    testWidgets('When group A is toggled, the onToggled callback should be called.', (tester) async {
       PlutoRow? toggledRow;
       bool? isExpanded;
 

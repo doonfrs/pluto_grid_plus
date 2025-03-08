@@ -9,7 +9,7 @@ import '../helper/row_helper.dart';
 
 void main() {
   testWidgets(
-    '두개의 그리드가 생성 되고 셀이 출력 되어야 한다.',
+    'When two grids are created, the cells should be displayed.',
     (WidgetTester tester) async {
       // given
       final gridAColumns = ColumnHelper.textColumn('headerA');
@@ -60,7 +60,7 @@ void main() {
   );
 
   testWidgets(
-    'Directionality 가 LTR 인 경우 그리드 A 가 좌측, 그리드 B 가 우측에 위치해야 한다.',
+    'When Directionality is LTR, grid A should be on the left, and grid B should be on the right.',
     (WidgetTester tester) async {
       // given
       final gridAColumns = ColumnHelper.textColumn('headerA');
@@ -103,7 +103,7 @@ void main() {
   );
 
   testWidgets(
-    'Directionality 가 RTL 인 경우 그리드 A 가 우측, 그리드 B 가 좌측에 위치해야 한다.',
+    'When Directionality is RTL, grid A should be on the right, and grid B should be on the left.',
     (WidgetTester tester) async {
       // given
       final gridAColumns = ColumnHelper.textColumn('headerA');
@@ -145,7 +145,8 @@ void main() {
     },
   );
 
-  group('divider 테스트', () {
+  group('When the divider is created, the following tests should be performed.',
+      () {
     GlobalKey gridAKey = GlobalKey();
     GlobalKey gridBKey = GlobalKey();
 
@@ -188,7 +189,7 @@ void main() {
     }
 
     dualGrid(const PlutoDualGridDivider()).test(
-      'Divider 위젯이 렌더링 되어야 한다.',
+      'The Divider widget should be rendered.',
       (tester) async {
         final findDivider = find.byType(PlutoDualGridDividerWidget);
 
@@ -197,7 +198,7 @@ void main() {
     );
 
     dualGrid(const PlutoDualGridDivider()).test(
-      'Divider 가 기본 컬러로 렌더링 되어야 한다.',
+      'The Divider should be rendered with default colors.',
       (tester) async {
         final findDivider = find.byType(PlutoDualGridDividerWidget);
 
@@ -219,7 +220,7 @@ void main() {
       backgroundColor: Colors.deepOrange,
       indicatorColor: Colors.indigoAccent,
     )).test(
-      'Divider 가변경 된 컬러로 렌더링 되어야 한다.',
+      'The Divider should be rendered with custom colors.',
       (tester) async {
         final findDivider = find.byType(PlutoDualGridDividerWidget);
 
@@ -240,7 +241,7 @@ void main() {
     dualGrid(const PlutoDualGridDivider(
       show: false,
     )).test(
-      'show 가 false 인 경우 Divider 가 렌더링 되지 않아야 한다.',
+      'When show is false, the Divider should not be rendered.',
       (tester) async {
         final findDivider = find.byType(PlutoDualGridDividerWidget);
 
@@ -249,7 +250,7 @@ void main() {
     );
 
     dualGrid(const PlutoDualGridDivider()).test(
-      'Divider 를 우측으로 드래그 하는 경우 Divider 의 위치가 증가해야 한다.',
+      'When the Divider is dragged to the right, the position of the Divider should increase.',
       (tester) async {
         final findDivider = find.byType(PlutoDualGridDividerWidget);
 
@@ -266,7 +267,7 @@ void main() {
     );
 
     dualGrid(const PlutoDualGridDivider()).test(
-      'Divider 를 좌측으로 드래그 하는 경우 Divider 의 위치가 증가해야 한다.',
+      'When the Divider is dragged to the left, the position of the Divider should increase.',
       (tester) async {
         final findDivider = find.byType(PlutoDualGridDividerWidget);
 
@@ -283,9 +284,9 @@ void main() {
     );
 
     dualGrid(const PlutoDualGridDivider()).test(
-      'Divider 를 우측으로 100 드래그 하는 경우, '
-      '좌측 그리드의 위치가 100 늘어나고, '
-      '우측 그리드의 위치가 100 줄어들어야 한다.',
+      'When the Divider is dragged to the right by 100, '
+      'the left grid should increase by 100, '
+      'and the right grid should decrease by 100.',
       (tester) async {
         final findDivider = find.byType(PlutoDualGridDividerWidget);
 
@@ -311,9 +312,10 @@ void main() {
       const PlutoDualGridDivider(),
       textDirection: TextDirection.rtl,
     ).test(
-      'RTL 인 경우 Divider 를 우측으로 100 드래그 하는 경우, '
-      'GridB 의 위치가 100 늘어나고, '
-      'GridA 의 위치가 100 줄어들어야 한다.',
+      'When Directionality is RTL, '
+      'the position of the Divider should increase when dragged to the right by 100, '
+      'GridB should increase by 100, '
+      'and GridA should decrease by 100.',
       (tester) async {
         final findDivider = find.byType(PlutoDualGridDividerWidget);
 
@@ -336,9 +338,9 @@ void main() {
     );
 
     dualGrid(const PlutoDualGridDivider()).test(
-      'Divider 를 좌측으로 100 드래그 하는 경우, '
-      '좌측 그리드의 위치가 100 즐어들고, '
-      '우측 그리드의 위치가 100 늘어나야 한다.',
+      'When the Divider is dragged to the left by 100, '
+      'the left grid should increase by 100, '
+      'and the right grid should decrease by 100.',
       (tester) async {
         final findDivider = find.byType(PlutoDualGridDividerWidget);
 
@@ -364,9 +366,10 @@ void main() {
       const PlutoDualGridDivider(),
       textDirection: TextDirection.rtl,
     ).test(
-      'RTL 인 경우 Divider 를 좌측으로 100 드래그 하는 경우, '
-      'gridB 의 위치가 100 즐어들고, '
-      'gridA 의 위치가 100 늘어나야 한다.',
+      'When Directionality is RTL, '
+      'the position of the Divider should increase when dragged to the left by 100, '
+      'GridB should increase by 100, '
+      'and GridA should decrease by 100.',
       (tester) async {
         final findDivider = find.byType(PlutoDualGridDividerWidget);
 
@@ -390,16 +393,17 @@ void main() {
   });
 
   group(
-    '그리드간 셀 이동 테스트',
+    'Grid cell movement test',
     () {
       PlutoGridStateManager? stateManagerA;
       PlutoGridStateManager? stateManagerB;
 
-      group('왼쪽 그리드의', () {
+      group('Left grid', () {
         buildLeftGridCellSelected({
           TextDirection textDirection = TextDirection.ltr,
         }) {
-          return PlutoWidgetTestHelper('첫번째 셀이 선택 된 상태에서', (tester) async {
+          return PlutoWidgetTestHelper('First cell is selected',
+              (tester) async {
             final gridAColumns = ColumnHelper.textColumn('headerA', count: 3);
             final gridARows = RowHelper.count(3, gridAColumns);
 
@@ -434,10 +438,10 @@ void main() {
         }
 
         buildLeftGridCellSelected().test(
-          '우측 끝으로 이동 후 한번 더 우측 방향키를 입력하면,'
-          '포커스가 우측 그리드로 바뀌어야 한다.'
-          '그리고 한번 더 우측 방향키를 입력하면,'
-          '우측 그리드의 첫번째 셀이 선택 되어야 한다.',
+          'When moving to the right end and then pressing the right arrow key again, '
+          'the focus should be transferred to the right grid.'
+          'And then pressing the right arrow key again, '
+          'the first cell of the right grid should be selected.',
           (tester) async {
             // 0 > 1
             await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
@@ -463,10 +467,10 @@ void main() {
         );
 
         buildLeftGridCellSelected().test(
-          '우측 끝으로 이동 후 탭 키를 입력하면'
-          '포커스가 우측 그리드로 바뀌어야 한다.'
-          '그리고 탭 키를 입력하면'
-          '우측 그리드의 첫번째 셀이 선택 되어야 한다.',
+          'When moving to the right end and then pressing the tab key, '
+          'the focus should be transferred to the right grid.'
+          'And then pressing the tab key, '
+          'the first cell of the right grid should be selected.',
           (tester) async {
             // 0 > 1
             await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
@@ -488,12 +492,12 @@ void main() {
         );
 
         buildLeftGridCellSelected().test(
-          '우측 끝으로 이동 후 탭 키를 입력하면'
-          '포커스가 우측 그리드로 바뀌어야 한다.'
-          '그리고 쉬프트 + 탭 키를 입력하면'
-          '우측 그리드의 첫번째 셀이 선택 되어야 한다.'
-          '이어스 쉬프트 + 탭 키를 입력 하면'
-          '다시 왼쪽 그리드로 포커스가 바뀌어야 한다.',
+          'When moving to the right end and then pressing the tab key, '
+          'the focus should be transferred to the right grid.'
+          'And then pressing the tab key, '
+          'the first cell of the right grid should be selected.'
+          'And then pressing the tab key, '
+          'the focus should be transferred back to the left grid.',
           (tester) async {
             // 0 > 1
             await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
@@ -533,19 +537,19 @@ void main() {
   );
 
   group('PlutoDualGridDisplayRatio', () {
-    test('ratio 가 0 인 경우 assert 에러', () {
+    test('When ratio is 0, an assert error should be thrown', () {
       expect(() {
         PlutoDualGridDisplayRatio(ratio: 0);
       }, throwsA(isA<AssertionError>()));
     });
 
-    test('ratio 가 1 인 경우 assert 에러', () {
+    test('When ratio is 1, an assert error should be thrown', () {
       expect(() {
         PlutoDualGridDisplayRatio(ratio: 1);
       }, throwsA(isA<AssertionError>()));
     });
 
-    test('ratio 가 0.5 인 경우 width 가 5:5', () {
+    test('When ratio is 0.5, the width should be 5:5', () {
       var display = PlutoDualGridDisplayRatio(ratio: 0.5);
 
       const size = BoxConstraints(maxWidth: 200);
@@ -554,7 +558,7 @@ void main() {
       expect(display.gridBWidth(size), 100);
     });
 
-    test('ratio 가 0.1 인 경우 width 가 1:9', () {
+    test('When ratio is 0.1, the width should be 1:9', () {
       var display = PlutoDualGridDisplayRatio(ratio: 0.1);
 
       const size = BoxConstraints(maxWidth: 200);
@@ -565,7 +569,7 @@ void main() {
   });
 
   group('PlutoDualGridDisplayFixedAndExpanded', () {
-    test('width 가 100', () {
+    test('When width is 100', () {
       var display = PlutoDualGridDisplayFixedAndExpanded(width: 100);
 
       const size = BoxConstraints(maxWidth: 200);
@@ -574,7 +578,7 @@ void main() {
       expect(display.gridBWidth(size), 100);
     });
 
-    test('width 가 50', () {
+    test('When width is 50', () {
       var display = PlutoDualGridDisplayFixedAndExpanded(width: 50);
 
       const size = BoxConstraints(maxWidth: 200);
@@ -585,7 +589,7 @@ void main() {
   });
 
   group('PlutoDualGridDisplayExpandedAndFixed', () {
-    test('width 가 100', () {
+    test('When width is 100', () {
       var display = PlutoDualGridDisplayExpandedAndFixed(width: 100);
 
       const size = BoxConstraints(maxWidth: 200);
@@ -594,7 +598,7 @@ void main() {
       expect(display.gridBWidth(size), 100);
     });
 
-    test('width 가 50', () {
+    test('When width is 50', () {
       var display = PlutoDualGridDisplayExpandedAndFixed(width: 50);
 
       const size = BoxConstraints(maxWidth: 200);

@@ -10,7 +10,7 @@ class _MockScrollController extends Mock implements ScrollController {}
 
 void main() {
   group('selectingModes', () {
-    test('Square, Row, None 이 리턴 되야 한다.', () {
+    test('Square, Row, None should be returned.', () {
       const selectingModes = PlutoGridSelectingMode.values;
 
       expect(selectingModes.contains(PlutoGridSelectingMode.cell), isTrue);
@@ -36,7 +36,8 @@ void main() {
   });
 
   group('PlutoCellPosition', () {
-    testWidgets('null 과의 비교는 false 를 리턴 해야 한다.', (WidgetTester tester) async {
+    testWidgets('null comparison should return false.',
+        (WidgetTester tester) async {
       // given
       const cellPositionA = PlutoGridCellPosition(
         columnIdx: 1,
@@ -52,7 +53,8 @@ void main() {
       expect(compare, false);
     });
 
-    testWidgets('값이 다른 비교는 false 를 리턴 해야 한다.', (WidgetTester tester) async {
+    testWidgets('values are different, comparison should return false.',
+        (WidgetTester tester) async {
       // given
       const cellPositionA = PlutoGridCellPosition(
         columnIdx: 1,
@@ -71,7 +73,8 @@ void main() {
       expect(compare, false);
     });
 
-    testWidgets('값이 동일한 비교는 true 를 리턴 해야 한다.', (WidgetTester tester) async {
+    testWidgets('values are same, comparison should return true.',
+        (WidgetTester tester) async {
       // given
       const cellPositionA = PlutoGridCellPosition(
         columnIdx: 1,
@@ -92,7 +95,7 @@ void main() {
   });
 
   group('initializeRows', () {
-    test('전달 한 행의 sortIdx 가 설정 되어야 한다.', () {
+    test('The sortIdx of the row passed should be set.', () {
       final List<PlutoColumn> columns = ColumnHelper.textColumn('title');
 
       final List<PlutoRow> rows = [
@@ -114,7 +117,7 @@ void main() {
     });
 
     test(
-        'forceApplySortIdx 가 false 이고 이미 sortIdx 가 설정 된 경우 sortIdx 값이 유지 되어야 한다.',
+        'forceApplySortIdx is false and sortIdx is already set, sortIdx should be preserved.',
         () {
       final List<PlutoColumn> columns = ColumnHelper.textColumn('title');
 
@@ -146,9 +149,7 @@ void main() {
       expect(rows.last.sortIdx, 5);
     });
 
-    test(
-        'forceApplySortIdx 가 true 인 경우, '
-        '이미 sortIdx 가 설정 되어도 0부터 다시 설정 되어야 한다.', () {
+    test('forceApplySortIdx is true, sortIdx should be reset to 0.', () {
       final List<PlutoColumn> columns = ColumnHelper.textColumn('title');
 
       final List<PlutoRow> rows = [
@@ -179,7 +180,7 @@ void main() {
       expect(rows.last.sortIdx, 2);
     });
 
-    test('increase 가 false 인 경우 값이 0부터 음수로 설정 되어야 한다.', () {
+    test('increase is false, values should be set from 0 to negative.', () {
       final List<PlutoColumn> columns = ColumnHelper.textColumn('title');
 
       final List<PlutoRow> rows = [
@@ -201,7 +202,9 @@ void main() {
       expect(rows.last.sortIdx, -4);
     });
 
-    test('increase 가 false, start 가 -10 인 경우 값이 -10 부터 음수로 설정 되어야 한다.', () {
+    test(
+        'increase is false, start is -10, values should be set from -10 to negative.',
+        () {
       final List<PlutoColumn> columns = ColumnHelper.textColumn('title');
 
       final List<PlutoRow> rows = [
@@ -224,7 +227,9 @@ void main() {
       expect(rows.last.sortIdx, -14);
     });
 
-    test('컬럼 타입이 숫자인 경우 셀 값이 숫자로 cast 되어야 한다.', () {
+    test(
+        'When the column type is number, the cell value should be cast to number.',
+        () {
       final List<PlutoColumn> columns = [
         PlutoColumn(
           title: 'title',
@@ -249,9 +254,8 @@ void main() {
       expect(rows[2].cells['field']!.value, 1000);
     });
 
-    test(
-        'applyFormatOnInit 이 false 인 경우, '
-        '값이 cast 되지 않아야 한다.', () {
+    test('When applyFormatOnInit is false, the cell value should not be cast.',
+        () {
       final List<PlutoColumn> columns = [
         PlutoColumn(
           title: 'title',
@@ -278,7 +282,8 @@ void main() {
       expect(rows[2].cells['field']!.value, 1000);
     });
 
-    test('컬럼 타입이 Date 인 경우 셀 값이 날짜 포멧에 맞게 변경 되어야 한다.', () {
+    test('When the column type is Date, the cell value should be formatted.',
+        () {
       final List<PlutoColumn> columns = [
         PlutoColumn(
           title: 'title',
@@ -303,7 +308,9 @@ void main() {
       expect(rows[2].cells['field']!.value, '2021-01-04');
     });
 
-    test('applyFormatOnInit 이 false 인 경우 컬럼 타입이 Date 인 셀 값이 변경 되지 않아야 한다.', () {
+    test(
+        'When applyFormatOnInit is false, the cell value should not be formatted.',
+        () {
       final List<PlutoColumn> columns = [
         PlutoColumn(
           title: 'title',
@@ -330,12 +337,12 @@ void main() {
       expect(rows[2].cells['field']!.value, '2021-01-04 12:50:53');
     });
 
-    test('format 값을 설정한 경우 컬럼 타입이 Date 인 셀 값이 포멧에 맞게 변경 되어야 한다.', () {
+    test('When format is set, the cell value should be formatted.', () {
       final List<PlutoColumn> columns = [
         PlutoColumn(
           title: 'title',
           field: 'field',
-          type: PlutoColumnType.date(format: 'yyyy년 MM월 dd일'),
+          type: PlutoColumnType.date(format: 'yyyy-MM-dd'),
         )
       ];
 
@@ -350,24 +357,24 @@ void main() {
         rows,
       );
 
-      expect(rows[0].cells['field']!.value, '2021년 01월 01일');
-      expect(rows[1].cells['field']!.value, '2021년 01월 03일');
-      expect(rows[2].cells['field']!.value, '2021년 01월 04일');
+      expect(rows[0].cells['field']!.value, '2021-01-01');
+      expect(rows[1].cells['field']!.value, '2021-01-03');
+      expect(rows[2].cells['field']!.value, '2021-01-04');
     });
 
-    test('각 셀에 row 와 column 이 설정 되어야 한다.', () {
+    test('When the cell value is set, the row and column should be set.', () {
       final List<PlutoColumn> columns = [
         PlutoColumn(
           title: 'title',
           field: 'field',
-          type: PlutoColumnType.date(format: 'yyyy년 MM월 dd일'),
+          type: PlutoColumnType.date(format: 'yyyy-MM-dd'),
         )
       ];
 
       final List<PlutoRow> rows = [
-        PlutoRow(cells: {'field': PlutoCell(value: '2021-01-01 12:30:51')}),
-        PlutoRow(cells: {'field': PlutoCell(value: '2021-01-03 12:40:52')}),
-        PlutoRow(cells: {'field': PlutoCell(value: '2021-01-04 12:50:53')}),
+        PlutoRow(cells: {'field': PlutoCell(value: '2021-01-01')}),
+        PlutoRow(cells: {'field': PlutoCell(value: '2021-01-03')}),
+        PlutoRow(cells: {'field': PlutoCell(value: '2021-01-04')}),
       ];
 
       PlutoGridStateManager.initializeRows(
@@ -387,7 +394,7 @@ void main() {
   });
 
   group('initializeRowsAsync', () {
-    test('chunkSize 가 0 이면 assert 가 발생 되어야 한다.', () async {
+    test('When chunkSize is 0, an assertion error should be thrown.', () async {
       final List<PlutoColumn> columns = ColumnHelper.textColumn('title');
 
       final List<PlutoRow> rows = RowHelper.count(1, columns);
@@ -404,7 +411,8 @@ void main() {
       );
     });
 
-    test('chunkSize 가 -1 이면 assert 가 발생 되어야 한다.', () async {
+    test('When chunkSize is -1, an assertion error should be thrown.',
+        () async {
       final List<PlutoColumn> columns = ColumnHelper.textColumn('title');
 
       final List<PlutoRow> rows = RowHelper.count(1, columns);
@@ -422,9 +430,8 @@ void main() {
     });
 
     test(
-        'sortIdx 가 0부터 설정 된 rows 를 sortIdx 시작 값을 변경하여 실행하면, '
-        'sortIdx 값을 10 으로 변경 하면 rows 의 sortIdx 가 변경 되고, '
-        '원래 순서대로 리턴 되어야 한다.', () async {
+        'When the sortIdx is 0, '
+        'the rows should be sorted with the start value changed.', () async {
       final List<PlutoColumn> columns = ColumnHelper.textColumn('title');
 
       final List<PlutoRow> rows = RowHelper.count(100, columns);
@@ -450,9 +457,8 @@ void main() {
     });
 
     test(
-        'sortIdx 가 0부터 설정 된 rows 를 sortIdx 시작 값을 변경하여 실행하면, '
-        'sortIdx 값을 -10 으로 변경 하면 rows 의 sortIdx 가 변경 되고, '
-        '원래 순서대로 리턴 되어야 한다.', () async {
+        'When the sortIdx is 0, '
+        'the rows should be sorted with the start value changed.', () async {
       final List<PlutoColumn> columns = ColumnHelper.textColumn('title');
 
       final List<PlutoRow> rows = RowHelper.count(100, columns);
@@ -478,9 +484,8 @@ void main() {
     });
 
     test(
-        'sortIdx 가 0부터 설정 된 rows 를 sortIdx 시작 값을 변경하여 실행하면, '
-        'sortIdx 값을 -10 으로 변경 하면 rows 의 sortIdx 가 변경 되고, '
-        '원래 순서대로 리턴 되어야 한다.', () async {
+        'When the sortIdx is 0, '
+        'the rows should be sorted with the start value changed.', () async {
       final List<PlutoColumn> columns = ColumnHelper.textColumn('title');
 
       final List<PlutoRow> rows = RowHelper.count(100, columns);
@@ -505,7 +510,9 @@ void main() {
       }
     });
 
-    test('한개의 행을 전달하고 chunkSize 가 10 인경우 정상적으로 리턴 되어야 한다.', () async {
+    test(
+        'When a single row is passed and chunkSize is 10, '
+        'it should return normally.', () async {
       final List<PlutoColumn> columns = ColumnHelper.textColumn('title');
 
       final List<PlutoRow> rows = RowHelper.count(1, columns);

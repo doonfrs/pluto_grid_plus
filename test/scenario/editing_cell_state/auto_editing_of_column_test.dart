@@ -7,7 +7,7 @@ import '../../helper/pluto_widget_test_helper.dart';
 import '../../helper/row_helper.dart';
 
 void main() {
-  group('autoEditing 이 false 인 상태에서', () {
+  group('Auto Editing Column Test', () {
     List<PlutoColumn> columns;
 
     List<PlutoRow> rows;
@@ -15,7 +15,7 @@ void main() {
     PlutoGridStateManager? stateManager;
 
     final plutoGrid = PlutoWidgetTestHelper(
-      '0, 3번 컬럼이 autoEditing 인 5개의 컬럼과 10개의 행을 생성',
+      '0, 3rd column is autoEditing with 5 columns and 10 rows',
       (tester) async {
         columns = [
           PlutoColumn(
@@ -59,7 +59,7 @@ void main() {
     );
 
     plutoGrid.test(
-      '0번 셀을 탭하면 editing 상태가 true 가 되어야 한다.',
+      'Clicking the 0th cell should enter edit mode',
       (tester) async {
         expect(stateManager!.isEditing, false);
 
@@ -72,7 +72,7 @@ void main() {
     );
 
     plutoGrid.test(
-      '1번 셀을 탭하면 editing 상태가 false 가 되어야 한다.',
+      'Clicking the 1st cell should not enter edit mode',
       (tester) async {
         expect(stateManager!.isEditing, false);
 
@@ -85,7 +85,7 @@ void main() {
     );
 
     plutoGrid.test(
-      '2번 셀을 탭하면 editing 상태가 false 가 되어야 한다.',
+      'Clicking the 2nd cell should not enter edit mode',
       (tester) async {
         expect(stateManager!.isEditing, false);
 
@@ -98,7 +98,7 @@ void main() {
     );
 
     plutoGrid.test(
-      '2번 셀을 탭하고 우측 방향키를 입력하면 3번 쎌이 editing 상태가 true 가 되어야 한다.',
+      'Clicking the 2nd cell and pressing the right arrow key should enter edit mode for the 3rd cell',
       (tester) async {
         expect(stateManager!.isEditing, false);
 
@@ -113,7 +113,7 @@ void main() {
     );
 
     plutoGrid.test(
-      '3번 셀을 탭하면 editing 상태가 true 가 되어야 한다.',
+      'Clicking the 3rd cell should enter edit mode',
       (tester) async {
         expect(stateManager!.isEditing, false);
 
@@ -126,7 +126,7 @@ void main() {
     );
 
     plutoGrid.test(
-      '3번 셀을 탭하고 ESC 를 입력 후 좌측 방향키를 입력하면 2번 셀이 editing 상태가 false 가 되어야 한다.',
+      'Clicking the 3rd cell, pressing ESC, and pressing the left arrow key should not enter edit mode for the 2nd cell',
       (tester) async {
         expect(stateManager!.isEditing, false);
 

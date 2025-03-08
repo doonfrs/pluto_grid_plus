@@ -74,7 +74,7 @@ void main() {
     );
   }
 
-  testWidgets('10000 이 렌더링 되어야 한다.', (tester) async {
+  testWidgets('Should display 10000', (tester) async {
     const num cellValue = 10000;
 
     await buildWidget(tester: tester, cellValue: cellValue);
@@ -82,7 +82,7 @@ void main() {
     expect(find.text(cellValue.toString()), findsOneWidget);
   });
 
-  testWidgets('10000.09 이 렌더링 되어야 한다.', (tester) async {
+  testWidgets('Should display 10000.09', (tester) async {
     const num cellValue = 10000.09;
 
     await buildWidget(tester: tester, cellValue: cellValue);
@@ -91,7 +91,7 @@ void main() {
   });
 
   testWidgets(
-    'comma 를 소수점 구분자로 사용하는 da_DK 인 경우 10000,09 가 렌더링 되어야 한다.',
+    'When using comma as decimal separator in da_DK locale, should display 10000,09',
     (tester) async {
       const num cellValue = 10000.09;
 
@@ -101,7 +101,7 @@ void main() {
     },
   );
 
-  testWidgets('소수점 3자리 까지 렌더링 되어야 한다.', (tester) async {
+  testWidgets('Should display up to 3 decimal places', (tester) async {
     const num cellValue = 10000.123;
 
     await buildWidget(tester: tester, cellValue: cellValue, decimalPoint: 3);

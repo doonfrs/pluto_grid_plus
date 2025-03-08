@@ -24,7 +24,7 @@ void main() {
   late PlutoGridStateManager stateManager;
 
   final withColumnAndRows =
-      PlutoWidgetTestHelper('컬럼 10개와 행 10개 인 상태에서, ', (tester) async {
+      PlutoWidgetTestHelper('With 10 columns and 10 rows, ', (tester) async {
     columns = [
       ...ColumnHelper.textColumn('column', count: 10, width: 100),
     ];
@@ -62,7 +62,7 @@ void main() {
 
   group('moveCurrentCellToEdgeOfColumns', () {
     withColumnAndRows.test(
-      'PlutoMoveDirection 이 Up 이면 셀이 선택 되지 않아야 한다.',
+      'When PlutoMoveDirection is Up, no cell should be selected',
       (tester) async {
         stateManager.moveCurrentCellToEdgeOfColumns(PlutoMoveDirection.up);
 
@@ -71,7 +71,7 @@ void main() {
     );
 
     withColumnAndRows.test(
-      'PlutoMoveDirection 이 Down 이면 셀이 선택 되지 않아야 한다.',
+      'When PlutoMoveDirection is Down, no cell should be selected',
       (tester) async {
         stateManager.moveCurrentCellToEdgeOfColumns(PlutoMoveDirection.down);
 
@@ -80,7 +80,7 @@ void main() {
     );
 
     withColumnAndRows.test(
-      'currentCell 이 null 이면 셀이 선택 되지 않아야 한다.',
+      'When currentCell is null, no cell should be selected',
       (tester) async {
         expect(stateManager.currentCell, isNull);
 
@@ -91,7 +91,7 @@ void main() {
     );
 
     withColumnAndRows.test(
-      'isEditing 이 true 면 셀이 이동 되지 않아야 한다.',
+      'When isEditing is true, cell should not move',
       (tester) async {
         stateManager.setCurrentCell(stateManager.firstCell, 0);
 
@@ -110,7 +110,7 @@ void main() {
     );
 
     withColumnAndRows.test(
-      'isEditing 이 true 라도 force 가 true 면 셀이 이동 되어야 한다.',
+      'When isEditing is true but force is true, cell should move',
       (tester) async {
         stateManager.setCurrentCell(stateManager.firstCell, 0);
 
@@ -132,7 +132,7 @@ void main() {
     );
 
     withColumnAndRows.test(
-      'PlutoMoveDirection 이 Left 면 왼쪽 끝으로 이동 해야 한다.',
+      'When PlutoMoveDirection is Left, should move to leftmost cell',
       (tester) async {
         stateManager.setCurrentCell(rows.first.cells['column3'], 0);
 
@@ -153,7 +153,7 @@ void main() {
     );
 
     withColumnAndRows.test(
-      'PlutoMoveDirection 이 Right 면 오른쪽 끝으로 이동 해야 한다.',
+      'When PlutoMoveDirection is Right, should move to rightmost cell',
       (tester) async {
         stateManager.setCurrentCell(rows.first.cells['column3'], 0);
 
@@ -176,7 +176,7 @@ void main() {
 
   group('moveCurrentCellToEdgeOfRows', () {
     withColumnAndRows.test(
-      'PlutoMoveDirection 이 Left 이면 셀이 선택 되지 않아야 한다.',
+      'When PlutoMoveDirection is Left, no cell should be selected',
       (tester) async {
         stateManager.moveCurrentCellToEdgeOfRows(PlutoMoveDirection.left);
 
@@ -185,7 +185,7 @@ void main() {
     );
 
     withColumnAndRows.test(
-      'PlutoMoveDirection 이 Right 이면 셀이 선택 되지 않아야 한다.',
+      'When PlutoMoveDirection is Right, no cell should be selected',
       (tester) async {
         stateManager.moveCurrentCellToEdgeOfRows(PlutoMoveDirection.right);
 
@@ -194,7 +194,7 @@ void main() {
     );
 
     withColumnAndRows.test(
-      'isEditing 이 true 면 셀이 이동 되지 않아야 한다.',
+      'When isEditing is true, cell should not move',
       (tester) async {
         stateManager.setCurrentCell(stateManager.firstCell, 0);
 
@@ -213,7 +213,7 @@ void main() {
     );
 
     withColumnAndRows.test(
-      'isEditing 이 true 라도 force 가 true 면 셀이 이동 되어야 한다.',
+      'When isEditing is true but force is true, cell should move',
       (tester) async {
         stateManager.setCurrentCell(stateManager.firstCell, 0);
 
@@ -235,7 +235,7 @@ void main() {
     );
 
     withColumnAndRows.test(
-      'PlutoMoveDirection 이 Up 이면 맨 위 Row 로 이동 되어야 한다.',
+      'When PlutoMoveDirection is Up, should move to topmost row',
       (tester) async {
         stateManager.setCurrentCell(stateManager.rows[4].cells['column7'], 4);
 
@@ -256,7 +256,7 @@ void main() {
     );
 
     withColumnAndRows.test(
-      'PlutoMoveDirection 이 Down 이면 맨 아래 Row 로 이동 되어야 한다.',
+      'When PlutoMoveDirection is Down, should move to bottommost row',
       (tester) async {
         stateManager.setCurrentCell(stateManager.rows[4].cells['column7'], 4);
 
@@ -279,7 +279,7 @@ void main() {
 
   group('moveCurrentCellByRowIdx', () {
     withColumnAndRows.test(
-      'PlutoMoveDirection 이 Left 이면 셀이 선택 되지 않아야 한다.',
+      'When PlutoMoveDirection is Left, no cell should be selected',
       (tester) async {
         stateManager.moveCurrentCellByRowIdx(0, PlutoMoveDirection.left);
 
@@ -288,7 +288,7 @@ void main() {
     );
 
     withColumnAndRows.test(
-      'PlutoMoveDirection 이 Right 이면 셀이 선택 되지 않아야 한다.',
+      'When PlutoMoveDirection is Right, no cell should be selected',
       (tester) async {
         stateManager.moveCurrentCellByRowIdx(0, PlutoMoveDirection.right);
 
@@ -297,7 +297,7 @@ void main() {
     );
 
     withColumnAndRows.test(
-      'rowIdx 가 0보다 작으면 0번 행으로 이동 되어야 한다.',
+      'When rowIdx is less than 0, should move to row 0',
       (tester) async {
         stateManager.moveCurrentCellByRowIdx(-1, PlutoMoveDirection.down);
 
@@ -307,7 +307,7 @@ void main() {
     );
 
     withColumnAndRows.test(
-      'rowIdx 가 전체 행 인덱스보다 많으면 마지막 행으로 이동 되어야 한다.',
+      'When rowIdx is greater than total rows, should move to last row',
       (tester) async {
         stateManager.moveCurrentCellByRowIdx(11, PlutoMoveDirection.down);
 
@@ -319,7 +319,7 @@ void main() {
 
   group('moveSelectingCellToEdgeOfColumns', () {
     withColumnAndRows.test(
-      'PlutoMoveDirection 이 Up 이면 셀이 선택 되지 않아야 한다.',
+      'When PlutoMoveDirection is Up, no cell should be selected',
       (tester) async {
         stateManager.moveSelectingCellToEdgeOfColumns(PlutoMoveDirection.up);
 
@@ -328,7 +328,7 @@ void main() {
     );
 
     withColumnAndRows.test(
-      'PlutoMoveDirection 이 Down 이면 셀이 선택 되지 않아야 한다.',
+      'When PlutoMoveDirection is Down, no cell should be selected',
       (tester) async {
         stateManager.moveSelectingCellToEdgeOfColumns(PlutoMoveDirection.down);
 
@@ -337,7 +337,7 @@ void main() {
     );
 
     withColumnAndRows.test(
-      'isEditing 이 true 면 셀이 선택 되지 않아야 한다.',
+      'When isEditing is true, cell should not be selected',
       (tester) async {
         stateManager.setCurrentCell(stateManager.firstCell, 0);
 
@@ -354,7 +354,7 @@ void main() {
     );
 
     withColumnAndRows.test(
-      'isEditing 이 true 라도 force 가 true 면 셀이 선택 되어야 한다.',
+      'When isEditing is true but force is true, cell should be selected',
       (tester) async {
         stateManager.setCurrentCell(stateManager.firstCell, 0);
 
@@ -376,7 +376,7 @@ void main() {
     );
 
     withColumnAndRows.test(
-      'PlutoMoveDirection 이 Left 면 현재 셀 부터 왼쪽 끝까지 선택 되어야 한다.',
+      'When PlutoMoveDirection is Left, should select from current cell to leftmost cell',
       (tester) async {
         stateManager.setCurrentCell(stateManager.rows[0].cells['column3'], 0);
 
@@ -400,7 +400,7 @@ void main() {
     );
 
     withColumnAndRows.test(
-      'PlutoMoveDirection 이 Left 이고 현재 선택 된 셀이 있다면 선택 된 셀이 왼쪽 끝으로 변경 되어야 한다.',
+      'When PlutoMoveDirection is Left and there is a selected cell, should move the selected cell to leftmost cell',
       (tester) async {
         stateManager.setCurrentCell(stateManager.rows[0].cells['column3'], 0);
 
@@ -433,7 +433,7 @@ void main() {
     );
 
     withColumnAndRows.test(
-      'PlutoMoveDirection 이 Right 면 현재 셀 부터 오른쪽 끝까지 선택 되어야 한다.',
+      'When PlutoMoveDirection is Right, should select from current cell to rightmost cell',
       (tester) async {
         stateManager.setCurrentCell(stateManager.rows[0].cells['column3'], 0);
 
@@ -457,7 +457,7 @@ void main() {
     );
 
     withColumnAndRows.test(
-      'PlutoMoveDirection 이 Right 이고 현재 선택 된 셀이 있다면 선택 된 셀이 오른쪽 끝으로 변경 되어야 한다.',
+      'When PlutoMoveDirection is Right and there is a selected cell, should move the selected cell to rightmost cell',
       (tester) async {
         stateManager.setCurrentCell(stateManager.rows[0].cells['column3'], 0);
 
@@ -492,7 +492,7 @@ void main() {
 
   group('moveSelectingCellToEdgeOfRows', () {
     withColumnAndRows.test(
-      'PlutoMoveDirection 이 Left 이면 셀이 선택 되지 않아야 한다.',
+      'When PlutoMoveDirection is Left, no cell should be selected',
       (tester) async {
         stateManager.moveSelectingCellToEdgeOfRows(PlutoMoveDirection.left);
 
@@ -501,7 +501,7 @@ void main() {
     );
 
     withColumnAndRows.test(
-      'PlutoMoveDirection 이 Right 이면 셀이 선택 되지 않아야 한다.',
+      'When PlutoMoveDirection is Right, no cell should be selected',
       (tester) async {
         stateManager.moveSelectingCellToEdgeOfRows(PlutoMoveDirection.right);
 
@@ -510,7 +510,7 @@ void main() {
     );
 
     withColumnAndRows.test(
-      'isEditing 이 true 면 셀이 이동 되지 않아야 한다.',
+      'When isEditing is true, cell should not move',
       (tester) async {
         stateManager.setCurrentCell(stateManager.firstCell, 0);
 
@@ -527,7 +527,7 @@ void main() {
     );
 
     withColumnAndRows.test(
-      'isEditing 이 true 라도 force 가 true 면 셀이 이동 되어야 한다.',
+      'When isEditing is true but force is true, cell should move',
       (tester) async {
         stateManager.setCurrentCell(stateManager.firstCell, 0);
 
@@ -549,7 +549,7 @@ void main() {
     );
 
     withColumnAndRows.test(
-      'currentCell 이 없으면 셀 선택이 되지 않아야 한다.',
+      'When currentCell is null, no cell should be selected',
       (tester) async {
         stateManager.setEditing(false);
 
@@ -566,7 +566,7 @@ void main() {
     );
 
     withColumnAndRows.test(
-      'PlutoMoveDirection 이 Down 이면 가장 아래 셀이 선택 되어야 한다.',
+      'When PlutoMoveDirection is Down, should select the bottommost cell',
       (tester) async {
         stateManager.setCurrentCell(stateManager.firstCell, 0);
 
@@ -587,7 +587,7 @@ void main() {
     );
 
     withColumnAndRows.test(
-      'PlutoMoveDirection 이 Up 이면 가장 위의 셀이 선택 되어야 한다.',
+      'When PlutoMoveDirection is Up, should select the topmost cell',
       (tester) async {
         stateManager.setCurrentCell(stateManager.rows[4].cells['column3'], 4);
 
@@ -608,7 +608,7 @@ void main() {
     );
 
     withColumnAndRows.test(
-      'PlutoMoveDirection 이 Down 이고 선택 된 셀이 있으면 컬럼은 유지하고 가장 아래로 이동 해야 한다.',
+      'When PlutoMoveDirection is Down and there is a selected cell, should move the selected cell to the bottommost cell',
       (tester) async {
         stateManager.setCurrentCell(stateManager.firstCell, 0);
 
@@ -639,7 +639,7 @@ void main() {
 
   group('moveSelectingCellByRowIdx', () {
     withColumnAndRows.test(
-      'PlutoMoveDirection 이 Left 이면 셀이 선택 되지 않아야 한다.',
+      'When PlutoMoveDirection is Left, no cell should be selected',
       (tester) async {
         stateManager.moveSelectingCellByRowIdx(0, PlutoMoveDirection.left);
 
@@ -648,7 +648,7 @@ void main() {
     );
 
     withColumnAndRows.test(
-      'PlutoMoveDirection 이 Right 이면 셀이 선택 되지 않아야 한다.',
+      'When PlutoMoveDirection is Right, no cell should be selected',
       (tester) async {
         stateManager.moveSelectingCellByRowIdx(0, PlutoMoveDirection.right);
 
@@ -657,7 +657,7 @@ void main() {
     );
 
     withColumnAndRows.test(
-      'currentCell 이 없으면 셀이 선택 되지 않아야 한다.',
+      'When currentCell is null, no cell should be selected',
       (tester) async {
         expect(stateManager.currentCell, isNull);
 
@@ -670,7 +670,7 @@ void main() {
     );
 
     withColumnAndRows.test(
-      'rowIdx 가 0 보다 작으면 0번 행이 선택 되어야 한다.',
+      'When rowIdx is less than 0, should select the cell at row 0',
       (tester) async {
         stateManager.setCurrentCell(stateManager.rows[3].cells['column3'], 3);
 
@@ -687,7 +687,7 @@ void main() {
     );
 
     withColumnAndRows.test(
-      'rowIdx 가 0 보다 크면 마지막 행이 선택 되어야 한다.',
+      'When rowIdx is greater than total rows, should select the cell at the last row',
       (tester) async {
         stateManager.setCurrentCell(stateManager.rows[3].cells['column3'], 3);
 
@@ -704,7 +704,7 @@ void main() {
     );
 
     withColumnAndRows.test(
-      'rowIdx 가 3이면 3번 행의 셀이 선택 되어야 한다.',
+      'When rowIdx is 3, should select the cell at row 3',
       (tester) async {
         stateManager.setCurrentCell(stateManager.firstCell, 0);
 
@@ -721,7 +721,7 @@ void main() {
     );
 
     withColumnAndRows.test(
-      '선택 된 셀이 있으면 컬럼 위치가 유지되어야 한다.',
+      'When there is a selected cell, should maintain the column position',
       (tester) async {
         stateManager.setCurrentCell(stateManager.rows[3].cells['column3'], 0);
 

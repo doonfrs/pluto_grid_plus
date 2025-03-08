@@ -9,7 +9,7 @@ import '../../helper/row_helper.dart';
 import '../../helper/test_helper_util.dart';
 
 void main() {
-  group('PlutoGridTabKeyAction.moveToNextOnEdge - Tab 키 테스트', () {
+  group('PlutoGridTabKeyAction.moveToNextOnEdge - Tab Key Test', () {
     late List<PlutoColumn> columns;
 
     late List<PlutoRow> rows;
@@ -18,7 +18,7 @@ void main() {
 
     PlutoWidgetTestHelper buildGrid({String? tapValue}) {
       return PlutoWidgetTestHelper(
-        '5 컬럼 5 행.',
+        '5 columns 5 rows.',
         (tester) async {
           await TestHelperUtil.changeWidth(
             tester: tester,
@@ -55,7 +55,7 @@ void main() {
     }
 
     buildGrid(tapValue: 'column4 value 0').test(
-      '0번 행의 마지막 셀에서 Tab 키를 입력하면 1번 행의 첫번째 셀로 이동 되어야 한다.',
+      'When Tab is pressed in the last cell of the 0th row, focus should move to the first cell of the 1st row.',
       (tester) async {
         expect(stateManager.currentCellPosition!.rowIdx, 0);
         expect(stateManager.currentCellPosition!.columnIdx, 4);
@@ -69,7 +69,7 @@ void main() {
     );
 
     buildGrid(tapValue: 'column4 value 1').test(
-      '1번 행의 마지막 이전의 셀에서 Tab 키를 두번 입력하면 2번 행의 첫번째 셀로 이동 되어야 한다.',
+      'When Tab is pressed twice in the second last cell of the 1st row, focus should move to the first cell of the 2nd row.',
       (tester) async {
         expect(stateManager.currentCellPosition!.rowIdx, 1);
         expect(stateManager.currentCellPosition!.columnIdx, 4);
@@ -84,7 +84,7 @@ void main() {
     );
 
     buildGrid(tapValue: 'column4 value 4').test(
-      '마지막 행의 마지막 셀에서 Tab 키를 입력하면 위치가 변경 되지 않아야 한다.',
+      'When Tab is pressed in the last cell of the last row, focus should not move.',
       (tester) async {
         expect(stateManager.currentCellPosition!.rowIdx, 4);
         expect(stateManager.currentCellPosition!.columnIdx, 4);
@@ -98,7 +98,7 @@ void main() {
     );
   });
 
-  group('PlutoGridTabKeyAction.moveToNextOnEdge - Shift + Tab 키 테스트', () {
+  group('PlutoGridTabKeyAction.moveToNextOnEdge - Shift + Tab Key Test', () {
     late List<PlutoColumn> columns;
 
     late List<PlutoRow> rows;
@@ -107,7 +107,7 @@ void main() {
 
     PlutoWidgetTestHelper buildGrid({String? tapValue}) {
       return PlutoWidgetTestHelper(
-        '5 컬럼 5 행.',
+        '5 columns 5 rows.',
         (tester) async {
           await TestHelperUtil.changeWidth(
             tester: tester,
@@ -144,7 +144,7 @@ void main() {
     }
 
     buildGrid(tapValue: 'column0 value 1').test(
-      '1번 행의 첫 셀에서 Shift + Tab 키를 입력하면 0번 행의 마지막 셀로 이동 되어야 한다.',
+      'When Shift+Tab is pressed in the first cell of the 1st row, focus should move to the last cell of the 0th row.',
       (tester) async {
         expect(stateManager.currentCellPosition!.rowIdx, 1);
         expect(stateManager.currentCellPosition!.columnIdx, 0);
@@ -160,7 +160,7 @@ void main() {
     );
 
     buildGrid(tapValue: 'column0 value 2').test(
-      '2번 행의 첫 셀에서 Shift + Tab 키를 두번 입력하면 1번 행의 마지막 셀로 이동 되어야 한다.',
+      'When Shift+Tab is pressed twice in the first cell of the 2nd row, focus should move to the last cell of the 1st row.',
       (tester) async {
         expect(stateManager.currentCellPosition!.rowIdx, 2);
         expect(stateManager.currentCellPosition!.columnIdx, 0);
@@ -179,7 +179,7 @@ void main() {
     );
 
     buildGrid(tapValue: 'column0 value 0').test(
-      '첫번째 행의 첫번째 셀에서 Shift + Tab 키를 입력하면 위치가 변경 되지 않아야 한다.',
+      'When Shift+Tab is pressed in the first cell of the 0th row, focus should not move.',
       (tester) async {
         expect(stateManager.currentCellPosition!.rowIdx, 0);
         expect(stateManager.currentCellPosition!.columnIdx, 0);

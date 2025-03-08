@@ -40,9 +40,9 @@ class _TestWidgetWrapperState extends State<_TestWidgetWrapper> {
 class _TestLayoutChild extends Container implements PlutoVisibilityLayoutChild {
   _TestLayoutChild({
     this.width = defaultChildWidth,
-    // ignore: unused_element
+    // ignore: unused_element_parameter
     this.startPosition = 0,
-    // ignore: unused_element
+    // ignore: unused_element_parameter
     this.keepAlive = false,
   }) : super(width: width, height: childHeight);
 
@@ -142,7 +142,7 @@ void main() {
 
   group('horizontal', () {
     testWidgets(
-      'scrollController.addListener 가 호출 되어야 한다.',
+      'scrollController.addListener should be called',
       (tester) async {
         when(scrollPosition.viewportDimension).thenReturn(
           tester.view.physicalSize.width,
@@ -162,7 +162,7 @@ void main() {
     );
 
     testWidgets(
-      '위젯이 사라지면 scrollController.removeListener 가 호출 되어야 한다.',
+      'scrollController.removeListener should be called when widget disappears',
       (tester) async {
         when(scrollPosition.viewportDimension).thenReturn(
           tester.view.physicalSize.width,
@@ -189,7 +189,7 @@ void main() {
     );
 
     testWidgets(
-      '_TestLayoutChild 가 노출 되어야 한다.',
+      '_TestLayoutChild should be visible',
       (tester) async {
         when(scrollPosition.viewportDimension).thenReturn(
           tester.view.physicalSize.width,
@@ -219,7 +219,7 @@ void main() {
     );
 
     testWidgets(
-      '_TestLayoutChild 3개, 순서대로 노출 되어야 한다.',
+      'Three _TestLayoutChild widgets should be displayed in sequence',
       (tester) async {
         when(scrollPosition.viewportDimension).thenReturn(
           tester.view.physicalSize.width,

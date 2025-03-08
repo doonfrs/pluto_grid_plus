@@ -48,7 +48,7 @@ void main() {
     return text.style as TextStyle;
   }
 
-  group('suffixIcon 렌더링', () {
+  group('Suffix icon rendering', () {
     final PlutoCell cell = PlutoCell(value: '12:30');
 
     final PlutoRow row = PlutoRow(
@@ -57,7 +57,7 @@ void main() {
       },
     );
 
-    testWidgets('기본 시간 아이콘이 렌더링 되어야 한다.', (tester) async {
+    testWidgets('Default time icon should be rendered', (tester) async {
       final PlutoColumn column = PlutoColumn(
         title: 'column title',
         field: 'column_field_name',
@@ -80,7 +80,7 @@ void main() {
       expect(find.byIcon(Icons.access_time), findsOneWidget);
     });
 
-    testWidgets('변경한 아이콘이 렌더링 되어야 한다.', (tester) async {
+    testWidgets('Custom icon should be rendered', (tester) async {
       final PlutoColumn column = PlutoColumn(
         title: 'column title',
         field: 'column_field_name',
@@ -105,7 +105,7 @@ void main() {
       expect(find.byIcon(Icons.add), findsOneWidget);
     });
 
-    testWidgets('popupIcon 이 null 인 경우 아이콘이 렌더링 되지 않아야 한다.', (tester) async {
+    testWidgets('No icon should be rendered when popupIcon is null', (tester) async {
       final PlutoColumn column = PlutoColumn(
         title: 'column title',
         field: 'column_field_name',
@@ -131,7 +131,7 @@ void main() {
     });
   });
 
-  testWidgets('셀 값이 출력 되어야 한다.', (WidgetTester tester) async {
+  testWidgets('Cell value should be displayed', (WidgetTester tester) async {
     // given
     final PlutoColumn column = PlutoColumn(
       title: 'column title',
@@ -165,7 +165,7 @@ void main() {
     expect(find.text('12:30'), findsOneWidget);
   });
 
-  group('수정 가능 상태인 경우', () {
+  group('When cell is editable', () {
     final PlutoColumn column = PlutoColumn(
       title: 'column title',
       field: 'column_field_name',
@@ -193,12 +193,12 @@ void main() {
       await tester.tap(find.byType(TextField));
     });
 
-    tapCell.test('Hour, minute 컬럼이 호출 되어야 한다.', (tester) async {
+    tapCell.test('Hour and minute columns should be called', (tester) async {
       expect(find.text('Hour'), findsOneWidget);
       expect(find.text('Minute'), findsOneWidget);
     });
 
-    tapCell.test('12:28 분 선택.', (tester) async {
+    tapCell.test('Select 12:28', (tester) async {
       await tester.sendKeyEvent(LogicalKeyboardKey.arrowUp);
       await tester.pumpAndSettle();
       await tester.sendKeyEvent(LogicalKeyboardKey.arrowUp);
@@ -208,7 +208,7 @@ void main() {
       verify(stateManager.handleAfterSelectingRow(cell, '12:28')).called(1);
     });
 
-    tapCell.test('12:33 분 선택.', (tester) async {
+    tapCell.test('Select 12:33', (tester) async {
       await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
       await tester.pumpAndSettle();
       await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
@@ -220,14 +220,14 @@ void main() {
       verify(stateManager.handleAfterSelectingRow(cell, '12:33')).called(1);
     });
 
-    tapCell.test('12:29 분 선택.', (tester) async {
+    tapCell.test('Select 12:29', (tester) async {
       await tester.tap(find.text('29'));
       await tester.tap(find.text('29'));
 
       verify(stateManager.handleAfterSelectingRow(cell, '12:29')).called(1);
     });
 
-    tapCell.test('15:28 분 선택.', (tester) async {
+    tapCell.test('Select 15:28', (tester) async {
       await tester.sendKeyEvent(LogicalKeyboardKey.arrowUp);
       await tester.pumpAndSettle();
       await tester.sendKeyEvent(LogicalKeyboardKey.arrowUp);
@@ -245,7 +245,7 @@ void main() {
       verify(stateManager.handleAfterSelectingRow(cell, '15:28')).called(1);
     });
 
-    group('날짜 활성, 비활성 color 체크', () {
+    group('Active and inactive color check', () {
       late Color activatedCellColor;
       late Color activatedTextColor;
       late Color inactivatedCellColor;
@@ -263,7 +263,7 @@ void main() {
       });
 
       tapCell.test(
-        '12:30 선택 된 상태에서 color 가 12는 비활성, 30은 활성으로 되어야 한다.',
+        'When 12:30 is selected, color should be inactive for 12 and active for 30',
         (tester) async {
           final hour = find.text('12');
           final hourContainerDecoration = getCellDecoration(hour);
@@ -285,8 +285,8 @@ void main() {
       );
 
       tapCell.test(
-        '12:30 선택 된 상태에서 왼쪽 방향키를 입력하면, '
-        '12의 color 가 활성, 30의 color 가 비활성이 되어야 한다.',
+        'When 12:30 is selected and left arrow key is pressed, '
+        'color should be active for 12 and inactive for 30',
         (tester) async {
           await tester.sendKeyEvent(LogicalKeyboardKey.arrowLeft);
           await tester.pumpAndSettle();
@@ -311,8 +311,8 @@ void main() {
       );
 
       tapCell.test(
-        '12:30 선택 된 상태에서 아래쪽 방향키를 입력하면, '
-        '30의 color 가 비활성, 31의 color 가 활성이 되어야 한다.',
+        'When 12:30 is selected and down arrow key is pressed, '
+        'color should be inactive for 30 and active for 31',
         (tester) async {
           await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
           await tester.pumpAndSettle();
@@ -337,8 +337,8 @@ void main() {
       );
 
       tapCell.test(
-        '12:30 선택 된 상태에서 위쪽 방향키를 입력하면, '
-        '30의 color 가 비활성, 29의 color 가 활성이 되어야 한다.',
+        'When 12:30 is selected and up arrow key is pressed, '
+        'color should be inactive for 30 and active for 29',
         (tester) async {
           await tester.sendKeyEvent(LogicalKeyboardKey.arrowUp);
           await tester.pumpAndSettle();
@@ -363,8 +363,8 @@ void main() {
       );
 
       tapCell.test(
-        '12:30 선택 된 상태에서 왼쪽, 위 방향키를 입력하면, '
-        '30의 color 가 비활성, 11의 color 가 활성이 되어야 한다.(11:30)',
+        'When 12:30 is selected and left arrow then up arrow keys are pressed, '
+        'color should be inactive for 30 and active for 11 (11:30)',
         (tester) async {
           await tester.sendKeyEvent(LogicalKeyboardKey.arrowLeft);
           await tester.pumpAndSettle();
