@@ -33,7 +33,6 @@ git rm -rf . >/dev/null 2>&1
 
 echo "🔁 Moving demo build files to the repository root..."
 mv /tmp/build_web/* .
-mv /tmp/build_web/. .
 
 rm -rf /tmp/build_web
 
