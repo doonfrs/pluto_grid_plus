@@ -1,10 +1,5 @@
-# PlutoGrid Plus for flutter - v8.4.7
+# PlutoGrid Plus for flutter - v8.4.10
 
-PlutoGrid Plus is a maintained version of <https://github.com/bosskmk/pluto_grid>
-
-[![Awesome Flutter](https://img.shields.io/badge/Awesome-Flutter-blue.svg)](https://github.com/Solido/awesome-flutter)
-[![codecov](https://codecov.io/gh/bosskmk/pluto_grid/branch/master/graph/badge.svg)](https://codecov.io/gh/bosskmk/pluto_grid)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 `PlutoGrid` is a `DataGrid` that can be operated with the keyboard in various situations such as moving cells.  
 It is developed with priority on the web and desktop.  
@@ -24,17 +19,17 @@ If you comment on an issue, mobile improvements can be made quickly.
 >
 > The documentation has more details.
 
-## [ChangeLog](https://github.com/bosskmk/pluto_grid/blob/master/CHANGELOG.md)
+## [ChangeLog](https://github.com/doonfrs/pluto_grid_plus/blob/master/CHANGELOG.md)
 >
 > Please note the changes when changing the version of PlutoGrid you are using.
 
-## [Issue](https://github.com/bosskmk/pluto_grid/issues)
+## [Issue](https://github.com/doonfrs/pluto_grid_plus/issues)
 >
 > Report any questions or errors.
 
 ## Packages
 
-> [PlutoGridExport](https://github.com/bosskmk/pluto_grid/tree/master/packages/pluto_grid_export)  
+> [PlutoGridExport](https://github.com/doonfrs/pluto_grid_plus/tree/master/packages/pluto_grid_plus_export)  
 > This package can export the metadata of PlutoGrid as CSV or PDF.
 
 ## Screenshots
@@ -155,30 +150,5 @@ Widget build(BuildContext context) {
 }
 ```
 
-## Flutter version compatible
+PlutoGrid Plus is a maintained & improved version of PlutoGrid as the original is no longer active.
 
-| Flutter          | PlutoGrid             |
-|------------------|-----------------------|
-| 3.10.0 or higher | 7.0.0 or higher       |
-| 3.7.0 or higher  | 6.0.0 or higher       |
-| 3.3.0 or higher  | 5.0.6 or higher       |
-| 3.0.0 or higher  | 3.0.0-0.pre or higher |
-| 2.5.0 or higher  | 2.5.0 or higher       |
-
-For other versions, contact the issue
-
-## Related packages
->
-> develop packages that make it easy to develop admin pages or CMS with Flutter.
-
-* [PlutoGrid](https://github.com/bosskmk/pluto_grid)
-* [PlutoMenuBar](https://github.com/bosskmk/pluto_menu_bar)
-* [PlutoLayout](https://github.com/bosskmk/pluto_layout)
-
-## Donate to this project
-
-[![Buy me a coffee](https://www.buymeacoffee.com/assets/img/custom_images/white_img.png)](https://www.buymeacoffee.com/manki)
-
-## Jetbrains provides a free license
-
-[![IDE license support](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.png)](https://www.jetbrains.com/community/opensource/#support)
