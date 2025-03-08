@@ -7,18 +7,14 @@ It is developed with priority on the web and desktop.
 Improvements such as UI on mobile are being considered.  
 If you comment on an issue, mobile improvements can be made quickly.
 
-## [Demo Web](https://bosskmk.github.io/pluto_grid/build/web/index.html)
+## [Demo Web](https://doonfrs.github.io/pluto_grid_plus)
 >
 > You can try out various functions and usage methods right away.  
 > All features provide example code.
 
-## [Pub.Dev](https://pub.dev/packages/pluto_grid)
+## [Pub.Dev](https://pub.dev/packages/pluto_grid_plus)
 >
 > Check out how to install from the official distribution site.
-
-## [Documentation](https://pluto.weblaze.dev/series/pluto-grid)
->
-> The documentation has more details.
 
 ## [ChangeLog](https://github.com/doonfrs/pluto_grid_plus/blob/master/CHANGELOG.md)
 >
