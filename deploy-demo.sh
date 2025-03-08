@@ -28,10 +28,11 @@ fi
 git rm -rf . >/dev/null 2>&1
 cp -r $BUILD_DIR/* .
 cp -r $BUILD_DIR/. .
+rm -rf $DEMO_DIR
 
 git add .
 git commit -m "🚀 Deploy updated Flutter Web Demo"
-git push --force origin $BRANCH # No force push unless necessary!
+git push origin $BRANCH --force
 
 git checkout master
 
