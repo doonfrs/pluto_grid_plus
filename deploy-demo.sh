@@ -1,58 +1,44 @@
 #!/bin/bash
 
-# Exit immediately if a command fails
 set -e
 
-# Define variables
 BRANCH="gh-pages"
 DEMO_DIR="demo"
 BUILD_DIR="$DEMO_DIR/build/web"
 
 echo "🚀 Starting Flutter Web Build Process from '$DEMO_DIR'..."
 
-# Ensure we are on the master branch
 git checkout master
-
-# Pull the latest changes
 git pull origin master
 
-# Navigate to demo directory
 cd $DEMO_DIR
 
-# Get dependencies
 flutter pub get
-
-# Build the Flutter web app
 flutter build web --release
 
-# Move back to the root directory
 cd ..
 
 echo "✅ Flutter Web Build Completed!"
-
-# Switch to gh-pages branch (or create it if it doesn't exist)
 if git rev-parse --verify $BRANCH >/dev/null 2>&1; then
     git checkout $BRANCH
 else
     git checkout --orphan $BRANCH
-    git rm -rf .
+    git commit --allow-empty -m "Initial commit for GitHub Pages"
 fi
 
-echo "🔁 Moving demo build files to the repository root..."
+echo "🧹 Cleaning up old files while keeping .git..."
+git rm -rf . >/dev/null 2>&1
 
-# Remove old files and copy new build files
-rm -rf *
+echo "🔁 Moving demo build files to the repository root..."
 cp -r $BUILD_DIR/* .
 cp -r $BUILD_DIR/. .
+rm -rf demo
 
-# Add and commit changes
 git add .
 git commit -m "🚀 Deploy updated Flutter Web Demo"
 
-# Push to the gh-pages branch
 git push -f origin $BRANCH
 
-# Switch back to master
 git checkout master
 
 echo "🎉 Deployment completed!"
