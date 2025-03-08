@@ -43,4 +43,13 @@ git push -f origin $BRANCH
 
 git checkout master
 
+flutter pub get
+cd demo
+flutter pub get
+cd ..
+cd packages/pluto_grid_plus_export
+flutter pub get
+cd ..
+cd ..
+
 echo "🎉 Deployment Completed!"
