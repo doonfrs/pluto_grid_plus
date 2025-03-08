@@ -551,6 +551,13 @@ class PlutoContributors extends StatelessWidget {
             },
           ),
           PlutoContributorTile(
+            name: 'Feras Abdalrahman (Maintainer)',
+            linkTitle: 'Github',
+            onTapLink: () {
+              launchUrl('https://github.com/doonfrs');
+            },
+          ),
+          PlutoContributorTile(
             name: 'Gian',
             linkTitle: 'Github',
             onTapLink: () {

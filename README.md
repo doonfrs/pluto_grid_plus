@@ -1,5 +1,6 @@
 # PlutoGrid Plus for flutter - v8.4.10
 
+Please star ⭐⭐⭐⭐⭐ the repo if you find this package useful.
 
 `PlutoGrid` is a `DataGrid` that can be operated with the keyboard in various situations such as moving cells.  
 It is developed with priority on the web and desktop.  
@@ -151,4 +152,3 @@ Widget build(BuildContext context) {
 ```
 
 PlutoGrid Plus is a maintained & improved version of PlutoGrid as the original is no longer active.
-
