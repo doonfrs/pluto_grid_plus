@@ -18,18 +18,14 @@ cd ..
 
 echo "Build Completed!"
 
-if git rev-parse --verify $BRANCH >/dev/null 2>&1; then
-    git checkout $BRANCH
-    git pull origin $BRANCH
-else
-    git checkout --orphan $BRANCH
-fi
+git checkout $BRANCH
 
 echo "Preventing build folder from being deleted..."
 mv $BUILD_DIR /tmp/build_web
 
 echo "Cleaning old deployment files..."
-git rm -rf . >/dev/null 2>&1
+rm -rf ../pluto_grid_plus/*
+rm -rf .dart_tool
 
 echo "🔁 Moving demo build files to the repository root..."
 mv /tmp/build_web/* .
@@ -38,7 +34,7 @@ rm -rf /tmp/build_web
 
 git add .
 git commit -m "🚀 Deploy updated Flutter Web Demo"
-git push -f origin $BRANCH
+git push origin $BRANCH
 
 git checkout master
 
