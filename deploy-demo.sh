@@ -13,7 +13,7 @@ git pull origin master
 
 cd $DEMO_DIR
 flutter pub get
-flutter build web --release --base-href=/pluto_grid_plus/
+flutter build web --release
 cd ..
 
 echo "✅ Build Completed!"
