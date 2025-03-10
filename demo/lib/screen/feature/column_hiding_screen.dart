@@ -92,7 +92,7 @@ class _ColumnHidingScreenState extends State<ColumnHidingScreen> {
       topButtons: [
         PlutoExampleButton(
           url:
-              'https://github.com/bosskmk/pluto_grid/blob/master/demo/lib/screen/feature/column_hiding_screen.dart',
+              'https://github.com/doonfrs/pluto_grid_plus/blob/master/demo/lib/screen/feature/column_hiding_screen.dart',
         ),
       ],
       body: Column(

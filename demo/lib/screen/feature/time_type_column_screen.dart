@@ -61,7 +61,7 @@ class _TimeTypeColumnScreenState extends State<TimeTypeColumnScreen> {
       topButtons: [
         PlutoExampleButton(
           url:
-              'https://github.com/bosskmk/pluto_grid/blob/master/demo/lib/screen/feature/time_type_column_screen.dart',
+              'https://github.com/doonfrs/pluto_grid_plus/blob/master/demo/lib/screen/feature/time_type_column_screen.dart',
         ),
       ],
       body: PlutoGrid(

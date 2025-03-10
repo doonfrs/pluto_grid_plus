@@ -5,7 +5,7 @@
 This package can export the metadata of PlutoGrid as CSV or PDF.  
 
 Please refer to the link below for how to use it.
-https://github.com/bosskmk/pluto_grid/blob/master/demo/lib/screen/feature/export_screen.dart
+https://github.com/doonfrs/pluto_grid_plus/blob/master/demo/lib/screen/feature/export_screen.dart
 
 <br>
 
@@ -35,7 +35,7 @@ void main() {
 }
 
 /// For more details, please refer to the link below for how to use it.
-/// https://github.com/bosskmk/pluto_grid/blob/master/demo/lib/screen/feature/export_screen.dart
+/// https://github.com/doonfrs/pluto_grid_plus/blob/master/demo/lib/screen/feature/export_screen.dart
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 

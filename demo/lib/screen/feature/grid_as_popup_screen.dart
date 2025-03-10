@@ -109,7 +109,7 @@ class _GridAsPopupScreenState extends State<GridAsPopupScreen> {
       topButtons: [
         PlutoExampleButton(
           url:
-              'https://github.com/bosskmk/pluto_grid/blob/master/demo/lib/screen/feature/grid_as_popup_screen.dart',
+              'https://github.com/doonfrs/pluto_grid_plus/blob/master/demo/lib/screen/feature/grid_as_popup_screen.dart',
         ),
       ],
       body: Column(

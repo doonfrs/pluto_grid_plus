@@ -340,7 +340,7 @@ class PlutoGrid extends PlutoStatefulWidget {
   /// Column menu can be customized.
   ///
   /// See the demo example link below.
-  /// https://github.com/bosskmk/pluto_grid/blob/master/demo/lib/screen/feature/column_menu_screen.dart
+  /// https://github.com/doonfrs/pluto_grid_plus/blob/master/demo/lib/screen/feature/column_menu_screen.dart
   /// {@endtemplate}
   final PlutoColumnMenuDelegate? columnMenuDelegate;
 

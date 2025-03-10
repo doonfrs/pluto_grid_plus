@@ -143,7 +143,7 @@ class _RowGroupScreenState extends State<RowGroupScreen> {
       topButtons: [
         PlutoExampleButton(
           url:
-              'https://github.com/bosskmk/pluto_grid/blob/master/demo/lib/screen/feature/row_group_screen.dart',
+              'https://github.com/doonfrs/pluto_grid_plus/blob/master/demo/lib/screen/feature/row_group_screen.dart',
         ),
         PlutoDocsButton(url: 'https://pluto.weblaze.dev/row-grouping'),
       ],

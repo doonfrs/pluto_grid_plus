@@ -19,7 +19,7 @@ abstract class AbstractTextExport<T> {
     List<PlutoRow> rowsToExport;
 
     // Use filteredList if available
-    // https://github.com/bosskmk/pluto_grid/issues/318#issuecomment-987424407
+    // https://github.com/doonfrs/pluto_grid_plus/issues/318#issuecomment-987424407
     rowsToExport = state.refRows.filteredList.isNotEmpty
         ? state.refRows.filteredList
         : state.refRows.originalList;

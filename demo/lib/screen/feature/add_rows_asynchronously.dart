@@ -112,7 +112,7 @@ class _AddRowsAsynchronouslyScreenState
       topButtons: [
         PlutoExampleButton(
           url:
-              'https://github.com/bosskmk/pluto_grid/blob/master/demo/lib/screen/feature/add_rows_asynchronously.dart',
+              'https://github.com/doonfrs/pluto_grid_plus/blob/master/demo/lib/screen/feature/add_rows_asynchronously.dart',
         ),
       ],
       body: PlutoGrid(

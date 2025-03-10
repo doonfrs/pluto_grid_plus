@@ -43,7 +43,7 @@ class PlutoExampleScreen extends StatelessWidget {
         TextButton(
           child: const Text('Yes'),
           onPressed: () {
-            launchUrl('https://github.com/bosskmk/pluto_grid/issues');
+            launchUrl('https://github.com/doonfrs/pluto_grid_plus/issues');
           },
         ),
       ],

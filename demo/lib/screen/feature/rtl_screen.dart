@@ -42,7 +42,7 @@ class _RTLScreenState extends State<RTLScreen> {
       topButtons: [
         PlutoExampleButton(
           url:
-              'https://github.com/bosskmk/pluto_grid/blob/master/demo/lib/screen/feature/rtl_screen.dart',
+              'https://github.com/doonfrs/pluto_grid_plus/blob/master/demo/lib/screen/feature/rtl_screen.dart',
         ),
       ],
       body: Directionality(

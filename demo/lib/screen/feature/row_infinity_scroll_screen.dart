@@ -173,7 +173,7 @@ class _RowInfinityScrollScreenState extends State<RowInfinityScrollScreen> {
       topButtons: [
         PlutoExampleButton(
           url:
-              'https://github.com/bosskmk/pluto_grid/blob/master/demo/lib/screen/feature/row_infinity_scroll_screen.dart',
+              'https://github.com/doonfrs/pluto_grid_plus/blob/master/demo/lib/screen/feature/row_infinity_scroll_screen.dart',
         ),
       ],
       body: PlutoGrid(

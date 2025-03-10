@@ -74,7 +74,7 @@ class _RowMovingScreenState extends State<RowMovingScreen> {
       topButtons: [
         PlutoExampleButton(
           url:
-              'https://github.com/bosskmk/pluto_grid/blob/master/demo/lib/screen/feature/row_moving_screen.dart',
+              'https://github.com/doonfrs/pluto_grid_plus/blob/master/demo/lib/screen/feature/row_moving_screen.dart',
         ),
       ],
       body: PlutoGrid(

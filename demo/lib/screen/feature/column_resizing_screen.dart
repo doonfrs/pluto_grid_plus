@@ -52,7 +52,7 @@ class _ColumnResizingScreenState extends State<ColumnResizingScreen> {
       topButtons: [
         PlutoExampleButton(
           url:
-              'https://github.com/bosskmk/pluto_grid/blob/master/demo/lib/screen/feature/column_resizing_screen.dart',
+              'https://github.com/doonfrs/pluto_grid_plus/blob/master/demo/lib/screen/feature/column_resizing_screen.dart',
         ),
       ],
       body: PlutoGrid(
