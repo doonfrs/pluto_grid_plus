@@ -1,10 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:pluto_grid_plus/pluto_grid_plus.dart';
 
+typedef PlutoCellRenderer = Widget Function(
+    PlutoCellRendererContext rendererContext);
+
+class PlutoCellRendererContext {
+  final PlutoColumn column;
+
+  final int rowIdx;
+
+  final PlutoRow row;
+
+  final PlutoCell cell;
+
+  final PlutoGridStateManager stateManager;
+
+  PlutoCellRendererContext({
+    required this.column,
+    required this.rowIdx,
+    required this.row,
+    required this.cell,
+    required this.stateManager,
+  });
+}
+
 class PlutoCell {
   PlutoCell({
     dynamic value,
     Key? key,
+    this.renderer,
   })  : _key = key ?? UniqueKey(),
         _value = value,
         _originalValue = value;
@@ -16,6 +40,13 @@ class PlutoCell {
   final dynamic _originalValue;
 
   dynamic _valueForSorting;
+
+  /// Custom renderer for this specific cell.
+  /// If provided, this will be used instead of the column renderer.
+  final PlutoCellRenderer? renderer;
+
+  /// Returns true if this cell has a custom renderer.
+  bool get hasRenderer => renderer != null;
 
   /// Set initial value according to [PlutoColumn] setting.
   ///

@@ -7,6 +7,7 @@ import 'screen/development_screen.dart';
 import 'screen/empty_screen.dart';
 import 'screen/feature/add_and_remove_column_row_screen.dart';
 import 'screen/feature/add_rows_asynchronously.dart';
+import 'screen/feature/column_renderer_screen.dart';
 import 'screen/feature/cell_renderer_screen.dart';
 import 'screen/feature/cell_selection_screen.dart';
 import 'screen/feature/column_filtering_screen.dart';
@@ -65,6 +66,8 @@ class MyApp extends StatelessWidget {
             const AddAndRemoveColumnRowScreen(),
         AddRowsAsynchronouslyScreen.routeName: (context) =>
             const AddRowsAsynchronouslyScreen(),
+        ColumnRendererScreen.routeName: (context) =>
+            const ColumnRendererScreen(),
         CellRendererScreen.routeName: (context) => const CellRendererScreen(),
         CellSelectionScreen.routeName: (context) => const CellSelectionScreen(),
         CheckVisibleColumnsScreen.routeName: (context) =>

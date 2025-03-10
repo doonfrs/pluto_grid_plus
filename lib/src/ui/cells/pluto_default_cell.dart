@@ -486,6 +486,18 @@ class _DefaultCellWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Check for cell renderer first
+    if (cell.hasRenderer) {
+      return cell.renderer!(PlutoCellRendererContext(
+        column: column,
+        rowIdx: rowIdx,
+        row: row,
+        cell: cell,
+        stateManager: stateManager,
+      ));
+    }
+
+    // Fall back to column renderer
     if (column.hasRenderer) {
       return column.renderer!(PlutoColumnRendererContext(
         column: column,

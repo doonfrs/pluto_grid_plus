@@ -15,6 +15,7 @@ import '../widget/pluto_text_color_animation.dart';
 import 'development_screen.dart';
 import 'feature/add_and_remove_column_row_screen.dart';
 import 'feature/add_rows_asynchronously.dart';
+import 'feature/column_renderer_screen.dart';
 import 'feature/cell_renderer_screen.dart';
 import 'feature/cell_selection_screen.dart';
 import 'feature/column_filtering_screen.dart';
@@ -421,9 +422,17 @@ class PlutoFeatures extends StatelessWidget {
             },
           ),
           PlutoListTile(
+            title: 'Column renderer',
+            description:
+                'You can change the widget of the column through the renderer.',
+            onTapLiveDemo: () {
+              Navigator.pushNamed(context, ColumnRendererScreen.routeName);
+            },
+          ),
+          PlutoListTile(
             title: 'Cell renderer',
             description:
-                'You can change the widget of the cell through the renderer.',
+                'You can customize individual cells with cell-level renderers.',
             onTapLiveDemo: () {
               Navigator.pushNamed(context, CellRendererScreen.routeName);
             },

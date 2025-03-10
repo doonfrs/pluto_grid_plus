@@ -1,5 +1,9 @@
 # Changelog
 
+## [8.4.13] - 2025. 03. 10
+
+* Added cell-level renderer support with PlutoCellRenderer
+
 ## [8.4.12] - 2025. 03. 10
 
 * fix incase frozen columns & frozen rows
