@@ -152,7 +152,15 @@ class PlutoColumnTitleState extends PlutoStateWithChange<PlutoColumnTitle> {
           ),
           iconSize: style.iconSize,
           mouseCursor: contextMenuCursor,
-          onPressed: null,
+          hoverColor: Colors.transparent,
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          onPressed: () {
+            if (mounted && widget.column.enableSorting && 
+                !widget.column.enableContextMenu) {
+                  stateManager.toggleSortColumn(widget.column);
+                }
+          },
         ),
       ),
     );
