@@ -1,9 +1,13 @@
 # Changelog
 
+## [8.4.12] - 2025. 03. 10
+
+* fix incase frozen columns & frozen rows
+* Enhance the readme texts
+
 ## [8.4.11] - 2025. 03. 10
 
 * Introducing Frozen Rows
-
 
 ## [8.4.10] - 2025. 03. 08
 
