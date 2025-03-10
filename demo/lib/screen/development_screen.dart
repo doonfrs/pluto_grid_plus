@@ -113,7 +113,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
   void initState() {
     super.initState();
 
-    const _Test test = _Test.b;
+    const _Test test = _Test.a;
 
     // PlutoChangeNotifierFilter.debug = true;
     // PlutoChangeNotifierFilter.debugWidgets = [
@@ -128,6 +128,16 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
       columns.addAll(testColumnsA);
       columnGroups.addAll(testColumnGroupsA);
       rows.addAll(DummyData.rowsByColumns(length: 10000, columns: columns));
+      rows.insert(
+          0,
+          PlutoRow(
+            cells: Map.fromIterables(
+              columns.map((e) => e.field),
+              columns.map((e) => PlutoCell(value: 'frozen')),
+            ),
+            frozen: PlutoRowFrozen.start,
+          ));
+
       rowColorCallback = (PlutoRowColorContext rowColorContext) {
         return rowColorContext.row.cells['column2']?.value == 'green'
             ? const Color(0xFFE2F6DF)

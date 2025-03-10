@@ -44,6 +44,7 @@ import 'screen/feature/time_type_column_screen.dart';
 import 'screen/feature/value_formatter_screen.dart';
 import 'screen/home_screen.dart';
 import 'screen/feature/pages_list_screen.dart';
+import 'screen/feature/frozen_rows_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -118,6 +119,7 @@ class MyApp extends StatelessWidget {
         EmptyScreen.routeName: (context) => const EmptyScreen(),
         DevelopmentScreen.routeName: (context) => const DevelopmentScreen(),
         PagesListScreen.routeName: (context) => const PagesListScreen(),
+        FrozenRowsScreen.routeName: (context) => const FrozenRowsScreen(),
       },
       theme: ThemeData(
         primaryColor: PlutoGridExampleColors.primaryColor,

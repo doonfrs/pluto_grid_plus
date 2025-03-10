@@ -1,5 +1,10 @@
 # Changelog
 
+## [8.4.11] - 2025. 03. 10
+
+* Introducing Frozen Rows
+
+
 ## [8.4.10] - 2025. 03. 08
 
 * Translate all korean comments & unit tests to english
@@ -119,12 +124,12 @@ upgrade for flutter 3.22.0
 
 ## [6.0.4] - 2023. 3. 7
 
-* Add Scrollbar properties. <https://github.com/bosskmk/pluto_grid/issues/743>
+* Add Scrollbar properties. <https://github.com/doonfrs/pluto_grid_plus/issues/743>
 
 ## [6.0.3] - 2023. 3. 6
 
 * Add locales.(German, French)
-* Fix row group expanded bug. <https://github.com/bosskmk/pluto_grid/issues/775>
+* Fix row group expanded bug. <https://github.com/doonfrs/pluto_grid_plus/issues/775>
 
 ## [6.0.2] - 2023. 2. 2
 
@@ -152,7 +157,7 @@ upgrade for flutter 3.22.0
 
 * Fix sorting bug.  
   Fixed sorting issue with pagination applied.  
-  <https://github.com/bosskmk/pluto_grid/issues/668>
+  <https://github.com/doonfrs/pluto_grid_plus/issues/668>
 
 ## [5.4.6] - 2022. 11. 30
 
@@ -228,7 +233,7 @@ upgrade for flutter 3.22.0
 
 * Change PlutoGridStateManager.configuration to not null.
 * Add Currency column.
-  <https://github.com/bosskmk/pluto_grid/blob/master/demo/lib/screen/feature/currency_type_column_screen.dart>
+  <https://github.com/doonfrs/pluto_grid_plus/blob/master/demo/lib/screen/feature/currency_type_column_screen.dart>
 
 ## [5.1.1] - 2022. 9. 25
 
@@ -611,7 +616,7 @@ upgrade for flutter 3.22.0
 
 ## [0.1.20] - 2020. 10. 28
 
-* Add textAlign to column property.(PlutoColumnTextAlign.Left, or Right) [#49](https://github.com/bosskmk/pluto_grid/issues/49)
+* Add textAlign to column property.(PlutoColumnTextAlign.Left, or Right) [#49](https://github.com/doonfrs/pluto_grid_plus/issues/49)
 
 ## [0.1.19] - 2020. 10. 23
 
@@ -624,7 +629,7 @@ upgrade for flutter 3.22.0
 
 ## [0.1.17] - 2020. 10. 4
 
-* Cell selection problem. [#35](https://github.com/bosskmk/pluto_grid/issues/35)
+* Cell selection problem. [#35](https://github.com/doonfrs/pluto_grid_plus/issues/35)
 * Modified so that AutoSize of column operates according to default TextStyle.
 
 ## [0.1.16] - 2020. 10. 2
@@ -695,7 +700,7 @@ upgrade for flutter 3.22.0
 
 ## [0.1.4] - 2020. 8. 29
 
-* fixed column bug. [#1](https://github.com/bosskmk/pluto_grid/issues/1)
+* fixed column bug. [#1](https://github.com/doonfrs/pluto_grid_plus/issues/1)
 
 ## [0.1.3] - 2020. 8. 28
 

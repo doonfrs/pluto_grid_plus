@@ -233,6 +233,8 @@ class PlutoGridStyleConfig {
     this.cellColorInEditState = Colors.white,
     this.cellColorInReadOnlyState = const Color(0xFFDBDBDC),
     this.cellColorGroupedRow,
+    this.frozenRowColor = const Color(0xFFF8F8F8),
+    this.frozenRowBorderColor = const Color(0xFFE0E0E0),
     this.dragTargetColumnColor = const Color(0xFFDCF5FF),
     this.iconColor = Colors.black38,
     this.disabledIconColor = Colors.black12,
@@ -306,6 +308,8 @@ class PlutoGridStyleConfig {
     this.cellColorInEditState = const Color(0xFF666666),
     this.cellColorInReadOnlyState = const Color(0xFF222222),
     this.cellColorGroupedRow,
+    this.frozenRowColor = const Color(0xFF222222),
+    this.frozenRowBorderColor = const Color(0xFF666666),
     this.dragTargetColumnColor = const Color(0xFF313131),
     this.iconColor = Colors.white38,
     this.disabledIconColor = Colors.white12,
@@ -428,6 +432,12 @@ class PlutoGridStyleConfig {
 
   /// Background color of cells grouped by column.
   final Color? cellColorGroupedRow;
+
+  /// Background color for frozen rows
+  final Color frozenRowColor;
+
+  /// Border color for frozen rows
+  final Color frozenRowBorderColor;
 
   /// The background color of the column to be dragged.
   /// When moving a column by dragging it.

@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:pluto_grid_plus/pluto_grid_plus.dart';
 
+enum PlutoRowFrozen {
+  none,
+  start,
+  end;
+}
+
 class PlutoRow<T> {
   PlutoRow({
     required this.cells,
@@ -9,16 +15,24 @@ class PlutoRow<T> {
     this.data,
     bool checked = false,
     Key? key,
+    PlutoRowFrozen? frozen,
   })  : type = type ?? PlutoRowTypeNormal.instance,
         _checked = checked,
         _state = PlutoRowState.none,
-        _key = key ?? UniqueKey();
+        _key = key ?? UniqueKey(),
+        frozen = frozen ?? PlutoRowFrozen.none;
 
   final PlutoRowType type;
 
   final Key _key;
 
   T? data;
+
+  /// Indicates if the row should be frozen at the top or bottom of the grid
+  /// PlutoRowFrozen.none means the row is not frozen
+  /// PlutoRowFrozen.start means the row is frozen at the top
+  /// PlutoRowFrozen.end means the row is frozen at the bottom
+  final PlutoRowFrozen frozen;
 
   Map<String, PlutoCell> cells;
 

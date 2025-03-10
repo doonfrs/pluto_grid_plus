@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:demo/screen/empty_screen.dart';
 import 'package:demo/screen/feature/check_visible_columns_screen.dart';
+import 'package:demo/screen/feature/frozen_rows_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -394,6 +395,14 @@ class PlutoFeatures extends StatelessWidget {
             },
           ),
           PlutoListTile(
+            title: 'Frozen Rows',
+            description:
+                'Demonstrates rows frozen at top and bottom with pagination',
+            onTapLiveDemo: () {
+              Navigator.pushNamed(context, FrozenRowsScreen.routeName);
+            },
+          ),
+          PlutoListTile(
             title: 'Add rows asynchronously',
             description: 'Adds or sets rows asynchronously.',
             onTapLiveDemo: () {
@@ -743,7 +752,7 @@ class PlutoContributors extends StatelessWidget {
             name: 'And you.',
             linkTitle: 'Github',
             onTapLink: () {
-              launchUrl('https://github.com/bosskmk/pluto_grid');
+              launchUrl('https://github.com/doonfrs/pluto_grid_plus');
             },
           ),
         ],
