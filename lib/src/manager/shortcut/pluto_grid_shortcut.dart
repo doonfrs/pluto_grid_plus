@@ -29,8 +29,18 @@ class PlutoGridShortcut {
     required PlutoGridStateManager stateManager,
     required HardwareKeyboard state,
   }) {
+    // Remove NumLock before checking shortcuts. This will enable the arrow 
+    // keys and shortcuts to work correctly on Linux too.
+    final Set<LogicalKeyboardKey> filteredKeys = state.logicalKeysPressed
+      .where((key) => key != LogicalKeyboardKey.numLock)
+      .toSet();
+    // Create a fake state object with filtered keys.
+    final HardwareKeyboard fakeState = HardwareKeyboard.instance;
+    fakeState.logicalKeysPressed.clear();
+    fakeState.logicalKeysPressed.addAll(filteredKeys);
+
     for (final action in actions.entries) {
-      if (action.key.accepts(keyEvent.event, state)) {
+      if (action.key.accepts(keyEvent.event, fakeState)) {
         action.value.execute(keyEvent: keyEvent, stateManager: stateManager);
         return true;
       }
