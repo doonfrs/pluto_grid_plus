@@ -1,5 +1,10 @@
 # Changelog
 
+## [8.4.14] - 2025. 03. 11
+
+Discontinued, please move to trin_grid
+
+
 ## [8.4.13] - 2025. 03. 10
 
 * Added cell-level renderer support with PlutoCellRenderer
