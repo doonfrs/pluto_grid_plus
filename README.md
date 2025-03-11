@@ -1,5 +1,22 @@
 # PlutoGrid Plus
 
+## 🚨 This Package is No Longer Supported – Migrate to TrinaGrid 🚨  
+
+⚠️ **PlutoGrid Plus is no longer maintained.** Please switch to **[TrinaGrid](https://github.com/doonfrs/trina_grid)** for continued support and improvements.  
+
+🔄 **Why?**  
+- The old package is **unsupported**, and keeping the same name caused confusion.  
+- **TrinaGrid** introduces breaking changes and **new features**.  
+- A **[migration script](https://github.com/doonfrs/trina_grid?tab=readme-ov-file#migration-from-plutogrid)** is available for easy transition.  
+
+📦 **New Package:** [TrinaGrid on Pub.dev](https://pub.dev/packages/trina_grid)  
+🔗 **GitHub:** [TrinaGrid Repository](https://github.com/doonfrs/trina_grid)  
+
+🚀 **Upgrade now for the latest updates!**
+
+
+
+
 [![Pub Version](https://img.shields.io/pub/v/pluto_grid_plus.svg)](https://pub.dev/packages/pluto_grid_plus)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
