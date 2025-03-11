@@ -2,6 +2,19 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:pluto_grid_plus/pluto_grid_plus.dart';
 
+// Create a custom wrapper that filters out NumLock.
+// This will enable the arrow keys and shortcuts to work correctly on Linux too.
+class FilteredHardwareKeyboard extends HardwareKeyboard {
+  final Set<LogicalKeyboardKey> filteredKeys;
+
+  FilteredHardwareKeyboard(this.filteredKeys);
+
+  // Override the HardwareKeyboard logicalKeysPressed to get only the 
+  // filtered keys without NumLock.
+  @override
+  Set<LogicalKeyboardKey> get logicalKeysPressed => filteredKeys;
+}
+
 /// Class for setting shortcut actions.
 ///
 /// Defaults to [PlutoGridShortcut.defaultActions] if not passing [actions].
@@ -34,10 +47,9 @@ class PlutoGridShortcut {
     final Set<LogicalKeyboardKey> filteredKeys = state.logicalKeysPressed
       .where((key) => key != LogicalKeyboardKey.numLock)
       .toSet();
-    // Create a fake state object with filtered keys.
-    final HardwareKeyboard fakeState = HardwareKeyboard.instance;
-    fakeState.logicalKeysPressed.clear();
-    fakeState.logicalKeysPressed.addAll(filteredKeys);
+    // Create a wrapper around the HardwareKeyboard instance with filtered keys.
+    final FilteredHardwareKeyboard fakeState = 
+      FilteredHardwareKeyboard(filteredKeys);
 
     for (final action in actions.entries) {
       if (action.key.accepts(keyEvent.event, fakeState)) {
